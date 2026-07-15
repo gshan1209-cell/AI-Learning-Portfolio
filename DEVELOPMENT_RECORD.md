@@ -2,178 +2,146 @@
 
 ## 中文摘要
 
-- 2026-07-15 建立全新獨立 Repository。
-- 技術架構採 `gshan1209-cell/scrape` 的 Next.js + JSON chunks + Prisma 模式。
-- 完成平台骨架、三門示範課、五模式 Demo Adapter 與 14 個來源 Repo Metadata Registry。
-- 2026-07-15 使用者重新確認最終目標：**來源 Repo 的程式與功能要移植進本專案，舊 Repo 完成驗收後退役。**
-- 原本「保留舊 Repo 作為長期執行來源」的設計正式撤銷。
-- L4 已成為第一個實際移植樣板：原始 Streamlit 程式與 requirements 已進入 Monorepo，native Demo 已補齊主要功能。
-- 完整 CI 暫緩，但來源 Repo 在退役前仍必須完成最低必要驗收。
+- 專案已正式採用 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件要移植進本 Monorepo。
+- 舊 Repo 只有在功能驗收、搬遷公告與人工核准後，才可設為 Archived／唯讀。
+- `external`、`iframe` 只屬移植期間比對工具，不代表整合完成。
+- 已完成兩個實際移植樣板：L4 線性迴歸、CWA OpenData CLI。
+- 完整 CI 暫緩，但來源 Repo 退役前的最低必要驗收不可省略。
 
 ## 目前狀態
 
-**階段：Migration-first 已落地；ALP-MIG-001｜L4 進入 `refactoring`，下一步為執行驗收與退役前準備。**
+**階段：Migration-first 已落地；L4 與 CWA OpenData 均進入 `refactoring`。**
 
-## 已完成
+| 狀態 | 數量 |
+|---|---:|
+| refactoring | 2 |
+| planned | 12 |
+| ready_to_retire | 0 |
+| retired | 0 |
 
-### 平台層
+## 平台層已完成
 
-- [x] 全新 `AI-Learning-Portfolio` Repository
-- [x] Next.js 14 App Router
-- [x] Tailwind CSS 與基本 RWD
+- [x] Next.js 14 App Router + TypeScript + Tailwind CSS
 - [x] 首頁、課程目錄與動態課程頁
-- [x] JSON chunk 資料讀取
-- [x] `/api/courses` 與單課程 API
-- [x] Prisma PostgreSQL Schema
-- [x] 14 個來源作業登錄
-- [x] 3 門六段式示範課
-- [x] Demo Adapter：external、iframe、video、snapshot、native
-- [x] 14 個來源 Repo Metadata 快照
-- [x] `/api/repositories`
-- [x] `npm run repositories:sync`
-- [x] Migration-first README 與 Agent 規範
+- [x] JSON Course Chunk 與課程 API
+- [x] Prisma + PostgreSQL Schema 預留
+- [x] 14 個來源 Repo Metadata Registry
+- [x] Demo Adapter：native、external、iframe、video、snapshot
 - [x] `migration_registry/migrations.json`
 - [x] `/api/migrations`
-- [x] `/sources` 改為移植與退役中心
-- [x] v1.2 Source Migration 規格書
+- [x] `/sources` 移植與退役中心
+- [x] v1.2 Source Migration 規格
+- [x] Agent Migration-first 規範
 
-### ALP-MIG-001｜L4 線性迴歸
+## ALP-MIG-001｜L4 線性迴歸
 
-- [x] 盤點 `README.md`、`app.py`、`requirements.txt`
+### 已完成
+
+- [x] 來源 README、`app.py`、requirements 盤點
 - [x] 保存來源 blob SHA
-- [x] 移入原始 Streamlit `app.py`
-- [x] 移入 Python requirements
-- [x] 建立模組 README
-- [x] 建立模組 `migration.json`
-- [x] 建立舊新功能對照
-- [x] native Demo 支援 seeded random dataset
-- [x] native Demo 實作 OLS 自動擬合
-- [x] true／estimated slope 與 intercept 指標
-- [x] variance、MAE、MSE 指標
-- [x] residual 與 abs residual
-- [x] Top K Outliers 排序、圖上標記與表格
+- [x] 原始 Streamlit 程式移入 `modules/linear-regression/python-streamlit/`
+- [x] 模組 README 與 `migration.json`
+- [x] Native seeded random dataset
+- [x] OLS 自動擬合
+- [x] true／estimated slope、intercept、variance、MAE、MSE
+- [x] residual／abs residual
+- [x] Top K Outliers 排序、標記與表格
 - [x] React SVG 圖表
-- [x] fitted／manual 雙模式控制
+- [x] fitted／manual 雙模式
 
-## 方向修正紀錄
+### 待驗收
 
-### 舊方向（已撤銷）
+- [ ] Next.js Build／TypeScript／瀏覽器操作
+- [ ] Python Streamlit 參考版啟動
+- [ ] 確認 CSV／PNG 匯出是否屬必要功能
+- [ ] 舊 L4 README 搬遷公告
+- [ ] 舊 Streamlit 部署處理
+- [ ] 人工核准後 Archived
 
-- 中央網站只保存教學內容與來源連結。
-- 舊 Repo 長期保留為正式原始碼與 Demo。
-- `external` 或 `iframe` 可被視為作品整合完成。
+## ALP-MIG-002｜CWA OpenData
 
-### 新方向（正式採用）
-
-- 本專案接管必要原始碼、教材、Demo、素材與啟動文件。
-- 每個來源 Repo 對應 `modules/<module-slug>/`。
-- `external`、`iframe` 只算遷移過渡狀態。
-- 只有本專案能獨立提供功能，或功能已由本 Monorepo 管理的服務提供，才算移植完成。
-- 舊 Repo 完成驗收、搬遷公告與連結轉向後，改為 Archived／唯讀。
-- 原則上不刪除 Git 歷史，以利稽核與回溯。
-
-## L4 移植證據
+### 來源證據
 
 | 項目 | 內容 |
 |---|---|
-| Source Repo | `gshan1209-cell/L4` |
+| Source Repo | `gshan1209-cell/cwa_scraper` |
 | Default Branch | `main` |
-| Main Entry | `app.py` |
-| Source app SHA | `891a64363b6f2d99d87287ba2d1cebb794d797d7` |
-| New Module | `modules/linear-regression` |
-| Original Runtime | `modules/linear-regression/python-streamlit/app.py` |
-| Native Runtime | `src/components/native-demos/linear-regression-playground.tsx` |
+| Main Entry | `cwa_scraper.py` |
+| Source Script SHA | `e7d8fb50ab93f8609349866641e562619c683530` |
+| Requirements SHA | `2b1be2aac5f82492d1af8c8b1c36d5afcad4f40e` |
+| New Module | `modules/cwa-open-data` |
 | Migration Status | `refactoring` |
 
-## L4 功能對照
+### 已完成
 
-| 舊功能 | 新平台狀態 | 說明 |
-|---|---|---|
-| 隨機產生資料 | 已完成 | 使用 seed 產生可重現資料 |
-| 真實斜率、截距與雜訊 | 已完成 | 由 seeded random generator 產生 |
-| LinearRegression 自動擬合 | 已完成 | 改寫為前端 OLS |
-| 顯示真實／估計參數 | 已完成 | 指標卡顯示 |
-| residual／abs residual | 已完成 | 每筆資料計算 |
-| Top K Outliers | 已完成 | 排序、圖上標記與表格 |
-| Streamlit 參數控制 | 已完成 | React 控制面板 |
-| Matplotlib 圖表 | 已完成改寫 | React SVG |
-| CSV 下載 | 尚未納入 | 不阻擋核心功能驗收，待需求確認 |
-| PNG 匯出 | 尚未納入 | 不阻擋核心功能驗收，待需求確認 |
+- [x] README、CLI 與 requirements 盤點
+- [x] 原始 Python CLI 移入 `modules/cwa-open-data/python-cli/`
+- [x] 模組 README 與 `migration.json`
+- [x] 保留 Dataset、JSON/XML、輸出與預覽邏輯
+- [x] `CWA_API_KEY` 改為 Server-only Secret
+- [x] 新增 `/api/modules/cwa-open-data`
+- [x] Dataset ID 與 Format 驗證
+- [x] Sample 模式，不需 API Key
+- [x] Live 模式，使用伺服器環境變數
+- [x] 401、404 與上游錯誤轉譯
+- [x] JSON／XML Content-Type 與下載檔名
+- [x] Native CWA Playground
+- [x] 課程 Demo 從 external 改為 native
+
+### 待驗收
+
+- [ ] Next.js Build／TypeScript／瀏覽器操作
+- [ ] 使用測試用 Secret 驗證即時 JSON
+- [ ] 驗證即時 XML 與檔案下載
+- [ ] Python CLI 參考版啟動
+- [ ] 舊 CWA Repo README 搬遷公告
+- [ ] 人工核准後 Archived
 
 ## Migration Registry 狀態
 
-- `planned`
-- `inventory`
-- `importing`
-- `refactoring`
-- `verifying`
-- `ready_to_retire`
-- `retired`
-- `blocked`
+```text
+planned
+inventory
+importing
+refactoring
+verifying
+ready_to_retire
+retired
+blocked
+```
 
-課程 `published` 不代表來源 Repo 已完成移植。
+課程已發布、已有 Demo 或原始碼已複製，都不等於來源 Repo 可以退役。
 
 ## 退役門檻
 
-來源 Repo 必須全部達成以下條件：
+來源 Repo 必須全部達成：
 
-1. 必要程式、素材與文件已進入本專案。
-2. 舊功能與新功能有完整對照。
-3. 新平台能提供正式 Demo 或等價成果。
+1. 必要程式、素材與文件已進本專案。
+2. 舊新功能有完整對照。
+3. 新平台能獨立提供正式功能或成果。
 4. 敏感資料、授權與大型資產完成檢查。
-5. 完成最低必要功能驗收。
+5. 完成最低必要 Runtime 驗收。
 6. 舊 Repo README 有搬遷公告。
 7. 舊部署停止或導向新平台。
-8. 舊 Repo 改為 Archived／唯讀。
-
-## 待處理
-
-### ALP-MIG-001｜L4
-
-- [ ] 執行 Next.js build／瀏覽器操作驗收
-- [ ] 執行 Python Streamlit 參考版驗收
-- [ ] 確認 CSV／PNG 匯出是否需納入正式等價範圍
-- [ ] 將狀態改為 `verifying`
-- [ ] 更新舊 L4 Repo 搬遷公告
-- [ ] 停止或導向舊 Streamlit 部署
-- [ ] 人工核准退役
-- [ ] 將舊 L4 Repo 設為 Archived
-
-### 後續來源
-
-- [ ] ALP-MIG-002｜cwa_scraper
-- [ ] ALP-MIG-003｜L13_SVM
-- [ ] ALP-MIG-004｜L12
-- [ ] 其餘來源依 Migration Registry 排程
-
-### 平台層
-
-- [ ] Source Migration Pipeline
-- [ ] 原始檔案樹與來源 commit 快照
-- [ ] PostgreSQL 匯入腳本
-- [ ] 管理後台
-- [ ] 學習進度與收藏
-- [ ] AI 助教
-- [ ] 正式 CI 與部署驗證
+8. 使用者人工核准。
+9. 舊 Repo 改為 Archived／唯讀。
 
 ## 重要決策
 
-1. `scrape` 只作為技術架構參考，不納入移植課程。
-2. `machinelearningHw05` 是來源課程之一，不再是母體專案。
-3. 來源 Repo URL 僅供稽核與追溯，不能作為最終執行依賴。
-4. 大型模型、資料集與媒體檔必須逐項判斷，不做無差別搬運。
-5. 真實 Token、金鑰與 `.env` 不得移植進 Git。
-6. 舊 Repo 淘汰採 Archived／唯讀優先，不直接刪除歷史。
-7. 未達退役門檻前，不得封存或關閉來源 Repo。
-8. 完整測試可延後，但退役前最低必要驗收不可省略。
+1. `scrape` 只作為技術架構參考，不是移植課程。
+2. `machinelearningHw05` 是來源模組之一，不是母體專案。
+3. 來源 URL 僅供稽核與追溯，不能成為正式 Runtime 依賴。
+4. 真實 Token、API Key、`.env` 不得移入 Git。
+5. 大型模型、資料集與媒體檔逐項判斷，不做無差別搬運。
+6. 舊 Repo 優先 Archived，不直接刪除 Git 歷史。
+7. 未達退役門檻前不得封存來源 Repo。
 
-## 下一步任務
+## 下一步
 
-### ALP-MIG-001｜L4 驗收與退役前準備
+### ALP-MIG-003｜L13 SVM Kernel Trick
 
-1. 驗證 Native Playground 的資料生成、OLS、殘差與 Outliers。
-2. 驗證原始 Python Streamlit 版可啟動。
-3. 記錄功能差異與是否接受 CSV／PNG 缺口。
-4. 驗收通過後將 Migration Status 改為 `ready_to_retire`。
-5. 更新舊 Repo README 搬遷公告。
-6. 由使用者人工核准後才封存舊 Repo。
+1. 盤點 Manim、Streamlit、Plotly 與模型檔案。
+2. 移入必要 Python 原始碼、requirements 與動畫腳本。
+3. 將目前 iframe 過渡模式改寫成站內 native 互動視覺化。
+4. 建立來源功能對照與 `migration.json`。
+5. 保留舊 Repo 到最低必要驗收完成。
