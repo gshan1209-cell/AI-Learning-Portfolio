@@ -3,17 +3,17 @@
 ## 中文摘要
 
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
-- 舊 Repo 僅在最低必要驗收、搬遷公告與人工核准後設為 Archived／唯讀。
-- 4 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim。
-- 第 5 個來源 `machinelearningHw05` 已進入 `importing`。
+- 舊 Repo 僅在最低必要驗收、搬遷公告、舊部署處理與人工核准後設為 Archived／唯讀。
+- 目前已有 5 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05。
 - `external`、`iframe` 只供移植期間比對，不代表接管完成。
+- 本階段依決策跳過完整 Build／CI，但來源 Repo 退役前的最低 Runtime 驗收不可省略。
 
 ## 目前狀態
 
 | 狀態 | 數量 |
 |---|---:|
-| importing | 1 |
-| refactoring | 4 |
+| importing | 0 |
+| refactoring | 5 |
 | planned | 9 |
 | ready_to_retire | 0 |
 | retired | 0 |
@@ -65,53 +65,52 @@
 - theme、text、layout、animation、chart、sample data 共用層
 - scenes／shared package
 - 來源 commit 與 blob SHA 勾稽
-- 模組 README、migration manifest 與任務文件
 
 待完成：tests、橫幅／影片資產、Manim／FFmpeg／中文字體、9 場景渲染、播放器與退役流程。
 
 ## ALP-MIG-005｜機器學習十大演算法
 
-**狀態：`importing`**
-
-### 來源架構
-
-| 層級 | 技術 |
-|---|---|
-| Frontend | Next.js 15.5、React 18 |
-| Backend | FastAPI、Pydantic |
-| AI | Gemini `google-genai` |
-| Content | 約 703 行 `algorithms.json` |
-| Progress | localStorage |
+**狀態：`refactoring`**
 
 ### 已完成
 
-- [x] README、package、requirements 與前後端架構盤點
-- [x] 保存主要來源 SHA
-- [x] FastAPI main／algorithms／chat 與 requirements 移入來源參考區
-- [x] Next.js package、首頁、AlgorithmGrid、AlgorithmCard、ProgressBar 移入
-- [x] Algorithm／Quiz／DisplayAlgorithm 型別移入
-- [x] 教材 normalization 與文字 fallback 邏輯移入
-- [x] Gemini fallback 與 Prompt 內容盤點
-- [x] AI Gateway／Prompt Registry／Token Cost 改造要求文件化
-- [x] 模組 README、migration manifest 與任務文件
+- [x] FastAPI／Next.js 來源架構與主要來源碼保存
+- [x] 703 行來源教材拆成 10 個中央 JSON chunk
+- [x] 10 個主題、30 題測驗與 30 組解析
+- [x] 中央型別、Loader、搜尋、分類、難度與統計
+- [x] `/ml-algorithms` 主題目錄
+- [x] `/ml-algorithms/[slug]` 十個詳細頁
+- [x] 收藏、測驗結果與學習進度 localStorage Adapter
+- [x] 通過門檻、作答解析與重新作答
+- [x] 列表與單筆 API
+- [x] 十種 React／SVG Native 視覺化
+- [x] 線性回歸與 SVM 進階 Native 課程勾稽
+- [x] 移植中心可直接開啟新平台內容
+- [x] SVM Kernel Trick 數學說明校訂
 
-### 重要發現
+### 已接管視覺化
 
-1. README 描述 OpenAI，但目前程式實際使用 Gemini；正式規格以程式為準。
-2. 來源使用 Next.js 15.5，中央平台是 Next.js 14，不能直接放進正式編譯路徑。
-3. `AlgorithmCard` 依賴尚未搬入的 `FavoriteButton`。
-4. AI API 會接收 `user_id` 與最近五筆對話，需要個資最小化與日誌規範。
-5. 完整教材 JSON 是核心資產，目前尚未進入中央正式資料層。
+- `scatter-line`
+- `logistic-curve`
+- `decision-tree`
+- `random-forest`
+- `svm-margin`
+- `knn-neighbors`
+- `kmeans-clustering`
+- `naive-bayes-text`
+- `pca-projection`
+- `gradient-descent`
 
 ### 待完成
 
-- [ ] 完整教材與測驗 JSON 移植、比對與 chunk 化
-- [ ] FavoriteButton、詳細頁、Quiz、視覺化與 AI Tutor UI
-- [ ] Course Registry 與正式路由映射
-- [ ] Gemini 改走中央 AI Gateway
-- [ ] Prompt Version、Token Usage、Cost Ledger
-- [ ] SQLite／SQLAlchemy 實際用途確認
-- [ ] Build／Runtime／瀏覽器與退役流程
+- [ ] AI Tutor UI
+- [ ] 中央 AI Gateway
+- [ ] Prompt Registry、Prompt Version、Token Usage 與 Cost Ledger
+- [ ] 輸入長度、Prompt Injection、Schema 與個資防護
+- [ ] SQLite／SQLAlchemy 與未使用 OpenAI 相依盤點
+- [ ] Build／TypeScript／瀏覽器／RWD／localStorage 驗收
+- [ ] 舊 Vercel／FastAPI 停止或導向
+- [ ] 舊 Repo 搬遷公告與人工退役核准
 
 ## 共同退役門檻
 
@@ -127,7 +126,7 @@
 
 ## 下一步
 
-1. 將 ML Top 10 的 703 行教材拆成中央平台可維護的資料 chunks。
-2. 補齊 Favorite、詳細頁、Quiz 與視覺化來源元件。
-3. 建立正式 ML Topic Collection 與課程路由。
-4. 後續集中執行四個 `refactoring` 模組的最低必要 Runtime 驗收。
+1. 建立共用 AI Gateway／Prompt Registry 基礎，接管 ML Top 10 Gemini 助教。
+2. 補 Prompt Version、Token Usage 與 Cost Ledger。
+3. 後續集中執行 5 個 `refactoring` 模組的最低必要 Runtime 驗收。
+4. 驗收後再逐一建立舊 Repo 搬遷公告與退役候選清單。
