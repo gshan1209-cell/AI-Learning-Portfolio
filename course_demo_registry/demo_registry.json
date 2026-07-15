@@ -2,52 +2,55 @@
   "linear-regression-for-beginners": {
     "mode": "native",
     "title": "線性迴歸互動實驗室",
-    "description": "調整斜率與截距，觀察每個資料點到預測線的殘差如何改變。",
+    "description": "使用隨機資料、OLS 擬合、殘差與 Top K 離群值，取代舊 L4 外部執行依賴。",
     "nativeKey": "linear-regression-playground",
     "fallbackUrl": "https://github.com/gshan1209-cell/L4"
   },
   "svm-kernel-trick-3d": {
     "mode": "iframe",
     "title": "SVM Kernel Trick 互動展示",
-    "description": "直接在課程頁調整 C、gamma 與雜訊；若 Streamlit 休眠或拒絕嵌入，可改用備援連結。",
+    "description": "此 iframe 僅供移植期間功能比對；完成 native 接管後移除外部依賴。",
     "url": "https://seanlinesvm.streamlit.app/",
-    "fallbackUrl": "https://seanlinesvm.streamlit.app/"
+    "fallbackUrl": "https://github.com/gshan1209-cell/L13_SVM"
   },
   "cwa-open-data-first-api": {
-    "mode": "external",
-    "title": "CWA OpenData 下載器原始作品",
-    "description": "此作業是命令列工具，先從來源 Repo 查看參數、環境變數與下載流程。後續再轉製為站內 API Demo。",
-    "url": "https://github.com/gshan1209-cell/cwa_scraper",
+    "mode": "native",
+    "title": "CWA OpenData 站內實驗室",
+    "description": "在站內選擇資料集與 JSON/XML 格式；API Key 只由 Server Route Handler 讀取。",
+    "nativeKey": "cwa-open-data-playground",
     "fallbackUrl": "https://github.com/gshan1209-cell/cwa_scraper"
   },
   "startup-profit-prediction": {
     "mode": "iframe",
     "title": "新創公司利潤預測 Demo",
+    "description": "移植期間比對用外部服務。",
     "url": "https://machinelearninghw6-2.streamlit.app/",
-    "fallbackUrl": "https://machinelearninghw6-2.streamlit.app/"
+    "fallbackUrl": "https://github.com/gshan1209-cell/machinelearningHw6-2"
   },
   "movie-scraper-nextjs": {
     "mode": "external",
     "title": "電影資料工作台",
+    "description": "待移植進 Monorepo，現階段僅供來源功能盤點。",
     "url": "https://scrape-movie-web.vercel.app/",
     "fallbackUrl": "https://github.com/gshan1209-cell/scrape_movie"
   },
   "ai-visual-story": {
     "mode": "iframe",
     "title": "AI 圖文故事播放器",
+    "description": "待移植進 Monorepo，現階段僅供功能比對。",
     "url": "https://gshan1209-cell.github.io/L2DOC1-github/",
-    "fallbackUrl": "https://gshan1209-cell.github.io/L2DOC1-github/"
+    "fallbackUrl": "https://github.com/gshan1209-cell/L2DOC1-github"
   },
   "stock-manim-animation": {
     "mode": "video",
     "title": "台股技術分析動畫",
-    "description": "影片素材尚待從原始 Repository 整理，未設定影片時會自動顯示備援卡片。",
+    "description": "影片素材待從來源 Repo 移入本專案。",
     "fallbackUrl": "https://github.com/gshan1209-cell/L12"
   },
   "cosmos-text-to-image": {
     "mode": "snapshot",
     "title": "Cosmos 文字生成圖片作品快照",
-    "description": "作品快照尚待整理，未設定圖片時會自動顯示備援卡片。",
+    "description": "作品素材待從來源 Repo 移入本專案。",
     "fallbackUrl": "https://github.com/gshan1209-cell/hw3-cosmos-text2image"
   }
 }
