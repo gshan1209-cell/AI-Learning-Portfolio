@@ -14,6 +14,20 @@
     "notes": "原始 Streamlit 程式已移入；native 版已補隨機資料、OLS、殘差與 Top K Outliers，待執行驗收。"
   },
   {
+    "sourceRepository": "gshan1209-cell/cwa_scraper",
+    "sourceBranch": "main",
+    "courseSlug": "cwa-open-data-first-api",
+    "modulePath": "modules/cwa-open-data",
+    "status": "refactoring",
+    "targetDemoMode": "native",
+    "sourceRuntime": "python-cli",
+    "retirementPolicy": "archive-after-verification",
+    "retirementReady": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "notes": "原始 Python CLI 已移入；已新增 server-only CWA API route 與 native playground，待即時 API 與下載驗收。"
+  },
+  {
     "sourceRepository": "gshan1209-cell/L13_SVM",
     "sourceBranch": "main",
     "courseSlug": "svm-kernel-trick-3d",
@@ -21,19 +35,6 @@
     "status": "planned",
     "targetDemoMode": "native",
     "sourceRuntime": "python-streamlit-manim",
-    "retirementPolicy": "archive-after-verification",
-    "retirementReady": false,
-    "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
-  },
-  {
-    "sourceRepository": "gshan1209-cell/cwa_scraper",
-    "sourceBranch": "main",
-    "courseSlug": "cwa-open-data-first-api",
-    "modulePath": "modules/cwa-open-data",
-    "status": "planned",
-    "targetDemoMode": "native",
-    "sourceRuntime": "python-cli",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
