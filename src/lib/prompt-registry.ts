@@ -19,6 +19,10 @@ function readPromptRegistry(): PromptRegistry {
   return parsed as PromptRegistry;
 }
 
+export function getPromptDefinitions(): PromptDefinition[] {
+  return Object.values(readPromptRegistry()).sort((a, b) => a.promptId.localeCompare(b.promptId));
+}
+
 export function getPromptDefinition(promptId: string): PromptDefinition {
   const definition = readPromptRegistry()[promptId];
   if (!definition) throw new Error(`Prompt not found: ${promptId}`);
