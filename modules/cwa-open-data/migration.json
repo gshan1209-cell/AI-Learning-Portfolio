@@ -1,0 +1,58 @@
+{
+  "module": "cwa-open-data",
+  "courseSlug": "cwa-open-data-first-api",
+  "source": {
+    "repository": "gshan1209-cell/cwa_scraper",
+    "branch": "main",
+    "readmeSha": "415358a5650eae1607e8afbba6b48e4b2f368405",
+    "scriptSha": "e7d8fb50ab93f8609349866641e562619c683530",
+    "requirementsSha": "2b1be2aac5f82492d1af8c8b1c36d5afcad4f40e"
+  },
+  "status": "refactoring",
+  "importedFiles": [
+    "python-cli/cwa_scraper.py",
+    "python-cli/requirements.txt"
+  ],
+  "featureMapping": [
+    {
+      "legacyFeature": "Dataset 與 JSON/XML CLI 參數",
+      "targetFeature": "Native controls and server route query parameters",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "CWA_API_KEY environment variable",
+      "targetFeature": "Server-only CWA_API_KEY secret",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "CWA File API download",
+      "targetFeature": "GET /api/modules/cwa-open-data",
+      "status": "implemented_unverified"
+    },
+    {
+      "legacyFeature": "Timestamped file output",
+      "targetFeature": "Browser download with Content-Disposition",
+      "status": "partial"
+    },
+    {
+      "legacyFeature": "Terminal JSON/XML preview",
+      "targetFeature": "Native structured preview",
+      "status": "implemented"
+    }
+  ],
+  "verification": {
+    "structureChecked": true,
+    "dependenciesRecorded": true,
+    "nativeParityChecked": false,
+    "sensitiveDataChecked": true,
+    "runtimeVerified": false,
+    "retirementApproved": false
+  },
+  "retirement": {
+    "ready": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "repositoryArchived": false
+  },
+  "updatedAt": "2026-07-15"
+}
