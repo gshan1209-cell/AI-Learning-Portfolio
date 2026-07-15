@@ -19,7 +19,7 @@
     "algorithmCardSha": "dd5dc4030d111261c020add448d35cb90c23f38e",
     "progressBarSha": "5773cb723dcaeee1a1b716f666281dec7ba93817"
   },
-  "status": "importing",
+  "status": "refactoring",
   "importedFiles": [
     "python-fastapi-reference/requirements.txt",
     "python-fastapi-reference/main.py",
@@ -31,34 +31,54 @@
     "nextjs-reference/lib/algorithms.ts",
     "nextjs-reference/components/AlgorithmGrid.tsx",
     "nextjs-reference/components/AlgorithmCard.tsx",
-    "nextjs-reference/components/ProgressBar.tsx"
+    "nextjs-reference/components/ProgressBar.tsx",
+    "data/algorithms/linear-regression.json",
+    "data/algorithms/logistic-regression.json",
+    "data/algorithms/decision-tree.json",
+    "data/algorithms/random-forest.json",
+    "data/algorithms/svm.json",
+    "data/algorithms/knn.json",
+    "data/algorithms/kmeans.json",
+    "data/algorithms/naive-bayes.json",
+    "data/algorithms/pca.json",
+    "data/algorithms/gradient-descent.json",
+    "src/lib/ml-algorithms.ts",
+    "src/types/ml-algorithm.ts",
+    "src/app/ml-algorithms/page.tsx",
+    "src/app/ml-algorithms/[slug]/page.tsx",
+    "src/app/api/ml-algorithms/route.ts",
+    "src/app/api/ml-algorithms/[slug]/route.ts",
+    "src/components/ml-algorithm-card.tsx",
+    "src/components/ml-algorithm-quiz.tsx",
+    "src/components/ml-favorite-button.tsx",
+    "src/components/ml-learning-progress.tsx"
   ],
   "pendingFiles": [
-    "frontend/data/algorithms.json",
-    "backend/data/algorithms.json",
-    "FavoriteButton and favorite storage",
-    "algorithm detail routes",
-    "quiz components",
-    "visualization components",
+    "native visualization components for all ten visual types",
     "AI tutor UI",
-    "global styles and layout",
+    "central AI Gateway and Prompt Registry integration",
     "database and environment audit"
   ],
   "featureMapping": [
     {
       "legacyFeature": "Ten algorithm learning cards and filters",
-      "targetFeature": "Central course catalog and ML topic collection",
-      "status": "source_reference_imported"
+      "targetFeature": "Native /ml-algorithms catalog with search, category and difficulty filters",
+      "status": "native_implemented_unverified"
     },
     {
       "legacyFeature": "Algorithm JSON and quizzes",
-      "targetFeature": "Central chunked learning content",
-      "status": "pending_full_data_import"
+      "targetFeature": "Ten independent central JSON chunks with thirty quiz questions",
+      "status": "imported_and_wired_unverified"
+    },
+    {
+      "legacyFeature": "Algorithm detail routes",
+      "targetFeature": "Native /ml-algorithms/[slug] learning pages",
+      "status": "native_implemented_unverified"
     },
     {
       "legacyFeature": "LocalStorage progress and favorites",
-      "targetFeature": "Platform learning progress adapter",
-      "status": "partial_source_imported"
+      "targetFeature": "Platform local progress, quiz result and favorite adapters",
+      "status": "native_implemented_unverified"
     },
     {
       "legacyFeature": "Gemini tutor through FastAPI",
@@ -67,15 +87,16 @@
     },
     {
       "legacyFeature": "Standalone Next.js 15 deployment",
-      "targetFeature": "Next.js 14 Monorepo native routes and components",
-      "status": "pending"
+      "targetFeature": "Next.js 14 Monorepo native routes, components and API",
+      "status": "native_implemented_unverified"
     }
   ],
   "verification": {
     "structureChecked": true,
     "dependenciesRecorded": true,
     "sensitiveDataChecked": true,
-    "fullDatasetImported": false,
+    "fullDatasetImported": true,
+    "quizCountExpected": 30,
     "frontendParityChecked": false,
     "aiGatewayIntegrated": false,
     "runtimeVerified": false,
@@ -83,10 +104,9 @@
   },
   "risks": [
     "Source README describes OpenAI but current chat implementation uses Gemini.",
-    "Source frontend uses Next.js 15 while the central platform uses Next.js 14.",
-    "The 703-line algorithm dataset has not yet been fully copied into the new data layer.",
-    "Source components reference files that are not imported yet and must remain outside the build path.",
-    "AI prompts, user identifiers and chat history need central governance before production use."
+    "Native visualizations have not yet replaced every source visual type.",
+    "AI prompts, user identifiers and chat history need central governance before production use.",
+    "Build, browser, hydration and localStorage behavior have not yet been runtime verified."
   ],
   "retirement": {
     "ready": false,
