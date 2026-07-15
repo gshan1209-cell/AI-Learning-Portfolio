@@ -67,7 +67,7 @@
     "retirementReady": false,
     "sourceReadmeRedirected": false,
     "legacyDeploymentRetired": false,
-    "notes": "10 份中央教材 chunk、30 題測驗、原生目錄、詳細頁、收藏、進度與 API 已接管；待全視覺化、中央 AI Gateway、Build／瀏覽器驗收與退役流程。"
+    "notes": "10 份中央教材、30 題測驗、目錄、詳細頁、收藏、進度、API 與十種 Native 視覺化已接管；待中央 AI Gateway、Runtime／瀏覽器驗收與退役流程。"
   },
   {
     "sourceRepository": "gshan1209-cell/machinelearningHw6",
