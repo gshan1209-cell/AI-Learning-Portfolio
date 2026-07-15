@@ -23,7 +23,7 @@
 - [x] `/api/courses` 搜尋與分頁
 - [x] `/api/courses/[slug]` 單課程 API
 - [x] Prisma PostgreSQL Schema
-- [x] 13 個來源作業登錄
+- [x] 14 個來源作業登錄
 - [x] 3 門六段式示範課
 - [x] Agent 開發規範
 
