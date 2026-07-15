@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DemoAdapter from "@/components/demo-adapter";
 import { getAllCourses, getCourseBySlug } from "@/lib/course-repository";
 
 export function generateStaticParams() {
@@ -23,10 +24,10 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
         <p className="mt-3 text-xl font-bold text-brand">{course.subtitle}</p>
         <p className="mt-6 max-w-3xl text-lg leading-9 text-slate-600">{course.summary}</p>
         <div className="mt-8 flex flex-wrap gap-3">
+          <a href={course.source.repositoryUrl} target="_blank" rel="noreferrer" className="rounded-full bg-ink px-5 py-3 font-bold text-white">查看來源 Repo</a>
           {course.source.demoUrl && (
-            <a href={course.source.demoUrl} target="_blank" rel="noreferrer" className="rounded-full bg-brand px-5 py-3 font-bold text-white">開啟原始 Demo</a>
+            <a href={course.source.demoUrl} target="_blank" rel="noreferrer" className="rounded-full border border-slate-300 px-5 py-3 font-bold text-ink">直接開啟原始 Demo</a>
           )}
-          <a href={course.source.repositoryUrl} target="_blank" rel="noreferrer" className="rounded-full border border-slate-300 px-5 py-3 font-bold text-ink">查看來源 Repo</a>
         </div>
       </header>
 
@@ -44,6 +45,17 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
           </div>
         </div>
       </section>
+
+      {(course.demo || course.source.demoUrl) && (
+        <section className="mt-10">
+          <div className="mb-5">
+            <p className="text-sm font-black text-brand">INTERACTIVE DEMO</p>
+            <h2 className="mt-1 text-3xl font-black text-ink">動手操作看看</h2>
+            <p className="mt-2 text-slate-600">展示模式由 Course Registry 統一管理，外部服務無法載入時仍可退回原始作品。</p>
+          </div>
+          <DemoAdapter courseTitle={course.title} demo={course.demo} source={course.source} />
+        </section>
+      )}
 
       <div className="mt-10 space-y-6">
         {course.sections.map((section, index) => (
