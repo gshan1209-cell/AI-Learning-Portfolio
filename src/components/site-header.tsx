@@ -9,8 +9,8 @@ export default function SiteHeader() {
         </Link>
         <nav className="flex items-center gap-5 text-sm font-medium text-slate-600">
           <Link href="/courses" className="hover:text-brand">課程目錄</Link>
-          <Link href="/sources" className="hover:text-brand">來源專案</Link>
-          <a href="https://github.com/gshan1209-cell" target="_blank" rel="noreferrer" className="hover:text-brand">
+          <Link href="/sources" className="hover:text-brand">移植中心</Link>
+          <a href="https://github.com/gshan1209-cell/AI-Learning-Portfolio" target="_blank" rel="noreferrer" className="hover:text-brand">
             GitHub
           </a>
         </nav>
