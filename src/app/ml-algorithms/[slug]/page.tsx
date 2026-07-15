@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import MlAlgorithmQuiz from "@/components/ml-algorithm-quiz";
+import MlAlgorithmVisual from "@/components/ml-algorithm-visual";
 import MlFavoriteButton from "@/components/ml-favorite-button";
 import {
   getAllMlAlgorithms,
@@ -98,18 +99,19 @@ export default function MlAlgorithmDetailPage({ params }: { params: { slug: stri
         <ListPanel title="限制與風險" items={algorithm.cons} tone="amber" />
       </div>
 
-      <section className="mt-6 rounded-3xl border border-slate-200 bg-slate-950 p-7 text-white">
-        <p className="text-sm font-black text-emerald-300">VISUAL ADAPTER</p>
-        <h2 className="mt-2 text-2xl font-black">視覺化類型：{algorithm.visual_type}</h2>
-        <p className="mt-3 leading-7 text-slate-300">
-          來源專案的動態圖解正在改寫為中央 Native 元件。目前先保留視覺化類型與教材勾稽，避免繼續依賴舊部署。
-        </p>
-        {relatedCourse && (
-          <Link href={`/courses/${relatedCourse}`} className="mt-5 inline-flex rounded-full bg-emerald-400 px-5 py-3 font-bold text-slate-950">
+      <div className="mt-6">
+        <MlAlgorithmVisual visualType={algorithm.visual_type} />
+      </div>
+
+      {relatedCourse && (
+        <section className="mt-6 rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+          <p className="font-black text-emerald-900">延伸實驗室</p>
+          <p className="mt-2 leading-7 text-emerald-900">此主題已有更完整的移植模組，可繼續操作參數、資料與進階教學。</p>
+          <Link href={`/courses/${relatedCourse}`} className="mt-4 inline-flex rounded-full bg-emerald-700 px-5 py-3 font-bold text-white">
             開啟已移植的互動實驗室 →
           </Link>
-        )}
-      </section>
+        </section>
+      )}
 
       <div className="mt-8">
         <MlAlgorithmQuiz slug={algorithm.slug} questions={algorithm.quiz} />
