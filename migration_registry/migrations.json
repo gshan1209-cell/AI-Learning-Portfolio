@@ -4,14 +4,14 @@
     "sourceBranch": "main",
     "courseSlug": "linear-regression-for-beginners",
     "modulePath": "modules/linear-regression",
-    "status": "importing",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "python-streamlit",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
     "legacyDeploymentRetired": false,
-    "notes": "第一個完整移植樣板；已盤點 app.py 與 requirements.txt。"
+    "notes": "原始 Streamlit 程式已移入；native 版已補隨機資料、OLS、殘差與 Top K Outliers，待執行驗收。"
   },
   {
     "sourceRepository": "gshan1209-cell/L13_SVM",
