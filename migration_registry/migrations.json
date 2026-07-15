@@ -42,6 +42,20 @@
     "notes": "Phase 1、2、3 與共用 SVM 工具已移入；課程已切換 Native 教學模型，待素材、精確 Python Runtime 與瀏覽器驗收。"
   },
   {
+    "sourceRepository": "gshan1209-cell/L12",
+    "sourceBranch": "main",
+    "courseSlug": "stock-manim-animation",
+    "modulePath": "modules/stock-manim-animation",
+    "status": "refactoring",
+    "targetDemoMode": "video",
+    "sourceRuntime": "python-manim",
+    "retirementPolicy": "archive-after-verification",
+    "retirementReady": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "notes": "9 個場景、批次渲染器與核心 shared 元件已移入；待 tests、圖片／影片資產、Manim／FFmpeg／中文字體與全場景渲染驗收。"
+  },
+  {
     "sourceRepository": "gshan1209-cell/machinelearningHw05",
     "sourceBranch": "main",
     "courseSlug": "ml-top-10-algorithms",
@@ -75,19 +89,6 @@
     "status": "planned",
     "targetDemoMode": "native",
     "sourceRuntime": "python-streamlit-fastapi",
-    "retirementPolicy": "archive-after-verification",
-    "retirementReady": false,
-    "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
-  },
-  {
-    "sourceRepository": "gshan1209-cell/L12",
-    "sourceBranch": "main",
-    "courseSlug": "stock-manim-animation",
-    "modulePath": "modules/stock-manim-animation",
-    "status": "planned",
-    "targetDemoMode": "video",
-    "sourceRuntime": "python-manim",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
