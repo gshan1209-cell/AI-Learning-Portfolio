@@ -1,0 +1,77 @@
+{
+  "module": "linear-regression",
+  "courseSlug": "linear-regression-for-beginners",
+  "source": {
+    "repository": "gshan1209-cell/L4",
+    "branch": "main",
+    "readmeSha": "603db063a08b3945827ccca9b80fd33d11b03e0c",
+    "appSha": "891a64363b6f2d99d87287ba2d1cebb794d797d7",
+    "requirementsSha": "d4b315355620b27d00d047e4678e62444fd3535a"
+  },
+  "status": "importing",
+  "importedFiles": [
+    "python-streamlit/app.py",
+    "python-streamlit/requirements.txt"
+  ],
+  "excludedFiles": [
+    {
+      "path": "linear_regression_data.csv",
+      "reason": "輸出產物，不作為必要原始碼；後續由新平台動態生成。"
+    },
+    {
+      "path": "linear_regression_plot.png",
+      "reason": "輸出產物；保留功能但不必搬移舊產物。"
+    },
+    {
+      "path": "demoL4.png",
+      "reason": "舊版截圖；待確認是否需要納入歷史展示素材。"
+    }
+  ],
+  "featureMapping": [
+    {
+      "legacyFeature": "隨機產生 X、Y、真實斜率、截距與雜訊",
+      "targetFeature": "Native Playground random dataset generator",
+      "status": "pending"
+    },
+    {
+      "legacyFeature": "scikit-learn LinearRegression 自動擬合",
+      "targetFeature": "Native OLS fitting implementation",
+      "status": "pending"
+    },
+    {
+      "legacyFeature": "residual 與 abs_residual",
+      "targetFeature": "Native residual calculation",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "Top K Outliers",
+      "targetFeature": "Native outlier ranking and table",
+      "status": "pending"
+    },
+    {
+      "legacyFeature": "Matplotlib regression chart",
+      "targetFeature": "React SVG chart",
+      "status": "partial"
+    },
+    {
+      "legacyFeature": "Streamlit sidebar controls",
+      "targetFeature": "React control panel",
+      "status": "partial"
+    }
+  ],
+  "verification": {
+    "structureChecked": true,
+    "dependenciesRecorded": true,
+    "nativeParityChecked": false,
+    "sensitiveDataChecked": true,
+    "runtimeVerified": false,
+    "retirementApproved": false
+  },
+  "retirement": {
+    "ready": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "repositoryArchived": false
+  },
+  "updatedAt": "2026-07-15"
+}
