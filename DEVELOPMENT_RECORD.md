@@ -4,7 +4,7 @@
 
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告與人工核准後設為 Archived／唯讀。
-- 已進行三個實際移植模組：L4 線性迴歸、CWA OpenData、L13 SVM Kernel Trick。
+- 已有三個來源進入 `refactoring`：L4 線性迴歸、CWA OpenData、L13 SVM Kernel Trick。
 - `external`、`iframe` 只供移植期間功能比對，不代表接管完成。
 - 完整 CI 暫緩，但來源 Repo 退役前的 Runtime 驗收不可省略。
 
@@ -12,8 +12,7 @@
 
 | 狀態 | 數量 |
 |---|---:|
-| importing | 1 |
-| refactoring | 2 |
+| refactoring | 3 |
 | planned | 11 |
 | ready_to_retire | 0 |
 | retired | 0 |
@@ -37,13 +36,9 @@
 已完成：
 
 - 原始 Streamlit `app.py` 與 requirements 移入
-- 模組 README、migration manifest、來源 SHA
-- Native seeded random dataset
-- OLS 自動擬合
+- Native seeded random dataset、OLS、殘差與 Top K Outliers
 - true／estimated slope、intercept、variance、MAE、MSE
-- residual／abs residual
-- Top K Outliers、表格與 React SVG
-- fitted／manual 雙模式
+- React SVG 與 fitted／manual 雙模式
 
 待完成：
 
@@ -58,13 +53,9 @@
 已完成：
 
 - 原始 Python CLI 與 requirements 移入
-- 模組 README、migration manifest、來源 SHA
 - Server-only `CWA_API_KEY`
 - `/api/modules/cwa-open-data`
-- Dataset／JSON／XML 驗證
-- Sample 與 Live 模式
-- 401、404、上游錯誤轉譯
-- Content-Type／Content-Disposition
+- Dataset／JSON／XML、Sample／Live、錯誤轉譯與下載標頭
 - Native CWA Playground
 - 課程 Demo 從 external 改為 native
 
@@ -76,39 +67,42 @@
 
 ## ALP-MIG-003｜L13 SVM Kernel Trick
 
-**狀態：`importing`**
+**狀態：`refactoring`**
 
-### 來源架構
+### 三階段原始碼已接管
 
-| 階段 | 來源檔案 | 功能 |
+| 階段 | 新專案檔案 | 功能 |
 |---|---|---|
-| Phase 1 | `phase1_manim_kernel_trick.py` | 2D 同心圓提升到 3D 幾何動畫 |
-| Phase 2 | `phase2_rbf_decision_surface.py` | RBF SVM 2D 邊界與 3D 決策函數曲面 |
-| Phase 3 | `phase3_streamlit_app.py` | kernel、C、gamma、degree、noise 與點數互動 |
+| Phase 1 | `python-reference/phase1_manim_kernel_trick.py` | 2D 同心圓提升到 3D 幾何動畫 |
+| Phase 2 | `python-reference/phase2_rbf_decision_surface.py` | RBF SVM 2D 邊界與 3D 決策函數曲面 |
+| Phase 3 | `python-reference/phase3_streamlit_app.py` | Kernel、C、Gamma、Degree、Noise 與點數互動 |
 
 ### 已完成
 
-- [x] README、requirements 與三階段架構盤點
-- [x] 保存 README、Phase 1／2／3、utils 來源 SHA
-- [x] requirements 移入
-- [x] `utils/data_generator.py` 移入
-- [x] `utils/svm_utils.py` 移入
-- [x] Phase 1 Manim 程式移入
-- [x] Phase 2 RBF 決策曲面程式移入
-- [x] 模組 README 與 `migration.json`
-- [x] 建立 `ALP-MIG-003` 任務文件
+- [x] requirements、資料生成器與 SVC 工具移入
+- [x] Phase 1、2、3 完整移入
+- [x] Native SVM Playground
+- [x] RBF、Linear、Polynomial、Sigmoid 控制
+- [x] C、Gamma、Degree、Noise、Point Count、Seed
+- [x] Native 同心圓資料生成
+- [x] 2D 邊界與近似支持向量
+- [x] `z=x²+y²` 高維提升直覺圖
+- [x] 教學分類率與支持向量指標
+- [x] Gamma、C 與 Linear Kernel 動態提示
+- [x] Demo Adapter Native 註冊
+- [x] 課程從 iframe 改為 native
+
+### 實作界線
+
+Native Playground 接管操作流程與教學概念，但不宣稱是完整 scikit-learn SVC 的瀏覽器重寫。精確 SVC 原始碼已在 Monorepo；若網站需要精確即時計算，後續應新增由本專案管理的 Python API／Worker。
 
 ### 待完成
 
-- [ ] 完整移入 Phase 3 Streamlit 主程式
-- [ ] 盤點並移入必要圖片、影片與輸出素材
-- [ ] 建立 Native SVM Playground
-- [ ] Native 2D 同心圓與支持向量視覺化
-- [ ] Native 3D 幾何／決策函數曲面
-- [ ] kernel、C、gamma、degree、noise、point count 控制
-- [ ] 準確率、支持向量指標與動態教學提示
-- [ ] 將課程 iframe 過渡模式改為 native
-- [ ] Runtime 最低必要驗收
+- [ ] 必要圖片與 Manim 影片資產
+- [ ] Phase 1、2、3 Python Runtime 驗收
+- [ ] Native Playground 瀏覽器／RWD 驗收
+- [ ] 精確 SVC Runtime 策略決定
+- [ ] 舊 Streamlit Demo 停止或導向
 - [ ] 舊 Repo 搬遷公告與人工退役核准
 
 ## 數學規則
@@ -116,8 +110,8 @@
 1. `z=x²+y²` 只能描述為幾何直覺示意。
 2. 真實 RBF Kernel 不可描述成顯式 3D 特徵映射。
 3. 3D `f(x,y)` 圖必須標示為決策函數曲面。
-4. high gamma 需說明局部邊界與過擬合風險。
-5. low／high C 需說明 Soft／Hard Margin 差異。
+4. High Gamma 需說明局部邊界與過擬合風險。
+5. Low／High C 需說明 Soft／Hard Margin 差異。
 
 ## 退役門檻
 
@@ -135,7 +129,6 @@
 
 ## 下一步
 
-1. 完整搬入 L13 Phase 3 Streamlit 程式。
-2. 建立 Native SVM Playground 的資料與參數核心。
-3. 完成 2D 邊界、支持向量與參數教學提示。
-4. 再處理 3D 視覺化與 Manim 影片資產。
+1. 盤點並移入 L13 必要圖片與 Manim 影片資產。
+2. 啟動 ALP-MIG-004｜L12 台股 Manim 動畫移植。
+3. 後續統一執行 L4、CWA、L13 的最低必要 Runtime 驗收。
