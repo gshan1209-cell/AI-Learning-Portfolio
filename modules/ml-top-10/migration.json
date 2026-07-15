@@ -1,0 +1,98 @@
+{
+  "module": "ml-top-10",
+  "courseSlug": "ml-top-10-algorithms",
+  "source": {
+    "repository": "gshan1209-cell/machinelearningHw05",
+    "branch": "main",
+    "commitSha": "9567a798c0f7de0065a1834f6af8500708e902a1",
+    "readmeSha": "22460d190d3d681f63171df2c2d455ed05153789",
+    "frontendPackageSha": "306bb88d97e3e069ac51b59eefa5a6c394e87c88",
+    "backendRequirementsSha": "23ce963cff7b2e310c52e15c10d0f2893388fbb2",
+    "backendMainSha": "8564c3faf36213810201d6d380230a793e0652da",
+    "algorithmsRouteSha": "e5f125bced46f45180e68edeac0dceab48c5f9a3",
+    "chatSha": "6aa49e9d4c251355a5e0c1e4cb84dbb108d9a8d3",
+    "algorithmsDataSha": "7b2a3f2e824dbabfbc07cea8063f7d1f13958f78",
+    "homePageSha": "b4676f7365c2fd2d746d436568e989b6d679592f",
+    "algorithmLibSha": "11725967639b82541509c2d84fcdfec9b144126e",
+    "typesSha": "23f80bb084d46aad2d79663b45698450d65518f2",
+    "algorithmGridSha": "39ce207e320430923da6b012369f49e30970e5f8",
+    "algorithmCardSha": "dd5dc4030d111261c020add448d35cb90c23f38e",
+    "progressBarSha": "5773cb723dcaeee1a1b716f666281dec7ba93817"
+  },
+  "status": "importing",
+  "importedFiles": [
+    "python-fastapi-reference/requirements.txt",
+    "python-fastapi-reference/main.py",
+    "python-fastapi-reference/algorithms.py",
+    "python-fastapi-reference/chat.py",
+    "nextjs-reference/package.json",
+    "nextjs-reference/app/page.tsx",
+    "nextjs-reference/lib/types.ts",
+    "nextjs-reference/lib/algorithms.ts",
+    "nextjs-reference/components/AlgorithmGrid.tsx",
+    "nextjs-reference/components/AlgorithmCard.tsx",
+    "nextjs-reference/components/ProgressBar.tsx"
+  ],
+  "pendingFiles": [
+    "frontend/data/algorithms.json",
+    "backend/data/algorithms.json",
+    "FavoriteButton and favorite storage",
+    "algorithm detail routes",
+    "quiz components",
+    "visualization components",
+    "AI tutor UI",
+    "global styles and layout",
+    "database and environment audit"
+  ],
+  "featureMapping": [
+    {
+      "legacyFeature": "Ten algorithm learning cards and filters",
+      "targetFeature": "Central course catalog and ML topic collection",
+      "status": "source_reference_imported"
+    },
+    {
+      "legacyFeature": "Algorithm JSON and quizzes",
+      "targetFeature": "Central chunked learning content",
+      "status": "pending_full_data_import"
+    },
+    {
+      "legacyFeature": "LocalStorage progress and favorites",
+      "targetFeature": "Platform learning progress adapter",
+      "status": "partial_source_imported"
+    },
+    {
+      "legacyFeature": "Gemini tutor through FastAPI",
+      "targetFeature": "Platform AI Gateway plus Prompt Registry",
+      "status": "source_reference_imported_refactor_required"
+    },
+    {
+      "legacyFeature": "Standalone Next.js 15 deployment",
+      "targetFeature": "Next.js 14 Monorepo native routes and components",
+      "status": "pending"
+    }
+  ],
+  "verification": {
+    "structureChecked": true,
+    "dependenciesRecorded": true,
+    "sensitiveDataChecked": true,
+    "fullDatasetImported": false,
+    "frontendParityChecked": false,
+    "aiGatewayIntegrated": false,
+    "runtimeVerified": false,
+    "retirementApproved": false
+  },
+  "risks": [
+    "Source README describes OpenAI but current chat implementation uses Gemini.",
+    "Source frontend uses Next.js 15 while the central platform uses Next.js 14.",
+    "The 703-line algorithm dataset has not yet been fully copied into the new data layer.",
+    "Source components reference files that are not imported yet and must remain outside the build path.",
+    "AI prompts, user identifiers and chat history need central governance before production use."
+  ],
+  "retirement": {
+    "ready": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "repositoryArchived": false
+  },
+  "updatedAt": "2026-07-15"
+}
