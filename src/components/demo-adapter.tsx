@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { CourseDemo, CourseSource } from "@/types/course";
+import CwaOpenDataPlayground from "@/components/native-demos/cwa-open-data-playground";
 import LinearRegressionPlayground from "@/components/native-demos/linear-regression-playground";
 
 interface DemoAdapterProps {
@@ -30,7 +31,7 @@ function DemoFallback({
         rel="noreferrer"
         className="mt-5 inline-flex rounded-full bg-ink px-5 py-3 font-bold text-white"
       >
-        前往原始作品
+        前往來源紀錄
       </a>
     </div>
   );
@@ -41,10 +42,14 @@ function NativeDemo({ nativeKey, fallbackUrl }: { nativeKey?: string; fallbackUr
     return <LinearRegressionPlayground />;
   }
 
+  if (nativeKey === "cwa-open-data-playground") {
+    return <CwaOpenDataPlayground />;
+  }
+
   return (
     <DemoFallback
       title="站內互動元件尚未註冊"
-      message={`找不到 nativeKey：${nativeKey || "未設定"}。可先查看原始作品，之後再補上對應的站內元件。`}
+      message={`找不到 nativeKey：${nativeKey || "未設定"}。可先查看來源紀錄，之後再補上對應的站內元件。`}
       fallbackUrl={fallbackUrl}
     />
   );
@@ -77,7 +82,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
     return (
       <DemoFallback
         title={`${title} 暫時無法顯示`}
-        message="外部服務可能休眠、拒絕嵌入，或展示網址已變更。課程內容仍可正常閱讀，並可改由原始作品連結開啟。"
+        message="外部服務可能休眠、拒絕嵌入，或展示網址已變更。課程內容仍可正常閱讀，並可改由來源紀錄開啟。"
         fallbackUrl={fallbackUrl}
       />
     );
@@ -91,7 +96,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
     const targetUrl = resolvedDemo.url || fallbackUrl;
     return (
       <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-emerald-50 p-7">
-        <p className="text-sm font-black text-brand">EXTERNAL DEMO</p>
+        <p className="text-sm font-black text-brand">MIGRATION FALLBACK</p>
         <h3 className="mt-2 text-2xl font-black text-ink">{title}</h3>
         <p className="mt-3 max-w-3xl leading-7 text-slate-600">{description}</p>
         <a
@@ -100,7 +105,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
           rel="noreferrer"
           className="mt-6 inline-flex rounded-full bg-brand px-5 py-3 font-bold text-white"
         >
-          在新分頁開啟 Demo
+          開啟來源作品
         </a>
       </div>
     );
@@ -114,7 +119,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
     return (
       <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft">
         <div className="border-b border-slate-200 p-5">
-          <p className="text-sm font-black text-brand">EMBEDDED DEMO</p>
+          <p className="text-sm font-black text-brand">MIGRATION EMBED</p>
           <h3 className="mt-1 text-xl font-black text-ink">{title}</h3>
           <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
         </div>
@@ -128,8 +133,8 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
           sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         />
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-500">
-          <span>若外部網站拒絕嵌入，可改用新分頁開啟。</span>
-          <a href={fallbackUrl} target="_blank" rel="noreferrer" className="font-bold text-brand hover:underline">開啟備援連結</a>
+          <span>此模式僅供移植期間比對，完成原生接管後應移除。</span>
+          <a href={fallbackUrl} target="_blank" rel="noreferrer" className="font-bold text-brand hover:underline">開啟來源紀錄</a>
         </div>
       </div>
     );
@@ -142,13 +147,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
 
     return (
       <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-soft">
-        <video
-          controls
-          preload="metadata"
-          poster={resolvedDemo.posterUrl}
-          onError={() => setHasError(true)}
-          className="aspect-video w-full"
-        >
+        <video controls preload="metadata" poster={resolvedDemo.posterUrl} onError={() => setHasError(true)} className="aspect-video w-full">
           <source src={resolvedDemo.url} />
           您的瀏覽器不支援影片播放。
         </video>
@@ -167,17 +166,12 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
 
     return (
       <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft">
-        <img
-          src={resolvedDemo.url}
-          alt={`${title} 快照`}
-          onError={() => setHasError(true)}
-          className="aspect-video w-full object-cover"
-        />
+        <img src={resolvedDemo.url} alt={`${title} 快照`} onError={() => setHasError(true)} className="aspect-video w-full object-cover" />
         <figcaption className="p-5">
           <p className="text-sm font-black text-brand">SNAPSHOT</p>
           <h3 className="mt-1 text-xl font-black text-ink">{title}</h3>
           <p className="mt-2 leading-7 text-slate-600">{description}</p>
-          <a href={fallbackUrl} target="_blank" rel="noreferrer" className="mt-4 inline-flex font-bold text-brand hover:underline">查看完整作品 →</a>
+          <a href={fallbackUrl} target="_blank" rel="noreferrer" className="mt-4 inline-flex font-bold text-brand hover:underline">查看來源紀錄 →</a>
         </figcaption>
       </figure>
     );
