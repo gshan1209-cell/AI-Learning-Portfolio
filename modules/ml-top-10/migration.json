@@ -26,7 +26,8 @@
     "/ml-algorithms/[slug]",
     "/api/ml-algorithms",
     "/api/ml-algorithms/[slug]",
-    "/api/ai/ml-tutor"
+    "/api/ai/ml-tutor",
+    "/ai-governance"
   ],
   "nativeFeatures": [
     "search and filters",
@@ -40,6 +41,7 @@
     "central prompt registry and prompt versioning",
     "token and cost ledger contract",
     "privacy-preserving rate limiting",
+    "read-only AI governance dashboard",
     "related native course links"
   ],
   "visualTypes": [
@@ -59,6 +61,9 @@
     "activePromptVersion": "1.1.0",
     "legacyPromptVersionPreserved": "1.0.0",
     "gatewayImplemented": true,
+    "tutorUiImplemented": true,
+    "readOnlyDashboardImplemented": true,
+    "promptEditorImplemented": false,
     "structuredOutputImplemented": true,
     "fallbackImplemented": true,
     "inputAndHistoryLimitsImplemented": true,
@@ -88,7 +93,7 @@
     },
     {
       "legacyFeature": "Gemini tutor through standalone FastAPI",
-      "targetFeature": "Central AI Gateway, Prompt Registry, fallback and usage ledger",
+      "targetFeature": "Central AI Gateway, Prompt Registry, fallback, usage ledger and governance dashboard",
       "status": "native_implemented_unverified"
     },
     {
@@ -100,7 +105,8 @@
   "pending": [
     "live Gemini provider verification with a test secret",
     "Prisma migration and PostgreSQL usage ledger persistence",
-    "prompt governance admin UI and cost dashboard",
+    "authenticated prompt editor and cost management actions",
+    "multi-instance rate limiter",
     "build, browser, hydration, RWD and localStorage verification",
     "legacy deployment redirect or shutdown",
     "source README migration notice",
@@ -115,6 +121,7 @@
     "nativeVisualTypesImplemented": 10,
     "aiGatewayImplemented": true,
     "aiGatewayIntegrated": true,
+    "readOnlyGovernanceDashboardImplemented": true,
     "frontendParityChecked": false,
     "liveAiVerified": false,
     "runtimeVerified": false,
@@ -124,6 +131,7 @@
     "Live provider behavior has not been verified with a test key.",
     "In-memory rate limiting is best-effort and must be replaced for multi-instance production.",
     "JSONL usage logs are for local development only; production needs PostgreSQL persistence.",
+    "The governance dashboard is intentionally read-only until authentication and authorization exist.",
     "Build, browser, hydration and localStorage behavior have not yet been runtime verified."
   ],
   "retirement": {
