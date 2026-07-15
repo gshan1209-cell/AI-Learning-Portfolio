@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { CourseDemo, CourseSource } from "@/types/course";
 import CwaOpenDataPlayground from "@/components/native-demos/cwa-open-data-playground";
 import LinearRegressionPlayground from "@/components/native-demos/linear-regression-playground";
+import SvmKernelPlayground from "@/components/native-demos/svm-kernel-playground";
 
 interface DemoAdapterProps {
   courseTitle: string;
@@ -44,6 +45,10 @@ function NativeDemo({ nativeKey, fallbackUrl }: { nativeKey?: string; fallbackUr
 
   if (nativeKey === "cwa-open-data-playground") {
     return <CwaOpenDataPlayground />;
+  }
+
+  if (nativeKey === "svm-kernel-playground") {
+    return <SvmKernelPlayground />;
   }
 
   return (
