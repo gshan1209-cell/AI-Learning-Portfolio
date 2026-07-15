@@ -3,13 +3,14 @@
 ## 中文摘要
 
 - 2026-07-15 建立全新獨立 Repository。
-- 技術架構改採 `gshan1209-cell/scrape` 的 Next.js + JSON chunks + Prisma 模式。
-- 完成平台基礎骨架與三門示範課程。
+- 技術架構採 `gshan1209-cell/scrape` 的 Next.js + JSON chunks + Prisma 模式。
+- 完成平台基礎骨架、三門示範課程與五模式 Demo Adapter。
+- 線性迴歸已具備站內互動 Playground。
 - 依使用者決策，正式測試與驗證先跳過。
 
 ## 目前狀態
 
-**階段：P0 平台骨架已建立，待內容擴充與 Demo Adapter。**
+**階段：P1 Demo Adapter 已完成，下一步進行 GitHub Metadata 同步與課程轉製工作流。**
 
 ## 已完成
 
@@ -26,11 +27,26 @@
 - [x] 14 個來源作業登錄
 - [x] 3 門六段式示範課
 - [x] Agent 開發規範
+- [x] Demo Adapter：external、iframe、video、snapshot、native
+- [x] 獨立 `course_demo_registry` 資料層
+- [x] Demo 失效統一 fallback
+- [x] 線性迴歸 native 互動 Demo
+- [x] Demo Adapter 架構文件
+
+## Demo Adapter 完成證據
+
+| 課程 | 模式 | 說明 |
+|---|---|---|
+| 線性迴歸 | native | 站內可調斜率、截距與殘差 |
+| SVM Kernel Trick | iframe | 嵌入 Streamlit，保留備援連結 |
+| CWA OpenData | external | 連到命令列工具來源 Repo |
+| 台股技術分析動畫 | video | 模式已預留，待補影片 |
+| Cosmos 文字生成圖片 | snapshot | 模式已預留，待補快照 |
 
 ## 待處理
 
-- [ ] Demo Adapter：external、iframe、video、native 四種模式
 - [ ] GitHub Metadata 同步
+- [ ] Course Import／Transform Pipeline
 - [ ] 課程轉製後台
 - [ ] PostgreSQL 匯入腳本
 - [ ] 學習進度與收藏
@@ -43,3 +59,21 @@
 2. 不再以 `machinelearningHw05` 當技術母體。
 3. 原始作業 Repo 全部保留；中央平台只保存教學內容、來源與 Adapter。
 4. 大量資料採 chunk 分批讀取，不放入前端 bundle。
+5. Demo 設定與課程內容分離，展示網址變更不應重寫課程 chunk。
+6. 外部作品不可用時，課程內容仍須可閱讀並提供來源 Repo 備援。
+
+## 下一步任務
+
+### ALP-P1-002｜GitHub Metadata Sync
+
+目標：建立來源 Repository Metadata 快照，包含：
+
+- Repository 名稱與 URL
+- 預設分支
+- README 摘要
+- 主要語言與技術標籤
+- Demo URL
+- 最近同步時間
+- 轉製狀態
+
+本階段先採 JSON 快照與手動更新腳本，正式 GitHub API Token、排程與資料庫同步後續再啟用。
