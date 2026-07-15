@@ -24,6 +24,10 @@ const statusStyles: Record<MigrationStatus, string> = {
   blocked: "bg-rose-100 text-rose-800",
 };
 
+const nativeTargetPaths: Record<string, string> = {
+  "ml-top-10-algorithms": "/ml-algorithms",
+};
+
 function formatSize(sizeKb?: number) {
   if (sizeKb === undefined) return "尚未同步";
   if (sizeKb >= 1024) return `${(sizeKb / 1024).toFixed(1)} MB`;
@@ -95,6 +99,9 @@ export default function SourcesPage({
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         {migrations.map((migration) => {
           const repository = migration.repository;
+          const nativeTargetPath = nativeTargetPaths[migration.courseSlug];
+          const platformTarget = nativeTargetPath || (repository?.conversionStatus === "published" ? `/courses/${migration.courseSlug}` : undefined);
+
           return (
             <article key={migration.sourceRepository} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -159,9 +166,9 @@ export default function SourcesPage({
                     查看來源 Repo
                   </a>
                 )}
-                {repository?.conversionStatus === "published" && (
-                  <Link href={`/courses/${migration.courseSlug}`} className="rounded-full bg-ink px-5 py-3 text-sm font-bold text-white">
-                    開啟新平台課程
+                {platformTarget && (
+                  <Link href={platformTarget} className="rounded-full bg-ink px-5 py-3 text-sm font-bold text-white">
+                    開啟新平台內容
                   </Link>
                 )}
               </div>
