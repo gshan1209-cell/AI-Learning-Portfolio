@@ -5,7 +5,7 @@
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告、舊部署處理與人工核准後設為 Archived／唯讀。
 - 目前已有 5 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05。
-- ML Top 10 已完成教材、視覺化、測驗與中央 AI 助教程式接管，但仍未完成 Live／DB／瀏覽器驗收。
+- ML Top 10 已完成教材、視覺化、測驗、中央 AI 助教程式與唯讀治理儀表板接管，但仍未完成 Live／DB／瀏覽器驗收。
 - 本階段依決策跳過完整 Build／CI；任何來源 Repo 退役前的最低 Runtime 驗收不可省略。
 
 ## 目前狀態
@@ -29,6 +29,7 @@
 - [x] v1.2 Source Migration 規格與 Agent 規範
 - [x] Prompt Registry、Prompt Versioning 與中央 AI Gateway 基礎
 - [x] Token／Cost Ledger 合約與 Prisma Schema 預留
+- [x] `/ai-governance` 唯讀 Prompt／Token／成本治理儀表板
 
 ## ALP-MIG-001｜L4 線性迴歸
 
@@ -90,12 +91,14 @@
 - [x] Gemini Structured JSON Schema
 - [x] Server-side Response Validation
 - [x] Secret 缺少／Provider Error／Timeout fallback
-- [x] Question／History／Request Body Limits
+- [x] Question／History／16 KB Request Body Limits
 - [x] 不接收 user_id、不保存完整對話與原始 IP
 - [x] 匿名雜湊 Rate Limit
 - [x] Token Usage 與可設定費率的 Cost Estimate
 - [x] 本機 JSONL Ledger 與正式 PostgreSQL Schema 預留
 - [x] `ai_prompts`、`ai_prompt_versions`、`ai_model_rates`、`ai_usage_logs`
+- [x] `/ai-governance` 唯讀治理儀表板
+- [x] Prompt 版本、模型、Secret 配置狀態、Rate Limit、費率、Ledger 模式與近期用量檢視
 - [x] AI Gateway 架構文件
 
 ### 待完成
@@ -103,8 +106,8 @@
 - [ ] 使用測試 Secret 驗證 Live Gemini 回覆、Schema 與 Token Metadata
 - [ ] 執行 Prisma Migration
 - [ ] 正式 Usage Ledger 寫入 PostgreSQL
-- [ ] Prompt 管理後台與 Token／成本儀表板
-- [ ] 多實例 Redis／資料庫型 Rate Limiter
+- [ ] 具認證／授權的 Prompt 編輯、發布與回滾後台
+- [ ] 正式 Token／成本查詢圖表與多實例 Rate Limiter
 - [ ] SQLite／SQLAlchemy 與來源 OpenAI 相依盤點
 - [ ] Build／TypeScript／瀏覽器／RWD／localStorage 驗收
 - [ ] 舊 Vercel／FastAPI 停止或導向
@@ -124,8 +127,8 @@
 
 ## 下一步
 
-1. 補 Prompt 管理與 Token／成本唯讀儀表板。
-2. 使用測試 Secret 驗證 ML Top 10 Live／Fallback AI 流程。
-3. 執行 Prisma Migration 後改用 PostgreSQL Usage Ledger。
+1. 使用測試 Secret 驗證 ML Top 10 Live／Fallback AI 流程。
+2. 執行 Prisma Migration 後改用 PostgreSQL Usage Ledger。
+3. 建立具認證／授權的 Prompt 編輯、發布與回滾後台。
 4. 集中執行 5 個 `refactoring` 模組的最低必要 Runtime 驗收。
 5. 驗收後建立舊 Repo 搬遷公告與退役候選清單。
