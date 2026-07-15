@@ -7,10 +7,10 @@
     "fallbackUrl": "https://github.com/gshan1209-cell/L4"
   },
   "svm-kernel-trick-3d": {
-    "mode": "iframe",
-    "title": "SVM Kernel Trick 互動展示",
-    "description": "此 iframe 僅供移植期間功能比對；完成 native 接管後移除外部依賴。",
-    "url": "https://seanlinesvm.streamlit.app/",
+    "mode": "native",
+    "title": "SVM Kernel Trick 站內教學實驗室",
+    "description": "使用站內 Native 教學模型操作 Kernel、C、Gamma、Degree、Noise、Seed、支持向量與 2D→高維特徵提升；精確 SVC 參考程式已移入 Monorepo。",
+    "nativeKey": "svm-kernel-playground",
     "fallbackUrl": "https://github.com/gshan1209-cell/L13_SVM"
   },
   "cwa-open-data-first-api": {
