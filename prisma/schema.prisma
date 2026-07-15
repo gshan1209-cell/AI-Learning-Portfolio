@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Course {
+  id              String          @id @default(uuid())
+  externalKey     String          @unique @map("external_key")
+  slug            String          @unique
+  title           String
+  subtitle        String?
+  summary         String
+  category        String
+  level           String          @default("beginner")
+  durationMinutes Int             @default(30) @map("duration_minutes")
+  status          String          @default("draft")
+  featured        Boolean         @default(false)
+  tags            String[]        @default([])
+  objectives      Json            @default("[]")
+  quiz            Json?
+  publishedAt     DateTime?       @map("published_at")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  source          CourseSource?
+  sections        CourseSection[]
+  progress        CourseProgress[]
+
+  @@index([status, featured])
+  @@index([category])
+  @@map("courses")
+}
+
+model CourseSource {
+  id             String   @id @default(uuid())
+  courseId       String   @unique @map("course_id")
+  repository     String
+  repositoryUrl  String   @map("repository_url")
+  demoUrl        String?  @map("demo_url")
+  originalPath   String?  @map("original_path")
+  sourceCommit   String?  @map("source_commit")
+  importedAt     DateTime @default(now()) @map("imported_at")
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@map("course_sources")
+}
+
+model CourseSection {
+  id        String   @id @default(uuid())
+  courseId  String   @map("course_id")
+  sectionKey String  @map("section_key")
+  title     String
+  summary   String
+  content   Json     @default("{}")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, sectionKey])
+  @@index([courseId, sortOrder])
+  @@map("course_sections")
+}
+
+model CourseProgress {
+  id          String   @id @default(uuid())
+  learnerKey  String   @map("learner_key")
+  courseId    String   @map("course_id")
+  status      String   @default("started")
+  percent     Int      @default(0)
+  quizScore   Int?     @map("quiz_score")
+  startedAt   DateTime @default(now()) @map("started_at")
+  completedAt DateTime? @map("completed_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([learnerKey, courseId])
+  @@index([learnerKey, updatedAt])
+  @@map("course_progress")
+}
+
+model CourseImportFile {
+  id            String    @id @default(uuid())
+  filePath      String    @map("file_path")
+  fileHash      String    @map("file_hash")
+  status        String    @default("pending")
+  recordsCount  Int       @default(0) @map("records_count")
+  importedCount Int       @default(0) @map("imported_count")
+  skippedCount  Int       @default(0) @map("skipped_count")
+  errorMessage  String?   @map("error_message")
+  startedAt     DateTime? @map("started_at")
+  finishedAt    DateTime? @map("finished_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@unique([filePath, fileHash])
+  @@index([status])
+  @@map("course_import_files")
+}
