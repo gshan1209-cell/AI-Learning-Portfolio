@@ -12,38 +12,43 @@
     "dataGeneratorSha": "23b60f94c290b23c027bb7dad0b4c7cca30744d2",
     "svmUtilsSha": "c6a6105fb984e07454cd061dbc3dfcd47b441814"
   },
-  "status": "importing",
+  "status": "refactoring",
   "importedFiles": [
     "python-reference/requirements.txt",
     "python-reference/phase1_manim_kernel_trick.py",
     "python-reference/phase2_rbf_decision_surface.py",
+    "python-reference/phase3_streamlit_app.py",
     "python-reference/utils/data_generator.py",
     "python-reference/utils/svm_utils.py"
   ],
   "pendingFiles": [
-    "python-reference/phase3_streamlit_app.py",
-    "source teaching images and generated video assets"
+    "source teaching images and generated Manim video assets"
   ],
   "featureMapping": [
     {
       "legacyFeature": "Manim 2D to 3D feature mapping animation",
       "targetFeature": "Managed video asset plus reproducible Manim source",
-      "status": "imported_unverified"
+      "status": "source_imported_asset_pending"
     },
     {
       "legacyFeature": "RBF SVM decision surface images",
-      "targetFeature": "Native 2D/3D decision visualization",
-      "status": "source_imported_native_pending"
+      "targetFeature": "Native teaching visualization plus Python exact reference",
+      "status": "native_teaching_model_implemented_exact_runtime_unverified"
     },
     {
       "legacyFeature": "Streamlit kernel, C, gamma, degree and noise controls",
       "targetFeature": "Native SVM playground",
-      "status": "pending"
+      "status": "implemented_unverified"
     },
     {
       "legacyFeature": "Support vectors, accuracy and teaching notes",
       "targetFeature": "Native metrics and dynamic guidance",
-      "status": "pending"
+      "status": "implemented_as_teaching_approximation"
+    },
+    {
+      "legacyFeature": "Streamlit iframe deployment",
+      "targetFeature": "Native Demo Adapter registration",
+      "status": "replaced"
     }
   ],
   "verification": {
