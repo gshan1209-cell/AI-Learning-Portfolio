@@ -4,96 +4,114 @@
 
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告與人工核准後設為 Archived／唯讀。
-- 已有四個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim 動畫。
+- 4 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim。
+- 第 5 個來源 `machinelearningHw05` 已進入 `importing`。
 - `external`、`iframe` 只供移植期間比對，不代表接管完成。
-- 完整 CI 暫緩，但來源 Repo 退役前的 Runtime 驗收不可省略。
 
 ## 目前狀態
 
 | 狀態 | 數量 |
 |---|---:|
+| importing | 1 |
 | refactoring | 4 |
-| planned | 10 |
+| planned | 9 |
 | ready_to_retire | 0 |
 | retired | 0 |
 
 ## 平台層已完成
 
 - [x] Next.js 14 App Router + TypeScript + Tailwind CSS
-- [x] 首頁、課程目錄與動態課程頁
-- [x] JSON Course Chunk、課程 API、Prisma Schema
+- [x] 首頁、課程目錄、動態課程頁與 Course API
+- [x] Prisma + PostgreSQL Schema 預留
 - [x] 14 個來源 Repo Metadata Registry
 - [x] Demo Adapter：native、external、iframe、video、snapshot
-- [x] Migration Registry 與 `/api/migrations`
-- [x] `/sources` 移植與退役中心
-- [x] v1.2 Source Migration 規格
-- [x] Agent Migration-first 規範
+- [x] Migration Registry、`/api/migrations`、`/sources`
+- [x] v1.2 Source Migration 規格與 Agent 規範
 
 ## ALP-MIG-001｜L4 線性迴歸
 
 **狀態：`refactoring`**
 
-已完成：原始 Streamlit 程式、Native seeded data、OLS、殘差、Top K Outliers、指標與 SVG。
+已完成：原始 Streamlit、Native seeded data、OLS、殘差、Top K Outliers、指標與 SVG。
 
-待完成：Next.js／瀏覽器／Python 最低驗收、CSV／PNG 範圍、搬遷公告與退役核准。
+待完成：Runtime 驗收、CSV／PNG 範圍、搬遷公告與退役核准。
 
 ## ALP-MIG-002｜CWA OpenData
 
 **狀態：`refactoring`**
 
-已完成：原始 Python CLI、Server-only API Key、CWA Route Handler、Sample／Live、JSON／XML、錯誤轉譯與 Native Playground。
+已完成：原始 Python CLI、Server-only API Proxy、Sample／Live、JSON／XML、下載與 Native Playground。
 
-待完成：測試 Secret 即時驗收、Python CLI 驗收、搬遷公告與退役核准。
+待完成：測試 Secret、Python CLI、下載與退役驗收。
 
 ## ALP-MIG-003｜L13 SVM Kernel Trick
 
 **狀態：`refactoring`**
 
-已完成：Phase 1／2／3、資料生成與 SVC 工具完整移入；Native Playground 已接管 Kernel、C、Gamma、Degree、Noise、Seed、2D 邊界與高維直覺，課程已從 iframe 改為 native。
+已完成：Phase 1／2／3、SVC 工具與 Native SVM Playground，課程已從 iframe 改為 native。
 
-實作界線：Native 元件是教學模型，不假裝等同完整 scikit-learn SVC；精確 Python 程式已在 Monorepo，後續可新增本專案管理的 Python API／Worker。
+實作界線：Native 元件是教學模型，不假裝等同完整 scikit-learn SVC；精確 Python 原始碼已在 Monorepo。
 
-待完成：圖片／Manim 影片、Python Runtime、瀏覽器 RWD、精確 SVC Runtime 策略與退役流程。
+待完成：圖片／影片、Python Runtime、RWD、精確 SVC Runtime 策略與退役流程。
 
 ## ALP-MIG-004｜L12 台股 Manim 動畫
 
 **狀態：`refactoring`**
 
-### 來源證據
+已完成：
 
-| 項目 | 內容 |
+- 9 個教學場景全部移入
+- requirements、pyproject、main、render_all
+- theme、text、layout、animation、chart、sample data 共用層
+- scenes／shared package
+- 來源 commit 與 blob SHA 勾稽
+- 模組 README、migration manifest 與任務文件
+
+待完成：tests、橫幅／影片資產、Manim／FFmpeg／中文字體、9 場景渲染、播放器與退役流程。
+
+## ALP-MIG-005｜機器學習十大演算法
+
+**狀態：`importing`**
+
+### 來源架構
+
+| 層級 | 技術 |
 |---|---|
-| Source Repo | `gshan1209-cell/L12` |
-| Source Root | `manim-animations/` |
-| Source Commit | `cc8902757a2f4e240710f8c9dbe14fd53bf7f280` |
-| New Module | `modules/stock-manim-animation` |
-| Runtime | Python 3.10+／Manim 0.18+ |
+| Frontend | Next.js 15.5、React 18 |
+| Backend | FastAPI、Pydantic |
+| AI | Gemini `google-genai` |
+| Content | 約 703 行 `algorithms.json` |
+| Progress | localStorage |
 
 ### 已完成
 
-- [x] README、requirements、pyproject、main 與批次渲染器移入
-- [x] 9 個場景全部移入
-- [x] Title／Market Rules／Candlestick／Moving Average
-- [x] Volume Price／Support Resistance／Trend Breakout
-- [x] RSI／MACD／Bollinger／Backtesting Risk
-- [x] theme、text、layout、animation、chart、sample data 共用層移入
-- [x] scenes／shared Python package 初始化
-- [x] 來源 commit 與每個主要 blob SHA 記錄
+- [x] README、package、requirements 與前後端架構盤點
+- [x] 保存主要來源 SHA
+- [x] FastAPI main／algorithms／chat 與 requirements 移入來源參考區
+- [x] Next.js package、首頁、AlgorithmGrid、AlgorithmCard、ProgressBar 移入
+- [x] Algorithm／Quiz／DisplayAlgorithm 型別移入
+- [x] 教材 normalization 與文字 fallback 邏輯移入
+- [x] Gemini fallback 與 Prompt 內容盤點
+- [x] AI Gateway／Prompt Registry／Token Cost 改造要求文件化
 - [x] 模組 README、migration manifest 與任務文件
-- [x] 投資教育免責、字體與 Manim 系統相依風險文件化
+
+### 重要發現
+
+1. README 描述 OpenAI，但目前程式實際使用 Gemini；正式規格以程式為準。
+2. 來源使用 Next.js 15.5，中央平台是 Next.js 14，不能直接放進正式編譯路徑。
+3. `AlgorithmCard` 依賴尚未搬入的 `FavoriteButton`。
+4. AI API 會接收 `user_id` 與最近五筆對話，需要個資最小化與日誌規範。
+5. 完整教材 JSON 是核心資產，目前尚未進入中央正式資料層。
 
 ### 待完成
 
-- [ ] 來源 tests 盤點與移植
-- [ ] `project_banner.png` 與必要媒體資產
-- [ ] Manim／FFmpeg／Cairo／Pango 環境驗收
-- [ ] Windows／Linux 繁體中文字體驗收
-- [ ] 9 個場景低畫質渲染
-- [ ] `render_all.py` 批次驗收
-- [ ] 成交量柱狀圖縮放視覺檢查
-- [ ] 正式 MP4／Poster／章節 Metadata
-- [ ] 課程影片播放器與章節導覽
-- [ ] 舊 Repo 搬遷公告與人工退役核准
+- [ ] 完整教材與測驗 JSON 移植、比對與 chunk 化
+- [ ] FavoriteButton、詳細頁、Quiz、視覺化與 AI Tutor UI
+- [ ] Course Registry 與正式路由映射
+- [ ] Gemini 改走中央 AI Gateway
+- [ ] Prompt Version、Token Usage、Cost Ledger
+- [ ] SQLite／SQLAlchemy 實際用途確認
+- [ ] Build／Runtime／瀏覽器與退役流程
 
 ## 共同退役門檻
 
@@ -109,7 +127,7 @@
 
 ## 下一步
 
-1. 完成 L12 tests／圖片／影片資產盤點。
-2. 建立 Manim 媒體輸出與課程章節 Metadata 規格。
-3. 啟動 ALP-MIG-005，優先處理可直接整合的 Next.js 來源模組。
-4. 後續集中執行 L4、CWA、L13、L12 的最低必要 Runtime 驗收。
+1. 將 ML Top 10 的 703 行教材拆成中央平台可維護的資料 chunks。
+2. 補齊 Favorite、詳細頁、Quiz 與視覺化來源元件。
+3. 建立正式 ML Topic Collection 與課程路由。
+4. 後續集中執行四個 `refactoring` 模組的最低必要 Runtime 驗收。
