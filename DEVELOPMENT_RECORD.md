@@ -4,14 +4,14 @@
 
 - 2026-07-15 建立全新獨立 Repository。
 - 技術架構採 `gshan1209-cell/scrape` 的 Next.js + JSON chunks + Prisma 模式。
-- 完成平台基礎骨架、三門示範課程與五模式 Demo Adapter。
-- 完成 14 個來源 Repository 的 Metadata Registry、查詢 API 與同步腳本。
-- 線性迴歸已具備站內互動 Playground。
-- 依使用者決策，正式測試與驗證先跳過。
+- 完成平台骨架、三門示範課、五模式 Demo Adapter 與 14 個來源 Repo Metadata Registry。
+- 2026-07-15 使用者重新確認最終目標：**來源 Repo 的程式與功能要移植進本專案，舊 Repo 完成驗收後退役。**
+- 原本「保留舊 Repo 作為長期執行來源」的設計正式撤銷。
+- 完整 CI 暫緩，但來源 Repo 在退役前仍必須完成最低必要驗收。
 
 ## 目前狀態
 
-**階段：P1 平台展示與來源同步基礎已完成，下一步建立 Course Import／Transform Pipeline。**
+**階段：Migration-first 架構調整完成，開始 ALP-MIG-001｜L4 線性迴歸完整移植。**
 
 ## 已完成
 
@@ -22,95 +22,146 @@
 - [x] 課程目錄、搜尋與分類
 - [x] 動態課程頁
 - [x] JSON chunk 資料讀取
-- [x] `/api/courses` 搜尋與分頁
-- [x] `/api/courses/[slug]` 單課程 API
+- [x] `/api/courses` 與單課程 API
 - [x] Prisma PostgreSQL Schema
 - [x] 14 個來源作業登錄
 - [x] 3 門六段式示範課
-- [x] Agent 開發規範
 - [x] Demo Adapter：external、iframe、video、snapshot、native
-- [x] 獨立 `course_demo_registry` 資料層
-- [x] Demo 失效統一 fallback
-- [x] 線性迴歸 native 互動 Demo
-- [x] Demo Adapter 架構文件
+- [x] 獨立 `course_demo_registry`
+- [x] 線性迴歸 native Playground
 - [x] 14 個來源 Repo Metadata 快照
 - [x] `/sources` 跨 Repository 來源中心
-- [x] `/api/repositories` 查詢 API
-- [x] `npm run repositories:sync` GitHub Metadata 同步腳本
-- [x] Repository 與 Course Slug 勾稽
+- [x] `/api/repositories`
+- [x] `npm run repositories:sync`
+- [x] Migration-first README 與 Agent 規範
+- [x] 來源 Repo 退役門檻定義
+- [x] L4 README、`app.py`、`requirements.txt` 盤點
 
-## Demo Adapter 完成證據
+## 方向修正紀錄
 
-| 課程 | 模式 | 說明 |
-|---|---|---|
-| 線性迴歸 | native | 站內可調斜率、截距與殘差 |
-| SVM Kernel Trick | iframe | 嵌入 Streamlit，保留備援連結 |
-| CWA OpenData | external | 連到命令列工具來源 Repo |
-| 台股技術分析動畫 | video | 模式已預留，待補影片 |
-| Cosmos 文字生成圖片 | snapshot | 模式已預留，待補快照 |
+### 舊方向（已撤銷）
 
-## Repository Registry 完成證據
+- 中央網站只保存教學內容與來源連結。
+- 舊 Repo 長期保留為正式原始碼與 Demo。
+- `external` 或 `iframe` 可被視為作品整合完成。
 
-| 項目 | 狀態 |
+### 新方向（正式採用）
+
+- 本專案要接管必要原始碼、教材、Demo、素材與啟動文件。
+- 每個來源 Repo 對應一個 `modules/<module-slug>/`。
+- `external`、`iframe` 只算遷移過渡狀態。
+- 只有本專案能獨立提供功能，或功能已由本 Monorepo 管理的服務提供，才算移植完成。
+- 舊 Repo 完成驗收、搬遷公告與連結轉向後，改為 Archived／唯讀。
+- 原則上不刪除 Git 歷史，以利稽核與回溯。
+
+## 第一個移植樣板：L4 線性迴歸
+
+### 已盤點來源
+
+| 項目 | 內容 |
 |---|---|
-| 來源 Repo 數量 | 14 |
-| 預設分支 | 14 個皆為 `main` |
-| 公開狀態 | 14 個皆為 public |
-| 已轉製課程 | 3 |
-| 待轉製課程 | 11 |
-| 同步方式 | GitHub Connector 快照 + Node.js GitHub API 腳本 |
+| Source Repo | `gshan1209-cell/L4` |
+| Default Branch | `main` |
+| Main Entry | `app.py` |
+| Framework | Streamlit |
+| Core Libraries | NumPy、Pandas、Matplotlib、scikit-learn |
+| Core Functions | `generate_data`、`fit_linear_regression`、`find_top_outliers`、`plot_regression`、`main` |
+| Existing Native Replacement | `src/components/native-demos/linear-regression-playground.tsx` |
+| Migration Status | `importing` |
 
-> `gshan1209-cell/scrape` 的預設分支是 `master`，但它是技術架構參考來源，不屬於本次 14 個課程作業 Registry。
+### L4 功能對照
+
+| 舊功能 | 新平台狀態 | 說明 |
+|---|---|---|
+| 隨機產生資料 | 部分完成 | native Demo 目前採固定樣本與參數調整，仍需補隨機資料模式 |
+| 訓練最佳迴歸線 | 尚未完整對等 | 目前可調整直線，仍需補 OLS 自動擬合 |
+| 顯示真實／估計斜率截距 | 部分完成 | native Demo 需補完整指標卡 |
+| 計算 residual | 已完成 | 站內 Demo 可計算殘差 |
+| Top K Outliers | 尚未完成 | 待補排序、標記與表格 |
+| Streamlit 參數控制 | 部分完成 | native Demo 已有斜率與截距控制 |
+| Matplotlib 圖表 | 已改寫 | 改為 SVG／React 原生呈現 |
+| CSV 與圖片產出 | 尚未決定 | 需判斷是否屬正式教學需求 |
+
+## Migration Registry 狀態定義
+
+- `planned`
+- `inventory`
+- `importing`
+- `refactoring`
+- `verifying`
+- `ready_to_retire`
+- `retired`
+- `blocked`
+
+課程 `published` 不代表來源 Repo 已完成移植。
+
+## 退役門檻
+
+來源 Repo 必須全部達成以下條件：
+
+1. 必要程式、素材與文件已進入本專案。
+2. 舊功能與新功能有完整對照。
+3. 新平台能提供正式 Demo 或等價成果。
+4. 敏感資料、授權與大型資產完成檢查。
+5. 完成最低必要功能驗收。
+6. 舊 Repo README 有搬遷公告。
+7. 舊部署停止或導向新平台。
+8. 舊 Repo 改為 Archived／唯讀。
 
 ## 待處理
 
-- [ ] Course Import／Transform Pipeline
-- [ ] README 與程式結構分析器
-- [ ] 課程草稿產生器
-- [ ] 課程轉製後台
+### ALP-MIG-001｜L4
+
+- [ ] 移入原始 Streamlit 程式與 requirements
+- [ ] 建立模組 README 與 `migration.json`
+- [ ] 補齊 native Demo 的 OLS 擬合
+- [ ] 補齊隨機資料與 Top K Outliers
+- [ ] 完成最低必要驗收
+- [ ] 更新舊 L4 Repo 搬遷公告
+- [ ] 封存舊 L4 Repo
+
+### 平台層
+
+- [ ] 將 `/sources` 改為「移植與退役中心」
+- [ ] Source Migration Pipeline
+- [ ] 原始檔案樹與來源 commit 快照
 - [ ] PostgreSQL 匯入腳本
+- [ ] 管理後台
 - [ ] 學習進度與收藏
 - [ ] AI 助教
-- [ ] 正式測試、CI、部署驗證
+- [ ] 正式 CI 與部署驗證
 
 ## 重要決策
 
-1. 不把課程平台放進 `scrape` 表特專案。
-2. 不再以 `machinelearningHw05` 當技術母體。
-3. 原始作業 Repo 全部保留；中央平台只保存教學內容、來源與 Adapter。
-4. 大量資料採 chunk 分批讀取，不放入前端 bundle。
-5. Demo 設定與課程內容分離，展示網址變更不應重寫課程 chunk。
-6. 外部作品不可用時，課程內容仍須可閱讀並提供來源 Repo 備援。
-7. GitHub Metadata 採快照式管理，避免前台每次載入都直接呼叫 GitHub API。
-8. 真實 `GITHUB_TOKEN` 只允許放在本機或部署 Secret，不得提交到 Repository。
+1. `scrape` 只作為技術架構參考，不納入移植課程。
+2. `machinelearningHw05` 是來源課程之一，不再是母體專案。
+3. 來源 Repo URL 僅供稽核與追溯，不能作為最終執行依賴。
+4. 大型模型、資料集與媒體檔必須逐項判斷，不做無差別搬運。
+5. 真實 Token、金鑰與 `.env` 不得移植進 Git。
+6. 舊 Repo 淘汰採 Archived／唯讀優先，不直接刪除歷史。
+7. 未達退役門檻前，不得封存或關閉來源 Repo。
 
 ## 下一步任務
 
-### ALP-P1-003｜Course Import／Transform Pipeline
+### ALP-MIG-001｜L4 線性迴歸完整移植
 
-目標：將不同 Repository 的 README、檔案結構與 Demo 資訊轉成統一課程草稿。
-
-預計輸入：
+輸入：
 
 ```text
-repository_registry/repositories.json
-source_snapshots/<repo>/README.md
-source_snapshots/<repo>/file-tree.json
+gshan1209-cell/L4@main
+README.md
+app.py
+requirements.txt
 ```
 
-預計輸出：
+輸出：
 
 ```text
-course_drafts/<course-slug>.json
+modules/linear-regression/python-streamlit/app.py
+modules/linear-regression/python-streamlit/requirements.txt
+modules/linear-regression/README.md
+modules/linear-regression/migration.json
+migration_registry/migrations.json
 ```
 
-草稿必須包含：
-
-1. 作品用途
-2. 白話原理
-3. Demo 觀察重點
-4. 程式架構
-5. 課後測驗
-6. 延伸挑戰
-7. 來源 Repo 與同步時間
-8. 人工審核狀態
+完成後再依相同方式處理下一個來源 Repo。
