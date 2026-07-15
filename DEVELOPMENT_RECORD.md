@@ -4,16 +4,16 @@
 
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告與人工核准後設為 Archived／唯讀。
-- 已有三個來源進入 `refactoring`：L4 線性迴歸、CWA OpenData、L13 SVM Kernel Trick。
-- `external`、`iframe` 只供移植期間功能比對，不代表接管完成。
+- 已有四個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim 動畫。
+- `external`、`iframe` 只供移植期間比對，不代表接管完成。
 - 完整 CI 暫緩，但來源 Repo 退役前的 Runtime 驗收不可省略。
 
 ## 目前狀態
 
 | 狀態 | 數量 |
 |---|---:|
-| refactoring | 3 |
-| planned | 11 |
+| refactoring | 4 |
+| planned | 10 |
 | ready_to_retire | 0 |
 | retired | 0 |
 
@@ -33,89 +33,69 @@
 
 **狀態：`refactoring`**
 
-已完成：
+已完成：原始 Streamlit 程式、Native seeded data、OLS、殘差、Top K Outliers、指標與 SVG。
 
-- 原始 Streamlit `app.py` 與 requirements 移入
-- Native seeded random dataset、OLS、殘差與 Top K Outliers
-- true／estimated slope、intercept、variance、MAE、MSE
-- React SVG 與 fitted／manual 雙模式
-
-待完成：
-
-- Next.js／瀏覽器與 Python Streamlit 最低驗收
-- 確認 CSV／PNG 是否為必要功能
-- 舊 Repo 搬遷公告、部署處理與人工退役核准
+待完成：Next.js／瀏覽器／Python 最低驗收、CSV／PNG 範圍、搬遷公告與退役核准。
 
 ## ALP-MIG-002｜CWA OpenData
 
 **狀態：`refactoring`**
 
-已完成：
+已完成：原始 Python CLI、Server-only API Key、CWA Route Handler、Sample／Live、JSON／XML、錯誤轉譯與 Native Playground。
 
-- 原始 Python CLI 與 requirements 移入
-- Server-only `CWA_API_KEY`
-- `/api/modules/cwa-open-data`
-- Dataset／JSON／XML、Sample／Live、錯誤轉譯與下載標頭
-- Native CWA Playground
-- 課程 Demo 從 external 改為 native
-
-待完成：
-
-- Build／瀏覽器與 Python CLI 最低驗收
-- 使用測試 Secret 驗證即時 JSON、XML 與下載
-- 舊 Repo 搬遷公告與人工退役核准
+待完成：測試 Secret 即時驗收、Python CLI 驗收、搬遷公告與退役核准。
 
 ## ALP-MIG-003｜L13 SVM Kernel Trick
 
 **狀態：`refactoring`**
 
-### 三階段原始碼已接管
+已完成：Phase 1／2／3、資料生成與 SVC 工具完整移入；Native Playground 已接管 Kernel、C、Gamma、Degree、Noise、Seed、2D 邊界與高維直覺，課程已從 iframe 改為 native。
 
-| 階段 | 新專案檔案 | 功能 |
-|---|---|---|
-| Phase 1 | `python-reference/phase1_manim_kernel_trick.py` | 2D 同心圓提升到 3D 幾何動畫 |
-| Phase 2 | `python-reference/phase2_rbf_decision_surface.py` | RBF SVM 2D 邊界與 3D 決策函數曲面 |
-| Phase 3 | `python-reference/phase3_streamlit_app.py` | Kernel、C、Gamma、Degree、Noise 與點數互動 |
+實作界線：Native 元件是教學模型，不假裝等同完整 scikit-learn SVC；精確 Python 程式已在 Monorepo，後續可新增本專案管理的 Python API／Worker。
+
+待完成：圖片／Manim 影片、Python Runtime、瀏覽器 RWD、精確 SVC Runtime 策略與退役流程。
+
+## ALP-MIG-004｜L12 台股 Manim 動畫
+
+**狀態：`refactoring`**
+
+### 來源證據
+
+| 項目 | 內容 |
+|---|---|
+| Source Repo | `gshan1209-cell/L12` |
+| Source Root | `manim-animations/` |
+| Source Commit | `cc8902757a2f4e240710f8c9dbe14fd53bf7f280` |
+| New Module | `modules/stock-manim-animation` |
+| Runtime | Python 3.10+／Manim 0.18+ |
 
 ### 已完成
 
-- [x] requirements、資料生成器與 SVC 工具移入
-- [x] Phase 1、2、3 完整移入
-- [x] Native SVM Playground
-- [x] RBF、Linear、Polynomial、Sigmoid 控制
-- [x] C、Gamma、Degree、Noise、Point Count、Seed
-- [x] Native 同心圓資料生成
-- [x] 2D 邊界與近似支持向量
-- [x] `z=x²+y²` 高維提升直覺圖
-- [x] 教學分類率與支持向量指標
-- [x] Gamma、C 與 Linear Kernel 動態提示
-- [x] Demo Adapter Native 註冊
-- [x] 課程從 iframe 改為 native
-
-### 實作界線
-
-Native Playground 接管操作流程與教學概念，但不宣稱是完整 scikit-learn SVC 的瀏覽器重寫。精確 SVC 原始碼已在 Monorepo；若網站需要精確即時計算，後續應新增由本專案管理的 Python API／Worker。
+- [x] README、requirements、pyproject、main 與批次渲染器移入
+- [x] 9 個場景全部移入
+- [x] Title／Market Rules／Candlestick／Moving Average
+- [x] Volume Price／Support Resistance／Trend Breakout
+- [x] RSI／MACD／Bollinger／Backtesting Risk
+- [x] theme、text、layout、animation、chart、sample data 共用層移入
+- [x] scenes／shared Python package 初始化
+- [x] 來源 commit 與每個主要 blob SHA 記錄
+- [x] 模組 README、migration manifest 與任務文件
+- [x] 投資教育免責、字體與 Manim 系統相依風險文件化
 
 ### 待完成
 
-- [ ] 必要圖片與 Manim 影片資產
-- [ ] Phase 1、2、3 Python Runtime 驗收
-- [ ] Native Playground 瀏覽器／RWD 驗收
-- [ ] 精確 SVC Runtime 策略決定
-- [ ] 舊 Streamlit Demo 停止或導向
+- [ ] 來源 tests 盤點與移植
+- [ ] `project_banner.png` 與必要媒體資產
+- [ ] Manim／FFmpeg／Cairo／Pango 環境驗收
+- [ ] Windows／Linux 繁體中文字體驗收
+- [ ] 9 個場景低畫質渲染
+- [ ] `render_all.py` 批次驗收
+- [ ] 成交量柱狀圖縮放視覺檢查
+- [ ] 正式 MP4／Poster／章節 Metadata
+- [ ] 課程影片播放器與章節導覽
 - [ ] 舊 Repo 搬遷公告與人工退役核准
 
-## 數學規則
-
-1. `z=x²+y²` 只能描述為幾何直覺示意。
-2. 真實 RBF Kernel 不可描述成顯式 3D 特徵映射。
-3. 3D `f(x,y)` 圖必須標示為決策函數曲面。
-4. High Gamma 需說明局部邊界與過擬合風險。
-5. Low／High C 需說明 Soft／Hard Margin 差異。
-
-## 退役門檻
-
-來源 Repo 必須全部達成：
+## 共同退役門檻
 
 1. 必要程式、素材與文件已進本專案。
 2. 舊新功能有完整對照。
@@ -129,6 +109,7 @@ Native Playground 接管操作流程與教學概念，但不宣稱是完整 scik
 
 ## 下一步
 
-1. 盤點並移入 L13 必要圖片與 Manim 影片資產。
-2. 啟動 ALP-MIG-004｜L12 台股 Manim 動畫移植。
-3. 後續統一執行 L4、CWA、L13 的最低必要 Runtime 驗收。
+1. 完成 L12 tests／圖片／影片資產盤點。
+2. 建立 Manim 媒體輸出與課程章節 Metadata 規格。
+3. 啟動 ALP-MIG-005，優先處理可直接整合的 Next.js 來源模組。
+4. 後續集中執行 L4、CWA、L13、L12 的最低必要 Runtime 驗收。
