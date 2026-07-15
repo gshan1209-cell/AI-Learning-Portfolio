@@ -32,13 +32,14 @@
     "sourceBranch": "main",
     "courseSlug": "svm-kernel-trick-3d",
     "modulePath": "modules/svm-kernel-trick",
-    "status": "planned",
+    "status": "importing",
     "targetDemoMode": "native",
     "sourceRuntime": "python-streamlit-manim",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "已移入 requirements、Manim Phase 1、RBF Phase 2 與共用 SVM 工具；Phase 3 Streamlit 與 native 重構待完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/machinelearningHw05",
