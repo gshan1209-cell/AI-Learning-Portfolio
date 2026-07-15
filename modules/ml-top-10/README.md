@@ -2,11 +2,11 @@
 
 ## 中文摘要
 
-- 本模組接管原 `gshan1209-cell/machinelearningHw05` 的 Next.js 教學網站與 FastAPI AI 助教。
-- 來源實際架構為 Next.js 15 + FastAPI + Gemini + JSON 教材，不只是單純 Next.js。
-- FastAPI 入口、演算法路由、Gemini 助教與主要前端資料流已先移入來源參考區。
-- 來源參考區不加入中央平台編譯，避免未移完的元件與樣式破壞現有 Next.js 14。
-- 目前狀態為 `importing`；完整教材、詳細頁、測驗、收藏、視覺化與 AI Gateway 尚待接管。
+- 本模組接管原 `gshan1209-cell/machinelearningHw05` 的 Next.js 教學網站與 FastAPI Gemini 助教。
+- 來源核心教材已拆為 10 個中央 JSON chunk，共 10 個主題、30 題測驗與 30 組解析。
+- 中央平台已提供主題目錄、搜尋、篩選、詳細頁、收藏、測驗、進度與 API。
+- 正式教材 Runtime 已不需要舊 FastAPI 或舊 Vercel。
+- 目前狀態為 `refactoring`；視覺化、AI Gateway 與 Runtime 驗收尚未完成。
 
 ## 來源
 
@@ -17,12 +17,23 @@ Source commit: 9567a798c0f7de0065a1834f6af8500708e902a1
 Legacy deployment: https://machinelearning-hw05.vercel.app/
 ```
 
-## 已移入
+## 新專案結構
 
 ```text
 modules/ml-top-10/
 ├─ README.md
 ├─ migration.json
+├─ data/algorithms/
+│  ├─ linear-regression.json
+│  ├─ logistic-regression.json
+│  ├─ decision-tree.json
+│  ├─ random-forest.json
+│  ├─ svm.json
+│  ├─ knn.json
+│  ├─ kmeans.json
+│  ├─ naive-bayes.json
+│  ├─ pca.json
+│  └─ gradient-descent.json
 ├─ python-fastapi-reference/
 │  ├─ requirements.txt
 │  ├─ main.py
@@ -39,18 +50,43 @@ modules/ml-top-10/
       └─ ProgressBar.tsx
 ```
 
-## 來源功能
+正式平台檔案：
+
+```text
+src/types/ml-algorithm.ts
+src/lib/ml-algorithms.ts
+src/app/ml-algorithms/page.tsx
+src/app/ml-algorithms/[slug]/page.tsx
+src/app/api/ml-algorithms/route.ts
+src/app/api/ml-algorithms/[slug]/route.ts
+src/components/ml-algorithm-card.tsx
+src/components/ml-algorithm-quiz.tsx
+src/components/ml-favorite-button.tsx
+src/components/ml-learning-progress.tsx
+```
+
+## 已接管功能
 
 - 十大演算法卡片
 - 白話解釋與生活比喻
 - 搜尋、分類與難度篩選
-- 演算法詳細頁
-- 每個主題測驗
+- 十個演算法詳細頁
+- 每個主題三題測驗
+- 作答解析與通過門檻
 - localStorage 學習進度
-- 收藏
-- 動態視覺化
-- Gemini AI 助教
-- 未設定金鑰時的 fallback 回覆
+- localStorage 收藏
+- 列表與詳細 API
+- 線性回歸、SVM 與既有 Native Demo 交叉連結
+- AI 未啟用時教材仍可獨立運作
+
+## 資料設計
+
+大型 `algorithms.json` 已拆為每演算法獨立檔案。優點：
+
+1. 單一教材可獨立修改與審查。
+2. 測驗答案不會因大型檔案合併衝突而錯位。
+3. 後續可逐主題加入 Prompt、視覺化與版本欄位。
+4. 新平台不需在 Runtime 呼叫舊 Repo。
 
 ## AI 移植原則
 
@@ -66,36 +102,24 @@ modules/ml-top-10/
 6. AI 回覆失敗時保留非 AI 教材與固定 FAQ。
 7. 不記錄不必要的 `user_id` 或對話個資。
 
-## 版本相容性
+## 數學校訂
 
-來源前端使用 Next.js 15.5，中央平台目前是 Next.js 14。不能直接複製到 `src/app` 後宣稱完成，必須逐元件確認：
-
-- App Router API 相容性
-- React 18 相容性
-- CSS Variables 與全域樣式
-- localStorage Hydration
-- Link／Router 路徑
-- 舊 `/algorithms/*` 路由如何映射至中央課程架構
+SVM 來源教材用 3D 映射解釋 Kernel Trick。中央版保留幾何直覺，但補充：RBF Kernel 可對應更高甚至無限維特徵空間，3D 僅是簡化示意，不是完整顯式映射。
 
 ## 待處理
 
-- 完整移入 `frontend/data/algorithms.json` 與 `backend/data/algorithms.json`
-- 確認兩份教材是否相同並去重
-- 收藏元件與儲存格式
-- 演算法詳細頁
-- Quiz 元件與答題紀錄
-- 其餘視覺化元件
-- AI 助教 UI
-- 中央 Course Registry／API 轉換
+- 十種 Native 視覺化元件
+- AI Tutor UI
+- 中央 AI Gateway
 - Prompt Registry／Token Cost Ledger
-- SQLite／SQLAlchemy 是否仍有實際用途
-- 來源 `.env`、資料庫與敏感檔掃描
-- Runtime／Build／瀏覽器驗收
+- SQLite／SQLAlchemy 實際用途確認
+- Build／TypeScript／瀏覽器驗收
+- 舊 Vercel／FastAPI 導向或停止
 
 ## 退役條件
 
-1. 十大演算法教材與測驗完整進入中央資料層。
-2. 首頁、搜尋、詳細頁、收藏與進度完成接管。
+1. 十大演算法教材與測驗完整進入中央資料層。**已完成**
+2. 首頁、搜尋、詳細頁、收藏與進度完成接管。**已完成，待 Runtime 驗收**
 3. 必要視覺化完成接管。
 4. AI 助教改走中央 AI Gateway 或明確取消。
 5. 舊 FastAPI 與 Vercel 部署不再是正式依賴。
