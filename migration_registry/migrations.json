@@ -60,13 +60,14 @@
     "sourceBranch": "main",
     "courseSlug": "ml-top-10-algorithms",
     "modulePath": "modules/ml-top-10",
-    "status": "planned",
+    "status": "importing",
     "targetDemoMode": "native",
-    "sourceRuntime": "nextjs",
+    "sourceRuntime": "nextjs-fastapi-gemini",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "FastAPI 與主要 Next.js 來源參考碼已移入；待 703 行教材 JSON、詳細頁、測驗、收藏、視覺化與中央 AI Gateway 整合。"
   },
   {
     "sourceRepository": "gshan1209-cell/machinelearningHw6",
