@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "courses:manifest": "node scripts/build_course_manifest.mjs",
+    "repositories:sync": "node scripts/sync_repository_registry.mjs",
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy"
