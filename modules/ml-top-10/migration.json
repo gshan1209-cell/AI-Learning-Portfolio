@@ -20,49 +20,46 @@
     "progressBarSha": "5773cb723dcaeee1a1b716f666281dec7ba93817"
   },
   "status": "refactoring",
-  "importedFiles": [
-    "python-fastapi-reference/requirements.txt",
-    "python-fastapi-reference/main.py",
-    "python-fastapi-reference/algorithms.py",
-    "python-fastapi-reference/chat.py",
-    "nextjs-reference/package.json",
-    "nextjs-reference/app/page.tsx",
-    "nextjs-reference/lib/types.ts",
-    "nextjs-reference/lib/algorithms.ts",
-    "nextjs-reference/components/AlgorithmGrid.tsx",
-    "nextjs-reference/components/AlgorithmCard.tsx",
-    "nextjs-reference/components/ProgressBar.tsx",
-    "data/algorithms/linear-regression.json",
-    "data/algorithms/logistic-regression.json",
-    "data/algorithms/decision-tree.json",
-    "data/algorithms/random-forest.json",
-    "data/algorithms/svm.json",
-    "data/algorithms/knn.json",
-    "data/algorithms/kmeans.json",
-    "data/algorithms/naive-bayes.json",
-    "data/algorithms/pca.json",
-    "data/algorithms/gradient-descent.json",
-    "src/lib/ml-algorithms.ts",
-    "src/types/ml-algorithm.ts",
-    "src/app/ml-algorithms/page.tsx",
-    "src/app/ml-algorithms/[slug]/page.tsx",
-    "src/app/api/ml-algorithms/route.ts",
-    "src/app/api/ml-algorithms/[slug]/route.ts",
-    "src/components/ml-algorithm-card.tsx",
-    "src/components/ml-algorithm-quiz.tsx",
-    "src/components/ml-favorite-button.tsx",
-    "src/components/ml-learning-progress.tsx"
+  "contentMigration": {
+    "algorithmChunks": 10,
+    "quizQuestions": 30,
+    "quizExplanations": 30,
+    "sourceDatasetFullyMigrated": true,
+    "sourceRuntimeDependencyRemovedForContent": true
+  },
+  "nativeRoutes": [
+    "/ml-algorithms",
+    "/ml-algorithms/[slug]",
+    "/api/ml-algorithms",
+    "/api/ml-algorithms/[slug]"
   ],
-  "pendingFiles": [
-    "native visualization components for all ten visual types",
-    "AI tutor UI",
-    "central AI Gateway and Prompt Registry integration",
-    "database and environment audit"
+  "nativeFeatures": [
+    "search",
+    "category filter",
+    "difficulty filter",
+    "algorithm detail pages",
+    "favorites",
+    "quiz scoring and explanations",
+    "local learning progress",
+    "ten React SVG visual adapters",
+    "related native course links"
+  ],
+  "visualTypes": [
+    "scatter-line",
+    "logistic-curve",
+    "decision-tree",
+    "random-forest",
+    "svm-margin",
+    "knn-neighbors",
+    "kmeans-clustering",
+    "naive-bayes-text",
+    "pca-projection",
+    "gradient-descent"
   ],
   "featureMapping": [
     {
       "legacyFeature": "Ten algorithm learning cards and filters",
-      "targetFeature": "Native /ml-algorithms catalog with search, category and difficulty filters",
+      "targetFeature": "Native /ml-algorithms catalog",
       "status": "native_implemented_unverified"
     },
     {
@@ -71,8 +68,8 @@
       "status": "imported_and_wired_unverified"
     },
     {
-      "legacyFeature": "Algorithm detail routes",
-      "targetFeature": "Native /ml-algorithms/[slug] learning pages",
+      "legacyFeature": "Algorithm detail routes and visualizations",
+      "targetFeature": "Native detail pages with ten React SVG visual adapters",
       "status": "native_implemented_unverified"
     },
     {
@@ -91,12 +88,23 @@
       "status": "native_implemented_unverified"
     }
   ],
+  "pending": [
+    "AI tutor UI",
+    "central AI Gateway and Prompt Registry integration",
+    "token usage and cost ledger",
+    "database and environment audit",
+    "build, browser, hydration and localStorage verification",
+    "legacy deployment redirect or shutdown",
+    "source README migration notice",
+    "human retirement approval"
+  ],
   "verification": {
     "structureChecked": true,
     "dependenciesRecorded": true,
     "sensitiveDataChecked": true,
     "fullDatasetImported": true,
     "quizCountExpected": 30,
+    "nativeVisualTypesImplemented": 10,
     "frontendParityChecked": false,
     "aiGatewayIntegrated": false,
     "runtimeVerified": false,
@@ -104,7 +112,6 @@
   },
   "risks": [
     "Source README describes OpenAI but current chat implementation uses Gemini.",
-    "Native visualizations have not yet replaced every source visual type.",
     "AI prompts, user identifiers and chat history need central governance before production use.",
     "Build, browser, hydration and localStorage behavior have not yet been runtime verified."
   ],
