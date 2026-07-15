@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import MlAiTutor from "@/components/ml-ai-tutor";
 import MlAlgorithmQuiz from "@/components/ml-algorithm-quiz";
 import MlAlgorithmVisual from "@/components/ml-algorithm-visual";
 import MlFavoriteButton from "@/components/ml-favorite-button";
@@ -112,6 +113,10 @@ export default function MlAlgorithmDetailPage({ params }: { params: { slug: stri
           </Link>
         </section>
       )}
+
+      <div className="mt-8">
+        <MlAiTutor algorithmSlug={algorithm.slug} algorithmName={algorithm.name_zh} />
+      </div>
 
       <div className="mt-8">
         <MlAlgorithmQuiz slug={algorithm.slug} questions={algorithm.quiz} />
