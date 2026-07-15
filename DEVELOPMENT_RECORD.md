@@ -7,35 +7,53 @@
 - 完成平台骨架、三門示範課、五模式 Demo Adapter 與 14 個來源 Repo Metadata Registry。
 - 2026-07-15 使用者重新確認最終目標：**來源 Repo 的程式與功能要移植進本專案，舊 Repo 完成驗收後退役。**
 - 原本「保留舊 Repo 作為長期執行來源」的設計正式撤銷。
+- L4 已成為第一個實際移植樣板：原始 Streamlit 程式與 requirements 已進入 Monorepo，native Demo 已補齊主要功能。
 - 完整 CI 暫緩，但來源 Repo 在退役前仍必須完成最低必要驗收。
 
 ## 目前狀態
 
-**階段：Migration-first 架構調整完成，開始 ALP-MIG-001｜L4 線性迴歸完整移植。**
+**階段：Migration-first 已落地；ALP-MIG-001｜L4 進入 `refactoring`，下一步為執行驗收與退役前準備。**
 
 ## 已完成
+
+### 平台層
 
 - [x] 全新 `AI-Learning-Portfolio` Repository
 - [x] Next.js 14 App Router
 - [x] Tailwind CSS 與基本 RWD
-- [x] 首頁與作品集定位
-- [x] 課程目錄、搜尋與分類
-- [x] 動態課程頁
+- [x] 首頁、課程目錄與動態課程頁
 - [x] JSON chunk 資料讀取
 - [x] `/api/courses` 與單課程 API
 - [x] Prisma PostgreSQL Schema
 - [x] 14 個來源作業登錄
 - [x] 3 門六段式示範課
 - [x] Demo Adapter：external、iframe、video、snapshot、native
-- [x] 獨立 `course_demo_registry`
-- [x] 線性迴歸 native Playground
 - [x] 14 個來源 Repo Metadata 快照
-- [x] `/sources` 跨 Repository 來源中心
 - [x] `/api/repositories`
 - [x] `npm run repositories:sync`
 - [x] Migration-first README 與 Agent 規範
-- [x] 來源 Repo 退役門檻定義
-- [x] L4 README、`app.py`、`requirements.txt` 盤點
+- [x] `migration_registry/migrations.json`
+- [x] `/api/migrations`
+- [x] `/sources` 改為移植與退役中心
+- [x] v1.2 Source Migration 規格書
+
+### ALP-MIG-001｜L4 線性迴歸
+
+- [x] 盤點 `README.md`、`app.py`、`requirements.txt`
+- [x] 保存來源 blob SHA
+- [x] 移入原始 Streamlit `app.py`
+- [x] 移入 Python requirements
+- [x] 建立模組 README
+- [x] 建立模組 `migration.json`
+- [x] 建立舊新功能對照
+- [x] native Demo 支援 seeded random dataset
+- [x] native Demo 實作 OLS 自動擬合
+- [x] true／estimated slope 與 intercept 指標
+- [x] variance、MAE、MSE 指標
+- [x] residual 與 abs residual
+- [x] Top K Outliers 排序、圖上標記與表格
+- [x] React SVG 圖表
+- [x] fitted／manual 雙模式控制
 
 ## 方向修正紀錄
 
@@ -47,42 +65,42 @@
 
 ### 新方向（正式採用）
 
-- 本專案要接管必要原始碼、教材、Demo、素材與啟動文件。
-- 每個來源 Repo 對應一個 `modules/<module-slug>/`。
+- 本專案接管必要原始碼、教材、Demo、素材與啟動文件。
+- 每個來源 Repo 對應 `modules/<module-slug>/`。
 - `external`、`iframe` 只算遷移過渡狀態。
 - 只有本專案能獨立提供功能，或功能已由本 Monorepo 管理的服務提供，才算移植完成。
 - 舊 Repo 完成驗收、搬遷公告與連結轉向後，改為 Archived／唯讀。
 - 原則上不刪除 Git 歷史，以利稽核與回溯。
 
-## 第一個移植樣板：L4 線性迴歸
-
-### 已盤點來源
+## L4 移植證據
 
 | 項目 | 內容 |
 |---|---|
 | Source Repo | `gshan1209-cell/L4` |
 | Default Branch | `main` |
 | Main Entry | `app.py` |
-| Framework | Streamlit |
-| Core Libraries | NumPy、Pandas、Matplotlib、scikit-learn |
-| Core Functions | `generate_data`、`fit_linear_regression`、`find_top_outliers`、`plot_regression`、`main` |
-| Existing Native Replacement | `src/components/native-demos/linear-regression-playground.tsx` |
-| Migration Status | `importing` |
+| Source app SHA | `891a64363b6f2d99d87287ba2d1cebb794d797d7` |
+| New Module | `modules/linear-regression` |
+| Original Runtime | `modules/linear-regression/python-streamlit/app.py` |
+| Native Runtime | `src/components/native-demos/linear-regression-playground.tsx` |
+| Migration Status | `refactoring` |
 
-### L4 功能對照
+## L4 功能對照
 
 | 舊功能 | 新平台狀態 | 說明 |
 |---|---|---|
-| 隨機產生資料 | 部分完成 | native Demo 目前採固定樣本與參數調整，仍需補隨機資料模式 |
-| 訓練最佳迴歸線 | 尚未完整對等 | 目前可調整直線，仍需補 OLS 自動擬合 |
-| 顯示真實／估計斜率截距 | 部分完成 | native Demo 需補完整指標卡 |
-| 計算 residual | 已完成 | 站內 Demo 可計算殘差 |
-| Top K Outliers | 尚未完成 | 待補排序、標記與表格 |
-| Streamlit 參數控制 | 部分完成 | native Demo 已有斜率與截距控制 |
-| Matplotlib 圖表 | 已改寫 | 改為 SVG／React 原生呈現 |
-| CSV 與圖片產出 | 尚未決定 | 需判斷是否屬正式教學需求 |
+| 隨機產生資料 | 已完成 | 使用 seed 產生可重現資料 |
+| 真實斜率、截距與雜訊 | 已完成 | 由 seeded random generator 產生 |
+| LinearRegression 自動擬合 | 已完成 | 改寫為前端 OLS |
+| 顯示真實／估計參數 | 已完成 | 指標卡顯示 |
+| residual／abs residual | 已完成 | 每筆資料計算 |
+| Top K Outliers | 已完成 | 排序、圖上標記與表格 |
+| Streamlit 參數控制 | 已完成 | React 控制面板 |
+| Matplotlib 圖表 | 已完成改寫 | React SVG |
+| CSV 下載 | 尚未納入 | 不阻擋核心功能驗收，待需求確認 |
+| PNG 匯出 | 尚未納入 | 不阻擋核心功能驗收，待需求確認 |
 
-## Migration Registry 狀態定義
+## Migration Registry 狀態
 
 - `planned`
 - `inventory`
@@ -112,17 +130,24 @@
 
 ### ALP-MIG-001｜L4
 
-- [ ] 移入原始 Streamlit 程式與 requirements
-- [ ] 建立模組 README 與 `migration.json`
-- [ ] 補齊 native Demo 的 OLS 擬合
-- [ ] 補齊隨機資料與 Top K Outliers
-- [ ] 完成最低必要驗收
+- [ ] 執行 Next.js build／瀏覽器操作驗收
+- [ ] 執行 Python Streamlit 參考版驗收
+- [ ] 確認 CSV／PNG 匯出是否需納入正式等價範圍
+- [ ] 將狀態改為 `verifying`
 - [ ] 更新舊 L4 Repo 搬遷公告
-- [ ] 封存舊 L4 Repo
+- [ ] 停止或導向舊 Streamlit 部署
+- [ ] 人工核准退役
+- [ ] 將舊 L4 Repo 設為 Archived
+
+### 後續來源
+
+- [ ] ALP-MIG-002｜cwa_scraper
+- [ ] ALP-MIG-003｜L13_SVM
+- [ ] ALP-MIG-004｜L12
+- [ ] 其餘來源依 Migration Registry 排程
 
 ### 平台層
 
-- [ ] 將 `/sources` 改為「移植與退役中心」
 - [ ] Source Migration Pipeline
 - [ ] 原始檔案樹與來源 commit 快照
 - [ ] PostgreSQL 匯入腳本
@@ -140,28 +165,15 @@
 5. 真實 Token、金鑰與 `.env` 不得移植進 Git。
 6. 舊 Repo 淘汰採 Archived／唯讀優先，不直接刪除歷史。
 7. 未達退役門檻前，不得封存或關閉來源 Repo。
+8. 完整測試可延後，但退役前最低必要驗收不可省略。
 
 ## 下一步任務
 
-### ALP-MIG-001｜L4 線性迴歸完整移植
+### ALP-MIG-001｜L4 驗收與退役前準備
 
-輸入：
-
-```text
-gshan1209-cell/L4@main
-README.md
-app.py
-requirements.txt
-```
-
-輸出：
-
-```text
-modules/linear-regression/python-streamlit/app.py
-modules/linear-regression/python-streamlit/requirements.txt
-modules/linear-regression/README.md
-modules/linear-regression/migration.json
-migration_registry/migrations.json
-```
-
-完成後再依相同方式處理下一個來源 Repo。
+1. 驗證 Native Playground 的資料生成、OLS、殘差與 Outliers。
+2. 驗證原始 Python Streamlit 版可啟動。
+3. 記錄功能差異與是否接受 CSV／PNG 缺口。
+4. 驗收通過後將 Migration Status 改為 `ready_to_retire`。
+5. 更新舊 Repo README 搬遷公告。
+6. 由使用者人工核准後才封存舊 Repo。
