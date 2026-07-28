@@ -57,11 +57,11 @@ export function getMlAlgorithm(slug: string) {
 }
 
 export function getMlAlgorithmCategories() {
-  return [...new Set(algorithms.map((algorithm) => algorithm.category))].sort();
+  return Array.from(new Set(algorithms.map((algorithm) => algorithm.category))).sort();
 }
 
 export function getMlAlgorithmDifficulties() {
-  return [...new Set(algorithms.map((algorithm) => algorithm.difficulty))].sort();
+  return Array.from(new Set(algorithms.map((algorithm) => algorithm.difficulty))).sort();
 }
 
 export function getMlAlgorithmRelatedCourse(slug: string) {

@@ -41,7 +41,7 @@ export default function MlAlgorithmQuiz({ slug, questions }: { slug: string; que
 
       if (passed) {
         const completed = JSON.parse(localStorage.getItem(COMPLETED_KEY) || "[]") as string[];
-        localStorage.setItem(COMPLETED_KEY, JSON.stringify([...new Set([...completed, slug])]));
+        localStorage.setItem(COMPLETED_KEY, JSON.stringify(Array.from(new Set([...completed, slug]))));
         window.dispatchEvent(new Event(EVENT_NAME));
       }
     } catch {

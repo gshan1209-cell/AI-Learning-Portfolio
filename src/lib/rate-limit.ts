@@ -14,7 +14,7 @@ function readPositiveInteger(name: string, fallback: number) {
 
 function cleanup(now: number) {
   if (buckets.size < 500) return;
-  for (const [key, bucket] of buckets.entries()) {
+  for (const [key, bucket] of Array.from(buckets.entries())) {
     if (bucket.resetAt <= now) buckets.delete(key);
   }
 }

@@ -67,7 +67,7 @@ export function getAllCourses(filters: CourseFilters = {}): Course[] {
 
   const query = filters.query?.trim().toLowerCase();
 
-  return [...courseMap.values()]
+  return Array.from(courseMap.values())
     .filter((course) => {
       if (filters.category && course.category !== filters.category) return false;
       if (filters.level && course.level !== filters.level) return false;
@@ -98,5 +98,5 @@ export function getCourseBySlug(slug: string): Course | undefined {
 }
 
 export function getCourseCategories(): string[] {
-  return [...new Set(getAllCourses().map((course) => course.category))].sort();
+  return Array.from(new Set(getAllCourses().map((course) => course.category))).sort();
 }
