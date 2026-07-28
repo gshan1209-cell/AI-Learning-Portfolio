@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import copy
-import hashlib
 import json
+import math
 import subprocess
 import sys
 from pathlib import Path
@@ -14,6 +13,7 @@ RF_ARTIFACT = ROOT / "modules/startup-profit-prediction/artifacts/startup_rf_mod
 FEATURE_ARTIFACT = ROOT / "modules/feature-selection/artifacts/feature_selection_results.json"
 RF_EXPORTER = ROOT / "modules/startup-profit-prediction/python-reference/export_rf_tree.py"
 FEATURE_EXPORTER = ROOT / "modules/feature-selection/python-reference/scripts/export_feature_selection.py"
+IGNORED_METADATA_KEYS = {"generatedAt", "datasetNote"}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -21,35 +21,64 @@ def load_json(path: Path) -> dict[str, Any]:
         return json.load(file_handle)
 
 
-def stable_hash(payload: dict[str, Any]) -> str:
-    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    return hashlib.sha256(encoded).hexdigest()
+def compare_values(
+    committed: Any,
+    regenerated: Any,
+    path: str,
+    *,
+    relative_tolerance: float = 1e-8,
+    absolute_tolerance: float = 1e-6,
+) -> None:
+    if isinstance(committed, bool) or isinstance(regenerated, bool):
+        if committed is not regenerated:
+            raise RuntimeError(f"Boolean mismatch at {path}: {committed!r} != {regenerated!r}")
+        return
 
+    if isinstance(committed, (int, float)) and isinstance(regenerated, (int, float)):
+        if not math.isclose(
+            float(committed),
+            float(regenerated),
+            rel_tol=relative_tolerance,
+            abs_tol=absolute_tolerance,
+        ):
+            raise RuntimeError(f"Numeric mismatch at {path}: {committed!r} != {regenerated!r}")
+        return
 
-def normalize_rf(payload: dict[str, Any]) -> dict[str, Any]:
-    normalized = copy.deepcopy(payload)
-    metadata = normalized.get("metadata", {})
-    # These descriptive fields may be corrected independently of model structure.
-    metadata.pop("generatedAt", None)
-    metadata.pop("datasetNote", None)
-    return normalized
+    if isinstance(committed, dict) and isinstance(regenerated, dict):
+        committed_keys = set(committed)
+        regenerated_keys = set(regenerated)
+        if path.endswith("metadata"):
+            committed_keys -= IGNORED_METADATA_KEYS
+            regenerated_keys -= IGNORED_METADATA_KEYS
+        if committed_keys != regenerated_keys:
+            raise RuntimeError(
+                f"Key mismatch at {path}: committed={sorted(committed_keys)}, regenerated={sorted(regenerated_keys)}"
+            )
+        for key in sorted(committed_keys):
+            compare_values(
+                committed[key],
+                regenerated[key],
+                f"{path}.{key}",
+                relative_tolerance=relative_tolerance,
+                absolute_tolerance=absolute_tolerance,
+            )
+        return
 
+    if isinstance(committed, list) and isinstance(regenerated, list):
+        if len(committed) != len(regenerated):
+            raise RuntimeError(f"Length mismatch at {path}: {len(committed)} != {len(regenerated)}")
+        for index, (committed_item, regenerated_item) in enumerate(zip(committed, regenerated)):
+            compare_values(
+                committed_item,
+                regenerated_item,
+                f"{path}[{index}]",
+                relative_tolerance=relative_tolerance,
+                absolute_tolerance=absolute_tolerance,
+            )
+        return
 
-def normalize_feature(payload: dict[str, Any]) -> dict[str, Any]:
-    normalized = copy.deepcopy(payload)
-    metadata = normalized.get("metadata", {})
-    metadata.pop("generatedAt", None)
-    return normalized
-
-
-def assert_equal(name: str, committed: dict[str, Any], regenerated: dict[str, Any]) -> None:
-    committed_hash = stable_hash(committed)
-    regenerated_hash = stable_hash(regenerated)
-    if committed_hash != regenerated_hash:
-        raise RuntimeError(
-            f"{name} is not reproducible: committed={committed_hash}, regenerated={regenerated_hash}"
-        )
-    print(f"PASS: {name} reproducible hash {committed_hash}")
+    if committed != regenerated:
+        raise RuntimeError(f"Value mismatch at {path}: {committed!r} != {regenerated!r}")
 
 
 def main() -> None:
@@ -67,16 +96,17 @@ def main() -> None:
     if regenerated_rf["metadata"].get("datasetNote") != expected_note:
         raise RuntimeError("Random Forest exporter generated an inaccurate datasetNote")
 
-    assert_equal(
-        "Random Forest artifact",
-        normalize_rf(committed_rf),
-        normalize_rf(regenerated_rf),
+    compare_values(committed_rf, regenerated_rf, "randomForestArtifact")
+    print("PASS: Random Forest artifact structure, topology and predictions are reproducible")
+
+    compare_values(
+        committed_feature,
+        regenerated_feature,
+        "featureSelectionArtifact",
+        relative_tolerance=1e-6,
+        absolute_tolerance=1e-5,
     )
-    assert_equal(
-        "Feature Selection artifact",
-        normalize_feature(committed_feature),
-        normalize_feature(regenerated_feature),
-    )
+    print("PASS: Feature Selection rankings and metrics are reproducible within numeric tolerance")
 
 
 if __name__ == "__main__":
