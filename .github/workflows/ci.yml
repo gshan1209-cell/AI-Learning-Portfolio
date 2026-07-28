@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate:
-    name: Build, Lint & Type Check
+    name: Build, Lint, Test & Artifact Check
     runs-on: ubuntu-latest
 
     steps:
@@ -19,10 +19,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
-      - name: Install Dependencies
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: modules/feature-selection/python-reference/requirements.txt
+
+      - name: Install Node Dependencies
         run: npm ci
+
+      - name: Install Artifact Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas scipy scikit-learn==1.9.0
+
+      - name: Rebuild and Verify ML Artifacts
+        run: python scripts/verify_artifacts_reproducible.py
 
       - name: Generate Prisma Client
         run: npm run prisma:generate
