@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "npx tsx scripts/run_tests.ts",
     "courses:manifest": "node scripts/build_course_manifest.mjs",
     "repositories:sync": "node scripts/sync_repository_registry.mjs",
     "prisma:generate": "prisma generate",

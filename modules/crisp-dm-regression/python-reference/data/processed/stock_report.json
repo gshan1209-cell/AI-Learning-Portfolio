@@ -1,0 +1,13 @@
+{
+    "dataset": "2330.TW Stock",
+    "model": "Linear Regression",
+    "train_size": 176,
+    "test_size": 44,
+    "mse": 11.002261950932159,
+    "mae": 2.5838598048628723,
+    "r2": 0.950706453391422,
+    "train_r2": 0.975204359522424,
+    "test_r2": 0.950706453391422,
+    "diagnosis": "Good Fit",
+    "model_path": "models/stock_model.pkl.gz"
+}

@@ -1,0 +1,76 @@
+{
+  "id": "course-crisp-dm-regression",
+  "slug": "crisp-dm-regression",
+  "title": "CRISP-DM 機器學習迴歸專案全生命週期實戰",
+  "subtitle": "從商業理解、時間序列特徵工程到無資料洩漏的迴歸部署",
+  "summary": "學習如何使用 CRISP-DM 國際標準六階段框架，將商業問題轉化為機器學習迴歸任務，並以台積電歷史股價進行擬合與評估。",
+  "category": "機器學習進階",
+  "level": "beginner",
+  "durationMinutes": 45,
+  "status": "published",
+  "featured": true,
+  "tags": ["CRISP-DM", "Linear Regression", "Time-Series", "Feature Engineering"],
+  "learningObjectives": [
+    "掌握 CRISP-DM 六階段機器學習專案標準生命週期",
+    "理解金融時間序列迴歸中預防 Data Leakage 的前向切分法",
+    "學會計算與解讀 MAE、MSE、RMSE 與 R² 評估指標",
+    "掌握 OLS 線性迴歸與樹狀模型在真實數據上的差異"
+  ],
+  "source": {
+    "repository": "gshan1209-cell/machinelearningHw6",
+    "repositoryUrl": "https://github.com/gshan1209-cell/machinelearningHw6.git",
+    "demoUrl": "/regression-lab/crisp-dm",
+    "originalPath": "app/streamlit_app.py",
+    "sourceCommit": "4a94478ead424fdb29f4a55057bf167282a7a367"
+  },
+  "sections": [
+    {
+      "id": "concept",
+      "title": "1. 這個主題能做什麼？",
+      "summary": "瞭解 CRISP-DM 如何引導資料科學家從零完成可落地、可評估的迴歸模型專案。",
+      "bullets": [
+        "商業理解：明確定義目標與錯誤預測成本",
+        "資料準備：前向時間切分避免 Data Leakage",
+        "模型評估：解讀 MAE、MSE、RMSE 與 R² 指標"
+      ]
+    },
+    {
+      "id": "analogy",
+      "title": "2. 白話原理與生活比喻",
+      "summary": "把 CRISP-DM 想成建造一座橋樑的標準工程施工流程。從地質檢測、鋼筋加工到安全測試與通車維護，缺一不可。"
+    },
+    {
+      "id": "demo",
+      "title": "3. 可操作 Demo 觀察重點",
+      "summary": "開啟 Regression Lab 互動體驗 OLS 擬合與 CRISP-DM 流程圖。",
+      "bullets": [
+        "觀察 MA5 與收盤價之擬合直線",
+        "體驗前向時間切分與評估指標計算",
+        "查看殘差與模型比較"
+      ]
+    },
+    {
+      "id": "code",
+      "title": "4. 程式架構與關鍵程式碼",
+      "summary": "使用 Python / TypeScript 實作 OLS 線性迴歸與前向時間切分。",
+      "code": "function fitOls(x: number[], y: number[]) {\n  const meanX = x.reduce((a, b) => a + b, 0) / x.length;\n  const meanY = y.reduce((a, b) => a + b, 0) / y.length;\n  const slope = x.reduce((acc, xi, i) => acc + (xi - meanX) * (y[i] - meanY), 0) / x.reduce((acc, xi) => acc + Math.pow(xi - meanX, 2), 0);\n  const intercept = meanY - slope * meanX;\n  return { slope, intercept };\n}"
+    },
+    {
+      "id": "challenge",
+      "title": "5. 延伸挑戰",
+      "summary": "在 TSMC 股價特徵集中加入 Lag1 與 MA20，觀察 R² 與 RMSE 指標的變化；並思考多重共線性問題。"
+    }
+  ],
+  "quiz": {
+    "question": "在金融時間序列迴歸專案中，為什麼不能使用隨機打散 (Random K-Fold) 切分資料？",
+    "options": [
+      "因為會導致未來的歷史資料洩漏至過去 (Data Leakage)",
+      "因為隨機打散會讓計算速度變慢",
+      "因為隨機打散會刪除缺失值",
+      "因為繪製散佈圖時點會重疊"
+    ],
+    "answerIndex": 0,
+    "explanation": "時間序列具有時間先後順序，隨機打散會讓模型拿到未來的資訊來預測過去，造成極高但虛假的評估分數 (Data Leakage)。"
+  },
+  "updatedAt": "2026-07-28"
+}

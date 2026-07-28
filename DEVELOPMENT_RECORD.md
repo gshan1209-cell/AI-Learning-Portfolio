@@ -4,17 +4,16 @@
 
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告、舊部署處理與人工核准後設為 Archived／唯讀。
-- 目前已有 5 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05。
-- ML Top 10 已完成教材、視覺化、測驗、中央 AI 助教程式與唯讀治理儀表板接管。
-- 已於 `codex/post-merge-validation` 完成合併後全平台建置、Lint、TypeScript strict、Runtime 頁面與 API 驗證，並補齊 GitHub Actions CI Workflow。
+- 目前已有 8 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05、machinelearningHw6 (CRISP-DM)、machinelearningHw6-2 (Startup Profit)、hw07 (Feature Selection)。
+- 已完成 Migration Wave 002 (Regression Lab 共用能力層、三個 Native 實驗室頁面與測試)。
 
 ## 目前狀態
 
 | 狀態 | 數量 |
 |---|---:|
 | importing | 0 |
-| refactoring | 5 |
-| planned | 9 |
+| refactoring | 8 |
+| planned | 6 |
 | ready_to_retire | 0 |
 | retired | 0 |
 

@@ -1,0 +1,76 @@
+{
+  "id": "course-boston-feature-selection",
+  "slug": "boston-feature-selection",
+  "title": "Boston Housing 九種特徵選擇方法與數據倫理實戰",
+  "subtitle": "探索 Filter、Wrapper 與 Embedded 特徵選擇演算法及 Ethical Mode 治理",
+  "summary": "深入比較 Pearson、Spearman、F-test、RFE、SFS、SBS、Lasso 與 Random Forest 九種特徵選擇方法，並學習資料集倫理治理與爭議欄位過濾。",
+  "category": "特徵工程與倫理",
+  "level": "intermediate",
+  "durationMinutes": 45,
+  "status": "published",
+  "featured": true,
+  "tags": ["Feature Selection", "Boston Housing", "RFE", "Lasso L1", "Data Ethics"],
+  "learningObjectives": [
+    "掌握 Filter、Wrapper 與 Embedded 三大類特徵選擇演算法機制",
+    "比較 9 種特徵選擇方法在不同 k 值 (1..13) 上的 R² 與 MSE 表現",
+    "理解最佳特徵數量 (Sweet Spot) 與過擬合防護",
+    "掌握機器學習數據倫理 Governance 與爭議欄位過濾 (Ethical Mode)"
+  ],
+  "source": {
+    "repository": "gshan1209-cell/hw07",
+    "repositoryUrl": "https://github.com/gshan1209-cell/hw07.git",
+    "demoUrl": "/regression-lab/feature-selection",
+    "originalPath": "scripts/generate_feature_selection_chart.py",
+    "sourceCommit": "91618e5e83812cb9fd0af3ded059dfd2731e821f"
+  },
+  "sections": [
+    {
+      "id": "concept",
+      "title": "1. 這個主題能做什麼？",
+      "summary": "從高維資料中挑選最具代表性的特徵，提升模型訓練速度並降低維度災難與過擬合。",
+      "bullets": [
+        "Filter：相關係數與 F 檢定快速篩選",
+        "Wrapper：RFE/SFS/SBS 遞迴與搜尋",
+        "Embedded：Lasso L1 與 Random Forest 重要性"
+      ]
+    },
+    {
+      "id": "analogy",
+      "title": "2. 白話原理與生活比喻",
+      "summary": "把特徵選擇想成精簡面試題庫，只保留最有鑑別度的 5 個核心題目，大幅省下時間且判斷依然精準。"
+    },
+    {
+      "id": "demo",
+      "title": "3. 可操作 Demo 觀察重點",
+      "summary": "開啟 Regression Lab 切換九種特徵選擇方法與 Ethical Mode 體驗。",
+      "bullets": [
+        "觀察不同方法選出的前 k 個特徵交集",
+        "體驗 Ethical Mode 自動排除爭議欄位 B",
+        "查看即時 Pearson 相關係數計算"
+      ]
+    },
+    {
+      "id": "code",
+      "title": "4. 程式架構與關鍵程式碼",
+      "summary": "TypeScript 中計算雙變數 Pearson 相關係數。",
+      "code": "function calculatePearson(x: number[], y: number[]) {\n  const meanX = x.reduce((a, b) => a + b, 0) / x.length;\n  const meanY = y.reduce((a, b) => a + b, 0) / y.length;\n  const num = x.reduce((acc, xi, i) => acc + (xi - meanX) * (y[i] - meanY), 0);\n  const den = Math.sqrt(x.reduce((a, xi) => a + Math.pow(xi - meanX, 2), 0) * y.reduce((a, yi) => a + Math.pow(yi - meanY, 2), 0));\n  return den === 0 ? 0 : num / den;\n}"
+    },
+    {
+      "id": "challenge",
+      "title": "5. 延伸挑戰",
+      "summary": "切換 Pearson 相關與 Random Forest 重要性，比較兩者選出的前 5 個特徵是否有異同？思考線性與非線性模型的差異。"
+    }
+  ],
+  "quiz": {
+    "question": "下列哪一種方法屬於 Wrapper 類型的特徵選擇演算法？",
+    "options": [
+      "Recursive Feature Elimination (RFE 遞迴特徵消除)",
+      "Pearson Correlation (皮爾森相關係數)",
+      "Lasso L1 Regularization",
+      "F-test Regression"
+    ],
+    "answerIndex": 0,
+    "explanation": "RFE, SFS, SBS 屬於 Wrapper 方法，它們包裹一個基底模型，透過反覆訓練模型來篩選特徵子集。"
+  },
+  "updatedAt": "2026-07-28"
+}

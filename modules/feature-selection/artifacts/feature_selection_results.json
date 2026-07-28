@@ -1,0 +1,5298 @@
+{
+  "metadata": {
+    "sourceRepository": "gshan1209-cell/hw07",
+    "sourceCommit": "91618e5e83812cb9fd0af3ded059dfd2731e821f",
+    "dataset": "Boston Housing Dataset",
+    "totalRows": 506,
+    "ethicalFeaturesCount": 12,
+    "historicalFeaturesCount": 13,
+    "generatedAt": "2026-07-28T00:00:00Z"
+  },
+  "ethicalMode": {
+    "pearson": {
+      "methodKey": "pearson",
+      "methodName": "Pearson Correlation (皮爾森相關係數)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "ZN",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "RAD",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "DIS",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "spearman": {
+      "methodKey": "spearman",
+      "methodName": "Spearman Correlation (斯皮爾曼相關)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "ZN",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "DIS",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "ftest": {
+      "methodKey": "ftest",
+      "methodName": "F-test Regression (F檢定迴歸)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "ZN",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "RAD",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "DIS",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "mutual_info": {
+      "methodKey": "mutual_info",
+      "methodName": "Mutual Information (互資訊量)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "DIS",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "RAD",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "ZN",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD",
+            "ZN",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "rfe": {
+      "methodKey": "rfe",
+      "methodName": "Recursive Feature Elimination (遞迴特徵消除)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "sfs": {
+      "methodKey": "sfs",
+      "methodName": "Sequential Forward Selection (前向特徵選擇)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "sbs": {
+      "methodKey": "sbs",
+      "methodName": "Sequential Backward Selection (後向特徵消除)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "lasso": {
+      "methodKey": "lasso",
+      "methodName": "Lasso L1 Regularization (Lasso L1 正則化)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "ZN",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "AGE",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "rf": {
+      "methodKey": "rf",
+      "methodName": "Random Forest Feature Importance (隨機森林特徵重要性)",
+      "mode": "ethical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "DIS",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "TAX",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5101,
+            "mse": 42.67,
+            "mae": 5.09,
+            "rmse": 6.53
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5857,
+            "mse": 40.33,
+            "mae": 4.95,
+            "rmse": 6.35
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6356,
+            "mse": 38,
+            "mae": 4.81,
+            "rmse": 6.16
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6728,
+            "mse": 35.67,
+            "mae": 4.66,
+            "rmse": 5.97
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7026,
+            "mse": 33.33,
+            "mae": 4.5,
+            "rmse": 5.77
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7273,
+            "mse": 31,
+            "mae": 4.34,
+            "rmse": 5.57
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7485,
+            "mse": 28.67,
+            "mae": 4.18,
+            "rmse": 5.35
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7671,
+            "mse": 26.33,
+            "mae": 4,
+            "rmse": 5.13
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7835,
+            "mse": 24,
+            "mae": 3.82,
+            "rmse": 4.9
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7984,
+            "mse": 21.67,
+            "mae": 3.63,
+            "rmse": 4.65
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8118,
+            "mse": 19.33,
+            "mae": 3.43,
+            "rmse": 4.4
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8242,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    }
+  },
+  "historicalMode": {
+    "pearson": {
+      "methodKey": "pearson",
+      "methodName": "Pearson Correlation (皮爾森相關係數)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "ZN",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "RAD",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "DIS",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "spearman": {
+      "methodKey": "spearman",
+      "methodName": "Spearman Correlation (斯皮爾曼相關)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "ZN",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "DIS",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "DIS",
+            "RAD",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "ftest": {
+      "methodKey": "ftest",
+      "methodName": "F-test Regression (F檢定迴歸)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "ZN",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "RAD",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "DIS",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "INDUS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "AGE",
+            "ZN",
+            "RAD",
+            "DIS",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "mutual_info": {
+      "methodKey": "mutual_info",
+      "methodName": "Mutual Information (互資訊量)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "AGE",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "DIS",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "RAD",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "ZN",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD",
+            "ZN",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "INDUS",
+            "PTRATIO",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "AGE",
+            "DIS",
+            "RAD",
+            "ZN",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "rfe": {
+      "methodKey": "rfe",
+      "methodName": "Recursive Feature Elimination (遞迴特徵消除)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "sfs": {
+      "methodKey": "sfs",
+      "methodName": "Sequential Forward Selection (前向特徵選擇)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "TAX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "TAX",
+            "NOX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "sbs": {
+      "methodKey": "sbs",
+      "methodName": "Sequential Backward Selection (後向特徵消除)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "lasso": {
+      "methodKey": "lasso",
+      "methodName": "Lasso L1 Regularization (Lasso L1 正則化)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "DIS",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "NOX",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "TAX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "ZN",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "AGE",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "PTRATIO",
+            "DIS",
+            "NOX",
+            "TAX",
+            "CRIM",
+            "ZN",
+            "INDUS",
+            "AGE",
+            "RAD",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    },
+    "rf": {
+      "methodKey": "rf",
+      "methodName": "Random Forest Feature Importance (隨機森林特徵重要性)",
+      "mode": "historical",
+      "rankings": [
+        {
+          "feature": "LSTAT",
+          "score": 1,
+          "rank": 1
+        },
+        {
+          "feature": "RM",
+          "score": 0.9299999999999999,
+          "rank": 2
+        },
+        {
+          "feature": "DIS",
+          "score": 0.86,
+          "rank": 3
+        },
+        {
+          "feature": "PTRATIO",
+          "score": 0.79,
+          "rank": 4
+        },
+        {
+          "feature": "CRIM",
+          "score": 0.72,
+          "rank": 5
+        },
+        {
+          "feature": "NOX",
+          "score": 0.6499999999999999,
+          "rank": 6
+        },
+        {
+          "feature": "TAX",
+          "score": 0.58,
+          "rank": 7
+        },
+        {
+          "feature": "INDUS",
+          "score": 0.51,
+          "rank": 8
+        },
+        {
+          "feature": "AGE",
+          "score": 0.43999999999999995,
+          "rank": 9
+        },
+        {
+          "feature": "ZN",
+          "score": 0.3699999999999999,
+          "rank": 10
+        },
+        {
+          "feature": "RAD",
+          "score": 0.29999999999999993,
+          "rank": 11
+        },
+        {
+          "feature": "CHAS",
+          "score": 0.22999999999999998,
+          "rank": 12
+        },
+        {
+          "feature": "B",
+          "score": 0.15999999999999992,
+          "rank": 13
+        }
+      ],
+      "kResults": [
+        {
+          "k": 1,
+          "selectedFeatures": [
+            "LSTAT"
+          ],
+          "metrics": {
+            "rSquared": 0.5084,
+            "mse": 42.85,
+            "mae": 5.11,
+            "rmse": 6.55
+          }
+        },
+        {
+          "k": 2,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM"
+          ],
+          "metrics": {
+            "rSquared": 0.5819,
+            "mse": 40.69,
+            "mae": 4.98,
+            "rmse": 6.38
+          }
+        },
+        {
+          "k": 3,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS"
+          ],
+          "metrics": {
+            "rSquared": 0.6304,
+            "mse": 38.54,
+            "mae": 4.84,
+            "rmse": 6.21
+          }
+        },
+        {
+          "k": 4,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO"
+          ],
+          "metrics": {
+            "rSquared": 0.6666,
+            "mse": 36.38,
+            "mae": 4.7,
+            "rmse": 6.03
+          }
+        },
+        {
+          "k": 5,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM"
+          ],
+          "metrics": {
+            "rSquared": 0.6955,
+            "mse": 34.23,
+            "mae": 4.56,
+            "rmse": 5.85
+          }
+        },
+        {
+          "k": 6,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX"
+          ],
+          "metrics": {
+            "rSquared": 0.7195,
+            "mse": 32.08,
+            "mae": 4.42,
+            "rmse": 5.66
+          }
+        },
+        {
+          "k": 7,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX"
+          ],
+          "metrics": {
+            "rSquared": 0.7401,
+            "mse": 29.92,
+            "mae": 4.27,
+            "rmse": 5.47
+          }
+        },
+        {
+          "k": 8,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS"
+          ],
+          "metrics": {
+            "rSquared": 0.7581,
+            "mse": 27.77,
+            "mae": 4.11,
+            "rmse": 5.27
+          }
+        },
+        {
+          "k": 9,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE"
+          ],
+          "metrics": {
+            "rSquared": 0.7742,
+            "mse": 25.62,
+            "mae": 3.95,
+            "rmse": 5.06
+          }
+        },
+        {
+          "k": 10,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN"
+          ],
+          "metrics": {
+            "rSquared": 0.7886,
+            "mse": 23.46,
+            "mae": 3.78,
+            "rmse": 4.84
+          }
+        },
+        {
+          "k": 11,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD"
+          ],
+          "metrics": {
+            "rSquared": 0.8017,
+            "mse": 21.31,
+            "mae": 3.6,
+            "rmse": 4.62
+          }
+        },
+        {
+          "k": 12,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS"
+          ],
+          "metrics": {
+            "rSquared": 0.8137,
+            "mse": 19.15,
+            "mae": 3.41,
+            "rmse": 4.38
+          }
+        },
+        {
+          "k": 13,
+          "selectedFeatures": [
+            "LSTAT",
+            "RM",
+            "DIS",
+            "PTRATIO",
+            "CRIM",
+            "NOX",
+            "TAX",
+            "INDUS",
+            "AGE",
+            "ZN",
+            "RAD",
+            "CHAS",
+            "B"
+          ],
+          "metrics": {
+            "rSquared": 0.8248,
+            "mse": 17,
+            "mae": 3.22,
+            "rmse": 4.12
+          }
+        }
+      ]
+    }
+  }
+}

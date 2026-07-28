@@ -1,0 +1,13 @@
+{
+    "dataset": "Startup 50",
+    "model": "Linear Regression Pipeline",
+    "train_size": 40,
+    "test_size": 10,
+    "mse": 82010363.04501392,
+    "mae": 6961.477813275563,
+    "r2": 0.8987266414319833,
+    "train_r2": 0.9537019995248526,
+    "test_r2": 0.8987266414319833,
+    "diagnosis": "Good Fit",
+    "model_path": "models/startup_model.pkl.gz"
+}

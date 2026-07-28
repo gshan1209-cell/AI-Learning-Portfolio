@@ -74,39 +74,42 @@
     "sourceBranch": "main",
     "courseSlug": "crisp-dm-regression",
     "modulePath": "modules/crisp-dm-regression",
-    "status": "planned",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "python-streamlit-fastapi",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "原始 Python、Spec 與案例移入；CRISP-DM 6階段、TSMC 股價 snapshot、時間序列切分與 OLS 擬合 Native 展示已完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/machinelearningHw6-2",
     "sourceBranch": "main",
     "courseSlug": "startup-profit-prediction",
     "modulePath": "modules/startup-profit-prediction",
-    "status": "planned",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "python-streamlit-fastapi",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "50 Startups 資料集、Notebook 與原始碼已移入；純 TypeScript Random Forest 推論引擎、Artifact 與 Predict API 已完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/hw07",
     "sourceBranch": "main",
     "courseSlug": "boston-feature-selection",
     "modulePath": "modules/feature-selection",
-    "status": "planned",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "python-ml",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "Boston Housing 資料集與 9 種選擇方法說明移入；基準結果 Artifact、TypeScript 即時計算與 Ethical/Historical 模式已完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/hw3-cosmos-text2image",

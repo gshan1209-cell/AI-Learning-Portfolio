@@ -1,0 +1,52 @@
+{
+  "sourceRepository": "gshan1209-cell/hw07",
+  "sourceBranch": "main",
+  "sourceCommit": "91618e5e83812cb9fd0af3ded059dfd2731e821f",
+  "courseSlug": "boston-feature-selection",
+  "modulePath": "modules/feature-selection",
+  "status": "refactoring",
+  "targetDemoMode": "native",
+  "sourceRuntime": "python-ml",
+  "retirementPolicy": "archive-after-verification",
+  "importedFiles": [
+    "README.md",
+    "Boston_Housing_Feature_Selection_Chart_SPEC.md",
+    "requirements.txt",
+    "data/boston_housing.csv",
+    "scripts/generate_feature_selection_chart.py",
+    "src/data_loader.py",
+    "src/preprocessing.py",
+    "src/feature_selection.py",
+    "src/model_evaluation.py",
+    "src/visualization.py"
+  ],
+  "excludedFiles": [
+    ".git/"
+  ],
+  "exclusionReasons": {
+    ".git/": "Historical git metadata excluded"
+  },
+  "featureMapping": [
+    {
+      "sourceFeature": "9 Feature Selection Methods (k=1..13)",
+      "targetFeature": "Pre-computed baseline JSON artifact & TypeScript live calculation engine",
+      "status": "implemented"
+    },
+    {
+      "sourceFeature": "Boston Housing Dataset analysis",
+      "targetFeature": "/regression-lab/feature-selection with Ethical Mode (default) vs Historical Mode",
+      "status": "implemented"
+    },
+    {
+      "sourceFeature": "Feature Selection Results API",
+      "targetFeature": "GET /api/ml-lab/feature-selection/results with parameter whitelisting",
+      "status": "implemented"
+    }
+  ],
+  "verification": {
+    "nativeDemoFunctional": true,
+    "noSecretsCommitted": true,
+    "ethicalModeDefault": true,
+    "tsLiveCalculationMatchesGolden": true
+  }
+}
