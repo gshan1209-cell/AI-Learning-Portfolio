@@ -25,8 +25,8 @@ function computeSha256(content: string): string {
 }
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { dataset: string } }
+  _request: NextRequest,
+  { params }: { params: { dataset: string } },
 ) {
   const datasetKey = (params.dataset || "").toLowerCase().trim();
 
@@ -39,20 +39,20 @@ export async function GET(
       {
         status: 404,
         headers: { "Cache-Control": "no-store" },
-      }
+      },
     );
   }
 
   let result: DatasetMetadata;
 
   if (datasetKey === "tsmc-stock") {
-    const rawStr = JSON.stringify(TSMC_STOCK_SNAPSHOT);
+    const rawData = JSON.stringify(TSMC_STOCK_SNAPSHOT);
     result = {
       datasetKey: "tsmc-stock",
       title: "台積電 (2330.TW) 歷史股價與移動平均快照",
-      description: "包含 2024 年 1 月份台積電股價、5日/20日移動平均與成交量快照。",
+      description: "包含 2024 年 1 月份台積電股價、5 日／20 日移動平均與成交量快照。",
       version: "v1.0.0-snapshot",
-      sha256: computeSha256(rawStr),
+      sha256: computeSha256(rawData),
       rowCount: TSMC_STOCK_SNAPSHOT.length,
       schema: [
         { name: "date", type: "string", description: "交易日期 (YYYY-MM-DD)" },
@@ -73,13 +73,14 @@ export async function GET(
     };
   } else if (datasetKey === "startup-50") {
     const rfMeta = (rfModelArtifact as { metadata: Record<string, unknown> }).metadata;
+    const rowCount = Number(rfMeta.datasetRows || 0);
     result = {
       datasetKey: "startup-50",
-      title: "50 Startups 新創公司營運支出與淨利潤資料庫",
-      description: "記錄美國三個州新創企業之研發、行政與行銷支出及實際淨利潤。",
-      version: "v1.0.0-legacy-20rows",
+      title: "50 Startups 教學資料｜新創公司營運支出與利潤",
+      description: `來源檔沿用 50 Startups 名稱，本次實際移植資料為 ${rowCount} 筆。`,
+      version: `v1.0.0-legacy-${rowCount}rows`,
       sha256: String(rfMeta.datasetHash || ""),
-      rowCount: Number(rfMeta.datasetRows || 20),
+      rowCount,
       schema: [
         { name: "R&D Spend", type: "number", description: "研發支出 (USD)" },
         { name: "Administration", type: "number", description: "行政管理支出 (USD)" },
@@ -91,41 +92,40 @@ export async function GET(
       metadata: {
         sourceRepository: rfMeta.sourceRepository,
         sourceCommit: rfMeta.sourceCommit,
-        datasetNote: rfMeta.datasetNote || "來源檔包含 20 筆真實紀錄",
+        datasetNote: `來源檔 50_Startups.csv 實際包含 ${rowCount} 筆紀錄`,
         categoricalEncoding: rfMeta.categoricalEncoding,
       },
     };
   } else {
-    // boston-housing
-    const featMeta = (featureArtifact as { metadata: Record<string, unknown> }).metadata;
+    const featureMetadata = (featureArtifact as { metadata: Record<string, unknown> }).metadata;
     result = {
       datasetKey: "boston-housing",
       title: "Boston Housing 房屋定價與社會人口變數資料集",
       description: "包含 506 筆波士頓郊區房屋特徵與房價中位數 (MEDV)。",
       version: "v1.0.0",
-      sha256: String(featMeta.datasetHash || ""),
-      rowCount: Number(featMeta.totalRows || 506),
+      sha256: String(featureMetadata.datasetHash || ""),
+      rowCount: Number(featureMetadata.totalRows || 506),
       schema: [
         { name: "CRIM", type: "number", description: "城鎮人均犯罪率" },
         { name: "ZN", type: "number", description: "住宅用地比例 (超過 25,000 sq.ft)" },
         { name: "INDUS", type: "number", description: "非零售商業用地比例" },
-        { name: "CHAS", type: "number", description: "查爾斯河虛擬變數 (1 臨河; 0 否)" },
+        { name: "CHAS", type: "number", description: "查爾斯河虛擬變數 (1 臨河；0 否)" },
         { name: "NOX", type: "number", description: "一氧化氮濃度" },
         { name: "RM", type: "number", description: "每戶平均房間數" },
-        { name: "AGE", type: "number", description: "1940年前建成的業主自佔房屋比例" },
+        { name: "AGE", type: "number", description: "1940 年前建成的業主自佔房屋比例" },
         { name: "DIS", type: "number", description: "加權距離至 5 個波士頓就業中心" },
         { name: "RAD", type: "number", description: "輻射狀公路可達性指數" },
         { name: "TAX", type: "number", description: "每萬美元的全額物業稅率" },
         { name: "PTRATIO", type: "number", description: "城鎮師生比例" },
-        { name: "B", type: "number", description: "黑人人口比例歷史變數 (Ethical Mode 已預設排除)" },
-        { name: "LSTAT", type: "number", description: "低收入人口百分比" },
-        { name: "MEDV", type: "number", description: "業主自佔房屋價格中位數 (千美元 - 目標變數)" },
+        { name: "B", type: "number", description: "具爭議的歷史人口變數（Ethical Mode 預設排除）" },
+        { name: "LSTAT", type: "number", description: "低社經地位人口百分比" },
+        { name: "MEDV", type: "number", description: "業主自佔房屋價格中位數（千美元，目標變數）" },
       ],
       sampleRecords: [],
       metadata: {
-        ethicalGovernance: "Ethical Mode (Default) excludes column B.",
-        ethicalFeaturesCount: featMeta.ethicalFeaturesCount,
-        historicalFeaturesCount: featMeta.historicalFeaturesCount,
+        ethicalGovernance: "Ethical Mode (Default) excludes column B before model selection.",
+        ethicalFeaturesCount: featureMetadata.ethicalFeaturesCount,
+        historicalFeaturesCount: featureMetadata.historicalFeaturesCount,
       },
     };
   }
