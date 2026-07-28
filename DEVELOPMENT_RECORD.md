@@ -6,6 +6,7 @@
 - 舊 Repo 僅在最低必要驗收、搬遷公告、舊部署處理與人工核准後設為 Archived／唯讀。
 - 目前已有 8 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05、machinelearningHw6 (CRISP-DM)、machinelearningHw6-2 (Startup Profit)、hw07 (Feature Selection)。
 - 已完成 Migration Wave 002 (Regression Lab 共用能力層、三個 Native 實驗室頁面與測試)。
+- 已建立 Migration Wave 003 (Applied Web Systems) 規格與 Codex 執行指令，準備移植電影爬蟲、農事天氣與 Django Blog。
 
 ## 目前狀態
 
@@ -112,6 +113,17 @@
 - [ ] 舊 Vercel／FastAPI 停止或導向
 - [ ] 舊 Repo 搬遷公告與人工退役核准
 
+## Migration Wave 003｜Applied Web Systems
+
+**狀態：規格完成，尚未開始移植**
+
+- ALP-MIG-009：`scrape_movie`，建立受控擷取、snapshot、來源追溯、快取與 fallback。
+- ALP-MIG-010：`scrape_weather`，擴充既有 CWA 共用層，加入農事風險與 Leaflet 地圖。
+- ALP-MIG-011：`2026-DjangoBlog`，保留真實 Django Runtime，建立 Native MVT／ORM／request lifecycle 教學鏡像。
+- 工作分支：`codex/migration-wave-3-applied-web-systems`。
+- 完成定義：`docs/tasks/ALP-MIG-WAVE-003_APPLIED_WEB_SYSTEMS.md`。
+- Codex 指令：`docs/tasks/CODEX_PROMPT_MIGRATION_WAVE_003.md`。
+
 ## 共同退役門檻
 
 1. 必要程式、素材與文件已進本專案。
@@ -126,8 +138,9 @@
 
 ## 下一步
 
-1. 使用測試 Secret 驗證 ML Top 10 Live／Fallback AI 流程。
-2. 執行 Prisma Migration 後改用 PostgreSQL Usage Ledger。
-3. 建立具認證／授權的 Prompt 編輯、發布與回滾後台。
-4. 集中執行 5 個 `refactoring` 模組的最低必要 Runtime 驗收。
-5. 驗收後建立舊 Repo 搬遷公告與退役候選清單。
+1. 依 `CODEX_PROMPT_MIGRATION_WAVE_003.md` 執行 Applied Web Systems 三個模組移植。
+2. 使用測試 Secret 驗證 ML Top 10 Live／Fallback AI 流程。
+3. 執行 Prisma Migration 後改用 PostgreSQL Usage Ledger。
+4. 建立具認證／授權的 Prompt 編輯、發布與回滾後台。
+5. 集中執行既有 `refactoring` 模組的最低必要 Runtime 驗收。
+6. 驗收後建立舊 Repo 搬遷公告與退役候選清單。
