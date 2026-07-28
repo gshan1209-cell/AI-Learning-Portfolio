@@ -13,6 +13,7 @@ RF_ARTIFACT = ROOT / "modules/startup-profit-prediction/artifacts/startup_rf_mod
 FEATURE_ARTIFACT = ROOT / "modules/feature-selection/artifacts/feature_selection_results.json"
 RF_EXPORTER = ROOT / "modules/startup-profit-prediction/python-reference/export_rf_tree.py"
 FEATURE_EXPORTER = ROOT / "modules/feature-selection/python-reference/scripts/export_feature_selection.py"
+DIAGNOSTIC_FILE = ROOT / "artifact-verification-diagnostic.txt"
 IGNORED_METADATA_KEYS = {"generatedAt", "datasetNote"}
 
 
@@ -110,4 +111,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as error:
+        DIAGNOSTIC_FILE.write_text(f"{type(error).__name__}: {error}\n", encoding="utf-8")
+        raise
