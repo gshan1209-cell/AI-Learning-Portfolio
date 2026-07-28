@@ -55,7 +55,19 @@ jobs:
         run: npm run lint
 
       - name: TypeScript Type Check
-        run: npx tsc --noEmit
+        shell: bash
+        run: |
+          set -o pipefail
+          npx tsc --noEmit 2>&1 | tee typescript-diagnostic.txt
+
+      - name: Upload TypeScript Diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: typescript-diagnostic
+          path: typescript-diagnostic.txt
+          if-no-files-found: ignore
+          retention-days: 3
 
       - name: Run Automated Tests
         run: npm run test
