@@ -80,7 +80,7 @@ async function runAllTests() {
   assert(rfMetadata.generator === "scikit-learn RandomForestRegressor", "RF generator is scikit-learn");
   assert(Boolean(rfMetadata.scikitLearnVersion), `RF scikit-learn version = ${rfMetadata.scikitLearnVersion}`);
   assert(rfMetadata.datasetRows === 21, `RF dataset row count is exact (${rfMetadata.datasetRows})`);
-  assert(rfMetadata.datasetNote.includes("21"), "RF dataset note reports 21 records");
+  assert(rfMetadata.datasetNote?.includes("21") === true, "RF dataset note reports 21 records");
   assert(Boolean(rfMetadata.datasetHash), "RF dataset hash exists");
   assert(rfMetadata.featureOrder.length === 5, "RF feature order contains five entries");
   assert(rfArtifact.trees.length === rfMetadata.nEstimators, "RF tree count matches metadata");
