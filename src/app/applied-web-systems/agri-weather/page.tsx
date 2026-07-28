@@ -7,6 +7,12 @@ import { RequestLifecycleViewer, type LifecycleStep } from "@/components/web-lab
 import { WeatherMap } from "@/components/web-lab/agri-weather/weather-map";
 import type { WeatherAdvisoryResult, WeeklyWeatherResult, WeatherStationsResult } from "@/lib/web-lab/agri-weather/types";
 
+const CITY_DISTRICTS: Record<string, string[]> = {
+  "臺中市": ["西屯區"],
+  "臺北市": ["中正區"],
+  "高雄市": ["鳳山區"],
+};
+
 export default function AgriWeatherPage() {
   const [city, setCity] = useState("臺中市");
   const [district, setDistrict] = useState("西屯區");
@@ -24,14 +30,14 @@ export default function AgriWeatherPage() {
       const [fRes, aRes, sRes] = await Promise.all([
         fetch(`/api/web-lab/weather/weekly?city=${encodeURIComponent(city)}&district=${encodeURIComponent(district)}&mode=${mode}`),
         fetch(`/api/web-lab/weather/advisory?city=${encodeURIComponent(city)}&district=${encodeURIComponent(district)}&crop=${crop}&mode=${mode}`),
-        fetch(`/api/web-lab/weather/stations?city=${encodeURIComponent(city)}`),
+        fetch(`/api/web-lab/weather/stations?city=${encodeURIComponent(city)}&mode=${mode}`),
       ]);
 
       if (fRes.ok) setForecast(await fRes.json());
       if (aRes.ok) setAdvisory(await aRes.json());
       if (sRes.ok) setStations(await sRes.json());
-    } catch (err) {
-      console.error("Failed to load weather data:", err);
+    } catch (error) {
+      console.error("Failed to load weather data:", error);
     } finally {
       setLoading(false);
     }
@@ -41,31 +47,36 @@ export default function AgriWeatherPage() {
     loadData();
   }, [loadData]);
 
+  function handleCityChange(nextCity: string) {
+    setCity(nextCity);
+    setDistrict(CITY_DISTRICTS[nextCity]?.[0] || "");
+  }
+
   const lifecycleSteps: LifecycleStep[] = [
     {
       step: 1,
       name: "作物與地理行政區選擇",
-      description: `選擇 ${city} ${district} 與 作物 (${crop})，前端平行請求三大 Route Handlers。`,
+      description: `選擇 ${city} ${district} 與作物 (${crop})，前端平行請求三個受控 Route Handlers。`,
       status: "completed",
     },
     {
       step: 2,
       name: "CWA OpenData 中央 Client & Secret 隔離",
-      description: "API Key 僅於伺服器端讀取 (Server-only)，無任何 Key 出現在 Client Bundle 或 URL 參數中。",
+      description: "Live 模式統一使用 server-only CWA Client；沒有 Key 或上游失敗時，API 會明確標示 fallback。",
       status: "completed",
-      codeSnippet: `process.env.CWA_API_KEY // Server-only Secret`,
+      codeSnippet: `fetchCwaJson(fixedDataset) // CWA_API_KEY stays server-side`,
     },
     {
       step: 3,
       name: "農事氣象風險 JSON 規則引擎診斷",
-      description: "讀取版本化 agri-risk-rules.json，依據溫度、降雨機率與風速比對門檻觸發風險提醒與防護建議。",
+      description: "讀取版本化 agri-risk-rules.json，依據溫度、降雨機率與風速比對門檻，產生教學用風險提醒。",
       status: "completed",
       codeSnippet: `evaluateAgriRisks(weeklyForecast, crop) -> RiskAssessment[]`,
     },
     {
       step: 4,
       name: "Leaflet + OpenStreetMap 地圖動態渲染",
-      description: "透過 Dynamic Import 切離 SSR window 物件，將離線測站座標與雨量資訊標記於台灣 OpenStreetMap 圖層。",
+      description: "透過 Dynamic Import 切離 SSR window 物件；地圖失敗時，預報與提醒仍可使用。",
       status: "completed",
     },
   ];
@@ -92,7 +103,6 @@ export default function AgriWeatherPage() {
         </Link>
       </div>
 
-      {/* Controller Controls */}
       <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-3 text-xs">
           <div>
@@ -100,21 +110,21 @@ export default function AgriWeatherPage() {
             <div className="flex gap-1">
               <select
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(event) => handleCityChange(event.target.value)}
                 className="bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-1.5 font-medium"
               >
-                <option value="臺中市">臺中市</option>
-                <option value="臺北市">臺北市</option>
-                <option value="高雄市">高雄市</option>
+                {Object.keys(CITY_DISTRICTS).map((item) => (
+                  <option key={item} value={item}>{item}</option>
+                ))}
               </select>
               <select
                 value={district}
-                onChange={(e) => setDistrict(e.target.value)}
+                onChange={(event) => setDistrict(event.target.value)}
                 className="bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-1.5 font-medium"
               >
-                <option value="西屯區">西屯區</option>
-                <option value="中正區">中正區</option>
-                <option value="鳳山區">鳳山區</option>
+                {(CITY_DISTRICTS[city] || []).map((item) => (
+                  <option key={item} value={item}>{item}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -123,7 +133,7 @@ export default function AgriWeatherPage() {
             <label className="block text-slate-500 dark:text-slate-400 font-medium mb-1">目標農作物情境 (Crop)</label>
             <select
               value={crop}
-              onChange={(e) => setCrop(e.target.value)}
+              onChange={(event) => setCrop(event.target.value)}
               className="bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-1.5 font-medium"
             >
               <option value="rice">水稻 (Rice)</option>
@@ -171,74 +181,66 @@ export default function AgriWeatherPage() {
         </button>
       </div>
 
-      {/* Provenance Card */}
       {forecast && <SourceProvenanceCard provenance={forecast.provenance} />}
 
-      {/* Risk Advisory Cards */}
       <div className="space-y-3">
         <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
           <span>⚠️</span> 農事風險提醒與建議 (基於 agri-risk-rules.json 數據化規則)
         </h3>
         {advisory?.risks && advisory.risks.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {advisory.risks.map((r) => (
+            {advisory.risks.map((risk) => (
               <div
-                key={r.ruleId}
+                key={risk.ruleId}
                 className={`p-4 rounded-xl border space-y-2 ${
-                  r.severity === "high"
+                  risk.severity === "high"
                     ? "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-800 dark:text-rose-200"
                     : "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-800 dark:text-amber-200"
                 }`}
               >
                 <div className="flex items-center justify-between font-bold text-sm">
-                  <span>{r.name}</span>
-                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-black/20">
-                    [{r.ruleId}]
-                  </span>
+                  <span>{risk.name}</span>
+                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-black/20">[{risk.ruleId}]</span>
                 </div>
-                <p className="text-xs">{r.userMessage}</p>
+                <p className="text-xs">{risk.userMessage}</p>
                 <div className="text-xs font-semibold bg-white/60 dark:bg-black/40 p-2 rounded">
-                  💡 建議處置：{r.recommendation}
+                  💡 建議處置：{risk.recommendation}
                 </div>
-                <p className="text-[11px] opacity-75">限制提示：{r.limitations}</p>
+                <p className="text-[11px] opacity-75">限制提示：{risk.limitations}</p>
               </div>
             ))}
           </div>
         ) : (
           <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-200 text-xs">
-            ✅ 目前預報期間內，無高風險農業氣象災害提示。適宜正常栽培管理。
+            ✅ 目前預報期間內無高風險提示。此結果仍不取代官方警報或農業專家判斷。
           </div>
         )}
       </div>
 
-      {/* Weather Forecast Grid */}
       <div className="space-y-3">
-        <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
-          📅 一週氣象預報 ({city} {district})
-        </h3>
+        <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">📅 一週氣象預報 ({city} {district})</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {forecast?.weeklyForecast.map((f, idx) => (
+          {forecast?.weeklyForecast.map((item, index) => (
             <div
-              key={idx}
+              key={`${item.startTime}-${index}`}
               className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 text-xs"
             >
               <div className="font-semibold text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-1">
-                {new Date(f.startTime).toLocaleDateString("zh-TW", { month: "numeric", day: "numeric", weekday: "short" })}
+                {new Date(item.startTime).toLocaleDateString("zh-TW", { month: "numeric", day: "numeric", weekday: "short" })}
               </div>
               <div className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
-                {f.temperatureMin}°C ~ {f.temperatureMax}°C
+                {item.temperatureMin}°C ~ {item.temperatureMax}°C
               </div>
-              <div className="text-slate-600 dark:text-slate-400">{f.weatherDescription}</div>
+              <div className="text-slate-600 dark:text-slate-400">{item.weatherDescription}</div>
               <div className="flex items-center justify-between text-slate-500 pt-1">
-                <span>🌧️ 降雨率: {f.precipitationProbability}%</span>
-                <span>{f.comfort}</span>
+                <span>🌧️ 降雨率: {item.precipitationProbability}%</span>
+                <span>{item.comfort}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* GIS Leaflet Map */}
       <div className="space-y-3">
         <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center justify-between">
           <span>🗺️ 台灣 CWA 氣象測站地圖 (Leaflet + OpenStreetMap Client Component)</span>
@@ -247,7 +249,6 @@ export default function AgriWeatherPage() {
         {stations && <WeatherMap stations={stations.stations} />}
       </div>
 
-      {/* Teaching Lifecycle */}
       <RequestLifecycleViewer steps={lifecycleSteps} />
     </div>
   );
