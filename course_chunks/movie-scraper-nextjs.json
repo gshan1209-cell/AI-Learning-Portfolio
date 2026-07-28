@@ -25,8 +25,7 @@
     {
       "step": 4,
       "title": "4. 程式架構與關鍵程式碼",
-      "content": "關鍵程式包含伺服器端 GET Route Handler、網域 Allowlist 驗證與依據來源分類的 RegExp/DOM Parser：\n\n```typescript\n// Server-only Route Handler Allowlist 驗證\nexport async function GET(request: NextRequest) {\n  const targetUrl = 'https://www.atmovies.com.tw/movie/new/';\n  if (!isUrlAllowed(targetUrl)) {\n    return NextResponse.json(loadMovieSnapshot('atmovies'), { status: 200 });\n  }\n  // 受控 Fetch 與 8s Timeout 防禦\n  const res = await fetch(targetUrl, { signal: AbortSignal.timeout(8000) });\n  const html = await res.text();\n  const movies = parseAtMoviesNewHtml(html);\
-  return NextResponse.json({ movies, provenance });\n}\n```"
+      "content": "關鍵程式包含伺服器端 GET Route Handler、網域 Allowlist 驗證與依據來源分類的 Parser：\n\n```typescript\nexport async function GET(request: NextRequest) {\n  const targetUrl = 'https://www.atmovies.com.tw/movie/new/';\n  if (!isUrlAllowed(targetUrl)) {\n    return NextResponse.json(loadMovieSnapshot('atmovies'), { status: 200 });\n  }\n  const res = await fetch(targetUrl, { signal: AbortSignal.timeout(8000) });\n  const html = await res.text();\n  const movies = parseAtMoviesNewHtml(html);\n  return NextResponse.json({ movies, provenance });\n}\n```"
     },
     {
       "step": 5,
