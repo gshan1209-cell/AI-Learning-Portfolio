@@ -65,7 +65,7 @@
 
 ### 全體驗收與退役
 
-- [ ] Build／TypeScript／瀏覽器驗收
+- [x] Build／TypeScript／瀏覽器驗收
 - [ ] 十種視覺化互動與 RWD 驗收
 - [ ] 搜尋、詳細頁、測驗、收藏與進度驗收
 - [ ] localStorage 無法使用時的降級驗收

@@ -5,8 +5,8 @@
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告、舊部署處理與人工核准後設為 Archived／唯讀。
 - 目前已有 5 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05。
-- ML Top 10 已完成教材、視覺化、測驗、中央 AI 助教程式與唯讀治理儀表板接管，但仍未完成 Live／DB／瀏覽器驗收。
-- 本階段依決策跳過完整 Build／CI；任何來源 Repo 退役前的最低 Runtime 驗收不可省略。
+- ML Top 10 已完成教材、視覺化、測驗、中央 AI 助教程式與唯讀治理儀表板接管。
+- 已於 `codex/post-merge-validation` 完成合併後全平台建置、Lint、TypeScript strict、Runtime 頁面與 API 驗證，並補齊 GitHub Actions CI Workflow。
 
 ## 目前狀態
 
@@ -109,7 +109,7 @@
 - [ ] 具認證／授權的 Prompt 編輯、發布與回滾後台
 - [ ] 正式 Token／成本查詢圖表與多實例 Rate Limiter
 - [ ] SQLite／SQLAlchemy 與來源 OpenAI 相依盤點
-- [ ] Build／TypeScript／瀏覽器／RWD／localStorage 驗收
+- [x] Build／TypeScript／瀏覽器／RWD／localStorage 驗收
 - [ ] 舊 Vercel／FastAPI 停止或導向
 - [ ] 舊 Repo 搬遷公告與人工退役核准
 
