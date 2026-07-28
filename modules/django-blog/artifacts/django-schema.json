@@ -2,7 +2,7 @@
   "sourceRepository": "gshan1209-cell/2026-DjangoBlog",
   "sourceCommit": "eb900202f0d791951a26b6ea1767d15e69cde9ac",
   "djangoVersion": "6.0",
-  "pythonVersion": "3.14",
+  "pythonVersion": "3.12+",
   "appName": "article",
   "modelName": "Post",
   "fields": [
@@ -51,7 +51,7 @@
   ],
   "migrations": [
     "0001_initial.py",
-    "0002_alter_post_slug_unique.py"
+    "0002_alter_post_slug.py"
   ],
-  "generatedAt": "2026-07-28T15:04:29.724224"
+  "generatedAt": "2026-07-28T00:00:00Z"
 }
