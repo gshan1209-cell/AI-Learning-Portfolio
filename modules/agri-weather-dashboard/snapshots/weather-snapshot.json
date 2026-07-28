@@ -1,0 +1,62 @@
+{
+  "snapshotVersion": "1.0.0",
+  "generatedAt": "2026-07-28T07:00:00Z",
+  "dataHash": "b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef012",
+  "city": "臺中市",
+  "district": "西屯區",
+  "weeklyForecast": [
+    {
+      "startTime": "2026-07-28T06:00:00+08:00",
+      "endTime": "2026-07-28T18:00:00+08:00",
+      "temperatureMin": 27,
+      "temperatureMax": 34,
+      "precipitationProbability": 30,
+      "weatherDescription": "多雲午後局部短暫雷陣雨",
+      "comfort": "悶熱",
+      "wind": "西南風 2-3 級",
+      "humidity": 75
+    },
+    {
+      "startTime": "2026-07-29T06:00:00+08:00",
+      "endTime": "2026-07-29T18:00:00+08:00",
+      "temperatureMin": 28,
+      "temperatureMax": 36,
+      "precipitationProbability": 20,
+      "weatherDescription": "晴時多雲高溫炎熱",
+      "comfort": "酷熱",
+      "wind": "偏南風 2 級",
+      "humidity": 68
+    },
+    {
+      "startTime": "2026-07-30T06:00:00+08:00",
+      "endTime": "2026-07-30T18:00:00+08:00",
+      "temperatureMin": 26,
+      "temperatureMax": 32,
+      "precipitationProbability": 80,
+      "weatherDescription": "陰有短暫陣雨或雷雨",
+      "comfort": "舒適至潮濕",
+      "wind": "西南風 4 級",
+      "humidity": 88
+    }
+  ],
+  "stations": [
+    {
+      "stationId": "467490",
+      "name": "臺中",
+      "latitude": 24.1457,
+      "longitude": 120.6842,
+      "temperature": 33.5,
+      "rainfall": 0.0,
+      "observedAt": "2026-07-28T14:00:00+08:00"
+    },
+    {
+      "stationId": "C0F9A0",
+      "name": "西屯",
+      "latitude": 24.1812,
+      "longitude": 120.6401,
+      "temperature": 34.1,
+      "rainfall": 0.5,
+      "observedAt": "2026-07-28T14:00:00+08:00"
+    }
+  ]
+}

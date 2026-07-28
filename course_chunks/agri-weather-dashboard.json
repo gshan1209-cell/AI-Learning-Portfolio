@@ -1,0 +1,78 @@
+{
+  "id": "agri-weather-dashboard",
+  "title": "農事氣象儀表板、風險規則引擎與 GIS 地圖",
+  "summary": "學習整合 CWA OpenData 氣象資料、數據化農事風險 JSON 規則引擎，以及 Leaflet 地圖 Client-side 動態載入技術。",
+  "targetAudience": "希望學習開放資料 API 整合、地理資訊地圖 (GIS) 與領域決策支援系統的開發者。",
+  "estimatedMinutes": 45,
+  "sections": [
+    {
+      "step": 1,
+      "title": "1. 這個主題能做什麼",
+      "content": "氣象資料對農業生產至關重要。本課程帶你整合中央氣象署 (CWA) 一週天氣預報與氣象測站資料，搭配版本化的農事風險規則引擎 (JSON)，根據高溫、豪雨與強風自動為水稻、果樹等作物產生即時防禦建議，並透過動態 Leaflet 地圖將測站位置與氣溫雨量圖像化。"
+    },
+    {
+      "step": 2,
+      "title": "2. 白話原理與生活比喻",
+      "content": "將氣象預報比喻為「體溫計與氣候報告」，而農事風險規則引擎就是一位「資深農藝顧問的警示手冊」。當體溫計顯示超過 35°C 時，手冊自動翻到高溫熱害頁面，提醒農夫及時進行噴水降溫，並在台灣地圖上標示出離你農地最近的氣象站觀測數值。"
+    },
+    {
+      "step": 3,
+      "title": "3. 可操作 Demo",
+      "content": "點擊下方連結前往 Native 農事氣象儀表板，切換不同縣市、行政區與農作物種類，檢視風險提醒卡片與 Leaflet 地圖。",
+      "demoKey": "agri-weather-dashboard",
+      "demoUrl": "/applied-web-systems/agri-weather"
+    },
+    {
+      "step": 4,
+      "title": "4. 程式架構與關鍵程式碼",
+      "content": "關鍵程式包含資料化農事風險評估與 Leaflet 地圖 SSR 隔離：\n\n```typescript\n// 數據化風險評估邏輯\nexport function evaluateAgriRisks(forecast: WeeklyForecastItem[], crop: string) {\n  const maxTemp = Math.max(...forecast.map(f => f.temperatureMax));\n  if (maxTemp >= 35 && (crop === 'rice' || crop === 'vegetable')) {\n    return [{ ruleId: 'RULE-HEAT-01', severity: 'high', userMessage: '極端高溫熱害風險' }];\n  }\n  return [];\n}\n\n// Leaflet Client-only Dynamic Import\nconst WeatherMapInner = dynamic(() => import('./weather-map-inner'), { ssr: false });\n```"
+    },
+    {
+      "step": 5,
+      "title": "5. 小測驗",
+      "quizzes": [
+        {
+          "id": "q1",
+          "question": "在 Next.js (App Router) 中載入 Leaflet 地圖套件時，為什麼必須使用 dynamic import 並設定 ssr: false？",
+          "options": [
+            "A. 因為 Leaflet 內部依賴 window 與 document 瀏覽器物件，若在 SSR 階段執行會引發 ReferenceError",
+            "B. 因為 Next.js 預設不支援 CSS 樣式載入",
+            "C. 因為 OpenStreetMap 只允許 Client 端連線",
+            "D. 設定 ssr: false 才能提升 100 倍連線速度"
+          ],
+          "answerIndex": 0,
+          "explanation": "Leaflet 為純瀏覽器端 UI 庫，初始化時需要存取 window 與 DOM 物件。透過 dynamic(..., { ssr: false }) 可確保其僅在用戶端渲染。"
+        },
+        {
+          "id": "q2",
+          "question": "關於 CWA OpenData 的 API Key 安全管理，下列何者為最佳實踐？",
+          "options": [
+            "A. 將 Key 放入 NEXT_PUBLIC_CWA_KEY 前端變數中",
+            "B. 僅在伺服器端 Route Handler 讀取 CWA_API_KEY，前端 Bundle 零洩漏",
+            "C. 將 API Key 直接硬編碼寫在 Client Component 程式碼內",
+            "D. 在 URL Query 參數中明文發送 API Key"
+          ],
+          "answerIndex": 1,
+          "explanation": "API Key 應維持為 Server-only Secret，透過 Route Handler 代理請求，防止金鑰外洩遭濫用。"
+        },
+        {
+          "id": "q3",
+          "question": "農事風險規則將邏輯抽取為 agri-risk-rules.json 的主要好處是什麼？",
+          "options": [
+            "A. 讓規則具備數據化與版本控管能力，新增或修改風險門檻無需修改前端 UI 程式碼",
+            "B. 可以讓網頁自動連線外部資料庫",
+            "C. 能夠自動下載所有 Leaflet 地圖圖磚",
+            "D. 能防止所有氣象預報超時"
+          ],
+          "answerIndex": 0,
+          "explanation": "將商業邏輯與規則解耦為 JSON 設定，有助於數據版本化管理、單元測試比對與團隊維護。"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "title": "6. 延伸挑戰",
+      "content": "嘗試在 agri-risk-rules.json 中新增一條「連續潮濕病蟲害規則」，當連續兩天降雨機率 > 60% 且氣溫介於 20°C~28°C 時觸發，並測試預報邏輯。"
+    }
+  ]
+}

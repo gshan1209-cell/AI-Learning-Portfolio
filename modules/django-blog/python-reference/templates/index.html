@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <title>My Django Blog</title>
+</head>
+<body>
+    <h1>Welcome to MyBlog</h1>
+    <hr>
+    {% for post in posts %}
+    <article>
+        <h2><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h2>
+        <p>{{ post.content|truncatewords:30 }}</p>
+        <small>發布時間：{{ post.pub_date|date:"Y-m-d H:i:s" }} | Slug: {{ post.slug }}</small>
+    </article>
+    <hr>
+    {% empty %}
+    <p>目前尚無文章。</p>
+    {% endfor %}
+    <p><small>伺服器時間：{{ now|date:"Y-m-d H:i:s" }}</small></p>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+    "project_sections": {
+        "header": "<div align=\"center\">\n\n# 🚀 [專案名稱]\n\n> **[簡短且具吸引力的專案一句話簡介]**\n\n</div>\n\n",
+        "badge_section": "<div align=\"center\">\n\n[![GitHub license](https://img.shields.io/github/license/[username]/[repo]?style=for-the-badge&color=blue)](https://github.com/[username]/[repo]/blob/main/LICENSE)\n[![PRs Welcome](https://img.shields.io/badge/PRs-%E6%AD%A1%E8%BF%8E%E6%8F%90%E4%BA%A4-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)\n[![Stars](https://img.shields.io/github/stars/[username]/[repo]?style=for-the-badge&color=gold)](https://github.com/[username]/[repo]/stargazers)\n\n</div>\n\n---\n\n",
+        "agent_generation_notice": "> **🤖 Antigravity AI Agent 提示**\n>\n> 本 `README.md` 由 **Antigravity IDE AI Agent** 自動構建與維護。內容直接同步自專案程式碼與結構元資料，確保提供最新且精準的安裝指南與架構資訊。\n\n---\n\n",
+        "table_of_contents": "## 📌 目錄\n\n- [📖 關於專案](#-關於專案)\n- [✨ 主要功能](#-主要功能)\n- [🛠️ 核心技術棧](#️-核心技術棧)\n- [🚀 快速開始](#-快速開始)\n  - [前置需求](#前置需求)\n  - [安裝步驟](#安裝步驟)\n- [💡 使用指南](#-使用指南)\n- [🤝 貢獻指南](#-貢獻指南)\n- [📄 開源協議](#-開源協議)\n\n---\n\n",
+        "about_project": "## 📖 關於專案\n\n[請在此處詳細描述專案背景、開發初衷與解決的核心痛點。]\n\n",
+        "features": "## ✨ 主要功能\n\n- ⚡ **高效穩定**：[說明功能亮點 1]\n- 🎨 **現代化介面**：[說明功能亮點 2]\n- 🔒 **安全可靠**：[說明功能亮點 3]\n\n",
+        "tech_stack": "## 🛠️ 核心技術棧\n\n| 類別 | 技術標籤 |\n| :--- | :--- |\n| **Backend** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white) |\n| **Database** | ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white) |\n\n",
+        "getting_started": "## 🚀 快速開始\n\n### 前置需求\n\n請確保環境已安裝以下基礎工具：\n- Python 3.10+\n- Git\n\n### 安裝步驟\n\n1. **克隆專案庫**\n   ```bash\n   git clone https://github.com/[username]/[repo].git\n   cd [repo]\n   ```\n\n2. **建立並啟用虛擬環境**\n   ```bash\n   python -m venv venv\n   # Windows:\n   venv\\Scripts\\activate\n   # macOS/Linux:\n   source venv/bin/activate\n   ```\n\n3. **安裝依賴套件**\n   ```bash\n   pip install -r requirements.txt\n   ```\n\n4. **啟動開發伺服器**\n   ```bash\n   python manage.py runserver\n   ```\n\n"
+    }
+}

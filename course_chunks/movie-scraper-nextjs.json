@@ -1,0 +1,78 @@
+{
+  "id": "movie-scraper-nextjs",
+  "title": "電影資料擷取、Parser 正規化與來源治理",
+  "summary": "掌握 Next.js 伺服器端受控爬蟲、HTML Parser 正規化、Allowlist 安全防禦、版本化 Snapshot 備援與著作權倫理規範。",
+  "targetAudience": "希望學習 Web Scraping、API 治理與伺服器/用戶端安全界線的開發者。",
+  "estimatedMinutes": 45,
+  "sections": [
+    {
+      "step": 1,
+      "title": "1. 這個主題能做什麼",
+      "content": "在現代 Web 開發中，許多公開數據未提供現成的 REST API。透過網頁爬蟲 (Web Scraping)，我們可以在伺服器端擷取 HTML 頁面、解析 DOM/RegExp 結構並轉換為標準化 JSON。本課程教你如何構建兼具安全性、版本化快照備援與網域 Allowlist 防禦的受控爬蟲系統。"
+    },
+    {
+      "step": 2,
+      "title": "2. 白話原理與生活比喻",
+      "content": "想像你是一位圖書管理員（伺服器端 Server-side）。當讀者（前端 Client）想了解最新書籍資訊時，由圖書管理員替讀者前往外部各大報社（來源網站）閱讀公開公告，將資訊抄寫整理成標準卡片（JSON），再交給讀者。這樣可以保護讀者免於直接遭遇外部不穩定或有害網站，並能隨時提供預先準備好的快照備份（Snapshot）。"
+    },
+    {
+      "step": 3,
+      "title": "3. 可操作 Demo",
+      "content": "點擊下方連結前往 Native 電影資料工作台，切換 Snapshot 離線快照與 Live 即時擷取模式，觀察 Data Provenance 治理標示與 HTTP 請求處理流程。",
+      "demoKey": "movie-scraper-nextjs",
+      "demoUrl": "/applied-web-systems/movie-scraper"
+    },
+    {
+      "step": 4,
+      "title": "4. 程式架構與關鍵程式碼",
+      "content": "關鍵程式包含伺服器端 GET Route Handler、網域 Allowlist 驗證與依據來源分類的 Parser：\n\n```typescript\nexport async function GET(request: NextRequest) {\n  const targetUrl = 'https://www.atmovies.com.tw/movie/new/';\n  if (!isUrlAllowed(targetUrl)) {\n    return NextResponse.json(loadMovieSnapshot('atmovies'), { status: 200 });\n  }\n  const res = await fetch(targetUrl, { signal: AbortSignal.timeout(8000) });\n  const html = await res.text();\n  const movies = parseAtMoviesNewHtml(html);\n  return NextResponse.json({ movies, provenance });\n}\n```"
+    },
+    {
+      "step": 5,
+      "title": "5. 小測驗",
+      "quizzes": [
+        {
+          "id": "q1",
+          "question": "為什麼網頁爬蟲與外部 HTTP 請求應該放在 Server-side (Route Handler) 執行，而非 Client Component？",
+          "options": [
+            "A. 防止 CORS 阻擋、隱藏伺服器細節、避免在瀏覽器端暴露爬蟲指紋與敏感 Key",
+            "B. Client Component 無法使用 fetch API",
+            "C. 放在 Server-side 可以自動繞過所有登入密碼與 CAPTCHA 驗證",
+            "D. 因為 Next.js 不允許在 Client Component 寫 JavaScript 邏輯"
+          ],
+          "answerIndex": 0,
+          "explanation": "在 Server-side 執行可以避免跨域限制 (CORS)、防止瀏覽器端直接連線外部網站曝露 IP，並能進行統一的 Allowlist、Timeout 與快取治理。"
+        },
+        {
+          "id": "q2",
+          "question": "在受控爬蟲系統中，Snapshot 模式的主要作用是什麼？",
+          "options": [
+            "A. 永久取代即時資料，不允許更新",
+            "B. 提供離線可用的版本化備援資料，防範上游網站斷線、超時或封鎖時頁面崩潰",
+            "C. 用於儲存使用者的個人帳號與密碼",
+            "D. 自動備份資料庫所有使用者紀錄"
+          ],
+          "answerIndex": 1,
+          "explanation": "Snapshot 模式提供可靠的版本化備援，確保在 CI 測試或外部服務故障時，展示頁面與教學功能依然可穩定運行。"
+        },
+        {
+          "id": "q3",
+          "question": "關於爬蟲與資料擷取的倫理規範，下列何者正確？",
+          "options": [
+            "A. 可以任意擷取付費牆內容並重新散布",
+            "B. 應遵守 robots.txt、使用條款、設定合理頻率限制 (Rate Limit) 並留存原始來源連結與標記",
+            "C. 只要是公開網站就可以無限制並行併發連線抓取",
+            "D. 爬蟲應該偽裝成任意使用者繞過驗證碼"
+          ],
+          "answerIndex": 1,
+          "explanation": "負責任的擷取必須尊重著作權與來源條款，設定 Timeout、Rate Limit 並明確標示 Data Provenance。"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "title": "6. 延伸挑戰",
+      "content": "嘗試增加一個新的爬蟲 Parser，並為其編寫最小化 HTML Fixture 與單元測試案例，驗證在缺少上映日期或海報欄位時 Parser 是否具備容錯能力。"
+    }
+  ]
+}

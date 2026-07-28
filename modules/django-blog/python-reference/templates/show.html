@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <title>{{ post.title }} - My Django Blog</title>
+</head>
+<body>
+    <a href="{% url 'post_list' %}">&larr; 返回文章列表</a>
+    <h1>{{ post.title }}</h1>
+    <p><small>發布時間：{{ post.pub_date|date:"Y-m-d H:i:s" }} | Slug: {{ post.slug }}</small></p>
+    <hr>
+    <div>
+        {{ post.content|linebreaks }}
+    </div>
+    <hr>
+    <p><small>伺服器時間：{{ now|date:"Y-m-d H:i:s" }}</small></p>
+</body>
+</html>

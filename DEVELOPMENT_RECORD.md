@@ -4,16 +4,17 @@
 
 - 專案採 **Migration-first**：來源 Repo 的必要程式、教材、Demo 與文件逐一移植進本 Monorepo。
 - 舊 Repo 僅在最低必要驗收、搬遷公告、舊部署處理與人工核准後設為 Archived／唯讀。
-- 目前已有 8 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05、machinelearningHw6 (CRISP-DM)、machinelearningHw6-2 (Startup Profit)、hw07 (Feature Selection)。
+- 目前已有 11 個來源進入 `refactoring`：L4、CWA OpenData、L13 SVM、L12 台股 Manim、machinelearningHw05、machinelearningHw6 (CRISP-DM)、machinelearningHw6-2 (Startup Profit)、hw07 (Feature Selection)、scrape_movie (Movie Scraper)、scrape_weather (Agri Weather)、2026-DjangoBlog (Django Blog)。
 - 已完成 Migration Wave 002 (Regression Lab 共用能力層、三個 Native 實驗室頁面與測試)。
+- 已完成 Migration Wave 003 (Applied Web Systems 共用能力層、三個 Native 實驗室頁面、九支 API/Route Handlers、三個六段式課程、單元測試、Python 測試與 Next.js Build 驗證)。
 
 ## 目前狀態
 
 | 狀態 | 數量 |
 |---|---:|
 | importing | 0 |
-| refactoring | 8 |
-| planned | 6 |
+| refactoring | 11 |
+| planned | 3 |
 | ready_to_retire | 0 |
 | retired | 0 |
 
@@ -62,55 +63,23 @@
 
 已完成 9 個教學場景、批次渲染器、requirements、pyproject 與完整 shared 共用層。
 
-待完成：tests、橫幅／影片資產、Manim／FFmpeg／中文字體、9 場景渲染、播放器與退役流程。
+待完成：tests、圖片／影片資產、Manim／FFmpeg／中文字體、9 場景渲染、播放器與退役流程。
 
 ## ALP-MIG-005｜機器學習十大演算法
 
 **狀態：`refactoring`**
 
-### 教材與 Native 功能已完成
+已完成：教材、30 題測驗、主要前端、十種視覺化、中央 AI Gateway、Prompt v1.1.0、Token／Cost Ledger 合約與唯讀治理儀表板。
 
-- [x] 來源 FastAPI／Next.js 主要碼與 SHA 保存
-- [x] 703 行來源教材拆成 10 個中央 JSON chunk
-- [x] 10 個主題、30 題測驗與 30 組解析
-- [x] `/ml-algorithms` 與十個詳細頁
-- [x] 搜尋、分類、難度、收藏、測驗與進度
-- [x] 列表與單筆 API
-- [x] 十種 React／SVG Native 視覺化
-- [x] 線性回歸與 SVM 進階課程勾稽
-- [x] SVM Kernel Trick 數學說明校訂
+## Migration Wave 003｜Applied Web Systems
 
-### 中央 AI 治理已實作
+**狀態：`refactoring`**
 
-- [x] `POST /api/ai/ml-tutor`
-- [x] AI Tutor UI 接入十個演算法頁面
-- [x] Prompt Registry 正式來源
-- [x] Prompt v1.0.0 歷史版保留
-- [x] Prompt v1.1.0 Injection Guard 啟用
-- [x] Gemini Structured JSON Schema
-- [x] Server-side Response Validation
-- [x] Secret 缺少／Provider Error／Timeout fallback
-- [x] Question／History／16 KB Request Body Limits
-- [x] 不接收 user_id、不保存完整對話與原始 IP
-- [x] 匿名雜湊 Rate Limit
-- [x] Token Usage 與可設定費率的 Cost Estimate
-- [x] 本機 JSONL Ledger 與正式 PostgreSQL Schema 預留
-- [x] `ai_prompts`、`ai_prompt_versions`、`ai_model_rates`、`ai_usage_logs`
-- [x] `/ai-governance` 唯讀治理儀表板
-- [x] Prompt 版本、模型、Secret 配置狀態、Rate Limit、費率、Ledger 模式與近期用量檢視
-- [x] AI Gateway 架構文件
-
-### 待完成
-
-- [ ] 使用測試 Secret 驗證 Live Gemini 回覆、Schema 與 Token Metadata
-- [ ] 執行 Prisma Migration
-- [ ] 正式 Usage Ledger 寫入 PostgreSQL
-- [ ] 具認證／授權的 Prompt 編輯、發布與回滾後台
-- [ ] 正式 Token／成本查詢圖表與多實例 Rate Limiter
-- [ ] SQLite／SQLAlchemy 與來源 OpenAI 相依盤點
-- [x] Build／TypeScript／瀏覽器／RWD／localStorage 驗收
-- [ ] 舊 Vercel／FastAPI 停止或導向
-- [ ] 舊 Repo 搬遷公告與人工退役核准
+- ALP-MIG-009：`scrape_movie` (`f3e0b48074c91adab5b92879b011e9ace805581a`)，建立受控網頁擷取、parser、snapshot、來源追溯、快取與 fallback。
+- ALP-MIG-010：`scrape_weather` (`788311e505d9231378f55e093a7f1e791266693d`)，重用既有 CWA 共用層，建立農事風險規則 JSON 與 Leaflet 台灣地圖。
+- ALP-MIG-011：`2026-DjangoBlog` (`eb900202f0d791951a26b6ea1767d15e69cde9ac`)，保存真實 Django Runtime (通過 `check` & `test`)，建立 Native MVT/ORM 教學鏡像與 Python 匯出之 Schema Artifacts。
+- 工作分支：`codex/migration-wave-3-applied-web-systems`。
+- 驗證：407 個 Jest 測試、TypeScript 檢查、Next.js 靜態建置、Django `manage.py check/test` 全部通過。
 
 ## 共同退役門檻
 
@@ -126,8 +95,6 @@
 
 ## 下一步
 
-1. 使用測試 Secret 驗證 ML Top 10 Live／Fallback AI 流程。
-2. 執行 Prisma Migration 後改用 PostgreSQL Usage Ledger。
-3. 建立具認證／授權的 Prompt 編輯、發布與回滾後台。
-4. 集中執行 5 個 `refactoring` 模組的最低必要 Runtime 驗收。
-5. 驗收後建立舊 Repo 搬遷公告與退役候選清單。
+1. 建立 PR 到 `main` (不自動合併)，等待人工驗收。
+2. 集中執行既有 `refactoring` 模組的最低必要 Runtime 驗收。
+3. 驗收後建立舊 Repo 搬遷公告與退役候選清單。

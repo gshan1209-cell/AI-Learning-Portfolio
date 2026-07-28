@@ -1,0 +1,31 @@
+{
+  "templates": [
+    {
+      "file": "templates/index.html",
+      "usedByView": "article.views.index",
+      "contextVariables": [
+        "posts",
+        "now"
+      ],
+      "features": [
+        "for loop",
+        "date filter",
+        "url tag",
+        "empty block"
+      ]
+    },
+    {
+      "file": "templates/show.html",
+      "usedByView": "article.views.detail",
+      "contextVariables": [
+        "post",
+        "now"
+      ],
+      "features": [
+        "linebreaks filter",
+        "date filter",
+        "back link"
+      ]
+    }
+  ]
+}
