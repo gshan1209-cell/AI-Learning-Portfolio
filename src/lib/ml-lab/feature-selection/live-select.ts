@@ -5,8 +5,13 @@ interface SelectionArtifact {
   metadata: {
     sourceRepository: string;
     sourceCommit: string;
+    generator: string;
+    scikitLearnVersion: string;
     dataset: string;
+    datasetHash: string;
     totalRows: number;
+    splitSeed: number;
+    testSize: number;
     ethicalFeaturesCount: number;
     historicalFeaturesCount: number;
     generatedAt: string;

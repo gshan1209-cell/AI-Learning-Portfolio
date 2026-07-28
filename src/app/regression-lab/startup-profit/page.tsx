@@ -127,14 +127,14 @@ export default function StartupProfitPage() {
 
           <div className="mt-6 border-t border-emerald-200/80 pt-4 space-y-1 text-[11px] text-emerald-900/70">
             <div>• 模型結構：{metadata.modelType} ({metadata.nEstimators} 棵樹)</div>
-            <div>• 資料集訓練 R²: {metadata.metrics.rSquared.toFixed(4)} | MAE: ${metadata.metrics.mae.toLocaleString()}</div>
+            <div>• 資料集訓練 R²: {(metadata.trainingMetrics || metadata.metrics!).rSquared.toFixed(4)} | MAE: ${(metadata.trainingMetrics || metadata.metrics!).mae.toLocaleString()}</div>
             <div>• 特徵順序：{metadata.featureOrder.join(", ")}</div>
           </div>
         </div>
       </div>
 
       {/* Model Evaluation Grid */}
-      <MetricCardGrid metrics={metadata.metrics} title="Random Forest 訓練與測試基準評估" />
+      <MetricCardGrid metrics={metadata.trainingMetrics || metadata.metrics!} title="Random Forest 訓練與測試基準評估" />
 
       {/* Course link */}
       <div className="flex items-center justify-between rounded-3xl bg-slate-900 p-6 text-white">

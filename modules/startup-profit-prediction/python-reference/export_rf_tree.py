@@ -1,20 +1,32 @@
 import os
 import json
+import hashlib
 import pandas as pd
 import numpy as np
+import sklearn
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+def get_file_hash(filepath):
+    hasher = hashlib.sha256()
+    with open(filepath, "rb") as f:
+        buf = f.read()
+        hasher.update(buf)
+    return hasher.hexdigest()
+
 def export_rf():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(base_dir, "data", "50_Startups.csv")
+    csv_path = os.path.join(base_dir, "..", "data", "50_Startups.csv")
     if not os.path.exists(csv_path):
-        csv_path = os.path.join(base_dir, "..", "data", "50_Startups.csv")
+        csv_path = os.path.join(base_dir, "data", "50_Startups.csv")
         
+    dataset_hash = get_file_hash(csv_path)
     df = pd.read_csv(csv_path)
+    total_rows = len(df)
     
     # One-hot encode State column
-    states = ["Florida", "New York"] # California is baseline
+    # State values in dataset: New York, California, Florida
+    states = ["Florida", "New York"] # California is baseline (0,0)
     for st in states:
         df[f"State_{st}"] = (df["State"] == st).astype(float)
         
@@ -22,7 +34,10 @@ def export_rf():
     X = df[features].values
     y = df["Profit"].values
     
-    rf = RandomForestRegressor(n_estimators=10, random_state=42, max_depth=5)
+    # Train real Random Forest Regressor
+    n_estimators = 10
+    seed = 42
+    rf = RandomForestRegressor(n_estimators=n_estimators, random_state=seed, max_depth=5)
     rf.fit(X, y)
     
     preds = rf.predict(X)
@@ -42,11 +57,14 @@ def export_rf():
             "value": tree.value.squeeze().tolist()
         })
         
-    # Golden samples for test verification
+    # Generate Golden Samples directly from Python rf.predict()
     sample_inputs = [
         {"rdSpend": 165349.2, "administration": 136897.8, "marketingSpend": 471784.1, "state": "New York"},
+        {"rdSpend": 162597.7, "administration": 151377.59, "marketingSpend": 443898.53, "state": "California"},
+        {"rdSpend": 153441.51, "administration": 101145.55, "marketingSpend": 407934.54, "state": "Florida"},
         {"rdSpend": 100000.0, "administration": 120000.0, "marketingSpend": 250000.0, "state": "California"},
-        {"rdSpend": 50000.0, "administration": 90000.0, "marketingSpend": 100000.0, "state": "Florida"}
+        {"rdSpend": 50000.0, "administration": 90000.0, "marketingSpend": 100000.0, "state": "Florida"},
+        {"rdSpend": 0.0, "administration": 50000.0, "marketingSpend": 0.0, "state": "New York"}
     ]
     
     golden_samples = []
@@ -68,11 +86,28 @@ def export_rf():
         "metadata": {
             "sourceRepository": "gshan1209-cell/machinelearningHw6-2",
             "sourceCommit": "cd4b4ae549ab9cecb83123447260b0b135a8d70e",
+            "generator": "scikit-learn RandomForestRegressor",
+            "scikitLearnVersion": sklearn.__version__,
             "modelType": "RandomForestRegressor",
-            "nEstimators": len(trees_data),
+            "nEstimators": n_estimators,
+            "seed": seed,
             "featureOrder": features,
-            "seed": 42,
-            "metrics": { "mae": mae, "mse": mse, "rmse": rmse, "rSquared": r2 },
+            "datasetHash": dataset_hash,
+            "datasetRows": total_rows,
+            "datasetNote": "來源檔 50_Startups.csv 包含 20 筆紀錄",
+            "categoricalEncoding": "One-Hot Encoding (State: Florida, New York; California baseline)",
+            "modelParameters": {
+                "nEstimators": n_estimators,
+                "maxDepth": 5,
+                "randomState": seed
+            },
+            "trainingScript": "export_rf_tree.py",
+            "trainingMetrics": {
+                "mae": round(mae, 2),
+                "mse": round(mse, 2),
+                "rmse": round(rmse, 2),
+                "rSquared": round(r2, 4)
+            },
             "generatedAt": "2026-07-28T00:00:00Z"
         },
         "trees": trees_data,
@@ -83,7 +118,7 @@ def export_rf():
     os.makedirs(os.path.dirname(artifact_path), exist_ok=True)
     with open(artifact_path, "w", encoding="utf-8") as f:
         json.dump(artifact, f, indent=2)
-    print("Exported RF tree model artifact successfully to", artifact_path)
+    print("Exported real RF tree model artifact successfully to", artifact_path)
 
 if __name__ == "__main__":
     export_rf()

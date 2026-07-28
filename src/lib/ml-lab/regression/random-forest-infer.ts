@@ -13,11 +13,20 @@ interface RfArtifact {
   metadata: {
     sourceRepository: string;
     sourceCommit: string;
+    generator: string;
+    scikitLearnVersion: string;
     modelType: string;
     nEstimators: number;
-    featureOrder: string[];
     seed: number;
-    metrics: { mae: number; mse: number; rmse: number; rSquared: number };
+    featureOrder: string[];
+    datasetHash: string;
+    datasetRows: number;
+    datasetNote?: string;
+    categoricalEncoding: string;
+    modelParameters: Record<string, unknown>;
+    trainingScript: string;
+    trainingMetrics: { mae: number; mse: number; rmse: number; rSquared: number };
+    metrics?: { mae: number; mse: number; rmse: number; rSquared: number };
     generatedAt: string;
   };
   trees: TreeNode[];
@@ -59,7 +68,7 @@ export function predictStartupProfit(input: StartupPredictInput): StartupPredict
   return {
     predictedProfit: Math.round(avgProfit * 100) / 100,
     modelVersion: `RF-${artifact.metadata.nEstimators}Trees-v1`,
-    metrics: artifact.metadata.metrics,
+    metrics: artifact.metadata.trainingMetrics || artifact.metadata.metrics!,
     input: {
       rdSpend: rd,
       administration: admin,

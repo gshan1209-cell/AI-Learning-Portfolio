@@ -24,9 +24,12 @@ export async function GET(request: NextRequest) {
 
   const method = VALID_METHODS.has(rawMethod) ? rawMethod : "pearson";
   const mode = rawMode === "historical" ? "historical" : "ethical";
-  const k = Number.isFinite(rawK) ? Math.max(1, Math.min(13, rawK)) : 5;
+  const maxK = mode === "ethical" ? 12 : 13;
+  const k = Number.isFinite(rawK) ? Math.max(1, Math.min(maxK, Math.round(rawK))) : 5;
 
   const result = getFeatureSelectionResults(method, mode, k);
 
-  return NextResponse.json(result);
+  return NextResponse.json(result, {
+    headers: { "Cache-Control": "no-store" },
+  });
 }
