@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 const VALID_STATES = new Set(["New York", "California", "Florida"]);
 const ALLOWED_KEYS = new Set(["rdSpend", "administration", "marketingSpend", "state"]);
-const MAX_BODY_BYTES = 16 * 1024; // 16 KB
+const MAX_BODY_BYTES = 16 * 1024;
 const MAX_SPEND = 10_000_000;
 
 function jsonError(message: string, status = 400) {
@@ -14,15 +14,14 @@ function jsonError(message: string, status = 400) {
     {
       status,
       headers: { "Cache-Control": "no-store" },
-    }
+    },
   );
 }
 
 export async function POST(request: NextRequest) {
-  // Check Content-Length header or read text buffer to enforce body size limit
   const contentLength = Number(request.headers.get("content-length") || "0");
-  if (contentLength > MAX_BODY_BYTES) {
-    return jsonError("Request payload size exceeds maximum limit of 16 KB.");
+  if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
+    return jsonError("Request payload size exceeds maximum limit of 16 KB.", 413);
   }
 
   let rawText: string;
@@ -33,7 +32,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (Buffer.byteLength(rawText, "utf8") > MAX_BODY_BYTES) {
-    return jsonError("Request payload size exceeds maximum limit of 16 KB.");
+    return jsonError("Request payload size exceeds maximum limit of 16 KB.", 413);
   }
 
   let body: Record<string, unknown>;
@@ -47,7 +46,6 @@ export async function POST(request: NextRequest) {
     return jsonError("Request body must be a JSON object.");
   }
 
-  // Reject extra unknown keys
   const extraKeys = Object.keys(body).filter((key) => !ALLOWED_KEYS.has(key));
   if (extraKeys.length > 0) {
     return jsonError(`Unexpected fields in request payload: ${extraKeys.join(", ")}`);
