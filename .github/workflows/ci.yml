@@ -39,6 +39,15 @@ jobs:
       - name: Rebuild and Verify ML Artifacts
         run: python scripts/verify_artifacts_reproducible.py
 
+      - name: Upload Artifact Verification Diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-verification-diagnostic
+          path: artifact-verification-diagnostic.txt
+          if-no-files-found: ignore
+          retention-days: 3
+
       - name: Generate Prisma Client
         run: npm run prisma:generate
 
