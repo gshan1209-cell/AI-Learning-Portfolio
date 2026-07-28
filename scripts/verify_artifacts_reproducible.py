@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -14,7 +15,10 @@ FEATURE_ARTIFACT = ROOT / "modules/feature-selection/artifacts/feature_selection
 RF_EXPORTER = ROOT / "modules/startup-profit-prediction/python-reference/export_rf_tree.py"
 FEATURE_EXPORTER = ROOT / "modules/feature-selection/python-reference/scripts/export_feature_selection.py"
 DIAGNOSTIC_FILE = ROOT / "artifact-verification-diagnostic.txt"
-IGNORED_METADATA_KEYS = {"generatedAt", "datasetNote"}
+# generatedAt and datasetNote are descriptive. datasetHash is a raw-byte hash and
+# can differ across Windows/Linux line-ending normalization even when rows match.
+IGNORED_METADATA_KEYS = {"generatedAt", "datasetNote", "datasetHash"}
+SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -82,6 +86,11 @@ def compare_values(
         raise RuntimeError(f"Value mismatch at {path}: {committed!r} != {regenerated!r}")
 
 
+def validate_hash(label: str, value: Any) -> None:
+    if not isinstance(value, str) or not SHA256_PATTERN.fullmatch(value):
+        raise RuntimeError(f"{label} must be a 64-character lowercase SHA-256 value")
+
+
 def main() -> None:
     committed_rf = load_json(RF_ARTIFACT)
     committed_feature = load_json(FEATURE_ARTIFACT)
@@ -96,6 +105,14 @@ def main() -> None:
     expected_note = f"來源檔 50_Startups.csv 實際包含 {row_count} 筆紀錄"
     if regenerated_rf["metadata"].get("datasetNote") != expected_note:
         raise RuntimeError("Random Forest exporter generated an inaccurate datasetNote")
+
+    for label, payload in (
+        ("Committed Random Forest datasetHash", committed_rf["metadata"].get("datasetHash")),
+        ("Regenerated Random Forest datasetHash", regenerated_rf["metadata"].get("datasetHash")),
+        ("Committed Feature Selection datasetHash", committed_feature["metadata"].get("datasetHash")),
+        ("Regenerated Feature Selection datasetHash", regenerated_feature["metadata"].get("datasetHash")),
+    ):
+        validate_hash(label, payload)
 
     compare_values(committed_rf, regenerated_rf, "randomForestArtifact")
     print("PASS: Random Forest artifact structure, topology and predictions are reproducible")
