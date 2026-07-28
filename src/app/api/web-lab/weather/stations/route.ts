@@ -1,22 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
-import { loadStationsSnapshot } from "@/lib/web-lab/agri-weather/forecast";
+import { getWeatherStations } from "@/lib/web-lab/agri-weather/forecast";
+import { isAllowedCity, isAllowedWeatherMode } from "@/lib/web-lab/agri-weather/validation";
 import { normalizeError } from "@/lib/web-lab/request-policy";
+
+function errorResponse(message: string) {
+  return NextResponse.json(
+    normalizeError(message, 400, "INVALID_PARAMETER"),
+    { status: 400, headers: { "Cache-Control": "no-store" } },
+  );
+}
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const city = searchParams.get("city") || undefined;
+    const { searchParams } = request.nextUrl;
+    const city = searchParams.get("city") || "臺中市";
+    const mode = searchParams.get("mode") || "snapshot";
 
-    const result = loadStationsSnapshot(city);
+    if (!isAllowedWeatherMode(mode)) {
+      return errorResponse("Invalid mode parameter. Must be 'snapshot' or 'live'.");
+    }
+    if (!isAllowedCity(city)) {
+      return errorResponse("Unsupported city parameter.");
+    }
+
+    const result = await getWeatherStations(city, mode);
     return NextResponse.json(result, {
       headers: {
-        "Cache-Control": "public, max-age=300, s-maxage=600",
+        "Cache-Control": mode === "snapshot"
+          ? "public, max-age=300, s-maxage=600"
+          : "no-store",
       },
     });
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       normalizeError("An error occurred while fetching weather stations.", 500, "INTERNAL_ERROR"),
-      { status: 500 }
+      { status: 500, headers: { "Cache-Control": "no-store" } },
     );
   }
 }
