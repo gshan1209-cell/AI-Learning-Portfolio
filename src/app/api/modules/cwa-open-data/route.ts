@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { CwaClientError, fetchCwaJson, getCwaApiKey } from "@/lib/cwa-open-data/client";
 
 const DATASET_PATTERN = /^[A-Z0-9-]{3,40}$/;
 const FORMATS = new Set(["JSON", "XML"]);
@@ -35,6 +36,13 @@ function samplePayload(dataset: string) {
   };
 }
 
+function errorResponse(message: string, status: number) {
+  return NextResponse.json(
+    { error: message },
+    { status, headers: { "Cache-Control": "no-store" } },
+  );
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const dataset = (searchParams.get("dataset") || "F-A0010-001").toUpperCase();
@@ -42,11 +50,11 @@ export async function GET(request: NextRequest) {
   const mode = searchParams.get("mode") || "sample";
 
   if (!DATASET_PATTERN.test(dataset)) {
-    return NextResponse.json({ error: "Invalid dataset identifier." }, { status: 400 });
+    return errorResponse("Invalid dataset identifier.", 400);
   }
 
   if (!FORMATS.has(format)) {
-    return NextResponse.json({ error: "Format must be JSON or XML." }, { status: 400 });
+    return errorResponse("Format must be JSON or XML.", 400);
   }
 
   if (mode !== "live") {
@@ -55,59 +63,57 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const apiKey = process.env.CWA_API_KEY;
+  const apiKey = getCwaApiKey();
   if (!apiKey) {
     return NextResponse.json(
       { error: "CWA_API_KEY is not configured on the server.", fallbackMode: "sample" },
-      { status: 503 },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
     );
   }
 
-  const endpoint = new URL(`https://opendata.cwa.gov.tw/fileapi/v1/opendataapi/${dataset}`);
-  endpoint.searchParams.set("Authorization", apiKey);
-  endpoint.searchParams.set("format", format);
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const fileName = `${dataset}_${timestamp}.${format.toLowerCase()}`;
 
   try {
-    const response = await fetch(endpoint, {
-      cache: "no-store",
-      signal: AbortSignal.timeout(30000),
-    });
-
-    if (response.status === 401) {
-      return NextResponse.json({ error: "CWA authorization failed." }, { status: 502 });
-    }
-
-    if (response.status === 404) {
-      return NextResponse.json({ error: `Dataset ${dataset} was not found.` }, { status: 404 });
-    }
-
-    if (!response.ok) {
-      return NextResponse.json({ error: `CWA request failed with status ${response.status}.` }, { status: 502 });
-    }
-
-    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-    const fileName = `${dataset}_${timestamp}.${format.toLowerCase()}`;
-
-    if (format === "XML") {
-      const xml = await response.text();
-      return new NextResponse(xml, {
+    if (format === "JSON") {
+      const json = await fetchCwaJson(dataset);
+      return NextResponse.json(json, {
         headers: {
-          "Content-Type": "application/xml; charset=utf-8",
           "Content-Disposition": `attachment; filename="${fileName}"`,
           "Cache-Control": "no-store",
         },
       });
     }
 
-    const json = await response.json();
-    return NextResponse.json(json, {
+    const endpoint = new URL(`https://opendata.cwa.gov.tw/fileapi/v1/opendataapi/${dataset}`);
+    endpoint.searchParams.set("Authorization", apiKey);
+    endpoint.searchParams.set("format", "XML");
+
+    const response = await fetch(endpoint, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(20_000),
+    });
+
+    if (!response.ok) {
+      return errorResponse(`CWA request failed with status ${response.status}.`, response.status === 404 ? 404 : 502);
+    }
+
+    const xml = await response.text();
+    if (Buffer.byteLength(xml, "utf8") > 2 * 1024 * 1024) {
+      return errorResponse("CWA response exceeded the 2 MB limit.", 502);
+    }
+
+    return new NextResponse(xml, {
       headers: {
+        "Content-Type": "application/xml; charset=utf-8",
         "Content-Disposition": `attachment; filename="${fileName}"`,
         "Cache-Control": "no-store",
       },
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown request error";
-    return NextResponse.json({ error: "Unable to reach CWA Open Data.", detail: message }, { status: 502 });
+    if (error instanceof CwaClientError) {
+      return errorResponse(error.message, error.status);
+    }
+    return errorResponse("Unable to reach CWA OpenData.", 502);
   }
 }
