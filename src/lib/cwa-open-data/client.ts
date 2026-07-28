@@ -1,5 +1,3 @@
-import "server-only";
-
 const DATASET_PATTERN = /^[A-Z0-9-]{3,40}$/;
 const CWA_REST_BASE_URL = "https://opendata.cwa.gov.tw/api/v1/rest/datastore";
 const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
