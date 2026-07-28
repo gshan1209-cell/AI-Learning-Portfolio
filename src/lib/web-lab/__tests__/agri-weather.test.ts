@@ -1,44 +1,35 @@
 import { evaluateAgriRisks } from "../agri-weather/rules";
 import { loadWeatherSnapshot } from "../agri-weather/forecast";
+import type { AssertFn } from "./movie-scraper.test";
 
-describe("Agri Weather Unit Tests", () => {
-  test("evaluateAgriRisks triggers high temperature risk when maxTemp >= 35°C", () => {
-    const mockForecast = [
-      {
-        startTime: "2026-07-28T00:00:00Z",
-        endTime: "2026-07-28T12:00:00Z",
-        temperatureMin: 28,
-        temperatureMax: 36,
-        precipitationProbability: 20,
-        weatherDescription: "晴朗高溫",
-      },
-    ];
+export function runAgriWeatherUnitTests(assert: AssertFn) {
+  const heatRisks = evaluateAgriRisks([
+    {
+      startTime: "2026-07-28T00:00:00Z",
+      endTime: "2026-07-28T12:00:00Z",
+      temperatureMin: 28,
+      temperatureMax: 36,
+      precipitationProbability: 20,
+      weatherDescription: "晴朗高溫",
+    },
+  ], "rice");
+  assert(heatRisks.some((risk) => risk.ruleId === "RULE-HEAT-01"), "Heat rule triggers at 36°C");
 
-    const risks = evaluateAgriRisks(mockForecast, "rice");
-    expect(risks.some((r) => r.ruleId === "RULE-HEAT-01")).toBe(true);
-  });
+  const rainRisks = evaluateAgriRisks([
+    {
+      startTime: "2026-07-28T00:00:00Z",
+      endTime: "2026-07-28T12:00:00Z",
+      temperatureMin: 24,
+      temperatureMax: 30,
+      precipitationProbability: 85,
+      weatherDescription: "大雨",
+    },
+  ], "vegetable");
+  assert(rainRisks.some((risk) => risk.ruleId === "RULE-RAIN-01"), "Rain rule triggers at 85%");
 
-  test("evaluateAgriRisks triggers rain risk when precipitationProbability >= 70%", () => {
-    const mockForecast = [
-      {
-        startTime: "2026-07-28T00:00:00Z",
-        endTime: "2026-07-28T12:00:00Z",
-        temperatureMin: 24,
-        temperatureMax: 30,
-        precipitationProbability: 85,
-        weatherDescription: "大雨",
-      },
-    ];
-
-    const risks = evaluateAgriRisks(mockForecast, "vegetable");
-    expect(risks.some((r) => r.ruleId === "RULE-RAIN-01")).toBe(true);
-  });
-
-  test("loadWeatherSnapshot returns default weather forecast and provenance", () => {
-    const snapshot = loadWeatherSnapshot("臺中市", "西屯區");
-    expect(snapshot.city).toBe("臺中市");
-    expect(snapshot.district).toBe("西屯區");
-    expect(snapshot.weeklyForecast.length).toBeGreaterThan(0);
-    expect(snapshot.provenance.mode).toBe("snapshot");
-  });
-});
+  const snapshot = loadWeatherSnapshot("臺中市", "西屯區");
+  assert(snapshot.city === "臺中市", "Weather snapshot keeps city");
+  assert(snapshot.district === "西屯區", "Weather snapshot keeps district");
+  assert(snapshot.weeklyForecast.length > 0, "Weather snapshot contains forecast");
+  assert(snapshot.provenance.mode === "snapshot", "Weather snapshot declares snapshot mode");
+}
