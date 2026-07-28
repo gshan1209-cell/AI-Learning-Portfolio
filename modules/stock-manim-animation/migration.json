@@ -1,0 +1,113 @@
+{
+  "module": "stock-manim-animation",
+  "courseSlug": "stock-manim-animation",
+  "source": {
+    "repository": "gshan1209-cell/L12",
+    "branch": "main",
+    "commitSha": "cc8902757a2f4e240710f8c9dbe14fd53bf7f280",
+    "sourceRoot": "manim-animations",
+    "readmeSha": "0931338f53f31556dfb1cf67683edf2df4464591",
+    "requirementsSha": "d9f13ebc2aa179713fa411ef0e223c922b705323",
+    "renderAllSha": "f2c75b487305fa0b8f246be35fc82f7fa4392ec1",
+    "mainSha": "c78de49cc428e22cfdc6c30f83422eb792208f78",
+    "pyprojectSha": "ffe16f1dac6a2e07a2bc82eda819379410930c66",
+    "sceneShas": {
+      "scene_00_title_intro.py": "b26580af54d24e6465411592d740b7ac48b789b2",
+      "scene_01_market_rules.py": "f0f39ea5b48bfd80e4369cd3bc73c6590e28fbfa",
+      "scene_02_candlestick_basics.py": "16065d884428f7a620ab9a0ca6722cf2e6cb70eb",
+      "scene_03_moving_average.py": "21c9202879b8c463311e99aafae7e44bc4632883",
+      "scene_04_volume_price.py": "6626f7b26a1a13b0ffc28bd46da4eb2cb1c7a54b",
+      "scene_05_support_resistance.py": "9944a4820f46885d81e4b7ed035bf4b70e5b781e",
+      "scene_06_trend_breakout.py": "af986f0ce007e3ce21e294371f5ff19184746cd3",
+      "scene_07_indicators_intro.py": "7fade47c08b8135832a3cac50ffd9d90aca5d140",
+      "scene_08_backtesting_risk.py": "b46dd133b8cffa0ebada781dcbf3b0c54d6f303c"
+    },
+    "sharedShas": {
+      "theme.py": "8144e077d9f9b71374835a27be5558f63083bd33",
+      "text_components.py": "bde6725c0177ab65f4fabd9cb88b214801baf55b",
+      "layout_components.py": "08a55a3f1ac6337e58549e603b23d70cbb201625",
+      "animation_utils.py": "1a3b99166b8a3cd0c45ccad4afa0ececc9087f2d",
+      "chart_components.py": "ee24ab50b5f2e1b024239d9593821886febba43f",
+      "data_samples.py": "682d8dc1795c4f776c69a7e876c479fda25e71b9"
+    }
+  },
+  "status": "refactoring",
+  "importedFiles": [
+    "python-manim/README.md",
+    "python-manim/requirements.txt",
+    "python-manim/pyproject.toml",
+    "python-manim/main.py",
+    "python-manim/render_all.py",
+    "python-manim/scenes/scene_00_title_intro.py",
+    "python-manim/scenes/scene_01_market_rules.py",
+    "python-manim/scenes/scene_02_candlestick_basics.py",
+    "python-manim/scenes/scene_03_moving_average.py",
+    "python-manim/scenes/scene_04_volume_price.py",
+    "python-manim/scenes/scene_05_support_resistance.py",
+    "python-manim/scenes/scene_06_trend_breakout.py",
+    "python-manim/scenes/scene_07_indicators_intro.py",
+    "python-manim/scenes/scene_08_backtesting_risk.py",
+    "python-manim/shared/theme.py",
+    "python-manim/shared/text_components.py",
+    "python-manim/shared/layout_components.py",
+    "python-manim/shared/animation_utils.py",
+    "python-manim/shared/chart_components.py",
+    "python-manim/shared/data_samples.py"
+  ],
+  "pendingFiles": [
+    "assets/images/project_banner.png",
+    "source tests",
+    "rendered MP4 and image assets"
+  ],
+  "featureMapping": [
+    {
+      "legacyFeature": "Nine Taiwan stock Manim teaching scenes",
+      "targetFeature": "Monorepo-managed reproducible Manim source",
+      "status": "imported_unverified"
+    },
+    {
+      "legacyFeature": "Dark and light financial terminal themes",
+      "targetFeature": "Shared theme module in Monorepo",
+      "status": "imported_unverified"
+    },
+    {
+      "legacyFeature": "Candlestick, volume, moving average and metric components",
+      "targetFeature": "Shared chart component library in Monorepo",
+      "status": "imported_unverified"
+    },
+    {
+      "legacyFeature": "Batch rendering with render_all.py",
+      "targetFeature": "Monorepo batch render command",
+      "status": "imported_unverified"
+    },
+    {
+      "legacyFeature": "Rendered lesson videos",
+      "targetFeature": "Managed video assets and course chapter player",
+      "status": "pending"
+    }
+  ],
+  "verification": {
+    "structureChecked": true,
+    "dependenciesRecorded": true,
+    "sourceTraceabilityChecked": true,
+    "sensitiveDataChecked": true,
+    "assetsChecked": false,
+    "runtimeVerified": false,
+    "allScenesRendered": false,
+    "retirementApproved": false
+  },
+  "risks": [
+    "Manim requires system dependencies including FFmpeg and rendering libraries.",
+    "The original Chinese font Microsoft JhengHei may be unavailable on Linux deployments.",
+    "Rendered media and project banner have not yet been migrated.",
+    "Volume bar scaling behavior requires visual verification.",
+    "Investment education disclaimers must remain visible."
+  ],
+  "retirement": {
+    "ready": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "repositoryArchived": false
+  },
+  "updatedAt": "2026-07-15"
+}

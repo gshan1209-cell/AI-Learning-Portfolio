@@ -1,0 +1,56 @@
+{
+  "linear-regression-for-beginners": {
+    "mode": "native",
+    "title": "線性迴歸互動實驗室",
+    "description": "使用隨機資料、OLS 擬合、殘差與 Top K 離群值，取代舊 L4 外部執行依賴。",
+    "nativeKey": "linear-regression-playground",
+    "fallbackUrl": "https://github.com/gshan1209-cell/L4"
+  },
+  "svm-kernel-trick-3d": {
+    "mode": "native",
+    "title": "SVM Kernel Trick 站內教學實驗室",
+    "description": "使用站內 Native 教學模型操作 Kernel、C、Gamma、Degree、Noise、Seed、支持向量與 2D→高維特徵提升；精確 SVC 參考程式已移入 Monorepo。",
+    "nativeKey": "svm-kernel-playground",
+    "fallbackUrl": "https://github.com/gshan1209-cell/L13_SVM"
+  },
+  "cwa-open-data-first-api": {
+    "mode": "native",
+    "title": "CWA OpenData 站內實驗室",
+    "description": "在站內選擇資料集與 JSON/XML 格式；API Key 只由 Server Route Handler 讀取。",
+    "nativeKey": "cwa-open-data-playground",
+    "fallbackUrl": "https://github.com/gshan1209-cell/cwa_scraper"
+  },
+  "startup-profit-prediction": {
+    "mode": "iframe",
+    "title": "新創公司利潤預測 Demo",
+    "description": "移植期間比對用外部服務。",
+    "url": "https://machinelearninghw6-2.streamlit.app/",
+    "fallbackUrl": "https://github.com/gshan1209-cell/machinelearningHw6-2"
+  },
+  "movie-scraper-nextjs": {
+    "mode": "external",
+    "title": "電影資料工作台",
+    "description": "待移植進 Monorepo，現階段僅供來源功能盤點。",
+    "url": "https://scrape-movie-web.vercel.app/",
+    "fallbackUrl": "https://github.com/gshan1209-cell/scrape_movie"
+  },
+  "ai-visual-story": {
+    "mode": "iframe",
+    "title": "AI 圖文故事播放器",
+    "description": "待移植進 Monorepo，現階段僅供功能比對。",
+    "url": "https://gshan1209-cell.github.io/L2DOC1-github/",
+    "fallbackUrl": "https://github.com/gshan1209-cell/L2DOC1-github"
+  },
+  "stock-manim-animation": {
+    "mode": "video",
+    "title": "台股技術分析動畫",
+    "description": "影片素材待從來源 Repo 移入本專案。",
+    "fallbackUrl": "https://github.com/gshan1209-cell/L12"
+  },
+  "cosmos-text-to-image": {
+    "mode": "snapshot",
+    "title": "Cosmos 文字生成圖片作品快照",
+    "description": "作品素材待從來源 Repo 移入本專案。",
+    "fallbackUrl": "https://github.com/gshan1209-cell/hw3-cosmos-text2image"
+  }
+}

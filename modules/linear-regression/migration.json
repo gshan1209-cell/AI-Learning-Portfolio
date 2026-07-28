@@ -1,0 +1,87 @@
+{
+  "module": "linear-regression",
+  "courseSlug": "linear-regression-for-beginners",
+  "source": {
+    "repository": "gshan1209-cell/L4",
+    "branch": "main",
+    "readmeSha": "603db063a08b3945827ccca9b80fd33d11b03e0c",
+    "appSha": "891a64363b6f2d99d87287ba2d1cebb794d797d7",
+    "requirementsSha": "d4b315355620b27d00d047e4678e62444fd3535a"
+  },
+  "status": "refactoring",
+  "importedFiles": [
+    "python-streamlit/app.py",
+    "python-streamlit/requirements.txt"
+  ],
+  "excludedFiles": [
+    {
+      "path": "linear_regression_data.csv",
+      "reason": "輸出產物，不作為必要原始碼；新平台可動態生成。"
+    },
+    {
+      "path": "linear_regression_plot.png",
+      "reason": "輸出產物；圖表功能已改為 React SVG。"
+    },
+    {
+      "path": "demoL4.png",
+      "reason": "舊版截圖；不影響核心功能，後續可選擇納入歷史展示。"
+    }
+  ],
+  "featureMapping": [
+    {
+      "legacyFeature": "隨機產生 X、Y、真實斜率、截距與雜訊",
+      "targetFeature": "Native Playground seeded random dataset generator",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "scikit-learn LinearRegression 自動擬合",
+      "targetFeature": "Native OLS fitting implementation",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "residual 與 abs_residual",
+      "targetFeature": "Native residual calculation",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "Top K Outliers",
+      "targetFeature": "Native outlier ranking, chart labels and table",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "Matplotlib regression chart",
+      "targetFeature": "Responsive React SVG chart",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "Streamlit sidebar controls",
+      "targetFeature": "React control panel with fitted and manual modes",
+      "status": "implemented"
+    },
+    {
+      "legacyFeature": "模型資訊指標卡",
+      "targetFeature": "True／estimated slope, intercept, variance, MAE and MSE cards",
+      "status": "implemented"
+    }
+  ],
+  "remainingDifferences": [
+    "尚未提供 CSV 下載。",
+    "尚未提供 PNG 圖片匯出。",
+    "尚未執行 npm build、瀏覽器與 Python Streamlit runtime 驗證。"
+  ],
+  "verification": {
+    "structureChecked": true,
+    "dependenciesRecorded": true,
+    "nativeParityChecked": false,
+    "sensitiveDataChecked": true,
+    "runtimeVerified": false,
+    "retirementApproved": false
+  },
+  "retirement": {
+    "ready": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "repositoryArchived": false
+  },
+  "updatedAt": "2026-07-15"
+}

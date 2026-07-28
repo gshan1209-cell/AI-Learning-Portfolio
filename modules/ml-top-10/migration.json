@@ -1,0 +1,144 @@
+{
+  "module": "ml-top-10",
+  "courseSlug": "ml-top-10-algorithms",
+  "source": {
+    "repository": "gshan1209-cell/machinelearningHw05",
+    "branch": "main",
+    "commitSha": "9567a798c0f7de0065a1834f6af8500708e902a1",
+    "readmeSha": "22460d190d3d681f63171df2c2d455ed05153789",
+    "frontendPackageSha": "306bb88d97e3e069ac51b59eefa5a6c394e87c88",
+    "backendRequirementsSha": "23ce963cff7b2e310c52e15c10d0f2893388fbb2",
+    "backendMainSha": "8564c3faf36213810201d6d380230a793e0652da",
+    "algorithmsRouteSha": "e5f125bced46f45180e68edeac0dceab48c5f9a3",
+    "chatSha": "6aa49e9d4c251355a5e0c1e4cb84dbb108d9a8d3",
+    "algorithmsDataSha": "7b2a3f2e824dbabfbc07cea8063f7d1f13958f78"
+  },
+  "status": "refactoring",
+  "contentMigration": {
+    "algorithmChunks": 10,
+    "quizQuestions": 30,
+    "quizExplanations": 30,
+    "sourceDatasetFullyMigrated": true,
+    "sourceRuntimeDependencyRemovedForContent": true
+  },
+  "nativeRoutes": [
+    "/ml-algorithms",
+    "/ml-algorithms/[slug]",
+    "/api/ml-algorithms",
+    "/api/ml-algorithms/[slug]",
+    "/api/ai/ml-tutor",
+    "/ai-governance"
+  ],
+  "nativeFeatures": [
+    "search and filters",
+    "algorithm detail pages",
+    "favorites",
+    "quiz scoring and explanations",
+    "local learning progress",
+    "ten React SVG visual adapters",
+    "governed AI tutor UI",
+    "curriculum fallback without API key",
+    "central prompt registry and prompt versioning",
+    "token and cost ledger contract",
+    "privacy-preserving rate limiting",
+    "read-only AI governance dashboard",
+    "related native course links"
+  ],
+  "visualTypes": [
+    "scatter-line",
+    "logistic-curve",
+    "decision-tree",
+    "random-forest",
+    "svm-margin",
+    "knn-neighbors",
+    "kmeans-clustering",
+    "naive-bayes-text",
+    "pca-projection",
+    "gradient-descent"
+  ],
+  "aiGovernance": {
+    "promptId": "ml-algorithm-tutor",
+    "activePromptVersion": "1.1.0",
+    "legacyPromptVersionPreserved": "1.0.0",
+    "gatewayImplemented": true,
+    "tutorUiImplemented": true,
+    "readOnlyDashboardImplemented": true,
+    "promptEditorImplemented": false,
+    "structuredOutputImplemented": true,
+    "fallbackImplemented": true,
+    "inputAndHistoryLimitsImplemented": true,
+    "promptInjectionPolicyImplemented": true,
+    "rateLimitImplemented": true,
+    "tokenUsageImplemented": true,
+    "costEstimateImplemented": true,
+    "postgresSchemaReserved": true,
+    "liveProviderVerified": false,
+    "databaseMigrationApplied": false
+  },
+  "featureMapping": [
+    {
+      "legacyFeature": "Ten algorithm learning cards, detail pages and visualizations",
+      "targetFeature": "Native Next.js 14 catalog, detail pages and React SVG labs",
+      "status": "native_implemented_unverified"
+    },
+    {
+      "legacyFeature": "Algorithm JSON and quizzes",
+      "targetFeature": "Ten independent central JSON chunks with thirty quiz questions",
+      "status": "imported_and_wired_unverified"
+    },
+    {
+      "legacyFeature": "LocalStorage progress and favorites",
+      "targetFeature": "Platform progress, quiz result and favorite adapters",
+      "status": "native_implemented_unverified"
+    },
+    {
+      "legacyFeature": "Gemini tutor through standalone FastAPI",
+      "targetFeature": "Central AI Gateway, Prompt Registry, fallback, usage ledger and governance dashboard",
+      "status": "native_implemented_unverified"
+    },
+    {
+      "legacyFeature": "Standalone Next.js 15 deployment",
+      "targetFeature": "Next.js 14 Monorepo native routes, components and APIs",
+      "status": "native_implemented_unverified"
+    }
+  ],
+  "pending": [
+    "live Gemini provider verification with a test secret",
+    "Prisma migration and PostgreSQL usage ledger persistence",
+    "authenticated prompt editor and cost management actions",
+    "multi-instance rate limiter",
+    "build, browser, hydration, RWD and localStorage verification",
+    "legacy deployment redirect or shutdown",
+    "source README migration notice",
+    "human retirement approval"
+  ],
+  "verification": {
+    "structureChecked": true,
+    "dependenciesRecorded": true,
+    "sensitiveDataChecked": true,
+    "fullDatasetImported": true,
+    "quizCountExpected": 30,
+    "nativeVisualTypesImplemented": 10,
+    "aiGatewayImplemented": true,
+    "aiGatewayIntegrated": true,
+    "readOnlyGovernanceDashboardImplemented": true,
+    "frontendParityChecked": false,
+    "liveAiVerified": false,
+    "runtimeVerified": false,
+    "retirementApproved": false
+  },
+  "risks": [
+    "Live provider behavior has not been verified with a test key.",
+    "In-memory rate limiting is best-effort and must be replaced for multi-instance production.",
+    "JSONL usage logs are for local development only; production needs PostgreSQL persistence.",
+    "The governance dashboard is intentionally read-only until authentication and authorization exist.",
+    "Build, browser, hydration and localStorage behavior have not yet been runtime verified."
+  ],
+  "retirement": {
+    "ready": false,
+    "sourceReadmeRedirected": false,
+    "legacyDeploymentRetired": false,
+    "repositoryArchived": false
+  },
+  "updatedAt": "2026-07-15"
+}

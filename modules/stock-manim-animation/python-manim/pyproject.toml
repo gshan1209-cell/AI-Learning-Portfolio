@@ -1,0 +1,11 @@
+[project]
+name = "manim-animations-taiwan-stock"
+version = "0.1.0"
+description = "Manim animations for Taiwan stock market practical teaching"
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 100
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

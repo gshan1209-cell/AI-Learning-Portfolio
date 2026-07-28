@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Course {
+  id              String          @id @default(uuid())
+  externalKey     String          @unique @map("external_key")
+  slug            String          @unique
+  title           String
+  subtitle        String?
+  summary         String
+  category        String
+  level           String          @default("beginner")
+  durationMinutes Int             @default(30) @map("duration_minutes")
+  status          String          @default("draft")
+  featured        Boolean         @default(false)
+  tags            String[]        @default([])
+  objectives      Json            @default("[]")
+  quiz            Json?
+  publishedAt     DateTime?       @map("published_at")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  source          CourseSource?
+  sections        CourseSection[]
+  progress        CourseProgress[]
+
+  @@index([status, featured])
+  @@index([category])
+  @@map("courses")
+}
+
+model CourseSource {
+  id             String   @id @default(uuid())
+  courseId       String   @unique @map("course_id")
+  repository     String
+  repositoryUrl  String   @map("repository_url")
+  demoUrl        String?  @map("demo_url")
+  originalPath   String?  @map("original_path")
+  sourceCommit   String?  @map("source_commit")
+  importedAt     DateTime @default(now()) @map("imported_at")
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@map("course_sources")
+}
+
+model CourseSection {
+  id         String   @id @default(uuid())
+  courseId   String   @map("course_id")
+  sectionKey String   @map("section_key")
+  title      String
+  summary    String
+  content    Json     @default("{}")
+  sortOrder  Int      @default(0) @map("sort_order")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, sectionKey])
+  @@index([courseId, sortOrder])
+  @@map("course_sections")
+}
+
+model CourseProgress {
+  id          String    @id @default(uuid())
+  learnerKey  String    @map("learner_key")
+  courseId    String    @map("course_id")
+  status      String    @default("started")
+  percent     Int       @default(0)
+  quizScore   Int?      @map("quiz_score")
+  startedAt   DateTime  @default(now()) @map("started_at")
+  completedAt DateTime? @map("completed_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([learnerKey, courseId])
+  @@index([learnerKey, updatedAt])
+  @@map("course_progress")
+}
+
+model CourseImportFile {
+  id            String    @id @default(uuid())
+  filePath      String    @map("file_path")
+  fileHash      String    @map("file_hash")
+  status        String    @default("pending")
+  recordsCount  Int       @default(0) @map("records_count")
+  importedCount Int       @default(0) @map("imported_count")
+  skippedCount  Int       @default(0) @map("skipped_count")
+  errorMessage  String?   @map("error_message")
+  startedAt     DateTime? @map("started_at")
+  finishedAt    DateTime? @map("finished_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@unique([filePath, fileHash])
+  @@index([status])
+  @@map("course_import_files")
+}
+
+model AiPrompt {
+  id            String            @id @default(uuid())
+  promptId      String            @unique @map("prompt_id")
+  name          String
+  activeVersion String            @map("active_version")
+  createdAt     DateTime          @default(now()) @map("created_at")
+  updatedAt     DateTime          @updatedAt @map("updated_at")
+  versions      AiPromptVersion[]
+
+  @@map("ai_prompts")
+}
+
+model AiPromptVersion {
+  id             String    @id @default(uuid())
+  aiPromptId     String    @map("ai_prompt_id")
+  version        String
+  provider       String
+  model          String
+  status         String    @default("active")
+  systemPrompt   String    @map("system_prompt")
+  generationConfig Json    @map("generation_config")
+  responseSchema Json      @map("response_schema")
+  limits         Json
+  createdAt      DateTime  @default(now()) @map("created_at")
+  retiredAt      DateTime? @map("retired_at")
+  prompt         AiPrompt  @relation(fields: [aiPromptId], references: [id], onDelete: Cascade)
+  usageLogs      AiUsageLog[]
+
+  @@unique([aiPromptId, version])
+  @@index([provider, model, status])
+  @@map("ai_prompt_versions")
+}
+
+model AiModelRate {
+  id                       String    @id @default(uuid())
+  provider                 String
+  model                    String
+  currency                 String    @default("USD")
+  inputUsdPerMillionTokens Decimal   @db.Decimal(18, 8) @map("input_usd_per_million_tokens")
+  outputUsdPerMillionTokens Decimal  @db.Decimal(18, 8) @map("output_usd_per_million_tokens")
+  effectiveFrom            DateTime  @map("effective_from")
+  effectiveTo              DateTime? @map("effective_to")
+  createdAt                DateTime  @default(now()) @map("created_at")
+
+  @@index([provider, model, effectiveFrom])
+  @@map("ai_model_rates")
+}
+
+model AiUsageLog {
+  requestId       String          @id @map("request_id")
+  promptVersionId String?         @map("prompt_version_id")
+  promptId        String          @map("prompt_id")
+  promptVersion   String          @map("prompt_version")
+  provider        String
+  model           String
+  mode            String
+  featureKey      String          @map("feature_key")
+  contextKey      String?         @map("context_key")
+  promptTokens    Int             @default(0) @map("prompt_tokens")
+  candidateTokens Int             @default(0) @map("candidate_tokens")
+  thoughtsTokens  Int             @default(0) @map("thoughts_tokens")
+  totalTokens     Int             @default(0) @map("total_tokens")
+  estimatedCostUsd Decimal?       @db.Decimal(18, 8) @map("estimated_cost_usd")
+  status          String          @default("success")
+  metadata        Json            @default("{}")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  promptVersionRecord AiPromptVersion? @relation(fields: [promptVersionId], references: [id], onDelete: SetNull)
+
+  @@index([promptId, promptVersion, createdAt])
+  @@index([provider, model, createdAt])
+  @@index([featureKey, createdAt])
+  @@map("ai_usage_logs")
+}
