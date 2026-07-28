@@ -20,12 +20,26 @@
     "nativeKey": "cwa-open-data-playground",
     "fallbackUrl": "https://github.com/gshan1209-cell/cwa_scraper"
   },
+  "crisp-dm-regression": {
+    "mode": "native",
+    "title": "CRISP-DM 迴歸生命週期與股價案例",
+    "description": "CRISP-DM 6階段互動時間軸、TSMC 股價 snapshot、無 Leakage 切分與 OLS 擬合展示。",
+    "url": "/regression-lab/crisp-dm",
+    "fallbackUrl": "https://github.com/gshan1209-cell/machinelearningHw6"
+  },
   "startup-profit-prediction": {
-    "mode": "iframe",
-    "title": "新創公司利潤預測 Demo",
-    "description": "移植期間比對用外部服務。",
-    "url": "https://machinelearninghw6-2.streamlit.app/",
+    "mode": "native",
+    "title": "50 Startups 新創利潤預測實驗室",
+    "description": "使用純 TypeScript Random Forest 推論引擎進行即時支出淨利潤預測。",
+    "url": "/regression-lab/startup-profit",
     "fallbackUrl": "https://github.com/gshan1209-cell/machinelearningHw6-2"
+  },
+  "boston-feature-selection": {
+    "mode": "native",
+    "title": "Boston Housing 九種特徵選擇方法實驗室",
+    "description": "比較 9 種特徵選擇方法在 k=1..13 上表現，預設 Ethical Mode 並支援即時 Pearson 計算。",
+    "url": "/regression-lab/feature-selection",
+    "fallbackUrl": "https://github.com/gshan1209-cell/hw07"
   },
   "movie-scraper-nextjs": {
     "mode": "external",

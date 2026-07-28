@@ -1,0 +1,54 @@
+{
+  "sourceRepository": "gshan1209-cell/machinelearningHw6-2",
+  "sourceBranch": "main",
+  "sourceCommit": "cd4b4ae549ab9cecb83123447260b0b135a8d70e",
+  "courseSlug": "startup-profit-prediction",
+  "modulePath": "modules/startup-profit-prediction",
+  "status": "refactoring",
+  "targetDemoMode": "native",
+  "sourceRuntime": "python-streamlit-fastapi",
+  "retirementPolicy": "archive-after-verification",
+  "importedFiles": [
+    "README.md",
+    "requirements.txt",
+    "01_startup_profit_crisp_dm.ipynb",
+    "data_loader.py",
+    "development_log.md",
+    "evaluate_model.py",
+    "predict.py",
+    "preprocessing.py",
+    "train_model.py",
+    "app/streamlit_app.py",
+    "app/fastapi_app.py",
+    "data/50_Startups.csv",
+    "docs/"
+  ],
+  "excludedFiles": [
+    ".git/",
+    "Kaggle50.png",
+    "models/*.pkl"
+  ],
+  "exclusionReasons": {
+    ".git/": "Historical git metadata excluded",
+    "Kaggle50.png": "Large binary image file excluded",
+    "models/*.pkl": "Pickle binaries replaced by versioned JSON tree model artifact"
+  },
+  "featureMapping": [
+    {
+      "sourceFeature": "50 Startups Random Forest Pipeline",
+      "targetFeature": "TypeScript Random Forest inference engine with exported JSON tree model",
+      "status": "implemented"
+    },
+    {
+      "sourceFeature": "Streamlit prediction form & FastAPI /predict endpoint",
+      "targetFeature": "/regression-lab/startup-profit form & POST /api/ml-lab/startup-profit/predict",
+      "status": "implemented"
+    }
+  ],
+  "verification": {
+    "nativeDemoFunctional": true,
+    "noSecretsCommitted": true,
+    "tsPythonGoldenSamplesMatch": true,
+    "inputValidationEnforced": true
+  }
+}

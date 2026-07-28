@@ -1,0 +1,14 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+yfinance
+optuna
+pickle5; python_version < '3.8'
+gzip-reader; sys_platform == 'win32'
+joblib
+streamlit
+fastapi
+uvicorn
+pydantic

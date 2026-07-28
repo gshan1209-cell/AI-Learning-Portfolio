@@ -1,0 +1,76 @@
+{
+  "id": "course-startup-profit",
+  "slug": "startup-profit-prediction",
+  "title": "50 Startups 新創支出與 Random Forest 利潤預測",
+  "subtitle": "探索類別 One-Hot 編碼、隨機森林樹結構與純前端推論引擎",
+  "summary": "掌握 50 Startups 資料集的研發、行政與行銷支出結構，並學習如何將 Python 訓練好的 Random Forest 模型匯出為 JSON 結構並在 TypeScript 中實現推論。",
+  "category": "機器學習進階",
+  "level": "intermediate",
+  "durationMinutes": 40,
+  "status": "published",
+  "featured": true,
+  "tags": ["Random Forest", "50 Startups", "One-Hot Encoding", "TypeScript Inference"],
+  "learningObjectives": [
+    "掌握類別變數 (State) 的 One-Hot Encoding 編碼機制",
+    "理解 Random Forest 整合多棵 Decision Tree 進行迴歸預測的原理",
+    "學會在 Web 應用中載入版本化 Model Artifact 實現前端即時推論",
+    "認識模型外插能力 (Extrapolation) 限制與特徵重要性"
+  ],
+  "source": {
+    "repository": "gshan1209-cell/machinelearningHw6-2",
+    "repositoryUrl": "https://github.com/gshan1209-cell/machinelearningHw6-2.git",
+    "demoUrl": "/regression-lab/startup-profit",
+    "originalPath": "app/streamlit_app.py",
+    "sourceCommit": "cd4b4ae549ab9cecb83123447260b0b135a8d70e"
+  },
+  "sections": [
+    {
+      "id": "concept",
+      "title": "1. 這個主題能做什麼？",
+      "summary": "根據企業的研發、行政、行銷支出與地理州別，預估其潛在淨利潤。",
+      "bullets": [
+        "50 Startups 三大支出欄位分析",
+        "State 類別欄位 One-Hot 轉換",
+        "Random Forest 多樹投票與平均預測"
+      ]
+    },
+    {
+      "id": "analogy",
+      "title": "2. 白話原理與生活比喻",
+      "summary": "把 Random Forest 想成由多位不同專家組成的智囊團共同給出預測。每位專家看到的資料維度不同，最終取平均避免個人偏見。"
+    },
+    {
+      "id": "demo",
+      "title": "3. 可操作 Demo 觀察重點",
+      "summary": "開啟 Regression Lab 調整支出與州別，體驗即時 Random Forest 推論。",
+      "bullets": [
+        "觀察研發支出 R&D Spend 對利潤的強相關",
+        "體驗 TypeScript 純前端樹分枝推論",
+        "對照模型評估指標 R²=0.9542"
+      ]
+    },
+    {
+      "id": "code",
+      "title": "4. 程式架構與關鍵程式碼",
+      "summary": "TypeScript 中遍歷 Decision Tree 節點進行分枝推論。",
+      "code": "function predictTree(tree: TreeNode, features: number[]) {\n  let node = 0;\n  while (tree.childrenLeft[node] !== -1 && tree.childrenRight[node] !== -1) {\n    const featIdx = tree.feature[node];\n    if (features[featIdx] <= tree.threshold[node]) node = tree.childrenLeft[node];\n    else node = tree.childrenRight[node];\n  }\n  return tree.value[node];\n}"
+    },
+    {
+      "id": "challenge",
+      "title": "5. 延伸挑戰",
+      "summary": "觀察特徵重要性 (Feature Importances) 的計算與限制，思考特徵重要性高是否等同於因果關係？"
+    }
+  ],
+  "quiz": {
+    "question": "為什麼在處理類別欄位 State (New York, California, Florida) 時需要 One-Hot Encoding？",
+    "options": [
+      "因為文字無法直接進行數值運算，且直接給予 1, 2, 3 會引入虛假的順序大小關係",
+      "因為 One-Hot Encoding 能讓資料筆數翻倍",
+      "因為亂數森林只支援 0 和 1 的輸入",
+      "因為可以防止模型過度擬合"
+    ],
+    "answerIndex": 0,
+    "explanation": "州別是無順序的名義變數 (Nominal variable)，直接給予 1, 2, 3 會讓模型誤以為 New York (3) 大於 California (1)。"
+  },
+  "updatedAt": "2026-07-28"
+}

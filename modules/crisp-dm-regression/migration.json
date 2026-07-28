@@ -1,0 +1,56 @@
+{
+  "sourceRepository": "gshan1209-cell/machinelearningHw6",
+  "sourceBranch": "main",
+  "sourceCommit": "4a94478ead424fdb29f4a55057bf167282a7a367",
+  "courseSlug": "crisp-dm-regression",
+  "modulePath": "modules/crisp-dm-regression",
+  "status": "refactoring",
+  "targetDemoMode": "native",
+  "sourceRuntime": "python-streamlit-fastapi",
+  "retirementPolicy": "archive-after-verification",
+  "importedFiles": [
+    "README.md",
+    "CRISP-DM_Regression_Development_Spec.md",
+    "DEVELOPMENT_LOG.md",
+    "requirements.txt",
+    "generate_notebooks.py",
+    "test_pipeline.py",
+    "train_models.py",
+    "app/streamlit_app.py",
+    "app/fastapi_app.py",
+    "src/",
+    "notebooks/",
+    "data/raw/50_Startups.csv"
+  ],
+  "excludedFiles": [
+    ".git/",
+    "models/*.pkl"
+  ],
+  "exclusionReasons": {
+    ".git/": "Historical git metadata excluded from monorepo copy",
+    "models/*.pkl": "Binary python pickle files replaced by reproducible versioned JSON artifacts"
+  },
+  "featureMapping": [
+    {
+      "sourceFeature": "CRISP-DM 6-stage methodology UI",
+      "targetFeature": "/regression-lab/crisp-dm CrispDmTimeline component",
+      "status": "implemented"
+    },
+    {
+      "sourceFeature": "Stock price regression model",
+      "targetFeature": "TSMC 2330.TW versioned dataset snapshot & linear vs random forest evaluation",
+      "status": "implemented"
+    },
+    {
+      "sourceFeature": "FastAPI / Streamlit deployment",
+      "targetFeature": "Native Next.js App Router interactive lab",
+      "status": "implemented"
+    }
+  ],
+  "verification": {
+    "nativeDemoFunctional": true,
+    "noSecretsCommitted": true,
+    "metricsVerified": true,
+    "timeSeriesSplitNoLeakage": true
+  }
+}
