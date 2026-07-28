@@ -25,19 +25,7 @@
     {
       "step": 4,
       "title": "4. 程式架構與關鍵程式碼",
-      "content": "關鍵程式包含 Post Model 唯一 Slug 與時區感知 View 處理：\n\n```python
-# article/models.py
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.CharField(max_length=200, unique=True)
-    content = models.TextField()
-    pub_date = models.DateTimeField(auto_now_add=True)
-
-# article/views.py
-def detail(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    return render(request, "show.html", {'post': post, 'now': timezone.now()})
-```"
+      "content": "關鍵程式包含 Post Model 唯一 Slug 與時區感知 View 處理：\n\n```python\n# article/models.py\nclass Post(models.Model):\n    title = models.CharField(max_length=200)\n    slug = models.CharField(max_length=200, unique=True)\n    content = models.TextField()\n    pub_date = models.DateTimeField(auto_now_add=True)\n\n# article/views.py\ndef detail(request, slug):\n    post = get_object_or_404(Post, slug=slug)\n    return render(request, \"show.html\", {'post': post, 'now': timezone.now()})\n```"
     },
     {
       "step": 5,

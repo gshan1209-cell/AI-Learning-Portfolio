@@ -25,13 +25,7 @@
     {
       "step": 4,
       "title": "4. 程式架構與關鍵程式碼",
-      "content": "關鍵程式包含資料化農事風險評估與 Leaflet 地圖 SSR 隔離：\n\n```typescript\n// 數據化風險評估邏輯\nexport function evaluateAgriRisks(forecast: WeeklyForecastItem[], crop: string) {\
-  const maxTemp = Math.max(...forecast.map(f => f.temperatureMax));\
-  if (maxTemp >= 35 && (crop === 'rice' || crop === 'vegetable')) {\
-    return [{ ruleId: 'RULE-HEAT-01', severity: 'high', userMessage: '極端高溫熱害風險' }];\
-  }\
-  return [];\
-}\n\n// Leaflet Client-only Dynamic Import\nconst WeatherMapInner = dynamic(() => import('./weather-map-inner'), { ssr: false });\n```"
+      "content": "關鍵程式包含資料化農事風險評估與 Leaflet 地圖 SSR 隔離：\n\n```typescript\n// 數據化風險評估邏輯\nexport function evaluateAgriRisks(forecast: WeeklyForecastItem[], crop: string) {\n  const maxTemp = Math.max(...forecast.map(f => f.temperatureMax));\n  if (maxTemp >= 35 && (crop === 'rice' || crop === 'vegetable')) {\n    return [{ ruleId: 'RULE-HEAT-01', severity: 'high', userMessage: '極端高溫熱害風險' }];\n  }\n  return [];\n}\n\n// Leaflet Client-only Dynamic Import\nconst WeatherMapInner = dynamic(() => import('./weather-map-inner'), { ssr: false });\n```"
     },
     {
       "step": 5,
