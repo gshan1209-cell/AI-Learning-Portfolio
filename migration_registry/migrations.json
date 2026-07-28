@@ -127,41 +127,47 @@
   {
     "sourceRepository": "gshan1209-cell/scrape_movie",
     "sourceBranch": "main",
+    "sourceCommit": "f3e0b48074c91adab5b92879b011e9ace805581a",
     "courseSlug": "movie-scraper-nextjs",
     "modulePath": "modules/movie-scraper",
-    "status": "planned",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "nextjs",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "原始碼與 Fixtures 已移入；Native 頁面 /applied-web-systems/movie-scraper 與 Route Handler 已完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/scrape_weather",
     "sourceBranch": "main",
+    "sourceCommit": "788311e505d9231378f55e093a7f1e791266693d",
     "courseSlug": "agri-weather-dashboard",
     "modulePath": "modules/agri-weather-dashboard",
-    "status": "planned",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "nextjs-fastapi",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "原始 Next.js 及 FastAPI 碼已保存；共用 CWA Client、農事風險規則 JSON 與 Leaflet 地圖 Native 頁面已完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/2026-DjangoBlog",
     "sourceBranch": "main",
+    "sourceCommit": "eb900202f0d791951a26b6ea1767d15e69cde9ac",
     "courseSlug": "django-blog-basics",
     "modulePath": "modules/django-blog",
-    "status": "planned",
+    "status": "refactoring",
     "targetDemoMode": "native",
     "sourceRuntime": "python-django",
     "retirementPolicy": "archive-after-verification",
     "retirementReady": false,
     "sourceReadmeRedirected": false,
-    "legacyDeploymentRetired": false
+    "legacyDeploymentRetired": false,
+    "notes": "真實 Django 專案已保存並通過測試；以 Artifacts 驅動之 Native MVT/ORM /applied-web-systems/django-blog 教學鏡像已完成。"
   },
   {
     "sourceRepository": "gshan1209-cell/L20-Ensemble-Model",

@@ -1,0 +1,42 @@
+{
+  "sourceRepository": "gshan1209-cell/scrape_weather",
+  "sourceBranch": "main",
+  "sourceCommit": "788311e505d9231378f55e093a7f1e791266693d",
+  "modulePath": "modules/agri-weather-dashboard",
+  "courseSlug": "agri-weather-dashboard",
+  "status": "refactoring",
+  "targetDemoMode": "native",
+  "sourceRuntime": "nextjs-fastapi",
+  "retirementPolicy": "archive-after-verification",
+  "retirementReady": false,
+  "sourceReadmeRedirected": false,
+  "legacyDeploymentRetired": false,
+  "importedFiles": [
+    "apps/api/app/main.py",
+    "apps/api/app/config.py",
+    "apps/api/app/cwa_client.py",
+    "apps/api/app/advisory.py",
+    "apps/api/requirements.txt",
+    "apps/web/src/app/page.tsx",
+    "apps/web/src/components/WeatherMap.tsx",
+    "README.md"
+  ],
+  "excludedFiles": [
+    "node_modules",
+    ".next",
+    ".venv",
+    "apps/api/__pycache__"
+  ],
+  "secrets": [
+    "CWA_API_KEY (server-only, reused from ALP-MIG-002)"
+  ],
+  "dataSources": [
+    "CWA OpenData (中央氣象署開放資料平台)"
+  ],
+  "verification": {
+    "cwaClientReused": true,
+    "rulesEngineTested": true,
+    "leafletMapTested": true,
+    "fastapiCheckPassed": true
+  }
+}

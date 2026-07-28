@@ -1,0 +1,40 @@
+{
+  "sourceRepository": "gshan1209-cell/scrape_movie",
+  "sourceBranch": "main",
+  "sourceCommit": "f3e0b48074c91adab5b92879b011e9ace805581a",
+  "modulePath": "modules/movie-scraper",
+  "courseSlug": "movie-scraper-nextjs",
+  "status": "refactoring",
+  "targetDemoMode": "native",
+  "sourceRuntime": "nextjs",
+  "retirementPolicy": "archive-after-verification",
+  "retirementReady": false,
+  "sourceReadmeRedirected": false,
+  "legacyDeploymentRetired": false,
+  "importedFiles": [
+    "apps/web/src/lib/scrape-center.ts",
+    "apps/web/src/lib/scrapers/atmovies.ts",
+    "apps/web/src/lib/scrapers/types.ts",
+    "apps/web/src/app/api/movies/route.ts",
+    "apps/web/src/app/page.tsx",
+    "README.md",
+    "package.json"
+  ],
+  "excludedFiles": [
+    "node_modules",
+    ".next",
+    "apps/web/src/components/chat-bot.tsx (redesigned as guided teaching panel)",
+    "package-lock.json"
+  ],
+  "secrets": [],
+  "dataSources": [
+    "Scrape Center (https://ssr1.scrape.center)",
+    "@movies 開眼電影網 (https://www.atmovies.com.tw)"
+  ],
+  "verification": {
+    "snapshotTested": true,
+    "parserTested": true,
+    "allowlistEnforced": true,
+    "apiTested": true
+  }
+}

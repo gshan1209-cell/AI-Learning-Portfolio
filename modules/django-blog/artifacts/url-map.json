@@ -1,0 +1,22 @@
+{
+  "routes": [
+    {
+      "pattern": "admin/",
+      "name": "admin:index",
+      "view": "django.contrib.admin.site.urls",
+      "description": "Django 預設後台管理界面"
+    },
+    {
+      "pattern": "",
+      "name": "post_list",
+      "view": "article.views.index",
+      "description": "部落格首頁，展示所有文章列表與伺服器時間"
+    },
+    {
+      "pattern": "post/<slug:slug>/",
+      "name": "post_detail",
+      "view": "article.views.detail",
+      "description": "單篇文章詳細頁，找不到 slug 時回傳 404"
+    }
+  ]
+}

@@ -42,11 +42,25 @@
     "fallbackUrl": "https://github.com/gshan1209-cell/hw07"
   },
   "movie-scraper-nextjs": {
-    "mode": "external",
-    "title": "電影資料工作台",
-    "description": "待移植進 Monorepo，現階段僅供來源功能盤點。",
-    "url": "https://scrape-movie-web.vercel.app/",
+    "mode": "native",
+    "title": "電影資料擷取與來源治理工作台",
+    "description": "受控 HTML Parser、Allowlist 驗證、版本化 Snapshot 備援與 Data Provenance 治理。",
+    "url": "/applied-web-systems/movie-scraper",
     "fallbackUrl": "https://github.com/gshan1209-cell/scrape_movie"
+  },
+  "agri-weather-dashboard": {
+    "mode": "native",
+    "title": "農事天氣儀表板與氣象風險提醒",
+    "description": "整合 CWA OpenData、數據化農事風險規則 JSON 與 Leaflet 台灣地圖觀測。",
+    "url": "/applied-web-systems/agri-weather",
+    "fallbackUrl": "https://github.com/gshan1209-cell/scrape_weather"
+  },
+  "django-blog-basics": {
+    "mode": "native",
+    "title": "Django Blog MVT 與請求生命週期鏡像",
+    "description": "真實 Django 專案保存，搭配基於 Artifacts 的 Native MVT/ORM 請求生命週期唯讀教學鏡像。",
+    "url": "/applied-web-systems/django-blog",
+    "fallbackUrl": "https://github.com/gshan1209-cell/2026-DjangoBlog"
   },
   "ai-visual-story": {
     "mode": "iframe",

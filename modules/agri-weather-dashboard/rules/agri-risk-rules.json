@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-07-28T07:00:00Z",
+  "description": "農事氣象風險規則集，適用於台灣常見農作物情境診斷。",
+  "rules": [
+    {
+      "ruleId": "RULE-HEAT-01",
+      "version": "1.0.0",
+      "name": "極端高溫熱害風險",
+      "crops": ["rice", "vegetable", "fruit", "all"],
+      "severity": "high",
+      "threshold": { "temperatureMaxGte": 36 },
+      "userMessage": "預報出現 36°C 以上極端高溫，可能引發農作物熱傷害與水分蒸散過快。",
+      "recommendation": "建議於清晨或傍晚進行適度灌溉降溫，並加強遮陽網防護。",
+      "limitations": "本提醒僅供農事預防參考，請依現場作物實際生長狀況調整作業。",
+      "source": "農業試驗所作物高溫防護指南"
+    },
+    {
+      "ruleId": "RULE-COLD-01",
+      "version": "1.0.0",
+      "name": "低溫寒害寒流警告",
+      "crops": ["rice", "fruit", "all"],
+      "severity": "high",
+      "threshold": { "temperatureMinLte": 10 },
+      "userMessage": "預報出現 10°C 以下低溫，水稻抽穗期或果樹開花期防禦力較低。",
+      "recommendation": "水稻田可提高蓄水深度防寒，果園可覆蓋塑膠布或施用抗寒營養劑。",
+      "limitations": "寒害程度受持續時間與風速影響，建議密切關注氣象局低溫特報。",
+      "source": "氣象署低溫農業防禦參考"
+    },
+    {
+      "ruleId": "RULE-RAIN-01",
+      "version": "1.0.0",
+      "name": "高降雨機率與豪雨風險",
+      "crops": ["vegetable", "fruit", "all"],
+      "severity": "medium",
+      "threshold": { "precipitationProbabilityGte": 70 },
+      "userMessage": "降雨機率高達 70% 以上，濕氣過重容易引發病蟲害或澇害。",
+      "recommendation": "請先行清理田間排水溝渠，減少積水；果實達到採收標準者建議儘速採收。",
+      "limitations": "局部大雨可能隨地形變化，排水設施應維持隨時暢通。",
+      "source": "植物保護資訊系統"
+    },
+    {
+      "ruleId": "RULE-WIND-01",
+      "version": "1.0.0",
+      "name": "強風倒伏與摩擦傷風險",
+      "crops": ["rice", "fruit", "all"],
+      "severity": "medium",
+      "threshold": { "windSpeedGte": 8 },
+      "userMessage": "預報陣風強度達到 8 級以上，可能造成高莖作物倒伏或果實刮傷。",
+      "recommendation": "請加固果樹支柱與棚架，高莖作物必要時進行包紮防風。",
+      "limitations": "沿海地區需防範鹽風危害。",
+      "source": "農糧署強風災害預防手冊"
+    }
+  ]
+}

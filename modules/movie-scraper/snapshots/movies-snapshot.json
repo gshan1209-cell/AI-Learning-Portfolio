@@ -1,0 +1,63 @@
+{
+  "snapshotVersion": "1.0.0",
+  "generatedAt": "2026-07-28T07:00:00Z",
+  "dataHash": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0",
+  "totalMovies": 4,
+  "sources": ["scrape-center", "atmovies"],
+  "movies": [
+    {
+      "id": "1",
+      "title": "霸王別姬",
+      "cover": "https://p0.meituan.net/movie/v1.jpg",
+      "categories": ["劇情", "愛情"],
+      "region": "中國大陸",
+      "duration": "171 分鐘",
+      "releaseDate": "1993-01-01",
+      "score": "9.5",
+      "detailUrl": "https://ssr1.scrape.center/detail/1",
+      "source": "scrape-center",
+      "sourceLabel": "Scrape Center",
+      "dataMode": "snapshot"
+    },
+    {
+      "id": "2",
+      "title": "肖申克的救贖",
+      "cover": "https://p0.meituan.net/movie/v2.jpg",
+      "categories": ["劇情", "犯罪"],
+      "region": "美國",
+      "duration": "142 分鐘",
+      "releaseDate": "1994-09-10",
+      "score": "9.7",
+      "detailUrl": "https://ssr1.scrape.center/detail/2",
+      "source": "scrape-center",
+      "sourceLabel": "Scrape Center",
+      "dataMode": "snapshot"
+    },
+    {
+      "id": "faen11111111",
+      "title": "阿凡達：火與灰",
+      "cover": "https://www.atmovies.com.tw/film/poster/faen11111111.jpg",
+      "categories": ["本周新片"],
+      "duration": "190分",
+      "releaseDate": "2026/12/18",
+      "score": "9.2",
+      "detailUrl": "https://www.atmovies.com.tw/film/faen11111111/",
+      "source": "atmovies",
+      "sourceLabel": "@movies 開眼電影網",
+      "dataMode": "snapshot"
+    },
+    {
+      "id": "faen22222222",
+      "title": "捍衛戰士 3",
+      "cover": "https://www.atmovies.com.tw/film/poster/faen22222222.jpg",
+      "categories": ["本周新片"],
+      "duration": "130分",
+      "releaseDate": "2026/08/08",
+      "score": "8.8",
+      "detailUrl": "https://www.atmovies.com.tw/film/faen22222222/",
+      "source": "atmovies",
+      "sourceLabel": "@movies 開眼電影網",
+      "dataMode": "snapshot"
+    }
+  ]
+}

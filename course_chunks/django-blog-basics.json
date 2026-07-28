@@ -1,0 +1,90 @@
+{
+  "id": "django-blog-basics",
+  "title": "Django Blog 基礎、MVT 架構與請求生命週期",
+  "summary": "掌握 Python Django MVT 設計模式、ORM 與 Migration 版本控管、Admin 後台管理與安全防禦設定。",
+  "targetAudience": "希望學習 Python 全端開發、Django MVT 設計模式與請求處理生命週期的開發者。",
+  "estimatedMinutes": 45,
+  "sections": [
+    {
+      "step": 1,
+      "title": "1. 這個主題能做什麼",
+      "content": "Django 是 Python 世界最著名的 Full-stack Web 框架。本課程帶你掌握 Django 的 MVT (Model-View-Template) 架構、ORM 物件關係對映、自動化的 SQLite Migration 管理、Admin 管理後台，以及 DEBUG、SECRET_KEY、CSRF 與 Template Autoescape 等安全性設定。"
+    },
+    {
+      "step": 2,
+      "title": "2. 白話原理與生活比喻",
+      "content": "將 Django 網站運作比喻為一家「主題餐廳」：Model 是後廚的「菜單與食材庫存（資料庫）」，View 是「點餐服務員（商業邏輯與 HTTP 處理）」，Template 是「精美的擺盤樣式（HTML 視圖）」，而 URL Routing 就是餐廳入口的「桌號與菜單導覽告示牌」。"
+    },
+    {
+      "step": 3,
+      "title": "3. 可操作 Demo",
+      "content": "點擊下方連結前往 Native Django Blog 鏡像教學頁面，檢視模型 Schema、URL 路由匹配與 HTTP 請求生命週期步驟。",
+      "demoKey": "django-blog-basics",
+      "demoUrl": "/applied-web-systems/django-blog"
+    },
+    {
+      "step": 4,
+      "title": "4. 程式架構與關鍵程式碼",
+      "content": "關鍵程式包含 Post Model 唯一 Slug 與時區感知 View 處理：\n\n```python
+# article/models.py
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200, unique=True)
+    content = models.TextField()
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+# article/views.py
+def detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, "show.html", {'post': post, 'now': timezone.now()})
+```"
+    },
+    {
+      "step": 5,
+      "title": "5. 小測驗",
+      "quizzes": [
+        {
+          "id": "q1",
+          "question": "在 Django MVT 架構中，View 的主要職責是什麼？",
+          "options": [
+            "A. 負責接收 HTTP 請求、調用 Model ORM 查詢資料庫、並將資料傳遞給 Template 渲染後回傳 Response",
+            "B. 直接定義 SQL 表格結構與主鍵約束",
+            "C. 負責瀏覽器端的 CSS 樣式與動畫繪製",
+            "D. 用於取代 Python 的解譯器"
+          ],
+          "answerIndex": 0,
+          "explanation": "Django View 相當於 MVC 模式中的 Controller，負責接收請求、執行商業邏輯與 ORM 查詢並回傳 Response。"
+        },
+        {
+          "id": "q2",
+          "question": "在正式環境 (Production) 中部署 Django 專案時，關於 DEBUG 設定何者正確？",
+          "options": [
+            "A. 必須保持 DEBUG = True 方便看錯訊號",
+            "B. 必須將 DEBUG 設為 False，防止在發生 500 錯誤時洩漏敏感 Traceback 與環境變數",
+            "C. DEBUG 設定對安全性沒有任何影響",
+            "D. DEBUG = False 會導致 ORM 無法讀取資料"
+          ],
+          "answerIndex": 1,
+          "explanation": "正式環境務必關閉 DEBUG (DEBUG=False)，避免伺服器路徑、SQL 語句與金鑰在錯誤頁面中洩漏。"
+        },
+        {
+          "id": "q3",
+          "question": "當我們修改了 Django Model (例如將 slug 欄位加上 unique=True) 後，正確的處理步驟為何？",
+          "options": [
+            "A. 手動修改 db.sqlite3 二進制檔案",
+            "B. 執行 python manage.py makemigrations 生成遷移檔，再執行 python manage.py migrate 應用至資料庫",
+            "C. 直接刪除整個專案重新安裝",
+            "D. 重啟 Django 伺服器即可自動更新 Schema"
+          ],
+          "answerIndex": 1,
+          "explanation": "Django 使用 makemigrations 生成 Python 異動腳本，再透過 migrate 命令安全套用至資料庫 Schema。"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "title": "6. 延伸挑戰",
+      "content": "進入 modules/django-blog/python-reference/ 目錄，執行 python manage.py test 驗證單元測試，並試著新增一個 Category Model 與 ForeignKey 關聯。"
+    }
+  ]
+}

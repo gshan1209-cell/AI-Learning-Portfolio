@@ -1,0 +1,47 @@
+{
+  "sourceRepository": "gshan1209-cell/2026-DjangoBlog",
+  "sourceBranch": "main",
+  "sourceCommit": "eb900202f0d791951a26b6ea1767d15e69cde9ac",
+  "modulePath": "modules/django-blog",
+  "courseSlug": "django-blog-basics",
+  "status": "refactoring",
+  "targetDemoMode": "native",
+  "sourceRuntime": "python-django",
+  "retirementPolicy": "archive-after-verification",
+  "retirementReady": false,
+  "sourceReadmeRedirected": false,
+  "legacyDeploymentRetired": false,
+  "importedFiles": [
+    "manage.py",
+    "DjangoBlog/settings.py",
+    "DjangoBlog/urls.py",
+    "DjangoBlog/wsgi.py",
+    "DjangoBlog/asgi.py",
+    "article/models.py",
+    "article/views.py",
+    "article/admin.py",
+    "article/apps.py",
+    "templates/index.html",
+    "templates/show.html",
+    "requirements.txt",
+    "README.md"
+  ],
+  "excludedFiles": [
+    ".git",
+    "*.sqlite3 (excluded per security policy, replaced by controlled fixtures)",
+    ".venv",
+    "__pycache__"
+  ],
+  "secrets": [
+    "SECRET_KEY (read from environment, defaults to safe dev key)"
+  ],
+  "dataSources": [
+    "Django ORM / SQLite"
+  ],
+  "verification": {
+    "djangoCheckPassed": true,
+    "makemigrationsCheckPassed": true,
+    "djangoTestPassed": true,
+    "nativeSchemaArtifactsExported": true
+  }
+}
