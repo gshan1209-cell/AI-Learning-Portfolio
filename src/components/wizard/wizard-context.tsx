@@ -30,9 +30,13 @@ interface WizardContextType {
   prevStep: () => void;
   goToStep: (index: number) => void;
   clearSteps: () => void;
+  completedCourses: string[];
+  markCourseCompleted: (title: string) => void;
+  isCourseCompleted: (title: string) => boolean;
 }
 
 const STORAGE_KEY = "alp_wizard_mode_enabled";
+const COMPLETED_KEY = "alp_wizard_completed_courses";
 
 const WizardContext = createContext<WizardContextType | undefined>(undefined);
 
@@ -43,12 +47,17 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
   const [activeHint, setActiveHint] = useState<string | null>(null);
   const [steps, setStepsState] = useState<WizardStep[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+  const [completedCourses, setCompletedCourses] = useState<string[]>([]);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved !== null) {
         setEnabled(saved === "true");
+      }
+      const savedCompleted = localStorage.getItem(COMPLETED_KEY);
+      if (savedCompleted) {
+        setCompletedCourses(JSON.parse(savedCompleted));
       }
     } catch {
       // Ignore localStorage errors
@@ -66,6 +75,21 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
       return next;
     });
   };
+
+  const markCourseCompleted = (title: string) => {
+    setCompletedCourses((prev) => {
+      if (prev.includes(title)) return prev;
+      const next = [...prev, title];
+      try {
+        localStorage.setItem(COMPLETED_KEY, JSON.stringify(next));
+      } catch {
+        // Ignore write error
+      }
+      return next;
+    });
+  };
+
+  const isCourseCompleted = (title: string) => completedCourses.includes(title);
 
   const setSteps = (newSteps: WizardStep[]) => {
     setStepsState(newSteps);
@@ -109,6 +133,9 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
         prevStep,
         goToStep,
         clearSteps,
+        completedCourses,
+        markCourseCompleted,
+        isCourseCompleted,
       }}
     >
       {children}

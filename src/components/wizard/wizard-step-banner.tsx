@@ -18,11 +18,14 @@ export default function WizardStepBanner({ initialSteps, pageTitle }: WizardStep
     prevStep,
     goToStep,
     setCompanionOpen,
+    markCourseCompleted,
+    isCourseCompleted,
   } = useWizard();
 
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [hoveredStepIndex, setHoveredStepIndex] = useState<number | null>(null);
   const [showInlineSnippet, setShowInlineSnippet] = useState(true);
+  const [celebrated, setCelebrated] = useState(false);
 
   useEffect(() => {
     if (initialSteps && initialSteps.length > 0) {
@@ -34,6 +37,22 @@ export default function WizardStepBanner({ initialSteps, pageTitle }: WizardStep
 
   const currentStep = steps[currentStepIndex];
   const hoveredStep = hoveredStepIndex !== null ? steps[hoveredStepIndex] : null;
+  const isFinished = isCourseCompleted(pageTitle || "單元關卡");
+
+  const handleNextClick = () => {
+    if (currentStepIndex >= steps.length - 1) {
+      markCourseCompleted(pageTitle || "單元關卡");
+      setCelebrated(true);
+      return;
+    }
+    nextStep();
+    const nextTarget = steps[currentStepIndex + 1]?.targetElementId;
+    if (nextTarget) {
+      setTimeout(() => {
+        document.getElementById(nextTarget)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
 
   return (
     <div className="my-6 rounded-3xl border border-indigo-200/80 bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 p-6 text-white shadow-xl relative overflow-hidden">
@@ -162,19 +181,18 @@ export default function WizardStepBanner({ initialSteps, pageTitle }: WizardStep
                   ← 上一步
                 </button>
                 <button
-                  onClick={() => {
-                    nextStep();
-                    const nextTarget = steps[currentStepIndex + 1]?.targetElementId;
-                    if (nextTarget) {
-                      setTimeout(() => {
-                        document.getElementById(nextTarget)?.scrollIntoView({ behavior: "smooth" });
-                      }, 100);
-                    }
-                  }}
-                  disabled={currentStepIndex >= steps.length - 1}
-                  className="rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 px-5 py-2 text-xs font-black text-slate-950 shadow-md hover:from-amber-300 hover:to-amber-400 disabled:opacity-30"
+                  onClick={handleNextClick}
+                  className={`rounded-xl px-5 py-2 text-xs font-black shadow-md transition-all ${
+                    isFinished || celebrated
+                      ? "bg-emerald-400 text-slate-950 hover:bg-emerald-300 ring-2 ring-emerald-300/60"
+                      : "bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 hover:from-amber-300 hover:to-amber-400"
+                  }`}
                 >
-                  {currentStepIndex >= steps.length - 1 ? "🎉 完成本單元" : "下一步 →"}
+                  {isFinished || celebrated
+                    ? "🏆 單元已通關"
+                    : currentStepIndex >= steps.length - 1
+                    ? "🎉 完成本單元"
+                    : "下一步 →"}
                 </button>
               </div>
             </div>

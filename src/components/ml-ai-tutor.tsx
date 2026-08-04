@@ -76,6 +76,23 @@ export default function MlAiTutor({
     void askTutor(input);
   }
 
+  function exportNotes() {
+    if (messages.length === 0) return;
+    const dateStr = new Date().toLocaleDateString("zh-TW");
+    let content = `# ${algorithmName} AI 學習對話筆記\n\n- **對話日期**：${dateStr}\n- **演算法**：${algorithmName} (${algorithmSlug})\n\n---\n\n`;
+    messages.forEach((msg) => {
+      content += `### ${msg.role === "user" ? "👤 提問" : "🤖 AI 助教"}\n\n${msg.content}\n\n`;
+    });
+
+    const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${algorithmSlug}-ai-learning-notes.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft md:p-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -86,9 +103,20 @@ export default function MlAiTutor({
             AI 只取得目前教材與最近六則對話，不需要姓名、Email 或帳號。未設定 Gemini Secret 時會自動使用固定教材回答。
           </p>
         </div>
-        <span className={`rounded-full px-3 py-2 text-xs font-black ${metadata?.mode === "live" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"}`}>
-          {metadata?.mode === "live" ? "LIVE AI" : "SAFE FALLBACK READY"}
-        </span>
+        <div className="flex items-center gap-2">
+          {messages.length > 0 && (
+            <button
+              onClick={exportNotes}
+              className="rounded-full border border-indigo-200 bg-indigo-50 px-3.5 py-1.5 text-xs font-bold text-indigo-700 hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-1 shadow-sm"
+              title="將目前的對話匯出為 Markdown 筆記"
+            >
+              📥 匯出 Markdown 筆記
+            </button>
+          )}
+          <span className={`rounded-full px-3 py-2 text-xs font-black ${metadata?.mode === "live" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"}`}>
+            {metadata?.mode === "live" ? "LIVE AI" : "SAFE FALLBACK READY"}
+          </span>
+        </div>
       </div>
 
       <div className="mt-6 min-h-40 space-y-3 rounded-2xl bg-slate-50 p-4" aria-live="polite">

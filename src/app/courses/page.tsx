@@ -1,4 +1,5 @@
 import CourseCard from "@/components/course-card";
+import LearnerProgressHub from "@/components/learner-progress-hub";
 import { getAllCourses, getCourseCategories } from "@/lib/course-repository";
 
 export const metadata = { title: "課程目錄" };
@@ -14,6 +15,8 @@ export default function CoursesPage({ searchParams }: { searchParams: { q?: stri
       <p className="mt-4 max-w-3xl leading-8 text-slate-600">
         「可學習」代表已完成六段式轉製；「待轉製」仍保留來源 Repository，後續將依序補上教學內容與 Demo Adapter。
       </p>
+
+      <LearnerProgressHub totalCoursesCount={courses.length} />
 
       <form className="mt-8 grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-soft md:grid-cols-[1fr_240px_auto]">
         <input name="q" defaultValue={searchParams.q} placeholder="搜尋課程、技術或 Repository" className="rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-brand" />

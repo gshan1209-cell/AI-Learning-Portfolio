@@ -12,3 +12,4 @@ ai_usage_logs/*.jsonl
 __pycache__/
 *.pyc
 tsconfig.tsbuildinfo
+.vercel
