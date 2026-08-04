@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoAdapter from "@/components/demo-adapter";
+import WizardStepBanner from "@/components/wizard/wizard-step-banner";
 import { getAllCourses, getCourseBySlug } from "@/lib/course-repository";
 
 export function generateStaticParams() {
@@ -11,9 +12,60 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
   const course = getCourseBySlug(params.slug);
   if (!course || course.status !== "published") notFound();
 
+  const wizardSteps = [
+    {
+      id: 1,
+      title: "學習目標與簡介",
+      description: course.subtitle,
+      actionText: "閱讀「學完你會知道」與使用技術",
+      targetElementId: "section-objectives",
+      previewSnippet: course.summary,
+      previewBullets: course.learningObjectives,
+    },
+    ...(course.demo || course.source.demoUrl
+      ? [
+          {
+            id: 2,
+            title: "動手操作 Demo",
+            description: "親自體驗本單元的互動展示與程式實作。",
+            actionText: "操作「動手操作看看」區塊",
+            targetElementId: "section-demo",
+            previewSnippet: `使用 Mode: ${course.demo?.mode || "native"} 展示`,
+            previewBullets: ["隨機資料生成", "即時參數調整與結果對照"],
+          },
+        ]
+      : []),
+    ...course.sections.map((section, idx) => ({
+      id: (course.demo || course.source.demoUrl ? 3 : 2) + idx,
+      title: section.title,
+      description: section.summary,
+      actionText: `閱讀 STEP ${idx + 1} 重點細節`,
+      targetElementId: `section-step-${section.id}`,
+      previewSnippet: section.summary,
+      previewBullets: section.bullets || (section.code ? ["包含程式碼實作示範"] : undefined),
+    })),
+    ...(course.quiz
+      ? [
+          {
+            id:
+              (course.demo || course.source.demoUrl ? 3 : 2) +
+              course.sections.length,
+            title: "課後想一想測驗",
+            description: "回答複習測驗並對照解答。",
+            actionText: "點擊「課後想一想」解答對照",
+            targetElementId: "section-quiz",
+            previewSnippet: course.quiz.question,
+            previewBullets: course.quiz.options,
+          },
+        ]
+      : []),
+  ];
+
   return (
     <main className="mx-auto max-w-5xl px-5 py-14">
       <Link href="/courses" className="text-sm font-bold text-brand hover:underline">← 回到課程目錄</Link>
+
+      <WizardStepBanner initialSteps={wizardSteps} pageTitle={`${course.title} 學習指引`} />
 
       <header className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft md:p-12">
         <div className="flex flex-wrap gap-2 text-xs font-bold">
@@ -31,7 +83,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
         </div>
       </header>
 
-      <section className="mt-10 grid gap-5 md:grid-cols-2">
+      <section id="section-objectives" className="mt-10 grid gap-5 md:grid-cols-2 scroll-mt-20">
         <div className="rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-xl font-black text-ink">學完你會知道</h2>
           <ul className="mt-4 space-y-3 text-slate-600">
@@ -47,7 +99,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
       </section>
 
       {(course.demo || course.source.demoUrl) && (
-        <section className="mt-10">
+        <section id="section-demo" className="mt-10 scroll-mt-20">
           <div className="mb-5">
             <p className="text-sm font-black text-brand">INTERACTIVE DEMO</p>
             <h2 className="mt-1 text-3xl font-black text-ink">動手操作看看</h2>
@@ -59,7 +111,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
 
       <div className="mt-10 space-y-6">
         {course.sections.map((section, index) => (
-          <section key={section.id} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-soft md:p-9">
+          <section id={`section-step-${section.id}`} key={section.id} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-soft md:p-9 scroll-mt-20">
             <p className="text-sm font-black text-brand">STEP {String(index + 1).padStart(2, "0")}</p>
             <h2 className="mt-2 text-2xl font-black text-ink">{section.title}</h2>
             <p className="mt-4 leading-8 text-slate-600">{section.summary}</p>
@@ -74,7 +126,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
       </div>
 
       {course.quiz && (
-        <section className="mt-10 rounded-3xl bg-ink p-8 text-white">
+        <section id="section-quiz" className="mt-10 rounded-3xl bg-ink p-8 text-white scroll-mt-20">
           <p className="text-sm font-bold text-emerald-300">課後想一想</p>
           <h2 className="mt-2 text-2xl font-black">{course.quiz.question}</h2>
           <ol className="mt-6 space-y-3">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import WizardToggle from "@/components/wizard/wizard-toggle";
 
 export default function SiteHeader() {
   return (
@@ -15,6 +16,7 @@ export default function SiteHeader() {
           <a href="https://github.com/gshan1209-cell/AI-Learning-Portfolio" target="_blank" rel="noreferrer" className="hover:text-brand">
             GitHub
           </a>
+          <WizardToggle />
         </nav>
       </div>
     </header>

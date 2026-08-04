@@ -30,6 +30,7 @@
 - [x] Prompt Registry、Prompt Versioning 與中央 AI Gateway 基礎
 - [x] Token／Cost Ledger 合約與 Prisma Schema 預留
 - [x] `/ai-governance` 唯讀 Prompt／Token／成本治理儀表板
+- [x] 精靈模式 (Wizard Mode) 全站引導機制：`WizardContext`、`WizardCompanion` 隨頁學習小精靈、`WizardStepBanner` 關卡引導與 `WizardToggle` 開關控制
 
 ## ALP-MIG-001｜L4 線性迴歸
 

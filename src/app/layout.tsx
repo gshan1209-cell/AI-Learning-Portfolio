@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import SiteHeader from "@/components/site-header";
+import { WizardProvider } from "@/components/wizard/wizard-context";
+import WizardCompanion from "@/components/wizard/wizard-companion";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,13 +21,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="zh-TW">
       <body>
-        <SiteHeader />
-        {children}
-        <footer className="mt-20 border-t border-slate-200 bg-white/70">
-          <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-slate-500">
-            AI Learning Portfolio — 從作業開始，把每一次練習變成能分享的知識。
-          </div>
-        </footer>
+        <WizardProvider>
+          <SiteHeader />
+          {children}
+          <footer className="mt-20 border-t border-slate-200 bg-white/70">
+            <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-slate-500">
+              AI Learning Portfolio — 從作業開始，把每一次練習變成能分享的知識。
+            </div>
+          </footer>
+          <WizardCompanion />
+        </WizardProvider>
       </body>
     </html>
   );

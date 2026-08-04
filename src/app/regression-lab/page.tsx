@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CrispDmTimeline from "@/components/ml-lab/crisp-dm-timeline";
+import WizardStepBanner from "@/components/wizard/wizard-step-banner";
 
 export const metadata = {
   title: "Regression Lab | 機器學習迴歸實驗室",
@@ -31,8 +32,31 @@ const LAB_MODULES = [
 ];
 
 export default function RegressionLabPage() {
+  const labSteps = [
+    {
+      id: 1,
+      title: "瀏覽 CRISP-DM 專案方法論",
+      description: "查看標準機器學習發布流程的 6 個核心步驟。",
+      actionText: "展開 CRISP-DM Timeline 觀看說明",
+    },
+    {
+      id: 2,
+      title: "選擇實驗主題",
+      description: "可選擇台積電股價迴歸、50 Startups 利潤預測或波士頓房價特徵選擇。",
+      actionText: "點擊下方模組卡片的「進入實驗室」按鈕",
+    },
+    {
+      id: 3,
+      title: "調整參數與測試推論",
+      description: "在 Native Demo 頁面實時動態調整特徵與數據，觀察預測誤差變化。",
+      actionText: "在實驗室控制項中調整參數並對照實體數據",
+    },
+  ];
+
   return (
     <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
+      <WizardStepBanner initialSteps={labSteps} pageTitle="迴歸實驗室實作指引" />
+
       {/* Header */}
       <header className="rounded-3xl bg-slate-900 p-8 text-white shadow-xl md:p-12">
         <span className="rounded-full bg-emerald-500/20 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-emerald-400">
