@@ -1,3 +1,4 @@
+import { GET as summaryImageGet } from "../src/app/api/courses/[slug]/summary-image/route";
 import {
   escapeSvgText,
   getCourseSummaryHighlights,
@@ -41,7 +42,7 @@ function createCourse(overrides: Partial<Course> = {}): Course {
   };
 }
 
-function runCourseSummaryTests(): void {
+async function runCourseSummaryTests(): Promise<void> {
   console.log("=== Course Summary Image Test Suite ===\n");
 
   assert(
@@ -88,13 +89,37 @@ function runCourseSummaryTests(): void {
   );
   assert(svg.includes("理解摘要圖用途"), "contains learning highlights");
 
+  const routeResponse = summaryImageGet(
+    new Request(
+      "http://localhost/api/courses/linear-regression-for-beginners/summary-image",
+    ),
+    { params: { slug: "linear-regression-for-beginners" } },
+  );
+  assert(routeResponse.status === 200, "summary image route returns 200");
+  assert(
+    routeResponse.headers.get("content-type")?.includes("image/svg+xml") ===
+      true,
+    "summary image route returns SVG",
+  );
+  assert(
+    (await routeResponse.text()).includes("用一條線看懂資料趨勢"),
+    "summary image route renders course content",
+  );
+
+  const missingRouteResponse = summaryImageGet(
+    new Request("http://localhost/api/courses/missing/summary-image"),
+    { params: { slug: "missing" } },
+  );
+  assert(
+    missingRouteResponse.status === 404,
+    "summary image route returns 404 for a missing course",
+  );
+
   console.log(`\n=== Test Summary: ${passed} Passed, ${failed} Failed ===`);
 }
 
-try {
-  runCourseSummaryTests();
-} catch (error) {
+runCourseSummaryTests().catch((error) => {
   console.error(error);
   console.error(`\n=== Test Summary: ${passed} Passed, ${failed} Failed ===`);
   process.exit(1);
-}
+});
