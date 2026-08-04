@@ -45,6 +45,7 @@ export interface Course {
   durationMinutes: number;
   status: CourseStatus;
   featured?: boolean;
+  coverImage?: string;
   tags: string[];
   learningObjectives: string[];
   source: CourseSource;
