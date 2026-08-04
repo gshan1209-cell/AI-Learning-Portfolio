@@ -2,6 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { GET as summaryImageGet } from "../src/app/api/courses/[slug]/summary-image/route";
 import {
+  COURSE_SUMMARY_CARD_CONTENT,
+  getCourseSummaryCardContent,
+} from "../src/lib/course-summary-card-content";
+import { getAllCourses } from "../src/lib/course-repository";
+import {
   escapeSvgText,
   getCourseSummaryHighlights,
   renderCourseSummarySvg,
@@ -80,16 +85,59 @@ async function runCourseSummaryTests(): Promise<void> {
     "falls back to tags",
   );
 
-  const svg = renderCourseSummarySvg(course);
+  const registeredCourses = getAllCourses();
+  assert(registeredCourses.length === 14, "course registry contains 14 courses");
   assert(
-    svg.includes('viewBox="0 0 1200 1600"'),
-    "uses a 1200x1600 viewBox",
+    Object.keys(COURSE_SUMMARY_CARD_CONTENT).length === 14,
+    "summary card registry contains 14 dedicated cards",
   );
   assert(
-    svg.includes("AI &amp; 資料 &lt;入門&gt;"),
-    "contains an escaped title",
+    registeredCourses.every((registeredCourse) =>
+      Boolean(getCourseSummaryCardContent(registeredCourse)),
+    ),
+    "every registered course has dedicated summary card content",
   );
-  assert(svg.includes("理解摘要圖用途"), "contains learning highlights");
+
+  const linearCourse = registeredCourses.find(
+    (registeredCourse) =>
+      registeredCourse.slug === "linear-regression-for-beginners",
+  );
+  assert(Boolean(linearCourse), "linear regression course exists");
+  const linearCard = getCourseSummaryCardContent(linearCourse!);
+  assert(
+    linearCard.title === "什麼是線性迴歸？",
+    "linear regression card has its dedicated title",
+  );
+  assert(linearCard.process.length === 3, "card has three process steps");
+  assert(linearCard.capabilities.length === 3, "card has three capabilities");
+  assert(linearCard.examples.length === 3, "card has three examples");
+  assert(linearCard.learnings.length === 4, "card has four learning points");
+  assert(linearCard.tools.length === 4, "card has four tools");
+
+  const svg = renderCourseSummarySvg(linearCourse!);
+  assert(
+    svg.includes('viewBox="0 0 1200 2133"'),
+    "uses a 1200x2133 vertical viewBox",
+  );
+  assert(svg.includes("什麼是線性迴歸？"), "contains the dedicated card title");
+  assert(svg.includes("1 運作流程"), "contains the process panel");
+  assert(svg.includes("2 核心能力"), "contains the capability panel");
+  assert(svg.includes("3 重點觀念"), "contains the key concept panel");
+  assert(svg.includes("4 生活中的例子"), "contains the examples panel");
+  assert(svg.includes("5 這堂課你會學到"), "contains the learning panel");
+  assert(svg.includes("6 常用工具"), "contains the tools panel");
+  assert(svg.includes("AI 助教"), "contains the shared AI tutor mascot");
+  assert(!svg.includes("drive.google.com"), "does not depend on Google Drive URLs");
+
+  const fallbackSvg = renderCourseSummarySvg(course);
+  assert(
+    fallbackSvg.includes("AI &amp; 資料 &lt;入門&gt;"),
+    "fallback card contains an escaped course title",
+  );
+  assert(
+    fallbackSvg.includes("理解摘要圖用途"),
+    "fallback card contains learning highlights",
+  );
 
   const routeResponse = summaryImageGet(
     new Request(
@@ -104,8 +152,8 @@ async function runCourseSummaryTests(): Promise<void> {
     "summary image route returns SVG",
   );
   assert(
-    (await routeResponse.text()).includes("用一條線看懂資料趨勢"),
-    "summary image route renders course content",
+    (await routeResponse.text()).includes("什麼是線性迴歸？"),
+    "summary image route renders dedicated infographic content",
   );
 
   const missingRouteResponse = summaryImageGet(
