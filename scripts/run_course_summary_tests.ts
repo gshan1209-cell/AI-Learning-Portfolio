@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { GET as summaryImageGet } from "../src/app/api/courses/[slug]/summary-image/route";
 import {
   escapeSvgText,
@@ -113,6 +115,31 @@ async function runCourseSummaryTests(): Promise<void> {
   assert(
     missingRouteResponse.status === 404,
     "summary image route returns 404 for a missing course",
+  );
+
+  const courseCardPath = path.join(
+    process.cwd(),
+    "src/components/course-card.tsx",
+  );
+  const courseCardSource = fs.readFileSync(courseCardPath, "utf8");
+  assert(
+    courseCardSource.includes("重點摘要"),
+    "course card shows the summary label",
+  );
+  assert(
+    courseCardSource.includes("/courses/${course.slug}/summary"),
+    "course card links to the course summary page",
+  );
+
+  const summaryPagePath = path.join(
+    process.cwd(),
+    "src/app/courses/[slug]/summary/page.tsx",
+  );
+  assert(fs.existsSync(summaryPagePath), "course summary page exists");
+  const summaryPageSource = fs.readFileSync(summaryPagePath, "utf8");
+  assert(
+    summaryPageSource.includes("/summary-image"),
+    "course summary page displays the SVG image route",
   );
 
   console.log(`\n=== Test Summary: ${passed} Passed, ${failed} Failed ===`);
