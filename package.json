@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx tsx scripts/run_tests.ts && npx tsx scripts/run_web_lab_tests.ts",
+    "test": "npx tsx scripts/run_tests.ts && npx tsx scripts/run_web_lab_tests.ts && npx tsx scripts/run_course_summary_tests.ts",
     "courses:manifest": "node scripts/build_course_manifest.mjs",
     "repositories:sync": "node scripts/sync_repository_registry.mjs",
     "prisma:generate": "prisma generate",
@@ -29,7 +29,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
-    "postcss": "^8",
+    "postcss": "^8.4.21",
     "prisma": "^6.11.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
