@@ -1,6 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Course, CourseAssets, CourseDemo, CourseLevel, CourseStatus } from "@/types/course";
+import type {
+  Course,
+  CourseAssets,
+  CourseDemo,
+  CourseLevel,
+  CourseStatus,
+} from "@/types/course";
 
 const COURSE_DIRECTORIES = ["course_chunks", "course_chunks_archive"];
 const DEMO_REGISTRY_PATH = "course_demo_registry/demo_registry.json";
@@ -12,6 +18,12 @@ function isCourse(value: unknown): value is Course {
   return Boolean(candidate.id && candidate.slug && candidate.title && candidate.source);
 }
 
+function compareCourseChunkNames(left: string, right: string): number {
+  if (left === "course_0001.json") return -1;
+  if (right === "course_0001.json") return 1;
+  return left.localeCompare(right);
+}
+
 function readDirectory(directory: string): Course[] {
   const absoluteDirectory = path.join(process.cwd(), directory);
   if (!fs.existsSync(absoluteDirectory)) return [];
@@ -19,6 +31,7 @@ function readDirectory(directory: string): Course[] {
   return fs
     .readdirSync(absoluteDirectory)
     .filter((fileName) => fileName.endsWith(".json"))
+    .sort(compareCourseChunkNames)
     .flatMap((fileName) => {
       const filePath = path.join(absoluteDirectory, fileName);
       try {

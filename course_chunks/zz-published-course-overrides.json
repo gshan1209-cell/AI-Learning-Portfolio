@@ -1,0 +1,541 @@
+[
+  {
+    "id": "course-ml-top10",
+    "slug": "ml-top-10-algorithms",
+    "title": "機器學習前十大演算法",
+    "subtitle": "用任務、圖解與測驗建立演算法選擇直覺",
+    "summary": "把線性迴歸、邏輯迴歸、決策樹、隨機森林、SVM、KNN、K-Means、PCA、Naive Bayes 與梯度下降整理成可搜尋、可收藏、可測驗的入門學習地圖。",
+    "category": "機器學習入門",
+    "level": "beginner",
+    "durationMinutes": 120,
+    "status": "published",
+    "featured": true,
+    "coverImage": "/images/courses/ml-top-10-algorithms.png",
+    "tags": ["Machine Learning", "Next.js", "Quiz", "AI Tutor", "Visualization"],
+    "learningObjectives": [
+      "依照預測、分類、分群與降維任務選擇合適演算法",
+      "用白話圖解理解十種演算法的輸入、輸出與限制",
+      "透過三十題測驗與解析檢查核心觀念",
+      "辨識模型比較、AI 助教與成本治理的基本邊界"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/machinelearningHw05",
+      "repositoryUrl": "https://github.com/gshan1209-cell/machinelearningHw05",
+      "demoUrl": "/ml-algorithms",
+      "originalPath": "modules/ml-top-10/data/algorithms"
+    },
+    "sections": [
+      {
+        "id": "task-map",
+        "title": "1. 先看任務，再選演算法",
+        "summary": "演算法不是越複雜越好。先判斷目標是預測數值、判斷類別、找出群組、降低維度，才能縮小選擇範圍。",
+        "bullets": ["數值預測：線性迴歸", "分類：邏輯迴歸、決策樹、隨機森林、SVM、KNN、Naive Bayes", "探索結構：K-Means、PCA", "模型學習過程：梯度下降"]
+      },
+      {
+        "id": "families",
+        "title": "2. 用家族概念記住十種方法",
+        "summary": "線性模型重視可解釋性；樹模型用規則切分；距離模型看鄰近程度；機率模型比較可能性；分群與降維則用來探索未標記資料。"
+      },
+      {
+        "id": "demo",
+        "title": "3. 可操作的十大演算法學習站",
+        "summary": "進入站內演算法目錄，依分類、難度與關鍵字篩選主題，查看 React／SVG 視覺化、收藏內容並完成每個主題的測驗。",
+        "bullets": ["觀察同一資料在不同演算法下的決策方式", "完成測驗後對照逐題解析", "用學習進度與收藏清單安排複習"]
+      },
+      {
+        "id": "ai-governance",
+        "title": "4. AI 助教不是答案機器",
+        "summary": "AI Tutor 透過中央 Prompt Registry、輸入限制、結構化輸出與失敗備援提供提示；未設定 Provider 或服務異常時，教材與測驗仍可獨立使用。"
+      },
+      {
+        "id": "challenge",
+        "title": "5. 延伸挑戰：建立自己的選模流程",
+        "summary": "挑一個生活問題，寫下目標欄位、資料是否有標籤、是否需要解釋，再從十種演算法中選出基準模型與第二候選模型。"
+      }
+    ],
+    "quiz": {
+      "question": "沒有標籤的顧客資料想先找出自然群組，最適合先嘗試哪一種方法？",
+      "options": ["線性迴歸", "K-Means", "邏輯迴歸", "Naive Bayes"],
+      "answerIndex": 1,
+      "explanation": "K-Means 是非監督式分群方法，可依資料點距離找出自然群組；其餘選項通常需要目標值或類別標籤。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-stock-manim",
+    "slug": "stock-manim-animation",
+    "title": "台股技術分析動畫",
+    "subtitle": "用九個 Manim 場景看懂圖表、指標與回測風險",
+    "summary": "從台股市場規則、K 線、均線、成交量、支撐壓力、趨勢突破到 RSI、MACD、布林通道與最大回撤，學習如何把金融概念轉成可重建的教學動畫。",
+    "category": "視覺化教學",
+    "level": "beginner",
+    "durationMinutes": 80,
+    "status": "published",
+    "coverImage": "/images/courses/stock-manim-animation.png",
+    "tags": ["Manim", "Stock", "Animation", "Backtesting", "Risk"],
+    "learningObjectives": [
+      "看懂 K 線 OHLC、台股紅漲綠跌與成交量",
+      "理解 MA5、MA20、MA60 與支撐壓力的教學用途",
+      "辨識突破、假突破、技術指標與回測的限制",
+      "掌握 Manim 場景、共用元件與批次渲染架構"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/L12",
+      "repositoryUrl": "https://github.com/gshan1209-cell/L12",
+      "demoUrl": "/learning-labs/stock-manim",
+      "originalPath": "modules/stock-manim-animation/python-manim"
+    },
+    "sections": [
+      {
+        "id": "story-map",
+        "title": "1. 九幕動畫是一條完整學習路徑",
+        "summary": "課程由市場規則開始，依序進入 K 線、均線、量價、支撐壓力、趨勢突破、指標與回測，避免只背單一訊號。",
+        "bullets": ["Scene 00–02：學習地圖、市場規則、K 線", "Scene 03–06：均線、量價、支撐壓力、突破", "Scene 07–08：指標與回測風險"]
+      },
+      {
+        "id": "visual-language",
+        "title": "2. 圖表必須服務觀念",
+        "summary": "動畫中的顏色、座標、標籤與轉場要讓觀眾看懂因果關係，而不是只追求華麗效果；台股紅漲綠跌也必須與其他市場習慣區分。"
+      },
+      {
+        "id": "demo",
+        "title": "3. 場景導覽與渲染實驗室",
+        "summary": "站內實驗室列出九個場景、對應原始碼與單場景／批次渲染指令，讓學習者先理解腳本結構，再進入 Manim、FFmpeg 與中文字體環境。"
+      },
+      {
+        "id": "architecture",
+        "title": "4. 共用層讓九幕保持一致",
+        "summary": "theme、text、layout、animation、chart 與 sample data 被拆成共用模組，場景只負責敘事順序，降低重複程式與視覺漂移。",
+        "code": "manim -pql scenes/scene_02_candlestick_basics.py CandlestickBasics\npython render_all.py"
+      },
+      {
+        "id": "risk",
+        "title": "5. 技術指標不是獲利保證",
+        "summary": "回測可能受到過度擬合、交易成本、資料偏誤與未來資訊洩漏影響；最大回撤與失敗案例必須和報酬一起呈現，本課程不構成投資建議。"
+      }
+    ],
+    "quiz": {
+      "question": "回測結果很好時，下一步最合理的做法是什麼？",
+      "options": ["直接保證未來獲利", "忽略交易成本", "檢查資料洩漏、過度擬合與最大回撤", "只保留成功交易"],
+      "answerIndex": 2,
+      "explanation": "回測是歷史情境測試，不是保證；必須檢查資料洩漏、過度擬合、成本與風險指標。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-boston-feature-selection",
+    "slug": "boston-feature-selection",
+    "title": "Boston Housing 九種特徵選擇方法與數據倫理實戰",
+    "subtitle": "比較 Filter、Wrapper、Embedded 方法與 Ethical Mode",
+    "summary": "比較 Pearson、Spearman、F-test、RFE、SFS、SBS、Lasso 與 Random Forest 等九種特徵選擇方法，並學習爭議欄位、歷史資料集與模型治理。",
+    "category": "特徵工程與倫理",
+    "level": "intermediate",
+    "durationMinutes": 75,
+    "status": "published",
+    "featured": true,
+    "coverImage": "/images/courses/boston-feature-selection.png",
+    "tags": ["Feature Selection", "Boston Housing", "RFE", "Lasso", "Data Ethics"],
+    "learningObjectives": [
+      "分辨 Filter、Wrapper 與 Embedded 三類特徵選擇方法",
+      "比較不同 k 值下的模型表現與過擬合風險",
+      "使用 Pearson 與特徵重要性理解變數關係",
+      "理解 Boston Housing 爭議欄位與 Ethical Mode 的治理目的"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/hw07",
+      "repositoryUrl": "https://github.com/gshan1209-cell/hw07",
+      "demoUrl": "/regression-lab/feature-selection",
+      "originalPath": "modules/feature-selection"
+    },
+    "sections": [
+      {
+        "id": "families",
+        "title": "1. 三大方法家族",
+        "summary": "Filter 先看統計關係，Wrapper 反覆訓練模型搜尋子集，Embedded 則在模型訓練中同時完成選擇。",
+        "bullets": ["Filter：Pearson、Spearman、F-test", "Wrapper：RFE、SFS、SBS", "Embedded：Lasso L1、Random Forest 重要性"]
+      },
+      {
+        "id": "sweet-spot",
+        "title": "2. 特徵不是越多越好",
+        "summary": "加入更多欄位可能提升訓練分數，也可能帶來雜訊、共線性與過擬合；應比較 k=1..13 的驗證結果尋找合理平衡。"
+      },
+      {
+        "id": "demo",
+        "title": "3. 九種方法與即時 Pearson Demo",
+        "summary": "在 Regression Lab 切換方法與 k 值，查看特徵排名、R²、MSE 與交集，並用即時雙變數計算器理解相關係數。"
+      },
+      {
+        "id": "ethics",
+        "title": "4. Ethical Mode 是必要的歷史脈絡",
+        "summary": "Boston Housing 含有具爭議的 B 欄位。系統預設排除並提示 LSTAT 等代理風險；歷史重現模式必須明確確認後才能開啟。"
+      },
+      {
+        "id": "challenge",
+        "title": "5. 延伸挑戰：線性關係與非線性重要性",
+        "summary": "比較 Pearson 與 Random Forest 選出的前五項特徵，說明兩者不同可能來自線性假設、交互作用與模型結構。"
+      }
+    ],
+    "quiz": {
+      "question": "下列哪一種屬於 Wrapper 特徵選擇方法？",
+      "options": ["RFE", "Pearson Correlation", "Lasso L1", "F-test"],
+      "answerIndex": 0,
+      "explanation": "RFE 會包裹基底模型並反覆訓練、移除特徵，因此屬於 Wrapper 方法。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-cosmos",
+    "slug": "cosmos-text-to-image",
+    "title": "Cosmos 文字生成圖片",
+    "subtitle": "從提示詞控制、金鑰安全到展示備援",
+    "summary": "以 Streamlit 與 Hugging Face Inference API 為案例，學習文字轉圖片介面的提示詞、風格、比例、種子、負面提示詞、Secret 管理與誠實的展示模式。",
+    "category": "生成式 AI",
+    "level": "intermediate",
+    "durationMinutes": 60,
+    "status": "published",
+    "coverImage": "/images/courses/cosmos-text-to-image.png",
+    "tags": ["Cosmos", "Hugging Face", "Streamlit", "Prompt", "Secrets"],
+    "learningObjectives": [
+      "拆解文字轉圖片提示詞中的主體、環境、構圖與限制",
+      "理解風格、長寬比、種子與負面提示詞的控制用途",
+      "安全管理 Hugging Face Token 與 Streamlit Secrets",
+      "清楚區分 Live Provider、等待排隊、失敗與展示備援模式"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/hw3-cosmos-text2image",
+      "repositoryUrl": "https://github.com/gshan1209-cell/hw3-cosmos-text2image",
+      "demoUrl": "/learning-labs/cosmos-prompt-lab",
+      "originalPath": "app.py"
+    },
+    "sections": [
+      {
+        "id": "prompt-anatomy",
+        "title": "1. 好提示詞先交代畫面任務",
+        "summary": "先寫清楚主體、動作、環境、鏡頭與光線，再補風格與禁止事項；堆疊空泛形容詞通常不會讓結果更可控。"
+      },
+      {
+        "id": "controls",
+        "title": "2. 四個控制項各有責任",
+        "summary": "風格預設決定視覺方向，長寬比配合用途，種子協助重現，負面提示詞排除不希望出現的元素。"
+      },
+      {
+        "id": "demo",
+        "title": "3. 提示詞設計實驗室",
+        "summary": "站內實驗室提供不呼叫模型的 Prompt Worksheet，讓學習者組合主體、場景、構圖、比例與限制；輸出只是一份提示詞草稿，不冒充生成圖片。"
+      },
+      {
+        "id": "runtime",
+        "title": "4. Provider 與備援必須誠實標示",
+        "summary": "正式 Live 模式需要有效 Token 與可用 Provider。排隊、逾時與失敗要回報真實狀態；展示圖或模擬模式不得標示為 Cosmos 即時生成結果。"
+      },
+      {
+        "id": "security",
+        "title": "5. 金鑰只能留在安全邊界",
+        "summary": "生產環境以 st.secrets 或伺服器端 Secret 管理 Token，本機可使用隱藏輸入；不得把憑證寫進公開 Repository、前端程式或截圖。"
+      }
+    ],
+    "quiz": {
+      "question": "Provider 逾時後顯示預先準備的圖片，介面應如何標示？",
+      "options": ["宣稱是剛剛由 Cosmos 即時生成", "標示為展示備援或範例素材", "隱藏錯誤並顯示假機率", "把 Token 顯示給使用者"],
+      "answerIndex": 1,
+      "explanation": "備援素材必須明確標示來源與模式，不能冒充 Live Provider 的即時輸出。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-movie-scraper",
+    "slug": "movie-scraper-nextjs",
+    "title": "電影資料擷取、Parser 正規化與來源治理",
+    "subtitle": "用受控爬蟲、Snapshot 與 Provenance 建立可靠工作台",
+    "summary": "學習 Next.js 伺服器端受控爬蟲、HTML Parser 正規化、Allowlist 安全防禦、版本化 Snapshot 備援與著作權倫理規範。",
+    "category": "API 與資料蒐集",
+    "level": "intermediate",
+    "durationMinutes": 70,
+    "status": "published",
+    "coverImage": "/images/courses/movie-scraper-nextjs.png",
+    "tags": ["Next.js", "Crawler", "Parser", "Snapshot", "Provenance"],
+    "learningObjectives": [
+      "理解 Server-side 爬蟲與 Client-side 顯示的安全界線",
+      "將不同 HTML 來源正規化為一致資料結構",
+      "使用 Allowlist、Timeout、Fixture 與 Snapshot 降低風險",
+      "遵守 robots.txt、使用條款、頻率限制與來源標示"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/scrape_movie",
+      "repositoryUrl": "https://github.com/gshan1209-cell/scrape_movie",
+      "demoUrl": "/applied-web-systems/movie-scraper",
+      "originalPath": "modules/movie-scraper"
+    },
+    "sections": [
+      {
+        "id": "lifecycle",
+        "title": "1. 從 HTML 到標準化 JSON",
+        "summary": "伺服器取得允許來源的 HTML，交給對應 Parser 擷取欄位，再轉成統一 Movie 資料結構供前端篩選與分頁。"
+      },
+      {
+        "id": "analogy",
+        "title": "2. Server 像資料圖書館員",
+        "summary": "前端不直接闖入外部網站，而由伺服器依規則取得公開資料、整理成卡片並附上來源與時間。"
+      },
+      {
+        "id": "demo",
+        "title": "3. Snapshot 與受控 Live 模式",
+        "summary": "在 Native 工作台切換離線 Snapshot 與受控 Live，觀察來源標記、資料新鮮度、請求生命週期與失敗備援。"
+      },
+      {
+        "id": "security",
+        "title": "4. Allowlist 阻擋任意 URL",
+        "summary": "Route Handler 只接受固定來源，不讓使用者輸入任意網址，並設定 Timeout、回應大小、Parser 容錯與版本化 Fixture，避免 SSRF 與建置不穩。"
+      },
+      {
+        "id": "ethics",
+        "title": "5. 能抓到不代表可以任意使用",
+        "summary": "必須尊重著作權、付費牆、robots.txt、網站條款與合理頻率，並保留原始連結與 Data Provenance。"
+      }
+    ],
+    "quiz": {
+      "question": "Snapshot 模式最主要的作用是什麼？",
+      "options": ["永久禁止更新", "在上游失敗時提供版本化備援資料", "儲存使用者密碼", "繞過所有驗證碼"],
+      "answerIndex": 1,
+      "explanation": "Snapshot 讓 CI、教學與外部服務故障時仍能穩定顯示，並可追蹤資料版本。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-weather-dashboard",
+    "slug": "agri-weather-dashboard",
+    "title": "農事氣象儀表板、風險規則引擎與 GIS 地圖",
+    "subtitle": "把 CWA 預報轉成可操作的農事提醒",
+    "summary": "整合中央氣象署一週預報、數據化農事風險 JSON 規則與 Leaflet 地圖，建立具備 Snapshot、Fallback 與來源治理的決策介面。",
+    "category": "全端應用",
+    "level": "intermediate",
+    "durationMinutes": 90,
+    "status": "published",
+    "coverImage": "/images/courses/agri-weather-dashboard.png",
+    "tags": ["CWA", "Next.js", "Leaflet", "Rule Engine", "OpenData"],
+    "learningObjectives": [
+      "從 CWA OpenData 整理一週預報與測站資訊",
+      "把高溫、豪雨與強風門檻寫成可版本控管的 JSON 規則",
+      "理解 Leaflet 在 Next.js 中的 Client-only 載入方式",
+      "設計 API Secret、Snapshot、Fallback 與資料來源標示"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/scrape_weather",
+      "repositoryUrl": "https://github.com/gshan1209-cell/scrape_weather",
+      "demoUrl": "/applied-web-systems/agri-weather",
+      "originalPath": "modules/agri-weather-dashboard"
+    },
+    "sections": [
+      {
+        "id": "decision-support",
+        "title": "1. 預報要轉成行動才有價值",
+        "summary": "氣溫、降雨與風速本身只是資料；結合作物、地點與門檻後，才能形成灌溉、防風、延後施作等提醒。"
+      },
+      {
+        "id": "rule-engine",
+        "title": "2. 規則引擎像可版本化的農藝手冊",
+        "summary": "把風險門檻與建議從 UI 程式抽離為 JSON，讓規則可審查、可測試、可追蹤版本，而不是散落在元件條件式中。"
+      },
+      {
+        "id": "demo",
+        "title": "3. 地點、作物與風險卡片 Demo",
+        "summary": "切換縣市、行政區與作物，查看一週預報、測站地圖、風險等級、規則 ID 與備援模式。"
+      },
+      {
+        "id": "map",
+        "title": "4. Leaflet 必須與 SSR 隔離",
+        "summary": "Leaflet 依賴 window 與 document，因此使用 dynamic import 並設定 ssr:false；地圖是資訊介面，不應載入任意 Script 或 Tile URL。"
+      },
+      {
+        "id": "limits",
+        "title": "5. 農事建議需要資料時間與責任邊界",
+        "summary": "介面必須顯示資料時間、來源與 Snapshot／Live 狀態；規則是教學與輔助判讀，不取代在地農業專業人員與官方警報。"
+      }
+    ],
+    "quiz": {
+      "question": "為什麼 Leaflet 在 Next.js App Router 中常使用 dynamic import 並設定 ssr:false？",
+      "options": ["它依賴瀏覽器的 window 與 DOM", "它不能顯示 CSS", "它只能連線付費地圖", "它會自動洩漏 API Key"],
+      "answerIndex": 0,
+      "explanation": "Leaflet 初始化需要瀏覽器物件，在伺服器渲染階段執行會發生錯誤，因此應限制在 Client-side 載入。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-django",
+    "slug": "django-blog-basics",
+    "title": "Django Blog 基礎、MVT 架構與請求生命週期",
+    "subtitle": "從 Model、View、Template 到 Migration 與 Admin",
+    "summary": "以真實 Django Blog 原始碼與站內唯讀鏡像，學習 MVT、ORM、URL Routing、Migration、Admin、Template Autoescape 與正式環境安全設定。",
+    "category": "Web 開發",
+    "level": "beginner",
+    "durationMinutes": 60,
+    "status": "published",
+    "coverImage": "/images/courses/django-blog-basics.png",
+    "tags": ["Django", "Python", "MVT", "ORM", "SQLite"],
+    "learningObjectives": [
+      "分辨 Django Model、View、Template 與 URL Routing 的責任",
+      "理解 ORM Model 與 Migration 的版本化流程",
+      "看懂文章列表、Slug 詳細頁與 Admin 管理",
+      "掌握 DEBUG、SECRET_KEY、CSRF 與 Autoescape 的安全重點"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/2026-DjangoBlog",
+      "repositoryUrl": "https://github.com/gshan1209-cell/2026-DjangoBlog",
+      "demoUrl": "/applied-web-systems/django-blog",
+      "originalPath": "modules/django-blog/python-reference"
+    },
+    "sections": [
+      {
+        "id": "mvt",
+        "title": "1. MVT 是一條清楚的請求分工",
+        "summary": "URL 找到 View，View 透過 Model／ORM 取得資料，再交給 Template 產生 HTML Response。"
+      },
+      {
+        "id": "analogy",
+        "title": "2. 用餐廳理解 Django",
+        "summary": "Model 是食材與菜單資料，View 是接單並協調流程的服務員，Template 是最後的擺盤，URL 則是桌號與動線。"
+      },
+      {
+        "id": "demo",
+        "title": "3. MVT 與 Schema 唯讀鏡像",
+        "summary": "站內教學頁展示 Post Schema、Fixture 文章、URL Map 與請求生命週期；真實 Python Runtime 仍保存在 modules/django-blog/python-reference。"
+      },
+      {
+        "id": "migration",
+        "title": "4. Model 改動要留下 Migration",
+        "summary": "修改欄位後先執行 makemigrations 產生可審查的版本，再以 migrate 套用資料庫，不應手動編輯 SQLite 二進位檔。",
+        "code": "python manage.py makemigrations\npython manage.py migrate\npython manage.py createsuperuser\npython manage.py runserver"
+      },
+      {
+        "id": "security",
+        "title": "5. 開發方便不等於正式安全",
+        "summary": "Production 必須關閉 DEBUG、保護 SECRET_KEY、設定 ALLOWED_HOSTS、保留 CSRF 與 Template Autoescape，並避免在錯誤頁洩漏環境資訊。"
+      }
+    ],
+    "quiz": {
+      "question": "修改 Django Model 後，正確的資料庫更新流程是什麼？",
+      "options": ["直接改 db.sqlite3", "makemigrations 後再 migrate", "只重啟伺服器", "刪除整個專案"],
+      "answerIndex": 1,
+      "explanation": "makemigrations 產生異動腳本，migrate 再把版本化變更套用到資料庫。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-ensemble",
+    "slug": "ensemble-income-predictor",
+    "title": "Ensemble 收入分類模型與公平性治理",
+    "subtitle": "從分類架構、評估指標到敏感欄位風險",
+    "summary": "以 Adult Census 收入分類規格為案例，理解 Logistic Regression、Decision Tree、Random Forest、Gradient Boosting 與 Voting Classifier 的比較方式，以及部署、版本、紀錄與公平性治理。",
+    "category": "機器學習實戰",
+    "level": "advanced",
+    "durationMinutes": 100,
+    "status": "published",
+    "coverImage": "/images/courses/ensemble-income-predictor.png",
+    "tags": ["Ensemble", "Classification", "Adult Census", "Fairness", "Model Governance"],
+    "learningObjectives": [
+      "理解多種分類器與 Voting Ensemble 的角色差異",
+      "分辨 Accuracy、Precision、Recall、F1 與 Confusion Matrix",
+      "設計訓練、推論、版本與 Prediction Log 的部署邊界",
+      "辨識 race、sex 等敏感欄位與代理變數的公平性風險"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/L20-Ensemble-Model",
+      "repositoryUrl": "https://github.com/gshan1209-cell/L20-Ensemble-Model",
+      "demoUrl": "/learning-labs/ensemble-fairness-lab",
+      "originalPath": "docs/Adult_Census_Vercel_SPEC_v1_0.md"
+    },
+    "sections": [
+      {
+        "id": "pipeline",
+        "title": "1. 先分開訓練與線上推論",
+        "summary": "模型訓練適合在本機、Colab 或 CI；Vercel 負責前端、短時間 API 推論與結果展示，避免在線上請求中重新訓練。"
+      },
+      {
+        "id": "ensemble",
+        "title": "2. Ensemble 是多個觀點的組合",
+        "summary": "不同模型有不同偏誤與穩定性。Voting Classifier 可以整合多個分類器，但仍必須驗證資料切分、校準與錯誤類型。"
+      },
+      {
+        "id": "metrics",
+        "title": "3. 不能只看 Accuracy",
+        "summary": "類別不平衡時，Accuracy 可能掩蓋重要錯誤；應搭配 Precision、Recall、F1、Confusion Matrix 與群體切分結果。"
+      },
+      {
+        "id": "demo",
+        "title": "4. 公平性決策實驗室",
+        "summary": "站內實驗室不輸出個人收入機率，也不冒充已訓練模型；它引導學習者選擇欄位、指標與治理檢查，辨識敏感欄位及代理風險。"
+      },
+      {
+        "id": "governance",
+        "title": "5. 預測紀錄必須可追溯且最小化",
+        "summary": "若保存 Prediction Logs，應記錄模型版本、時間與必要診斷資訊，同時避免保存不必要的個資；收入分類不能用於歧視性決策。"
+      }
+    ],
+    "quiz": {
+      "question": "資料類別不平衡時，只看 Accuracy 最大的風險是什麼？",
+      "options": ["模型一定無法部署", "可能忽略少數類別被大量判錯", "特徵會自動消失", "資料庫會停止運作"],
+      "answerIndex": 1,
+      "explanation": "當多數類別占比很高，模型即使忽略少數類別也可能得到高 Accuracy，因此需搭配 Recall、Precision、F1 與 Confusion Matrix。"
+    },
+    "updatedAt": "2026-08-05"
+  },
+  {
+    "id": "course-story",
+    "slug": "ai-visual-story",
+    "title": "AI 圖文故事播放器",
+    "subtitle": "從十二幕素材、JSON 敘事到公開靜態展示",
+    "summary": "以公開版圖文小說播放器為案例，學習如何用十二張故事圖、預設 JSON、靜態 HTML 與 GitHub Pages 建立可分享的視覺故事，同時管理素材權利與功能邊界。",
+    "category": "生成式 AI",
+    "level": "beginner",
+    "durationMinutes": 50,
+    "status": "published",
+    "coverImage": "/images/courses/ai-visual-story.png",
+    "tags": ["Story", "AI Image", "Static Web", "JSON", "Accessibility"],
+    "learningObjectives": [
+      "把故事拆成十二幕並建立一致的視覺節奏",
+      "理解預設 JSON、圖片素材與靜態播放器的分工",
+      "使用 GitHub Pages 發布不含後端與敏感設定的公開展示",
+      "補上素材來源、替代文字、播放控制與權利狀態"
+    ],
+    "source": {
+      "repository": "gshan1209-cell/L2DOC1-github",
+      "repositoryUrl": "https://github.com/gshan1209-cell/L2DOC1-github",
+      "demoUrl": "https://gshan1209-cell.github.io/L2DOC1-github/",
+      "originalPath": "HW1/indexHw1.html"
+    },
+    "sections": [
+      {
+        "id": "storyboard",
+        "title": "1. 十二幕先決定故事節奏",
+        "summary": "每一幕只負責一個動作、情緒或資訊轉折；角色、服裝、場景與色彩要能跨幕連續，避免單張漂亮但故事斷裂。"
+      },
+      {
+        "id": "data",
+        "title": "2. JSON 管故事，播放器管呈現",
+        "summary": "default_novel.json 保存順序與文字，story1.png 到 story12.png 提供視覺素材，HTML／JavaScript 負責導覽與播放。"
+      },
+      {
+        "id": "demo",
+        "title": "3. 公開靜態播放器",
+        "summary": "GitHub Pages 展示首頁與 HW1 播放功能；公開版刻意移除後端、編輯器、API、提示詞、敏感設定與未使用素材。"
+      },
+      {
+        "id": "publishing",
+        "title": "4. 公開版本要做最小揭露",
+        "summary": "只發布展示必要檔案，使用相對路徑與靜態資產，移除金鑰、使用者上傳內容、內部文件與不需要的開發功能。"
+      },
+      {
+        "id": "rights-accessibility",
+        "title": "5. 圖像故事也需要權利與無障礙",
+        "summary": "每個素材應記錄來源與使用權，播放器要提供清楚按鈕、替代文字、鍵盤操作與不依賴自動播放的閱讀方式。"
+      }
+    ],
+    "quiz": {
+      "question": "公開靜態播放器時，哪一項最不應該一併發布？",
+      "options": ["必要的故事圖片", "預設故事 JSON", "敏感金鑰與內部設定", "播放器 HTML"],
+      "answerIndex": 2,
+      "explanation": "公開展示只需必要素材與播放器；金鑰、憑證、內部提示詞與敏感設定必須移除。"
+    },
+    "updatedAt": "2026-08-05"
+  }
+]
