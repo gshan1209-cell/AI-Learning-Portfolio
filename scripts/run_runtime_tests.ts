@@ -173,8 +173,7 @@ function testCosmosRuntimeContract(): void {
   assert.ok(generateRoute.includes("X-Cosmos-Model"));
   assert.ok(generateRoute.includes("runtime_unconfigured"));
   assert.ok(!statusRoute.includes("getCosmosToken"));
-  assert.ok(lab.includes("沒有 Mock Mode"));
-  assert.ok(!lab.includes("Unsplash"));
+  assert.ok(lab.includes("沒有 Mock Mode、Unsplash 備援"));
 }
 
 function testEnsembleRuntimeContract(): void {
