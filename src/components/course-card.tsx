@@ -102,16 +102,12 @@ export default function CourseCard({ course }: { course: Course }) {
           </div>
 
           <div className="mt-3 flex justify-end text-sm font-medium">
-            {enabled ? (
-              <Link
-                href={`/courses/${course.slug}`}
-                className="inline-flex items-center gap-1 font-bold text-brand hover:underline"
-              >
-                開始學習 <span>→</span>
-              </Link>
-            ) : (
-              <span className="font-semibold text-slate-400">即將推出</span>
-            )}
+            <Link
+              href={`/courses/${course.slug}`}
+              className="inline-flex items-center gap-1 font-bold text-brand hover:underline"
+            >
+              {enabled ? "開始學習" : "查看課程資產"} <span>→</span>
+            </Link>
           </div>
         </div>
       </div>
