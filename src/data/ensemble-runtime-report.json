@@ -5,6 +5,7 @@
     "sourceRepository": "gshan1209-cell/L20-Ensemble-Model",
     "sourceRevision": "46f23c298da353ded39aca4cfa000c8df29589f4",
     "sourceGitBlobSha": "514ee4278a4b0aa45b867126a988ee97550ef546",
+    "binarySha256": "6e63a1f2393d45adeb5b3358093e2ad950817298d08acbc19fb1cf9f7912bb1d",
     "metrics": {
       "accuracy": 0.8575,
       "precision": 0.7356,
@@ -14,7 +15,21 @@
     }
   },
   "retraining": {
-    "status": "ci-pending",
+    "status": "verified",
+    "verifiedAt": "2026-08-05T05:46:14Z",
+    "workflowRunId": 30979091865,
+    "artifactId": 8919425120,
+    "artifactZipSha256": "bff199ea03d3ece99be4a29928fa6ff05fc240f560144a5dfd0bf8dc7f573d93",
+    "modelArtifactSha256": "c95fe52fd1c4551be26950752931adc41d1d89ad1f5c6e0292a39319101ac02a",
+    "dataset": "UCI Adult Dataset",
+    "datasetRecords": 32561,
+    "featureCount": 14,
+    "datasetSha256": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+    "randomState": 42,
+    "testSize": 0.2,
+    "pythonVersion": "3.12.13",
+    "sklearnVersion": "1.9.0",
+    "bestModelByF1": "SoftVotingEnsemble",
     "models": [
       "LogisticRegression",
       "DecisionTree",
@@ -22,10 +37,106 @@
       "GradientBoosting",
       "SoftVotingEnsemble"
     ],
-    "dataset": "UCI Adult Dataset",
-    "randomState": 42,
-    "testSize": 0.2,
-    "fairness": null
+    "metrics": {
+      "LogisticRegression": {
+        "accuracy": 0.855827,
+        "precision": 0.740627,
+        "recall": 0.617347,
+        "f1": 0.673391,
+        "confusionMatrix": [[4606, 339], [600, 968]]
+      },
+      "DecisionTree": {
+        "accuracy": 0.852602,
+        "precision": 0.711111,
+        "recall": 0.653061,
+        "f1": 0.680851,
+        "confusionMatrix": [[4529, 416], [544, 1024]]
+      },
+      "RandomForest": {
+        "accuracy": 0.834792,
+        "precision": 0.617703,
+        "recall": 0.823342,
+        "f1": 0.70585,
+        "confusionMatrix": [[4146, 799], [277, 1291]]
+      },
+      "GradientBoosting": {
+        "accuracy": 0.868878,
+        "precision": 0.789773,
+        "recall": 0.620536,
+        "f1": 0.695,
+        "confusionMatrix": [[4686, 259], [595, 973]]
+      },
+      "SoftVotingEnsemble": {
+        "accuracy": 0.868878,
+        "precision": 0.743852,
+        "recall": 0.694515,
+        "f1": 0.718338,
+        "confusionMatrix": [[4570, 375], [479, 1089]]
+      }
+    },
+    "fairness": {
+      "method": "held-out test split, random_state=42, minimum group size=25",
+      "sex": {
+        "Female": {
+          "count": 2158,
+          "actualPositiveCount": 245,
+          "predictedPositiveCount": 275,
+          "recall": 0.738776,
+          "falsePositiveRate": 0.049137,
+          "selectionRate": 0.127433
+        },
+        "Male": {
+          "count": 4355,
+          "actualPositiveCount": 1323,
+          "predictedPositiveCount": 1815,
+          "recall": 0.839002,
+          "falsePositiveRate": 0.23252,
+          "selectionRate": 0.416762
+        }
+      },
+      "race": {
+        "Amer-Indian-Eskimo": {
+          "count": 73,
+          "actualPositiveCount": 9,
+          "predictedPositiveCount": 8,
+          "recall": 0.444444,
+          "falsePositiveRate": 0.0625,
+          "selectionRate": 0.109589
+        },
+        "Asian-Pac-Islander": {
+          "count": 200,
+          "actualPositiveCount": 52,
+          "predictedPositiveCount": 73,
+          "recall": 0.807692,
+          "falsePositiveRate": 0.209459,
+          "selectionRate": 0.365
+        },
+        "Black": {
+          "count": 662,
+          "actualPositiveCount": 93,
+          "predictedPositiveCount": 103,
+          "recall": 0.709677,
+          "falsePositiveRate": 0.065026,
+          "selectionRate": 0.155589
+        },
+        "Other": {
+          "count": 45,
+          "actualPositiveCount": 4,
+          "predictedPositiveCount": 5,
+          "recall": 1.0,
+          "falsePositiveRate": 0.02439,
+          "selectionRate": 0.111111
+        },
+        "White": {
+          "count": 5533,
+          "actualPositiveCount": 1410,
+          "predictedPositiveCount": 1901,
+          "recall": 0.833333,
+          "falsePositiveRate": 0.176085,
+          "selectionRate": 0.343575
+        }
+      }
+    }
   },
-  "warning": "模型與統計僅供教學，不得用於徵才、薪資、授信、保險或其他高風險決策。"
+  "warning": "模型與統計僅供教學，不得用於徵才、薪資、授信、保險或其他高風險決策。分組指標是描述性診斷，不構成法律或倫理上的公平認證。"
 }
