@@ -43,8 +43,8 @@
   },
   "stock-manim-animation": {
     "mode": "native",
-    "title": "台股 Manim 九幕場景導覽",
-    "description": "導覽九個教學場景、共用元件、單場景與批次渲染指令；頁面不冒充尚未完成驗收的 MP4 成果。",
+    "title": "台股 Manim 九幕場景與渲染驗證",
+    "description": "以 Headless Manim、FFmpeg、ffprobe 與 SHA-256 manifest 驗證九個真實 MP4 輸出。",
     "url": "/learning-labs/stock-manim",
     "fallbackUrl": "https://github.com/gshan1209-cell/L12"
   },
@@ -57,8 +57,8 @@
   },
   "cosmos-text-to-image": {
     "mode": "native",
-    "title": "Cosmos 提示詞設計與 Provider 邊界實驗室",
-    "description": "組合主體、場景、構圖、比例與限制；站內頁面只產生提示詞草稿，不冒充模型生成圖片。",
+    "title": "Cosmos 外部 GPU Provider 實驗室",
+    "description": "透過伺服器端 Secret 與明確設定的模型／Endpoint 進行真實文字生圖，不使用 Mock 圖片或隱藏替代模型。",
     "url": "/learning-labs/cosmos-prompt-lab",
     "fallbackUrl": "https://github.com/gshan1209-cell/hw3-cosmos-text2image"
   },
@@ -85,16 +85,16 @@
   },
   "ensemble-income-predictor": {
     "mode": "native",
-    "title": "Ensemble 模型評估與公平性決策實驗室",
-    "description": "引導比較評估指標、敏感欄位與部署治理；不輸出個人收入機率，也不冒充已訓練模型。",
+    "title": "Adult Census 模型推論與公平性驗證",
+    "description": "使用版本化 scikit-learn Pipeline 執行真實推論，並公開整體評估與 sex／race 分群公平性報告。",
     "url": "/learning-labs/ensemble-fairness-lab",
     "fallbackUrl": "https://github.com/gshan1209-cell/L20-Ensemble-Model"
   },
   "ai-visual-story": {
-    "mode": "iframe",
-    "title": "AI 圖文故事公開靜態播放器",
-    "description": "公開版保留首頁、十二幕故事素材、預設 JSON 與靜態播放器；後端、編輯器、API 與敏感設定已移除。",
-    "url": "https://gshan1209-cell.github.io/L2DOC1-github/",
+    "mode": "native",
+    "title": "AI 圖文故事 Native 播放器",
+    "description": "十二幕故事、播放狀態、進度與鍵盤操作均由 AI-Learning-Portfolio 的 React 元件執行，不再嵌入外部 iframe。",
+    "url": "/learning-labs/ai-visual-story",
     "fallbackUrl": "https://github.com/gshan1209-cell/L2DOC1-github"
   }
 }
