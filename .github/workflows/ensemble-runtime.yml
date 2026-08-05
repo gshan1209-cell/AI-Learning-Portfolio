@@ -8,6 +8,7 @@ on:
       - "api/_ensemble_runtime.py"
       - "api/ensemble-predict.py"
       - "requirements.txt"
+      - "vercel.json"
       - ".github/workflows/ensemble-runtime.yml"
   push:
     branches: [ main ]
@@ -16,18 +17,25 @@ on:
       - "api/_ensemble_runtime.py"
       - "api/ensemble-predict.py"
       - "requirements.txt"
+      - "vercel.json"
       - ".github/workflows/ensemble-runtime.yml"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   train-and-verify:
-    name: Retrain, evaluate and exercise deployed model
+    name: Retrain, export and exercise deployed Ensemble model
     runs-on: ubuntu-24.04
     timeout-minutes: 35
 
     steps:
-      - name: Checkout Code
+      - name: Checkout source branch
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Setup Python 3.12
         uses: actions/setup-python@v5
@@ -47,43 +55,65 @@ jobs:
             --output-dir modules/ensemble-income-predictor/runtime-artifacts \
             --dataset-cache modules/ensemble-income-predictor/data/adult.data
 
-      - name: Validate training and fairness artifacts
+      - name: Export verified Soft Voting deployment artifact
+        run: |
+          python modules/ensemble-income-predictor/scripts/export_soft_voting.py \
+            --output-dir modules/ensemble-income-predictor/runtime-artifacts \
+            --dataset-cache modules/ensemble-income-predictor/data/adult.data
+
+      - name: Validate training, deployment and fairness artifacts
         run: |
           python - <<'PY'
+          import hashlib
           import json
           from pathlib import Path
 
           root = Path("modules/ensemble-income-predictor/runtime-artifacts")
           report = json.loads((root / "training_report.json").read_text(encoding="utf-8"))
+          deployed = json.loads((root / "deployed_model.json").read_text(encoding="utf-8"))
+          fairness = json.loads((root / "fairness.json").read_text(encoding="utf-8"))
+          fixtures = json.loads((root / "deployed_fixture_predictions.json").read_text(encoding="utf-8"))
+          model_path = root / "adult_income_pipeline.joblib"
+          model_sha = hashlib.sha256(model_path.read_bytes()).hexdigest()
+
           assert report["meta"]["records"] > 30_000, report["meta"]
           assert report["meta"]["features"] == 14, report["meta"]
-          assert report["meta"]["modelSha256"], report["meta"]
           assert len(report["metrics"]) == 5, report["metrics"].keys()
-          assert report["metrics"]["RandomForest"]["f1"] > 0.5
-          assert report["fairness"]["groups"]["sex"]
-          assert report["fairness"]["groups"]["race"]
-          assert len(report["fixturePredictions"]) == 3
+          assert report["metrics"]["SoftVotingEnsemble"]["f1"] > 0.5
+          assert deployed["deployedModel"] == "SoftVotingEnsemble", deployed
+          assert deployed["algorithm"] == "VotingClassifier(voting=soft)", deployed
+          assert deployed["modelSha256"] == model_sha, deployed
+          assert deployed["metrics"]["f1"] == report["metrics"]["SoftVotingEnsemble"]["f1"]
+          assert fairness["model"] == "SoftVotingEnsemble", fairness
+          assert fairness["groups"]["sex"]
+          assert fairness["groups"]["race"]
+          assert len(fixtures) == 3
           for path in [
-              root / "adult_income_pipeline.joblib",
-              root / "model_meta.json",
+              model_path,
+              root / "deployed_model.json",
               root / "metrics.json",
               root / "fairness.json",
-              root / "fixture_predictions.json",
+              root / "deployed_fixture_predictions.json",
           ]:
               assert path.exists() and path.stat().st_size > 0, path
-          print(json.dumps(report, ensure_ascii=False, indent=2))
+          print(json.dumps({
+              "trainingMetrics": report["metrics"],
+              "deployedModel": deployed,
+              "fairness": fairness,
+              "fixturePredictions": fixtures,
+          }, ensure_ascii=False, indent=2))
           PY
 
-      - name: Download and exercise pinned deployed model
+      - name: Exercise local Soft Voting Runtime
         env:
           PYTHONPATH: api
         run: |
           python - <<'PY'
           import json
-          from _ensemble_runtime import EXPECTED_GIT_BLOB_SHA, download_model_bytes, git_blob_sha, predict
+          from _ensemble_runtime import predict, runtime_status
 
-          model_bytes = download_model_bytes()
-          assert git_blob_sha(model_bytes) == EXPECTED_GIT_BLOB_SHA
+          status = runtime_status()
+          assert status["artifactAvailable"] is True, status
           result = predict({
               "age": 39,
               "workclass": "Private",
@@ -100,10 +130,29 @@ jobs:
           })
           assert result["prediction"] in {"<=50K", ">50K"}, result
           assert 0 <= result["probability"] <= 1, result
+          assert result["modelVersion"] == "adult-income-soft-voting-v1.1", result
           assert len(result["modelSha256"]) == 64, result
           assert "高風險" in result["disclaimer"], result
-          print(json.dumps(result, ensure_ascii=False, indent=2))
+          print(json.dumps({"status": status, "prediction": result}, ensure_ascii=False, indent=2))
           PY
+
+      - name: Commit versioned deployment artifact to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            modules/ensemble-income-predictor/runtime-artifacts/adult_income_pipeline.joblib \
+            modules/ensemble-income-predictor/runtime-artifacts/deployed_model.json \
+            modules/ensemble-income-predictor/runtime-artifacts/metrics.json \
+            modules/ensemble-income-predictor/runtime-artifacts/fairness.json \
+            modules/ensemble-income-predictor/runtime-artifacts/deployed_fixture_predictions.json
+          if git diff --cached --quiet; then
+            echo "Verified Ensemble deployment artifact is already current."
+          else
+            git commit -m "build: update verified Ensemble deployment artifact"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
 
       - name: Upload reproducible training artifacts
         uses: actions/upload-artifact@v4
