@@ -203,7 +203,7 @@ function testEnsembleRuntimeContract(): void {
   assert.ok(workflow.includes("Retrain five Adult Census classifiers"));
   assert.ok(workflow.includes("Download and exercise pinned deployed model"));
   assert.ok(lab.includes("predict_proba"));
-  assert.ok(!lab.includes("寫死的機率"));
+  assert.ok(lab.includes("不使用預先寫死的機率"));
 }
 
 function main(): void {
