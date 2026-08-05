@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Course, CourseDemo, CourseLevel, CourseStatus } from "@/types/course";
+import type { Course, CourseAssets, CourseDemo, CourseLevel, CourseStatus } from "@/types/course";
 
 const COURSE_DIRECTORIES = ["course_chunks", "course_chunks_archive"];
 const DEMO_REGISTRY_PATH = "course_demo_registry/demo_registry.json";
+const COURSE_ASSET_REGISTRY_PATH = "course_asset_registry/asset_registry.json";
 
 function isCourse(value: unknown): value is Course {
   if (!value || typeof value !== "object") return false;
@@ -45,6 +46,20 @@ function readDemoRegistry(): Record<string, CourseDemo> {
   }
 }
 
+function readAssetRegistry(): Record<string, CourseAssets> {
+  const registryPath = path.join(process.cwd(), COURSE_ASSET_REGISTRY_PATH);
+  if (!fs.existsSync(registryPath)) return {};
+
+  try {
+    const parsed = JSON.parse(fs.readFileSync(registryPath, "utf8")) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    return parsed as Record<string, CourseAssets>;
+  } catch (error) {
+    console.error(`Unable to read course asset registry: ${registryPath}`, error);
+    return {};
+  }
+}
+
 export interface CourseFilters {
   query?: string;
   category?: string;
@@ -55,12 +70,14 @@ export interface CourseFilters {
 export function getAllCourses(filters: CourseFilters = {}): Course[] {
   const courseMap = new Map<string, Course>();
   const demoRegistry = readDemoRegistry();
+  const assetRegistry = readAssetRegistry();
 
   for (const directory of COURSE_DIRECTORIES) {
     for (const course of readDirectory(directory)) {
       courseMap.set(course.slug, {
         ...course,
         demo: demoRegistry[course.slug] ?? course.demo,
+        assets: assetRegistry[course.slug] ?? course.assets,
       });
     }
   }
