@@ -1,0 +1,31 @@
+{
+  "deployedModel": {
+    "modelVersion": "adult-income-rf-v1.0-source-pinned",
+    "algorithm": "RandomForestClassifier",
+    "sourceRepository": "gshan1209-cell/L20-Ensemble-Model",
+    "sourceRevision": "46f23c298da353ded39aca4cfa000c8df29589f4",
+    "sourceGitBlobSha": "514ee4278a4b0aa45b867126a988ee97550ef546",
+    "metrics": {
+      "accuracy": 0.8575,
+      "precision": 0.7356,
+      "recall": 0.6371,
+      "f1": 0.6828,
+      "confusionMatrix": [[4586, 359], [569, 999]]
+    }
+  },
+  "retraining": {
+    "status": "ci-pending",
+    "models": [
+      "LogisticRegression",
+      "DecisionTree",
+      "RandomForest",
+      "GradientBoosting",
+      "SoftVotingEnsemble"
+    ],
+    "dataset": "UCI Adult Dataset",
+    "randomState": 42,
+    "testSize": 0.2,
+    "fairness": null
+  },
+  "warning": "模型與統計僅供教學，不得用於徵才、薪資、授信、保險或其他高風險決策。"
+}
