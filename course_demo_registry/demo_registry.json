@@ -93,7 +93,7 @@
   "ai-visual-story": {
     "mode": "native",
     "title": "AI 圖文故事 Native 播放器",
-    "description": "十二幕故事、播放狀態、進度與鍵盤操作均由 AI-Learning-Portfolio 的 React 元件執行，不再嵌入外部 iframe。",
+    "description": "十二幕故事、播放狀態、進度與鍵盤操作均由 AI-Learning-Portfolio 的 React 元件執行，已改為站內原生播放器。",
     "url": "/learning-labs/ai-visual-story",
     "fallbackUrl": "https://github.com/gshan1209-cell/L2DOC1-github"
   }
