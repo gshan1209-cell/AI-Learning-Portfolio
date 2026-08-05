@@ -1,0 +1,380 @@
+{
+  "linear-regression-for-beginners": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1GoavWaJJZJXm9OW2UQk0ZkEfAqD-IvhC",
+    "summaryCard": {
+      "fileId": "1ua0jPepFQ49Uhk1v0Q4pOVAF_FtRruE7",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1ua0jPepFQ49Uhk1v0Q4pOVAF_FtRruE7/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1i6uVHaTfhO4d3IGxkOByIwcjPVCvB1gQCtt6kFitLi8",
+      "name": "用一條線看懂資料趨勢｜課程簡報",
+      "url": "https://docs.google.com/presentation/d/1i6uVHaTfhO4d3IGxkOByIwcjPVCvB1gQCtt6kFitLi8/edit",
+      "mimeType": "application/vnd.google-apps.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1mLCy8GjowhayW80eM6l2p5j5P6DVjanbNdBOigOjb_o",
+      "name": "用一條線看懂資料趨勢｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1mLCy8GjowhayW80eM6l2p5j5P6DVjanbNdBOigOjb_o/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1ZFyVhqa69LufPSa6BiK-DZrOUiLWWxXe_U5IVPfWUOU",
+      "name": "用一條線看懂資料趨勢｜64秒影片設計稿",
+      "url": "https://docs.google.com/document/d/1ZFyVhqa69LufPSa6BiK-DZrOUiLWWxXe_U5IVPfWUOU/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    }
+  },
+  "svm-kernel-trick-3d": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1jlNz8Xr77JtDEmPNf3wITGrZiy1BbqzO",
+    "summaryCard": {
+      "fileId": "1YZxkz1vrNAAqxaRvkE0LXRLs8PrqkSnE",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1YZxkz1vrNAAqxaRvkE0LXRLs8PrqkSnE/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1DeBC6a8csecxzKgfI13e-37b3_WTWWQ7",
+      "name": "把平面摺成立體｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1DeBC6a8csecxzKgfI13e-37b3_WTWWQ7/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1ww0iNrz1yteCowUbEBUOcWAWG8wa-IyagWiUBqVvKXQ",
+      "name": "把平面摺成立體｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1ww0iNrz1yteCowUbEBUOcWAWG8wa-IyagWiUBqVvKXQ/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "14daxFbFp0BXMH_tQlOQdonXIOG2-H-ZM",
+      "name": "把平面摺成立體｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/14daxFbFp0BXMH_tQlOQdonXIOG2-H-ZM/view",
+      "mimeType": "text/html"
+    }
+  },
+  "cwa-open-data-first-api": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/12ABUeUkxQ_X29IXEinWV5vR5G4tkrZ6c",
+    "summaryCard": {
+      "fileId": "13ld-gdsfiVo4ciUiorD3XUN0YlB7_rWs",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/13ld-gdsfiVo4ciUiorD3XUN0YlB7_rWs/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1cUX9xvJ3kARmuER1yrm6Yl4yVOl6ems4",
+      "name": "第一次呼叫政府資料 API｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1cUX9xvJ3kARmuER1yrm6Yl4yVOl6ems4/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1dSvI3JsUNmqEkRhmLVBJETcSoewUinEAPn2-XCrO3fM",
+      "name": "第一次呼叫政府資料 API｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1dSvI3JsUNmqEkRhmLVBJETcSoewUinEAPn2-XCrO3fM/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "165V_8x_kW2J6bGxbqC_EWs6HiqMiUee1",
+      "name": "第一次呼叫政府資料 API｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/165V_8x_kW2J6bGxbqC_EWs6HiqMiUee1/view",
+      "mimeType": "text/html"
+    }
+  },
+  "ml-top-10-algorithms": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1Yfjj68kV56lriGEHlU_j0WWVeRdxfNdD",
+    "summaryCard": {
+      "fileId": "1oEE54IzDHpijcPAo_-dv54BIlO_A1Zui",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1oEE54IzDHpijcPAo_-dv54BIlO_A1Zui/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1kzht4HkHb3AJkqS4hnMqrX9H5t8AbtOA",
+      "name": "機器學習前十大演算法｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1kzht4HkHb3AJkqS4hnMqrX9H5t8AbtOA/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "13M0BG_WmBg7G95NM5GhJHnWwY4aoIvyKaQ8ldMpxuX0",
+      "name": "機器學習前十大演算法｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/13M0BG_WmBg7G95NM5GhJHnWwY4aoIvyKaQ8ldMpxuX0/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1bZh5jmtEKu4MBGQn_4wNgmO4ca-gno0A",
+      "name": "機器學習前十大演算法｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1bZh5jmtEKu4MBGQn_4wNgmO4ca-gno0A/view",
+      "mimeType": "text/html"
+    }
+  },
+  "crisp-dm-regression": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1IsJPLM-SKbzELQScCwgJE-LsuZxMBof6",
+    "summaryCard": {
+      "fileId": "1tMRjTEwT9AtKqWObt5gsZBJ7lzF3vFvl",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1tMRjTEwT9AtKqWObt5gsZBJ7lzF3vFvl/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "14aNqLHvM2sBY4mhAizex92xbFXhWpLUl",
+      "name": "CRISP-DM 迴歸專案流程｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/14aNqLHvM2sBY4mhAizex92xbFXhWpLUl/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "15K1FQHFhglpj8q4x0xkqxzw_o582yYiLxXjXagR9Uc8",
+      "name": "CRISP-DM 迴歸專案流程｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/15K1FQHFhglpj8q4x0xkqxzw_o582yYiLxXjXagR9Uc8/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1_xEASyGGxH2P9tcmeTCe7p2Un5IqAotc",
+      "name": "CRISP-DM 迴歸專案流程｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1_xEASyGGxH2P9tcmeTCe7p2Un5IqAotc/view",
+      "mimeType": "text/html"
+    }
+  },
+  "startup-profit-prediction": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1AUpe04zq5AjEAB9PdBFQPq5QwYM22PQO",
+    "summaryCard": {
+      "fileId": "1NbvIuHH_wvxQ0LsOBE_lD69eDnwV-c7p",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1NbvIuHH_wvxQ0LsOBE_lD69eDnwV-c7p/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1LSBG6zsGjkJIgCs9JdC-s96cw4TKsDNB",
+      "name": "新創公司利潤預測｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1LSBG6zsGjkJIgCs9JdC-s96cw4TKsDNB/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1w_fiiCDMDj8NiXdRaAYaoJN3D1j_D8KHcEQ890JDRM0",
+      "name": "新創公司利潤預測｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1w_fiiCDMDj8NiXdRaAYaoJN3D1j_D8KHcEQ890JDRM0/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1M3lG2z65DAb89S42A0PgxzadKQ7k3Lkx",
+      "name": "新創公司利潤預測｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1M3lG2z65DAb89S42A0PgxzadKQ7k3Lkx/view",
+      "mimeType": "text/html"
+    }
+  },
+  "stock-manim-animation": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/10wPPNCWwvzpoMCdyC2S4Jaqp213sv1Me",
+    "summaryCard": {
+      "fileId": "1cBYGd4BplyMAwOWaok636rLroyl51VBQ",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1cBYGd4BplyMAwOWaok636rLroyl51VBQ/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1zM1iuF8wY0ptnSjwkfC4aMm83BBYoDyZ",
+      "name": "台股技術分析動畫｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1zM1iuF8wY0ptnSjwkfC4aMm83BBYoDyZ/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1fSm5zecF6U5TqykZuwm1iPj9Fy_HVmIzanpw_ANbZp4",
+      "name": "台股技術分析動畫｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1fSm5zecF6U5TqykZuwm1iPj9Fy_HVmIzanpw_ANbZp4/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "18TihNpvBZAPT4RRHNUEsuTCuX2GHVp9M",
+      "name": "台股技術分析動畫｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/18TihNpvBZAPT4RRHNUEsuTCuX2GHVp9M/view",
+      "mimeType": "text/html"
+    }
+  },
+  "boston-feature-selection": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1OxDYMUtqGFigvwY1ripeW6D-6YQ29u8D",
+    "summaryCard": {
+      "fileId": "1oCDqsBGJtJfScJp0e4mGKowTiPPTv9i8",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1oCDqsBGJtJfScJp0e4mGKowTiPPTv9i8/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1CbeT0i18-3jBTy8LSibe_Jjr5UQtizO3",
+      "name": "房價預測與特徵選擇｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1CbeT0i18-3jBTy8LSibe_Jjr5UQtizO3/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "16_iXbBCAxRZQ3eTmxbvoyOvN3an4FA2WzhbMmBL4fTE",
+      "name": "房價預測與特徵選擇｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/16_iXbBCAxRZQ3eTmxbvoyOvN3an4FA2WzhbMmBL4fTE/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1Lo10cvAchuNnB0AKryBt9VzOxHrvTnJj",
+      "name": "房價預測與特徵選擇｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1Lo10cvAchuNnB0AKryBt9VzOxHrvTnJj/view",
+      "mimeType": "text/html"
+    }
+  },
+  "cosmos-text-to-image": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1rpGoP62G-OQ1eTNo3Y0QjYQXUNe_4L-C",
+    "summaryCard": {
+      "fileId": "1dIotF6qfJjOvr8AvrX60ArHorjyAHwP3",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1dIotF6qfJjOvr8AvrX60ArHorjyAHwP3/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1jMknnLTSZ2I5dvA0xskKNoKN4oQULJNM",
+      "name": "Cosmos 文字生成圖片｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1jMknnLTSZ2I5dvA0xskKNoKN4oQULJNM/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1KJeRcpZesjQYYW5CeDdhZnmxiwDtJB3UGrIG2LsEZe4",
+      "name": "Cosmos 文字生成圖片｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1KJeRcpZesjQYYW5CeDdhZnmxiwDtJB3UGrIG2LsEZe4/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1IqIa-gE8XMjwcJjnN6Ktcao9BnNoeXK0",
+      "name": "Cosmos 文字生成圖片｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1IqIa-gE8XMjwcJjnN6Ktcao9BnNoeXK0/view",
+      "mimeType": "text/html"
+    }
+  },
+  "movie-scraper-nextjs": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1ubDB5zcx8QzdlHfhtu_V0QAR-rLsp7oC",
+    "summaryCard": {
+      "fileId": "1Lwo2ebcF1iJLwSqy9RLkcXx5UL91leHX",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1Lwo2ebcF1iJLwSqy9RLkcXx5UL91leHX/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "10OKGd0xqz7aCLm6hTOrITU_YhiyNnTPT",
+      "name": "電影資料收集工作台｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/10OKGd0xqz7aCLm6hTOrITU_YhiyNnTPT/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1dUUyVRSS8EuTkHmTt2YrM3jFmS2nTGu4arsj5SlFGXI",
+      "name": "電影資料收集工作台｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1dUUyVRSS8EuTkHmTt2YrM3jFmS2nTGu4arsj5SlFGXI/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "15RtVk1pOSCcmFsaLXjVZV5N9id1lDzwP",
+      "name": "電影資料收集工作台｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/15RtVk1pOSCcmFsaLXjVZV5N9id1lDzwP/view",
+      "mimeType": "text/html"
+    }
+  },
+  "agri-weather-dashboard": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1knwrP8dGGJTFpvdk8gZTPTb7jV_IYDBm",
+    "summaryCard": {
+      "fileId": "1IwLZhoft0mJBURAMMze8QnIfPReI86DL",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1IwLZhoft0mJBURAMMze8QnIfPReI86DL/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1AMOAe-sZegp9IvkN4MYZwcW0u5bPZmCk",
+      "name": "農事天氣儀表板｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1AMOAe-sZegp9IvkN4MYZwcW0u5bPZmCk/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1nX6qa521rAyDI9Fe8sPqXqxaHDUgEANkQLYe2-07Pyg",
+      "name": "農事天氣儀表板｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1nX6qa521rAyDI9Fe8sPqXqxaHDUgEANkQLYe2-07Pyg/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "12zDwbonKkjYDduatsDx-dId4khmn1crZ",
+      "name": "農事天氣儀表板｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/12zDwbonKkjYDduatsDx-dId4khmn1crZ/view",
+      "mimeType": "text/html"
+    }
+  },
+  "django-blog-basics": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1xEk3WIp4bN7CI9tUEc0jM7pTRGytmR0x",
+    "summaryCard": {
+      "fileId": "1UdpreaOLgwX9y04FpPCwfgKLxtZfQMh3",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1UdpreaOLgwX9y04FpPCwfgKLxtZfQMh3/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1XSY0-TK5ohIc5xO4XElpHfU_xxSOYq0l",
+      "name": "Django Blog 入門｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1XSY0-TK5ohIc5xO4XElpHfU_xxSOYq0l/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1AexfHnd6dPePiAF_aS42PJk_L07l-dBOu5MGPsATdk8",
+      "name": "Django Blog 入門｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1AexfHnd6dPePiAF_aS42PJk_L07l-dBOu5MGPsATdk8/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1R-BXB9hds-2clJSGOrhPLAXGRFxQShNe",
+      "name": "Django Blog 入門｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1R-BXB9hds-2clJSGOrhPLAXGRFxQShNe/view",
+      "mimeType": "text/html"
+    }
+  },
+  "ensemble-income-predictor": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1BTW3a6-N-riik47iuZ68WdbkwbzkcIVq",
+    "summaryCard": {
+      "fileId": "1OkGA_h8N1vTGSwdrYZpYP9n32duSBRwS",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1OkGA_h8N1vTGSwdrYZpYP9n32duSBRwS/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "18_TSf57GQQe-y3h8bMbIdc1d0_VUNJLf",
+      "name": "Ensemble 收入分類模型｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/18_TSf57GQQe-y3h8bMbIdc1d0_VUNJLf/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "18fQlNclV29Gjb0-AsfcAp1HOiUOayNi23BCLc8yE0mE",
+      "name": "Ensemble 收入分類模型｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/18fQlNclV29Gjb0-AsfcAp1HOiUOayNi23BCLc8yE0mE/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "17SAD3P-5KAsfjmMB_oqw9NNLF2fd2H41",
+      "name": "Ensemble 收入分類模型｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/17SAD3P-5KAsfjmMB_oqw9NNLF2fd2H41/view",
+      "mimeType": "text/html"
+    }
+  },
+  "ai-visual-story": {
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1oMmZmsVT11hQdIH0BSr3971uVWFOa-TA",
+    "summaryCard": {
+      "fileId": "1fSa2mdscn4pleraDz5y8RrOVuBr9BRP6",
+      "name": "summary-card.png",
+      "url": "https://drive.google.com/file/d/1fSa2mdscn4pleraDz5y8RrOVuBr9BRP6/view",
+      "mimeType": "image/png"
+    },
+    "presentation": {
+      "fileId": "1p_9mLfeBoI-Sm8z-ZcPMVvYrF4TrZjFG",
+      "name": "AI 圖文故事播放器｜課程簡報.pptx",
+      "url": "https://docs.google.com/presentation/d/1p_9mLfeBoI-Sm8z-ZcPMVvYrF4TrZjFG/edit",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    },
+    "notebookLmPrompt": {
+      "fileId": "1GUDlpEKqmRzimD4k1HfC2t2P2IOXZHGWwHDOJqeTpEI",
+      "name": "AI 圖文故事播放器｜NotebookLM完整簡報提示語",
+      "url": "https://docs.google.com/document/d/1GUDlpEKqmRzimD4k1HfC2t2P2IOXZHGWwHDOJqeTpEI/edit",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    "videoDesign": {
+      "fileId": "1Sbzgd105t2gL68CW5UR6VUxLVcxUFwT7",
+      "name": "AI 圖文故事播放器｜64秒影片設計稿.html",
+      "url": "https://drive.google.com/file/d/1Sbzgd105t2gL68CW5UR6VUxLVcxUFwT7/view",
+      "mimeType": "text/html"
+    }
+  }
+}

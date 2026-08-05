@@ -19,6 +19,21 @@ export interface CourseDemo {
   nativeKey?: string;
 }
 
+export interface CourseAssetLink {
+  fileId: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface CourseAssets {
+  driveFolderUrl: string;
+  summaryCard: CourseAssetLink;
+  presentation: CourseAssetLink;
+  notebookLmPrompt: CourseAssetLink;
+  videoDesign: CourseAssetLink;
+}
+
 export interface CourseSection {
   id: string;
   title: string;
@@ -50,6 +65,7 @@ export interface Course {
   learningObjectives: string[];
   source: CourseSource;
   demo?: CourseDemo;
+  assets?: CourseAssets;
   sections: CourseSection[];
   quiz?: CourseQuiz;
   updatedAt: string;
