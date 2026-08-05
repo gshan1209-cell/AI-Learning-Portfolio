@@ -1,0 +1,41 @@
+{
+  "modelVersion": "adult-income-soft-voting-v1.1",
+  "algorithm": "VotingClassifier(voting=soft)",
+  "deployedModel": "SoftVotingEnsemble",
+  "dataset": "UCI Adult Dataset",
+  "datasetUrl": "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+  "datasetSha256": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+  "records": 32561,
+  "features": 14,
+  "randomState": 42,
+  "testSize": 0.2,
+  "modelSha256": "32841631d2718a7628b5384ee639af8f604515ca3962854b11424ada83aa13ca",
+  "sourceRepository": "gshan1209-cell/L20-Ensemble-Model",
+  "sourceRevision": "46f23c298da353ded39aca4cfa000c8df29589f4",
+  "classes": [
+    "<=50K",
+    ">50K"
+  ],
+  "metrics": {
+    "accuracy": 0.868878,
+    "precision": 0.743852,
+    "recall": 0.694515,
+    "f1": 0.718338,
+    "confusionMatrix": [
+      [
+        4570,
+        375
+      ],
+      [
+        479,
+        1089
+      ]
+    ],
+    "classes": [
+      "<=50K",
+      ">50K"
+    ],
+    "meanPositiveProbability": 0.27183
+  },
+  "disclaimer": "Educational use only. Do not use for hiring, compensation, lending, insurance, or other high-risk decisions."
+}

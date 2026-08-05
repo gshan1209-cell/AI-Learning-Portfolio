@@ -1,0 +1,96 @@
+name: Manim Runtime Render
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "modules/stock-manim-animation/python-manim/**"
+      - ".github/workflows/manim-runtime.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "modules/stock-manim-animation/python-manim/**"
+      - ".github/workflows/manim-runtime.yml"
+  workflow_dispatch:
+
+jobs:
+  render:
+    name: Render and verify nine Manim scenes
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: modules/stock-manim-animation/python-manim
+    env:
+      MANIM_CHINESE_FONT: Noto Sans CJK TC
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install FFmpeg, Cairo, Pango and Traditional Chinese fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ffmpeg \
+            libcairo2-dev \
+            libpango1.0-dev \
+            pkg-config \
+            python3-dev \
+            fonts-noto-cjk
+          fc-cache -f -v >/dev/null
+          fc-match "Noto Sans CJK TC"
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: modules/stock-manim-animation/python-manim/requirements.txt
+
+      - name: Install Manim runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pytest
+
+      - name: Run renderer contract tests
+        run: pytest -q tests/test_render_all.py
+
+      - name: Render all nine scenes
+        run: |
+          python render_all.py \
+            --quality=-ql \
+            --media-dir runtime-media \
+            --manifest runtime-media/render-manifest.json
+
+      - name: Verify render manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = Path("runtime-media/render-manifest.json")
+          payload = json.loads(manifest.read_text(encoding="utf-8"))
+          assert payload["sceneCount"] == 9, payload
+          assert len(payload["scenes"]) == 9, payload
+          for scene in payload["scenes"]:
+              path = Path(scene["videoPath"])
+              assert path.exists(), path
+              assert scene["bytes"] > 0, scene
+              assert scene["duration"] > 0, scene
+              assert scene["width"] > 0 and scene["height"] > 0, scene
+              assert len(scene["sha256"]) == 64, scene
+          print(json.dumps(payload, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Upload verified Manim videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: stock-manim-runtime-videos
+          path: |
+            modules/stock-manim-animation/python-manim/runtime-media/**/*.mp4
+            modules/stock-manim-animation/python-manim/runtime-media/render-manifest.json
+          if-no-files-found: error
+          retention-days: 14

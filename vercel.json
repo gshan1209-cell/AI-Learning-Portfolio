@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/ensemble-predict.py": {
+      "includeFiles": "modules/ensemble-income-predictor/runtime-artifacts/**",
+      "maxDuration": 60
+    }
+  }
+}

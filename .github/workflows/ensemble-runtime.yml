@@ -1,0 +1,143 @@
+name: Ensemble Runtime Training
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "modules/ensemble-income-predictor/**"
+      - "api/_ensemble_runtime.py"
+      - "api/ensemble-predict.py"
+      - "requirements.txt"
+      - "vercel.json"
+      - ".github/workflows/ensemble-runtime.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "modules/ensemble-income-predictor/**"
+      - "api/_ensemble_runtime.py"
+      - "api/ensemble-predict.py"
+      - "requirements.txt"
+      - "vercel.json"
+      - ".github/workflows/ensemble-runtime.yml"
+  workflow_dispatch:
+
+jobs:
+  train-and-verify:
+    name: Retrain, compare and exercise deployed Ensemble model
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install model dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Retrain five Adult Census classifiers
+        run: |
+          python modules/ensemble-income-predictor/scripts/train_model.py \
+            --output-dir /tmp/ensemble-training \
+            --dataset-cache /tmp/ensemble-data/adult.data
+
+      - name: Export Soft Voting candidate artifact
+        run: |
+          python modules/ensemble-income-predictor/scripts/export_soft_voting.py \
+            --output-dir /tmp/ensemble-candidate \
+            --dataset-cache /tmp/ensemble-data/adult.data
+
+      - name: Compare candidate with versioned deployment artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          training = json.loads(Path("/tmp/ensemble-training/training_report.json").read_text(encoding="utf-8"))
+          candidate = json.loads(Path("/tmp/ensemble-candidate/deployed_model.json").read_text(encoding="utf-8"))
+          candidate_fairness = json.loads(Path("/tmp/ensemble-candidate/fairness.json").read_text(encoding="utf-8"))
+          candidate_fixtures = json.loads(Path("/tmp/ensemble-candidate/deployed_fixture_predictions.json").read_text(encoding="utf-8"))
+
+          deployed_root = Path("modules/ensemble-income-predictor/runtime-artifacts")
+          deployed = json.loads((deployed_root / "deployed_model.json").read_text(encoding="utf-8"))
+          deployed_fairness = json.loads((deployed_root / "fairness.json").read_text(encoding="utf-8"))
+          deployed_fixtures = json.loads((deployed_root / "deployed_fixture_predictions.json").read_text(encoding="utf-8"))
+          deployed_model = deployed_root / "adult_income_pipeline.joblib"
+
+          assert training["meta"]["records"] == 32561, training["meta"]
+          assert training["meta"]["features"] == 14, training["meta"]
+          assert len(training["metrics"]) == 5, training["metrics"].keys()
+          assert candidate["deployedModel"] == "SoftVotingEnsemble", candidate
+          assert candidate["algorithm"] == "VotingClassifier(voting=soft)", candidate
+          assert candidate["metrics"] == deployed["metrics"], {"candidate": candidate["metrics"], "deployed": deployed["metrics"]}
+          assert candidate["datasetSha256"] == deployed["datasetSha256"], {"candidate": candidate["datasetSha256"], "deployed": deployed["datasetSha256"]}
+          assert candidate_fairness == deployed_fairness, "Fairness report drifted"
+          assert candidate_fixtures == deployed_fixtures, "Fixed fixture predictions drifted"
+          assert deployed_model.exists() and deployed_model.stat().st_size > 0, deployed_model
+          assert len(deployed["modelSha256"]) == 64, deployed
+          print(json.dumps({
+              "trainingMetrics": training["metrics"],
+              "versionedDeployment": deployed,
+              "fairness": deployed_fairness,
+              "fixturePredictions": deployed_fixtures,
+          }, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Exercise versioned Soft Voting Runtime with Vercel import semantics
+        run: |
+          python - <<'PY'
+          import importlib.util
+          import json
+          from pathlib import Path
+
+          entrypoint = Path("api/ensemble-predict.py")
+          spec = importlib.util.spec_from_file_location("vercel_ensemble_predict", entrypoint)
+          assert spec and spec.loader, entrypoint
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          assert hasattr(module, "handler"), "Vercel handler class is missing"
+
+          from api._ensemble_runtime import predict, runtime_status
+
+          status = runtime_status()
+          assert status["artifactAvailable"] is True, status
+          assert status["deployedModel"] == "SoftVotingEnsemble", status
+          result = predict({
+              "age": 39,
+              "workclass": "Private",
+              "education": "Bachelors",
+              "marital_status": "Never-married",
+              "occupation": "Adm-clerical",
+              "relationship": "Not-in-family",
+              "race": "White",
+              "sex": "Male",
+              "capital_gain": 2174,
+              "capital_loss": 0,
+              "hours_per_week": 40,
+              "native_country": "United-States"
+          })
+          assert result["prediction"] in {"<=50K", ">50K"}, result
+          assert 0 <= result["probability"] <= 1, result
+          assert result["modelVersion"] == "adult-income-soft-voting-v1.1", result
+          assert len(result["modelSha256"]) == 64, result
+          assert "高風險" in result["disclaimer"], result
+          print(json.dumps({"status": status, "prediction": result}, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Upload candidate retraining evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ensemble-income-runtime-evidence
+          path: |
+            /tmp/ensemble-training/**
+            /tmp/ensemble-candidate/**
+          if-no-files-found: error
+          retention-days: 14
