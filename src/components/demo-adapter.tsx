@@ -38,7 +38,55 @@ function DemoFallback({
   );
 }
 
-function NativeDemo({ nativeKey, fallbackUrl }: { nativeKey?: string; fallbackUrl: string }) {
+function NativeRouteDemo({
+  title,
+  description,
+  url,
+  fallbackUrl,
+}: {
+  title: string;
+  description: string;
+  url: string;
+  fallbackUrl: string;
+}) {
+  return (
+    <div className="rounded-3xl border border-emerald-200 bg-gradient-to-br from-white to-emerald-50 p-7 shadow-soft">
+      <p className="text-sm font-black text-brand">NATIVE LEARNING LAB</p>
+      <h3 className="mt-2 text-2xl font-black text-ink">{title}</h3>
+      <p className="mt-3 max-w-3xl leading-7 text-slate-600">{description}</p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <a
+          href={url}
+          className="inline-flex rounded-full bg-brand px-5 py-3 font-bold text-white"
+        >
+          開啟站內實驗室
+        </a>
+        <a
+          href={fallbackUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex rounded-full border border-slate-300 px-5 py-3 font-bold text-ink"
+        >
+          查看來源紀錄
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function NativeDemo({
+  nativeKey,
+  url,
+  title,
+  description,
+  fallbackUrl,
+}: {
+  nativeKey?: string;
+  url?: string;
+  title: string;
+  description: string;
+  fallbackUrl: string;
+}) {
   if (nativeKey === "linear-regression-playground") {
     return <LinearRegressionPlayground />;
   }
@@ -49,6 +97,17 @@ function NativeDemo({ nativeKey, fallbackUrl }: { nativeKey?: string; fallbackUr
 
   if (nativeKey === "svm-kernel-playground") {
     return <SvmKernelPlayground />;
+  }
+
+  if (url) {
+    return (
+      <NativeRouteDemo
+        title={title}
+        description={description}
+        url={url}
+        fallbackUrl={fallbackUrl}
+      />
+    );
   }
 
   return (
@@ -94,7 +153,15 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
   }
 
   if (resolvedDemo.mode === "native") {
-    return <NativeDemo nativeKey={resolvedDemo.nativeKey} fallbackUrl={fallbackUrl} />;
+    return (
+      <NativeDemo
+        nativeKey={resolvedDemo.nativeKey}
+        url={resolvedDemo.url}
+        title={title}
+        description={description}
+        fallbackUrl={fallbackUrl}
+      />
+    );
   }
 
   if (resolvedDemo.mode === "external") {
@@ -124,7 +191,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
     return (
       <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft">
         <div className="border-b border-slate-200 p-5">
-          <p className="text-sm font-black text-brand">MIGRATION EMBED</p>
+          <p className="text-sm font-black text-brand">PUBLIC SOURCE DEMO</p>
           <h3 className="mt-1 text-xl font-black text-ink">{title}</h3>
           <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
         </div>
@@ -138,7 +205,7 @@ export default function DemoAdapter({ courseTitle, demo, source }: DemoAdapterPr
           sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         />
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-500">
-          <span>此模式僅供移植期間比對，完成原生接管後應移除。</span>
+          <span>這是來源 Repository 的公開展示頁，站內教材與資產仍由 AI-Learning-Portfolio 管理。</span>
           <a href={fallbackUrl} target="_blank" rel="noreferrer" className="font-bold text-brand hover:underline">開啟來源紀錄</a>
         </div>
       </div>
