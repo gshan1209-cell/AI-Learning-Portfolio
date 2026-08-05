@@ -86,16 +86,30 @@ function testNativeVisualStory(registry: DemoRegistry): void {
   assert.equal(story.slides.length, 12);
   assert.equal(new Set(story.slides.map((slide) => slide.id)).size, 12);
   assert.match(story.sourceBlobSha, /^[0-9a-f]{40}$/);
-  assert.match(story.sourceRevision, /^[0-9a-f]{40}$/);
+  assert.match(story.sourceRevision.trim().toLowerCase(), /^[0-9a-f]{40}$/);
   assert.ok(story.rightsStatus.length > 20);
 
+  const pinnedRevisions = new Set<string>();
   for (const slide of story.slides) {
     assert.ok(slide.alt.length > 8, `${slide.id} must have meaningful alt text`);
     assert.ok(slide.text.includes("幕："), `${slide.id} must preserve the source scene heading`);
     assert.ok(slide.duration > 0, `${slide.id} duration must be positive`);
     assert.ok(["fade", "slide-in", "zoom-in"].includes(normalizedTransition(slide.transition)));
-    assert.ok(slide.imageUrl.includes(story.sourceRevision), `${slide.id} image must pin the source revision`);
+
+    const imageUrl = new URL(slide.imageUrl);
+    const segments = imageUrl.pathname.split("/").filter(Boolean);
+    assert.equal(imageUrl.hostname, "raw.githubusercontent.com", `${slide.id} must use raw GitHub content`);
+    assert.equal(segments[0], "gshan1209-cell", `${slide.id} must use the source owner`);
+    assert.equal(segments[1], "L2DOC1-github", `${slide.id} must use the source repository`);
+    assert.match(segments[2] ?? "", /^[0-9a-f]{40}$/i, `${slide.id} must pin an immutable commit SHA`);
+    assert.equal(segments[3], "uploads", `${slide.id} must use the source uploads folder`);
+    pinnedRevisions.add((segments[2] ?? "").trim().toLowerCase());
   }
+  assert.deepEqual(
+    [...pinnedRevisions],
+    [story.sourceRevision.trim().toLowerCase()],
+    "all story images must use the declared source revision",
+  );
 
   assert.equal(registry["ai-visual-story"].mode, "native");
   assert.equal(registry["ai-visual-story"].url, "/learning-labs/ai-visual-story");
