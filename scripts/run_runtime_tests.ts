@@ -230,8 +230,9 @@ function testEnsembleRuntimeContract(): void {
   assert.ok(trainer.includes('"race"'));
   assert.ok(trainer.includes("falsePositiveRate"));
   assert.ok(workflow.includes("Retrain five Adult Census classifiers"));
-  assert.ok(workflow.includes("Exercise local Soft Voting Runtime"));
-  assert.ok(workflow.includes("Commit versioned deployment artifact"));
+  assert.ok(workflow.includes("Compare candidate with versioned deployment artifact"));
+  assert.ok(workflow.includes("Exercise versioned Soft Voting Runtime"));
+  assert.ok(!workflow.includes("git push origin"));
   assert.ok(vercel.includes("runtime-artifacts/**"));
   assert.ok(lab.includes("predict_proba"));
   assert.ok(lab.includes("不使用預先寫死的機率"));
