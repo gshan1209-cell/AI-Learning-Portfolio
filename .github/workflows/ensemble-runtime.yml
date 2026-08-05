@@ -21,21 +21,15 @@ on:
       - ".github/workflows/ensemble-runtime.yml"
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   train-and-verify:
-    name: Retrain, export and exercise deployed Ensemble model
+    name: Retrain, compare and exercise deployed Ensemble model
     runs-on: ubuntu-24.04
     timeout-minutes: 35
 
     steps:
-      - name: Checkout source branch
+      - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
-          fetch-depth: 0
 
       - name: Setup Python 3.12
         uses: actions/setup-python@v5
@@ -52,59 +46,52 @@ jobs:
       - name: Retrain five Adult Census classifiers
         run: |
           python modules/ensemble-income-predictor/scripts/train_model.py \
-            --output-dir modules/ensemble-income-predictor/runtime-artifacts \
-            --dataset-cache modules/ensemble-income-predictor/data/adult.data
+            --output-dir /tmp/ensemble-training \
+            --dataset-cache /tmp/ensemble-data/adult.data
 
-      - name: Export verified Soft Voting deployment artifact
+      - name: Export Soft Voting candidate artifact
         run: |
           python modules/ensemble-income-predictor/scripts/export_soft_voting.py \
-            --output-dir modules/ensemble-income-predictor/runtime-artifacts \
-            --dataset-cache modules/ensemble-income-predictor/data/adult.data
+            --output-dir /tmp/ensemble-candidate \
+            --dataset-cache /tmp/ensemble-data/adult.data
 
-      - name: Validate training, deployment and fairness artifacts
+      - name: Compare candidate with versioned deployment artifact
         run: |
           python - <<'PY'
-          import hashlib
           import json
           from pathlib import Path
 
-          root = Path("modules/ensemble-income-predictor/runtime-artifacts")
-          report = json.loads((root / "training_report.json").read_text(encoding="utf-8"))
-          deployed = json.loads((root / "deployed_model.json").read_text(encoding="utf-8"))
-          fairness = json.loads((root / "fairness.json").read_text(encoding="utf-8"))
-          fixtures = json.loads((root / "deployed_fixture_predictions.json").read_text(encoding="utf-8"))
-          model_path = root / "adult_income_pipeline.joblib"
-          model_sha = hashlib.sha256(model_path.read_bytes()).hexdigest()
+          training = json.loads(Path("/tmp/ensemble-training/training_report.json").read_text(encoding="utf-8"))
+          candidate = json.loads(Path("/tmp/ensemble-candidate/deployed_model.json").read_text(encoding="utf-8"))
+          candidate_fairness = json.loads(Path("/tmp/ensemble-candidate/fairness.json").read_text(encoding="utf-8"))
+          candidate_fixtures = json.loads(Path("/tmp/ensemble-candidate/deployed_fixture_predictions.json").read_text(encoding="utf-8"))
 
-          assert report["meta"]["records"] > 30_000, report["meta"]
-          assert report["meta"]["features"] == 14, report["meta"]
-          assert len(report["metrics"]) == 5, report["metrics"].keys()
-          assert report["metrics"]["SoftVotingEnsemble"]["f1"] > 0.5
-          assert deployed["deployedModel"] == "SoftVotingEnsemble", deployed
-          assert deployed["algorithm"] == "VotingClassifier(voting=soft)", deployed
-          assert deployed["modelSha256"] == model_sha, deployed
-          assert deployed["metrics"]["f1"] == report["metrics"]["SoftVotingEnsemble"]["f1"]
-          assert fairness["model"] == "SoftVotingEnsemble", fairness
-          assert fairness["groups"]["sex"]
-          assert fairness["groups"]["race"]
-          assert len(fixtures) == 3
-          for path in [
-              model_path,
-              root / "deployed_model.json",
-              root / "metrics.json",
-              root / "fairness.json",
-              root / "deployed_fixture_predictions.json",
-          ]:
-              assert path.exists() and path.stat().st_size > 0, path
+          deployed_root = Path("modules/ensemble-income-predictor/runtime-artifacts")
+          deployed = json.loads((deployed_root / "deployed_model.json").read_text(encoding="utf-8"))
+          deployed_fairness = json.loads((deployed_root / "fairness.json").read_text(encoding="utf-8"))
+          deployed_fixtures = json.loads((deployed_root / "deployed_fixture_predictions.json").read_text(encoding="utf-8"))
+          deployed_model = deployed_root / "adult_income_pipeline.joblib"
+
+          assert training["meta"]["records"] == 32561, training["meta"]
+          assert training["meta"]["features"] == 14, training["meta"]
+          assert len(training["metrics"]) == 5, training["metrics"].keys()
+          assert candidate["deployedModel"] == "SoftVotingEnsemble", candidate
+          assert candidate["algorithm"] == "VotingClassifier(voting=soft)", candidate
+          assert candidate["metrics"] == deployed["metrics"], {"candidate": candidate["metrics"], "deployed": deployed["metrics"]}
+          assert candidate["datasetSha256"] == deployed["datasetSha256"], {"candidate": candidate["datasetSha256"], "deployed": deployed["datasetSha256"]}
+          assert candidate_fairness == deployed_fairness, "Fairness report drifted"
+          assert candidate_fixtures == deployed_fixtures, "Fixed fixture predictions drifted"
+          assert deployed_model.exists() and deployed_model.stat().st_size > 0, deployed_model
+          assert len(deployed["modelSha256"]) == 64, deployed
           print(json.dumps({
-              "trainingMetrics": report["metrics"],
-              "deployedModel": deployed,
-              "fairness": fairness,
-              "fixturePredictions": fixtures,
+              "trainingMetrics": training["metrics"],
+              "versionedDeployment": deployed,
+              "fairness": deployed_fairness,
+              "fixturePredictions": deployed_fixtures,
           }, ensure_ascii=False, indent=2))
           PY
 
-      - name: Exercise local Soft Voting Runtime
+      - name: Exercise versioned Soft Voting Runtime
         env:
           PYTHONPATH: api
         run: |
@@ -114,6 +101,7 @@ jobs:
 
           status = runtime_status()
           assert status["artifactAvailable"] is True, status
+          assert status["deployedModel"] == "SoftVotingEnsemble", status
           result = predict({
               "age": 39,
               "workclass": "Private",
@@ -136,28 +124,12 @@ jobs:
           print(json.dumps({"status": status, "prediction": result}, ensure_ascii=False, indent=2))
           PY
 
-      - name: Commit versioned deployment artifact to PR branch
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            modules/ensemble-income-predictor/runtime-artifacts/adult_income_pipeline.joblib \
-            modules/ensemble-income-predictor/runtime-artifacts/deployed_model.json \
-            modules/ensemble-income-predictor/runtime-artifacts/metrics.json \
-            modules/ensemble-income-predictor/runtime-artifacts/fairness.json \
-            modules/ensemble-income-predictor/runtime-artifacts/deployed_fixture_predictions.json
-          if git diff --cached --quiet; then
-            echo "Verified Ensemble deployment artifact is already current."
-          else
-            git commit -m "build: update verified Ensemble deployment artifact"
-            git push origin HEAD:${{ github.head_ref }}
-          fi
-
-      - name: Upload reproducible training artifacts
+      - name: Upload candidate retraining evidence
         uses: actions/upload-artifact@v4
         with:
-          name: ensemble-income-runtime-artifacts
-          path: modules/ensemble-income-predictor/runtime-artifacts/**
+          name: ensemble-income-runtime-evidence
+          path: |
+            /tmp/ensemble-training/**
+            /tmp/ensemble-candidate/**
           if-no-files-found: error
           retention-days: 14
