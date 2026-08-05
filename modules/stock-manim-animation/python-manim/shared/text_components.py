@@ -1,7 +1,13 @@
+from __future__ import annotations
+
+import os
+
 from manim import *
 from shared.theme import *
 
-CHINESE_FONT = "Microsoft JhengHei"
+# CI/Linux installs Noto CJK; Windows developers may override this with
+# MANIM_CHINESE_FONT=Microsoft JhengHei.
+CHINESE_FONT = os.getenv("MANIM_CHINESE_FONT", "Noto Sans CJK TC")
 
 
 def title_text(text: str, with_shadow=True):
