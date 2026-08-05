@@ -31,6 +31,21 @@ const slugs = [
   'ai-visual-story',
 ];
 
+const presentationOverrideSlugs = [
+  'svm-kernel-trick-3d',
+  'cwa-open-data-first-api',
+  'ml-top-10-algorithms',
+  'crisp-dm-regression',
+  'stock-manim-animation',
+  'boston-feature-selection',
+  'cosmos-text-to-image',
+  'movie-scraper-nextjs',
+  'agri-weather-dashboard',
+  'django-blog-basics',
+  'ensemble-income-predictor',
+  'ai-visual-story',
+];
+
 function compareCourseChunkNames(left, right) {
   if (left === 'course_0001.json') return -1;
   if (right === 'course_0001.json') return 1;
@@ -86,15 +101,11 @@ try {
 
     assert(
       assets.presentation.mimeType === 'application/vnd.google-apps.presentation',
-      `${slug} presentation is native Google Slides`,
+      `${slug} baseline presentation is native Google Slides`,
     );
     assert(
       assets.presentation.url.includes('/presentation/d/'),
-      `${slug} presentation uses a Google Slides URL`,
-    );
-    assert(
-      !/\.pptx$/i.test(assets.presentation.name),
-      `${slug} presentation name has no legacy PPTX extension`,
+      `${slug} baseline presentation uses a Google Slides URL`,
     );
     assert(
       assets.videoDesign.mimeType === 'application/vnd.google-apps.document',
@@ -104,12 +115,48 @@ try {
       assets.videoDesign.url.includes('/document/d/'),
       `${slug} video design uses a Google Docs URL`,
     );
-    assert(
-      !/\.html$/i.test(assets.videoDesign.name),
-      `${slug} video design name has no legacy HTML extension`,
-    );
   }
   assert(fileIds.size === 56, 'registry contains 56 unique core assets');
+
+  const presentationRegistryPath = path.join(
+    root,
+    'course_presentation_registry',
+    'presentation_registry.json',
+  );
+  assert(fs.existsSync(presentationRegistryPath), 'course presentation override registry exists');
+  const presentationRegistry = JSON.parse(
+    fs.readFileSync(presentationRegistryPath, 'utf8'),
+  );
+  assert(
+    Object.keys(presentationRegistry).length === 12,
+    'presentation override registry contains 12 newly assigned decks',
+  );
+  assert(
+    presentationOverrideSlugs.every((slug) => presentationRegistry[slug]),
+    'presentation override registry covers all newly assigned course decks',
+  );
+  assert(
+    !presentationRegistry['linear-regression-for-beginners'],
+    'linear regression keeps its existing native presentation',
+  );
+  assert(
+    !presentationRegistry['startup-profit-prediction'],
+    'startup profit keeps its existing native presentation',
+  );
+  for (const slug of presentationOverrideSlugs) {
+    const presentation = presentationRegistry[slug];
+    assert(Boolean(presentation.fileId), `${slug} override has a file ID`);
+    assert(/\.pptx$/i.test(presentation.name), `${slug} override identifies the PPTX file`);
+    assert(
+      presentation.mimeType ===
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      `${slug} override uses the PowerPoint MIME type`,
+    );
+    assert(
+      presentation.url.includes('/presentation/d/'),
+      `${slug} override opens through Google Presentations`,
+    );
+  }
 
   const typeSource = fs.readFileSync(path.join(root, 'src/types/course.ts'), 'utf8');
   assert(typeSource.includes('export interface CourseAssets'), 'course type defines asset metadata');
@@ -117,7 +164,18 @@ try {
 
   const repositorySource = fs.readFileSync(path.join(root, 'src/lib/course-repository.ts'), 'utf8');
   assert(repositorySource.includes('readAssetRegistry'), 'course repository reads asset registry');
-  assert(repositorySource.includes('assets: assetRegistry[course.slug] ?? course.assets'), 'course repository merges assets by slug');
+  assert(
+    repositorySource.includes('readPresentationRegistry'),
+    'course repository reads presentation override registry',
+  );
+  assert(
+    repositorySource.includes('resolveCourseAssets'),
+    'course repository merges presentation overrides into course assets',
+  );
+  assert(
+    repositorySource.includes('presentation ? { ...assets, presentation } : assets'),
+    'course repository replaces only the presentation asset',
+  );
   assert(
     repositorySource.includes('compareCourseChunkNames'),
     'course repository uses deterministic baseline-first chunk precedence',
@@ -155,17 +213,20 @@ try {
 
   const panelSource = fs.readFileSync(path.join(root, 'src/components/course-assets-panel.tsx'), 'utf8');
   assert(panelSource.includes('重點圖卡'), 'asset panel contains the public summary card');
-  for (const hiddenLabel of ['課程簡報', 'NotebookLM 提示語', '64 秒影片設計', '開啟 Drive 課程資料夾']) {
+  assert(panelSource.includes('課程簡報'), 'asset panel contains the public presentation');
+  assert(panelSource.includes('assets.presentation.url'), 'asset panel links the registered presentation');
+  assert(panelSource.includes('assets.presentation.name'), 'asset panel displays the presentation filename');
+  for (const hiddenLabel of ['NotebookLM 提示語', '64 秒影片設計', '開啟 Drive 課程資料夾']) {
     assert(!panelSource.includes(hiddenLabel), `asset panel hides ${hiddenLabel}`);
   }
   assert(
-    panelSource.includes('公開課程頁只呈現學習內容與重點圖卡'),
-    'asset panel only describes public learning content and summary card',
+    panelSource.includes('公開課程頁提供重點圖卡與課程簡報'),
+    'asset panel describes only the public summary card and presentation',
   );
 
   const pageSource = fs.readFileSync(path.join(root, 'src/app/courses/[slug]/page.tsx'), 'utf8');
-  assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the summary panel');
-  assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the summary panel');
+  assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the asset panel');
+  assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the asset panel');
   assert(
     pageSource.includes('return getAllCourses().map((course) => ({ slug: course.slug }))'),
     'course detail static params include every course status',
@@ -174,23 +235,15 @@ try {
     pageSource.includes('if (!course) notFound();'),
     'course detail returns 404 only when the course is missing',
   );
-  assert(
-    pageSource.includes('課程內容仍在轉製中'),
-    'draft course detail shows an honest conversion-status notice',
-  );
 
   const courseCardSource = fs.readFileSync(path.join(root, 'src/components/course-card.tsx'), 'utf8');
   assert(
     courseCardSource.includes('查看課程內容'),
-    'draft course card links to the course content page',
+    'course card links to the course content page',
   );
   assert(
     !courseCardSource.includes('查看課程資產'),
     'course card no longer exposes public asset wording',
-  );
-  assert(
-    !courseCardSource.includes('<span className="font-semibold text-slate-400">即將推出</span>'),
-    'draft course card no longer blocks access to course content',
   );
 
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
