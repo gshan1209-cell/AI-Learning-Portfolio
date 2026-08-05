@@ -1,0 +1,94 @@
+{
+  "status": "verified",
+  "verifiedAt": "2026-08-05T05:49:45Z",
+  "workflowRunId": 30979091834,
+  "artifactId": 8919493939,
+  "artifactName": "stock-manim-runtime-videos",
+  "artifactZipSha256": "d931a46ed4a63394dc2b3abf56d3290ffd77bcde8933f8381c56df86abfbc2f7",
+  "quality": "480p15",
+  "sceneCount": 9,
+  "totalDurationSeconds": 134.124869,
+  "scenes": [
+    {
+      "scene": "TitleIntro",
+      "source": "scenes/scene_00_title_intro.py",
+      "bytes": 331229,
+      "duration": 9.8,
+      "width": 854,
+      "height": 480,
+      "sha256": "a388d0a7801ce19c2ba9021be7758191011660a2ee2c041d5c25b9c4b1cab7d7"
+    },
+    {
+      "scene": "MarketRulesIntro",
+      "source": "scenes/scene_01_market_rules.py",
+      "bytes": 271132,
+      "duration": 11.132031,
+      "width": 854,
+      "height": 480,
+      "sha256": "1b9d6365ee7770b2ae2af90ed4abde0d3a9c94c5abe7f546b6709275dcbf8876"
+    },
+    {
+      "scene": "CandlestickBasics",
+      "source": "scenes/scene_02_candlestick_basics.py",
+      "bytes": 347180,
+      "duration": 17.66569,
+      "width": 854,
+      "height": 480,
+      "sha256": "e6f4ef3ead7650c6bf630ba43caeb53ba008699333de74febb5c737a0397bb18"
+    },
+    {
+      "scene": "MovingAverageIntro",
+      "source": "scenes/scene_03_moving_average.py",
+      "bytes": 326213,
+      "duration": 11.266667,
+      "width": 854,
+      "height": 480,
+      "sha256": "4a82e7a6bca3b3eb632b336e542291c4cc4968fa06bd87fa4b3e13736da2af88"
+    },
+    {
+      "scene": "VolumePriceIntro",
+      "source": "scenes/scene_04_volume_price.py",
+      "bytes": 370857,
+      "duration": 13.065365,
+      "width": 854,
+      "height": 480,
+      "sha256": "b2fd94970fe38a6fe8780d0b2223348011d19832f70722617e5e24732d983e9b"
+    },
+    {
+      "scene": "SupportResistanceIntro",
+      "source": "scenes/scene_05_support_resistance.py",
+      "bytes": 609737,
+      "duration": 19.199674,
+      "width": 854,
+      "height": 480,
+      "sha256": "c5477555b3aac3db0ed3ea9df446be672f17b329ce2504b0d0f409cc5e4d985f"
+    },
+    {
+      "scene": "TrendBreakoutIntro",
+      "source": "scenes/scene_06_trend_breakout.py",
+      "bytes": 417575,
+      "duration": 15.199023,
+      "width": 854,
+      "height": 480,
+      "sha256": "ed33cc723485d7ca9d79c65b496f3deb3d0fa49c519d24825817d97595abc480"
+    },
+    {
+      "scene": "IndicatorsIntro",
+      "source": "scenes/scene_07_indicators_intro.py",
+      "bytes": 506942,
+      "duration": 17.199023,
+      "width": 854,
+      "height": 480,
+      "sha256": "3bffb08f26eb61c00671652caa299374230c616e6ba0400c17873e7f45eea715"
+    },
+    {
+      "scene": "BacktestingRiskIntro",
+      "source": "scenes/scene_08_backtesting_risk.py",
+      "bytes": 687317,
+      "duration": 20.397396,
+      "width": 854,
+      "height": 480,
+      "sha256": "c1f61f8bf72fd3445a89541cf2b6956010b62d152fa6dc754d4bf47071764d5e"
+    }
+  ]
+}
