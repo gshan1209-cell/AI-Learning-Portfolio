@@ -1,0 +1,67 @@
+{
+  "model": "SoftVotingEnsemble",
+  "method": "held-out test split, random_state=42, minimum group size=25",
+  "warning": "These descriptive rates do not establish legal or ethical fairness and must not be used for high-risk decisions.",
+  "groups": {
+    "sex": {
+      "Female": {
+        "count": 2158,
+        "actualPositiveCount": 245,
+        "predictedPositiveCount": 201,
+        "recall": 0.632653,
+        "falsePositiveRate": 0.024046,
+        "selectionRate": 0.093142
+      },
+      "Male": {
+        "count": 4355,
+        "actualPositiveCount": 1323,
+        "predictedPositiveCount": 1263,
+        "recall": 0.705971,
+        "falsePositiveRate": 0.108509,
+        "selectionRate": 0.290011
+      }
+    },
+    "race": {
+      "Amer-Indian-Eskimo": {
+        "count": 73,
+        "actualPositiveCount": 9,
+        "predictedPositiveCount": 4,
+        "recall": 0.333333,
+        "falsePositiveRate": 0.015625,
+        "selectionRate": 0.054795
+      },
+      "Asian-Pac-Islander": {
+        "count": 200,
+        "actualPositiveCount": 52,
+        "predictedPositiveCount": 55,
+        "recall": 0.673077,
+        "falsePositiveRate": 0.135135,
+        "selectionRate": 0.275
+      },
+      "Black": {
+        "count": 662,
+        "actualPositiveCount": 93,
+        "predictedPositiveCount": 79,
+        "recall": 0.634409,
+        "falsePositiveRate": 0.035149,
+        "selectionRate": 0.119335
+      },
+      "Other": {
+        "count": 45,
+        "actualPositiveCount": 4,
+        "predictedPositiveCount": 4,
+        "recall": 1.0,
+        "falsePositiveRate": 0.0,
+        "selectionRate": 0.088889
+      },
+      "White": {
+        "count": 5533,
+        "actualPositiveCount": 1410,
+        "predictedPositiveCount": 1322,
+        "recall": 0.700709,
+        "falsePositiveRate": 0.081009,
+        "selectionRate": 0.23893
+      }
+    }
+  }
+}
