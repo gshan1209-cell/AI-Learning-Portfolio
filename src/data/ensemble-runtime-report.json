@@ -1,26 +1,25 @@
 {
   "deployedModel": {
-    "modelVersion": "adult-income-rf-v1.0-source-pinned",
-    "algorithm": "RandomForestClassifier",
+    "modelVersion": "adult-income-soft-voting-v1.1",
+    "algorithm": "VotingClassifier(voting=soft)",
+    "deployedModel": "SoftVotingEnsemble",
     "sourceRepository": "gshan1209-cell/L20-Ensemble-Model",
     "sourceRevision": "46f23c298da353ded39aca4cfa000c8df29589f4",
-    "sourceGitBlobSha": "514ee4278a4b0aa45b867126a988ee97550ef546",
-    "binarySha256": "6e63a1f2393d45adeb5b3358093e2ad950817298d08acbc19fb1cf9f7912bb1d",
+    "modelSha256": "32841631d2718a7628b5384ee639af8f604515ca3962854b11424ada83aa13ca",
     "metrics": {
-      "accuracy": 0.8575,
-      "precision": 0.7356,
-      "recall": 0.6371,
-      "f1": 0.6828,
-      "confusionMatrix": [[4586, 359], [569, 999]]
+      "accuracy": 0.868878,
+      "precision": 0.743852,
+      "recall": 0.694515,
+      "f1": 0.718338,
+      "confusionMatrix": [[4570, 375], [479, 1089]]
     }
   },
-  "retraining": {
+  "deploymentVerification": {
     "status": "verified",
-    "verifiedAt": "2026-08-05T05:46:14Z",
-    "workflowRunId": 30979091865,
-    "artifactId": 8919425120,
-    "artifactZipSha256": "bff199ea03d3ece99be4a29928fa6ff05fc240f560144a5dfd0bf8dc7f573d93",
-    "modelArtifactSha256": "c95fe52fd1c4551be26950752931adc41d1d89ad1f5c6e0292a39319101ac02a",
+    "verifiedAt": "2026-08-05T05:55:47Z",
+    "workflowRunId": 30979586281,
+    "artifactId": 8919610344,
+    "artifactZipSha256": "1748491cb91953dce0720b7e4105b5c2352d27a355186c9da1da8ca70be0a221",
     "dataset": "UCI Adult Dataset",
     "datasetRecords": 32561,
     "featureCount": 14,
@@ -28,115 +27,89 @@
     "randomState": 42,
     "testSize": 0.2,
     "pythonVersion": "3.12.13",
-    "sklearnVersion": "1.9.0",
-    "bestModelByF1": "SoftVotingEnsemble",
-    "models": [
-      "LogisticRegression",
-      "DecisionTree",
-      "RandomForest",
-      "GradientBoosting",
-      "SoftVotingEnsemble"
-    ],
-    "metrics": {
-      "LogisticRegression": {
-        "accuracy": 0.855827,
-        "precision": 0.740627,
-        "recall": 0.617347,
-        "f1": 0.673391,
-        "confusionMatrix": [[4606, 339], [600, 968]]
+    "sklearnVersion": "1.9.0"
+  },
+  "modelComparison": {
+    "LogisticRegression": {
+      "accuracy": 0.855827,
+      "precision": 0.740627,
+      "recall": 0.617347,
+      "f1": 0.673391
+    },
+    "DecisionTree": {
+      "accuracy": 0.852602,
+      "precision": 0.711111,
+      "recall": 0.653061,
+      "f1": 0.680851
+    },
+    "RandomForest": {
+      "accuracy": 0.834792,
+      "precision": 0.617703,
+      "recall": 0.823342,
+      "f1": 0.70585
+    },
+    "GradientBoosting": {
+      "accuracy": 0.868878,
+      "precision": 0.789773,
+      "recall": 0.620536,
+      "f1": 0.695
+    },
+    "SoftVotingEnsemble": {
+      "accuracy": 0.868878,
+      "precision": 0.743852,
+      "recall": 0.694515,
+      "f1": 0.718338
+    }
+  },
+  "fairness": {
+    "method": "held-out test split, random_state=42, minimum group size=25",
+    "warning": "這些是描述性診斷，不構成法律或倫理上的公平認證。",
+    "sex": {
+      "Female": {
+        "count": 2158,
+        "recall": 0.632653,
+        "falsePositiveRate": 0.024046,
+        "selectionRate": 0.093142
       },
-      "DecisionTree": {
-        "accuracy": 0.852602,
-        "precision": 0.711111,
-        "recall": 0.653061,
-        "f1": 0.680851,
-        "confusionMatrix": [[4529, 416], [544, 1024]]
-      },
-      "RandomForest": {
-        "accuracy": 0.834792,
-        "precision": 0.617703,
-        "recall": 0.823342,
-        "f1": 0.70585,
-        "confusionMatrix": [[4146, 799], [277, 1291]]
-      },
-      "GradientBoosting": {
-        "accuracy": 0.868878,
-        "precision": 0.789773,
-        "recall": 0.620536,
-        "f1": 0.695,
-        "confusionMatrix": [[4686, 259], [595, 973]]
-      },
-      "SoftVotingEnsemble": {
-        "accuracy": 0.868878,
-        "precision": 0.743852,
-        "recall": 0.694515,
-        "f1": 0.718338,
-        "confusionMatrix": [[4570, 375], [479, 1089]]
+      "Male": {
+        "count": 4355,
+        "recall": 0.705971,
+        "falsePositiveRate": 0.108509,
+        "selectionRate": 0.290011
       }
     },
-    "fairness": {
-      "method": "held-out test split, random_state=42, minimum group size=25",
-      "sex": {
-        "Female": {
-          "count": 2158,
-          "actualPositiveCount": 245,
-          "predictedPositiveCount": 275,
-          "recall": 0.738776,
-          "falsePositiveRate": 0.049137,
-          "selectionRate": 0.127433
-        },
-        "Male": {
-          "count": 4355,
-          "actualPositiveCount": 1323,
-          "predictedPositiveCount": 1815,
-          "recall": 0.839002,
-          "falsePositiveRate": 0.23252,
-          "selectionRate": 0.416762
-        }
+    "race": {
+      "Amer-Indian-Eskimo": {
+        "count": 73,
+        "recall": 0.333333,
+        "falsePositiveRate": 0.015625,
+        "selectionRate": 0.054795
       },
-      "race": {
-        "Amer-Indian-Eskimo": {
-          "count": 73,
-          "actualPositiveCount": 9,
-          "predictedPositiveCount": 8,
-          "recall": 0.444444,
-          "falsePositiveRate": 0.0625,
-          "selectionRate": 0.109589
-        },
-        "Asian-Pac-Islander": {
-          "count": 200,
-          "actualPositiveCount": 52,
-          "predictedPositiveCount": 73,
-          "recall": 0.807692,
-          "falsePositiveRate": 0.209459,
-          "selectionRate": 0.365
-        },
-        "Black": {
-          "count": 662,
-          "actualPositiveCount": 93,
-          "predictedPositiveCount": 103,
-          "recall": 0.709677,
-          "falsePositiveRate": 0.065026,
-          "selectionRate": 0.155589
-        },
-        "Other": {
-          "count": 45,
-          "actualPositiveCount": 4,
-          "predictedPositiveCount": 5,
-          "recall": 1.0,
-          "falsePositiveRate": 0.02439,
-          "selectionRate": 0.111111
-        },
-        "White": {
-          "count": 5533,
-          "actualPositiveCount": 1410,
-          "predictedPositiveCount": 1901,
-          "recall": 0.833333,
-          "falsePositiveRate": 0.176085,
-          "selectionRate": 0.343575
-        }
+      "Asian-Pac-Islander": {
+        "count": 200,
+        "recall": 0.673077,
+        "falsePositiveRate": 0.135135,
+        "selectionRate": 0.275
+      },
+      "Black": {
+        "count": 662,
+        "recall": 0.634409,
+        "falsePositiveRate": 0.035149,
+        "selectionRate": 0.119335
+      },
+      "Other": {
+        "count": 45,
+        "recall": 1.0,
+        "falsePositiveRate": 0.0,
+        "selectionRate": 0.088889
+      },
+      "White": {
+        "count": 5533,
+        "recall": 0.700709,
+        "falsePositiveRate": 0.081009,
+        "selectionRate": 0.23893
       }
     }
   },
-  "warning": "模型與統計僅供教學，不得用於徵才、薪資、授信、保險或其他高風險決策。分組指標是描述性診斷，不構成法律或倫理上的公平認證。"
+  "warning": "模型與統計僅供教學，不得用於徵才、薪資、授信、保險或其他高風險決策。"
 }
