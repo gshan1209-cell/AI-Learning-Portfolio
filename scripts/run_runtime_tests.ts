@@ -1,6 +1,15 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  DEFAULT_COSMOS_MODEL,
+  CosmosRequestError,
+  aspectSize,
+  buildCosmosPayload,
+  normalizeProviderError,
+  parseCosmosRequest,
+  resolveCosmosConfig,
+} from "../src/lib/cosmos-runtime";
 
 const root = process.cwd();
 
@@ -72,9 +81,68 @@ function testNativeVisualStory(): void {
   }
 }
 
+function testCosmosRuntimeContract(): void {
+  const unconfigured = resolveCosmosConfig({});
+  assert.equal(unconfigured.configured, false);
+  assert.equal(unconfigured.model, DEFAULT_COSMOS_MODEL);
+  assert.equal(unconfigured.provider, "huggingface-inference-router");
+  assert.ok(!JSON.stringify(unconfigured).includes("Bearer"));
+
+  const configured = resolveCosmosConfig({
+    HF_TOKEN: "secret-test-token",
+    COSMOS_ENDPOINT_URL: "https://gpu.example.test/generate",
+    COSMOS_MODEL_ID: "nvidia/Cosmos3-Super-Text2Image",
+    COSMOS_PROVIDER: "test-dedicated-gpu",
+    COSMOS_TIMEOUT_MS: "120000",
+  });
+  assert.equal(configured.configured, true);
+  assert.equal(configured.hasDedicatedEndpoint, true);
+  assert.equal(configured.provider, "test-dedicated-gpu");
+  assert.equal(configured.timeoutMs, 120000);
+  assert.ok(!JSON.stringify(configured).includes("secret-test-token"));
+
+  const input = parseCosmosRequest({
+    prompt: "A physically plausible robot in a rice field",
+    negativePrompt: "watermark",
+    aspectRatio: "16:9",
+    seed: 123,
+    steps: 30,
+    guidanceScale: 8,
+  });
+  assert.deepEqual(aspectSize(input.aspectRatio), { width: 1024, height: 576 });
+  const payload = buildCosmosPayload(input) as {
+    inputs: string;
+    parameters: { width: number; height: number; seed: number };
+  };
+  assert.equal(payload.inputs, input.prompt);
+  assert.deepEqual(
+    { width: payload.parameters.width, height: payload.parameters.height, seed: payload.parameters.seed },
+    { width: 1024, height: 576, seed: 123 },
+  );
+
+  assert.throws(
+    () => parseCosmosRequest({ prompt: "x", aspectRatio: "21:9" }),
+    (error: unknown) => error instanceof CosmosRequestError && error.code === "invalid_input",
+  );
+  assert.equal(normalizeProviderError(401).code, "auth_failed");
+  assert.equal(normalizeProviderError(429).code, "rate_limited");
+  assert.equal(normalizeProviderError(503).code, "provider_loading");
+
+  const generateRoute = readText("src/app/api/cosmos/generate/route.ts");
+  const statusRoute = readText("src/app/api/cosmos/status/route.ts");
+  const lab = readText("src/components/runtime-labs/cosmos-runtime-lab.tsx");
+  assert.ok(generateRoute.includes("getCosmosToken"));
+  assert.ok(generateRoute.includes("X-Cosmos-Model"));
+  assert.ok(generateRoute.includes("runtime_unconfigured"));
+  assert.ok(!statusRoute.includes("getCosmosToken"));
+  assert.ok(lab.includes("沒有 Mock Mode"));
+  assert.ok(!lab.includes("Unsplash"));
+}
+
 function main(): void {
   testNativeVisualStory();
-  console.log("Runtime contract tests passed: native visual story");
+  testCosmosRuntimeContract();
+  console.log("Runtime contract tests passed: native visual story, Cosmos provider adapter");
 }
 
 main();
