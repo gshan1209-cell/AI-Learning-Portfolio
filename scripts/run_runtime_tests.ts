@@ -45,8 +45,10 @@ type DemoRegistry = Record<string, {
 type EnsembleReport = {
   deployedModel: {
     modelVersion: string;
+    algorithm: string;
+    deployedModel: string;
     sourceRevision: string;
-    sourceGitBlobSha: string;
+    modelSha256: string;
     metrics: {
       accuracy: number;
       precision: number;
@@ -55,10 +57,25 @@ type EnsembleReport = {
       confusionMatrix: number[][];
     };
   };
-  retraining: {
+  deploymentVerification: {
     status: string;
-    models: string[];
-    fairness: unknown;
+    workflowRunId: number;
+    artifactId: number;
+    artifactZipSha256: string;
+    datasetRecords: number;
+    featureCount: number;
+    datasetSha256: string;
+  };
+  modelComparison: Record<string, {
+    accuracy: number;
+    precision: number;
+    recall: number;
+    f1: number;
+  }>;
+  fairness: {
+    method: string;
+    sex: Record<string, { count: number; recall: number; falsePositiveRate: number; selectionRate: number }>;
+    race: Record<string, { count: number; recall: number; falsePositiveRate: number; selectionRate: number }>;
   };
   warning: string;
 };
@@ -166,24 +183,35 @@ function testEnsembleRuntimeContract(): void {
   const runtime = readText("api/_ensemble_runtime.py");
   const handler = readText("api/ensemble-predict.py");
   const trainer = readText("modules/ensemble-income-predictor/scripts/train_model.py");
+  const exporter = readText("modules/ensemble-income-predictor/scripts/export_soft_voting.py");
   const workflow = readText(".github/workflows/ensemble-runtime.yml");
   const lab = readText("src/components/runtime-labs/ensemble-runtime-lab.tsx");
+  const vercel = readText("vercel.json");
 
   assert.equal(registry["ensemble-income-predictor"].mode, "native");
   assert.equal(registry["ensemble-income-predictor"].url, "/learning-labs/ensemble-fairness-lab");
+  assert.equal(report.deployedModel.modelVersion, "adult-income-soft-voting-v1.1");
+  assert.equal(report.deployedModel.deployedModel, "SoftVotingEnsemble");
+  assert.equal(report.deployedModel.algorithm, "VotingClassifier(voting=soft)");
   assert.match(report.deployedModel.sourceRevision, /^[0-9a-f]{40}$/);
-  assert.match(report.deployedModel.sourceGitBlobSha, /^[0-9a-f]{40}$/);
-  assert.ok(report.deployedModel.metrics.accuracy > 0.5);
+  assert.match(report.deployedModel.modelSha256, /^[0-9a-f]{64}$/);
+  assert.equal(report.deploymentVerification.status, "verified");
+  assert.match(report.deploymentVerification.artifactZipSha256, /^[0-9a-f]{64}$/);
+  assert.equal(report.deploymentVerification.datasetRecords, 32561);
+  assert.equal(report.deploymentVerification.featureCount, 14);
+  assert.equal(report.deployedModel.metrics.f1, report.modelComparison.SoftVotingEnsemble.f1);
   assert.equal(report.deployedModel.metrics.confusionMatrix.length, 2);
   assert.deepEqual(
-    new Set(report.retraining.models),
+    new Set(Object.keys(report.modelComparison)),
     new Set(["LogisticRegression", "DecisionTree", "RandomForest", "GradientBoosting", "SoftVotingEnsemble"]),
   );
+  assert.ok(Object.keys(report.fairness.sex).length >= 2);
+  assert.ok(Object.keys(report.fairness.race).length >= 5);
   assert.ok(report.warning.includes("高風險"));
 
   for (const contract of [
-    "EXPECTED_GIT_BLOB_SHA",
-    "git_blob_sha",
+    "LOCAL_MODEL_PATH",
+    "modelSha256",
     "predict_proba",
     "loggingSensitiveInputs",
     "不得用於徵才",
@@ -194,14 +222,17 @@ function testEnsembleRuntimeContract(): void {
   assert.ok(handler.includes("MAX_BODY_BYTES"));
   assert.ok(handler.includes("Do not log request bodies"));
 
-  for (const model of report.retraining.models) {
+  for (const model of Object.keys(report.modelComparison)) {
     assert.ok(trainer.includes(`\"${model}\"`), `trainer missing model: ${model}`);
   }
+  assert.ok(exporter.includes('DEPLOYED_MODEL_NAME = "SoftVotingEnsemble"'));
   assert.ok(trainer.includes('"sex"'));
   assert.ok(trainer.includes('"race"'));
   assert.ok(trainer.includes("falsePositiveRate"));
   assert.ok(workflow.includes("Retrain five Adult Census classifiers"));
-  assert.ok(workflow.includes("Download and exercise pinned deployed model"));
+  assert.ok(workflow.includes("Exercise local Soft Voting Runtime"));
+  assert.ok(workflow.includes("Commit versioned deployment artifact"));
+  assert.ok(vercel.includes("runtime-artifacts/**"));
   assert.ok(lab.includes("predict_proba"));
   assert.ok(lab.includes("不使用預先寫死的機率"));
 }
@@ -210,7 +241,7 @@ function main(): void {
   testNativeVisualStory();
   testCosmosRuntimeContract();
   testEnsembleRuntimeContract();
-  console.log("Runtime contract tests passed: native visual story, Cosmos provider adapter, Ensemble Python runtime");
+  console.log("Runtime contract tests passed: native visual story, Cosmos provider adapter, Ensemble Soft Voting runtime");
 }
 
 main();
