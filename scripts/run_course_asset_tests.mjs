@@ -51,6 +51,31 @@ try {
       assert(!fileIds.has(asset.fileId), `${slug} ${key} file ID is unique`);
       fileIds.add(asset.fileId);
     }
+
+    assert(
+      assets.presentation.mimeType === 'application/vnd.google-apps.presentation',
+      `${slug} presentation is native Google Slides`,
+    );
+    assert(
+      assets.presentation.url.includes('/presentation/d/'),
+      `${slug} presentation uses a Google Slides URL`,
+    );
+    assert(
+      !/\.pptx$/i.test(assets.presentation.name),
+      `${slug} presentation name has no legacy PPTX extension`,
+    );
+    assert(
+      assets.videoDesign.mimeType === 'application/vnd.google-apps.document',
+      `${slug} video design is native Google Docs`,
+    );
+    assert(
+      assets.videoDesign.url.includes('/document/d/'),
+      `${slug} video design uses a Google Docs URL`,
+    );
+    assert(
+      !/\.html$/i.test(assets.videoDesign.name),
+      `${slug} video design name has no legacy HTML extension`,
+    );
   }
   assert(fileIds.size === 56, 'registry contains 56 unique core assets');
 
