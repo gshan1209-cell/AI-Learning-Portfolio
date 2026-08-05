@@ -42,6 +42,27 @@ type DemoRegistry = Record<string, {
   description?: string;
 }>;
 
+type EnsembleReport = {
+  deployedModel: {
+    modelVersion: string;
+    sourceRevision: string;
+    sourceGitBlobSha: string;
+    metrics: {
+      accuracy: number;
+      precision: number;
+      recall: number;
+      f1: number;
+      confusionMatrix: number[][];
+    };
+  };
+  retraining: {
+    status: string;
+    models: string[];
+    fairness: unknown;
+  };
+  warning: string;
+};
+
 function testNativeVisualStory(): void {
   const story = readJson<StoryData>("src/data/ai-visual-story.json");
   const registry = readJson<DemoRegistry>("course_demo_registry/demo_registry.json");
@@ -139,10 +160,57 @@ function testCosmosRuntimeContract(): void {
   assert.ok(!lab.includes("Unsplash"));
 }
 
+function testEnsembleRuntimeContract(): void {
+  const report = readJson<EnsembleReport>("src/data/ensemble-runtime-report.json");
+  const registry = readJson<DemoRegistry>("course_demo_registry/demo_registry.json");
+  const runtime = readText("api/_ensemble_runtime.py");
+  const handler = readText("api/ensemble-predict.py");
+  const trainer = readText("modules/ensemble-income-predictor/scripts/train_model.py");
+  const workflow = readText(".github/workflows/ensemble-runtime.yml");
+  const lab = readText("src/components/runtime-labs/ensemble-runtime-lab.tsx");
+
+  assert.equal(registry["ensemble-income-predictor"].mode, "native");
+  assert.equal(registry["ensemble-income-predictor"].url, "/learning-labs/ensemble-fairness-lab");
+  assert.match(report.deployedModel.sourceRevision, /^[0-9a-f]{40}$/);
+  assert.match(report.deployedModel.sourceGitBlobSha, /^[0-9a-f]{40}$/);
+  assert.ok(report.deployedModel.metrics.accuracy > 0.5);
+  assert.equal(report.deployedModel.metrics.confusionMatrix.length, 2);
+  assert.deepEqual(
+    new Set(report.retraining.models),
+    new Set(["LogisticRegression", "DecisionTree", "RandomForest", "GradientBoosting", "SoftVotingEnsemble"]),
+  );
+  assert.ok(report.warning.includes("高風險"));
+
+  for (const contract of [
+    "EXPECTED_GIT_BLOB_SHA",
+    "git_blob_sha",
+    "predict_proba",
+    "loggingSensitiveInputs",
+    "不得用於徵才",
+  ]) {
+    assert.ok(runtime.includes(contract), `ensemble runtime missing contract: ${contract}`);
+  }
+  assert.ok(handler.includes("BaseHTTPRequestHandler"));
+  assert.ok(handler.includes("MAX_BODY_BYTES"));
+  assert.ok(handler.includes("Do not log request bodies"));
+
+  for (const model of report.retraining.models) {
+    assert.ok(trainer.includes(`\"${model}\"`), `trainer missing model: ${model}`);
+  }
+  assert.ok(trainer.includes('"sex"'));
+  assert.ok(trainer.includes('"race"'));
+  assert.ok(trainer.includes("falsePositiveRate"));
+  assert.ok(workflow.includes("Retrain five Adult Census classifiers"));
+  assert.ok(workflow.includes("Download and exercise pinned deployed model"));
+  assert.ok(lab.includes("predict_proba"));
+  assert.ok(!lab.includes("寫死的機率"));
+}
+
 function main(): void {
   testNativeVisualStory();
   testCosmosRuntimeContract();
-  console.log("Runtime contract tests passed: native visual story, Cosmos provider adapter");
+  testEnsembleRuntimeContract();
+  console.log("Runtime contract tests passed: native visual story, Cosmos provider adapter, Ensemble Python runtime");
 }
 
 main();
