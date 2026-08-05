@@ -2,6 +2,7 @@ export const DEFAULT_COSMOS_MODEL = "nvidia/Cosmos3-Super-Text2Image";
 export const DEFAULT_HF_ROUTER_BASE = "https://router.huggingface.co/hf-inference/models";
 
 export type CosmosAspectRatio = "1:1" | "16:9" | "9:16" | "4:3";
+export type RuntimeEnvironment = Readonly<Record<string, string | undefined>>;
 
 export type CosmosRuntimeConfig = {
   configured: boolean;
@@ -39,7 +40,7 @@ function readPositiveInt(value: string | undefined, fallback: number): number {
 }
 
 export function resolveCosmosConfig(
-  env: NodeJS.ProcessEnv = process.env,
+  env: RuntimeEnvironment = process.env,
 ): CosmosRuntimeConfig {
   const token = env.HF_TOKEN?.trim() || "";
   const model = env.COSMOS_MODEL_ID?.trim() || DEFAULT_COSMOS_MODEL;
@@ -59,7 +60,7 @@ export function resolveCosmosConfig(
   };
 }
 
-export function getCosmosToken(env: NodeJS.ProcessEnv = process.env): string {
+export function getCosmosToken(env: RuntimeEnvironment = process.env): string {
   return env.HF_TOKEN?.trim() || "";
 }
 
