@@ -13,7 +13,7 @@ export default function CourseAssetsPanel({ courseSlug, assets }: CourseAssetsPa
       <div>
         <p className="text-sm font-black text-brand">COURSE SUMMARY</p>
         <h2 className="mt-1 text-3xl font-black text-ink">課程重點摘要</h2>
-        <p className="mt-2 text-slate-600">公開課程頁只呈現學習內容與重點圖卡；簡報、NotebookLM 提示語與影片設計保留在內部資產管理，不對外顯示。</p>
+        <p className="mt-2 text-slate-600">公開課程頁只呈現學習內容與重點圖卡。</p>
       </div>
 
       <article className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
