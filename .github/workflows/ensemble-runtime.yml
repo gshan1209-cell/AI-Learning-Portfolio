@@ -91,13 +91,21 @@ jobs:
           }, ensure_ascii=False, indent=2))
           PY
 
-      - name: Exercise versioned Soft Voting Runtime
-        env:
-          PYTHONPATH: api
+      - name: Exercise versioned Soft Voting Runtime with Vercel import semantics
         run: |
           python - <<'PY'
+          import importlib.util
           import json
-          from _ensemble_runtime import predict, runtime_status
+          from pathlib import Path
+
+          entrypoint = Path("api/ensemble-predict.py")
+          spec = importlib.util.spec_from_file_location("vercel_ensemble_predict", entrypoint)
+          assert spec and spec.loader, entrypoint
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          assert hasattr(module, "handler"), "Vercel handler class is missing"
+
+          from api._ensemble_runtime import predict, runtime_status
 
           status = runtime_status()
           assert status["artifactAvailable"] is True, status
