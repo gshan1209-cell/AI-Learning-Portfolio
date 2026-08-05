@@ -154,14 +154,18 @@ try {
   }
 
   const panelSource = fs.readFileSync(path.join(root, 'src/components/course-assets-panel.tsx'), 'utf8');
-  for (const label of ['重點圖卡', '課程簡報', 'NotebookLM 提示語', '64 秒影片設計']) {
-    assert(panelSource.includes(label), `asset panel contains ${label}`);
+  assert(panelSource.includes('重點圖卡'), 'asset panel contains the public summary card');
+  for (const hiddenLabel of ['課程簡報', 'NotebookLM 提示語', '64 秒影片設計', '開啟 Drive 課程資料夾']) {
+    assert(!panelSource.includes(hiddenLabel), `asset panel hides ${hiddenLabel}`);
   }
-  assert(panelSource.includes('Drive 課程資料夾'), 'asset panel links to the course Drive folder');
+  assert(
+    panelSource.includes('保留在內部資產管理，不對外顯示'),
+    'asset panel explains that authoring assets remain internal',
+  );
 
   const pageSource = fs.readFileSync(path.join(root, 'src/app/courses/[slug]/page.tsx'), 'utf8');
-  assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the asset panel');
-  assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the asset panel');
+  assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the summary panel');
+  assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the summary panel');
   assert(
     pageSource.includes('return getAllCourses().map((course) => ({ slug: course.slug }))'),
     'course detail static params include every course status',
@@ -177,12 +181,16 @@ try {
 
   const courseCardSource = fs.readFileSync(path.join(root, 'src/components/course-card.tsx'), 'utf8');
   assert(
-    courseCardSource.includes('查看課程資產'),
-    'draft course card links to the asset detail page',
+    courseCardSource.includes('查看課程內容'),
+    'draft course card links to the course content page',
+  );
+  assert(
+    !courseCardSource.includes('查看課程資產'),
+    'course card no longer exposes public asset wording',
   );
   assert(
     !courseCardSource.includes('<span className="font-semibold text-slate-400">即將推出</span>'),
-    'draft course card no longer blocks access to course assets',
+    'draft course card no longer blocks access to course content',
   );
 
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
