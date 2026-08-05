@@ -5,16 +5,29 @@ import storyData from "@/data/ai-visual-story.json";
 
 type Transition = "fade" | "slide-in" | "zoom-in";
 
-type StorySlide = {
+type RawStorySlide = {
   id: string;
   imageUrl: string;
   alt: string;
   text: string;
   duration: number;
+  transition: unknown;
+};
+
+type StorySlide = Omit<RawStorySlide, "transition"> & {
   transition: Transition;
 };
 
-const slides = storyData.slides as StorySlide[];
+export function normalizeStoryTransition(value: unknown): Transition {
+  const normalized = String(value ?? "").trim().toLowerCase();
+  if (normalized === "slide-in" || normalized === "zoom-in") return normalized;
+  return "fade";
+}
+
+const slides: StorySlide[] = (storyData.slides as RawStorySlide[]).map((slide) => ({
+  ...slide,
+  transition: normalizeStoryTransition(slide.transition),
+}));
 
 function transitionClass(transition: Transition, reducedMotion: boolean): string {
   if (reducedMotion) return "opacity-100";
