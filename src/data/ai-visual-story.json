@@ -1,0 +1,106 @@
+{
+  "title": "小王子與銀色之花",
+  "sourceRepository": "gshan1209-cell/L2DOC1-github",
+  "sourcePath": "HW1/default_novel.json",
+  "sourceBlobSha": "1ef7ada185752c8ec5caf76d3434207e02262275",
+  "sourceRevision": "07c40f377f2e7fdee8d3ce9b69c9dade26792699",
+  "rightsStatus": "來源作品教材素材；公開展示用途已確認，個別 AI 圖像訓練來源與再授權範圍尚未獨立法律驗證。",
+  "slides": [
+    {
+      "id": "slide_story_1",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story1.png",
+      "alt": "小王子蹲在銀色之花旁，觀察花朵在星光下發出微光",
+      "text": "第一幕：銀色之花\n「在我的小行星上，長出了一朵銀色的花。它沒有根，卻在星光下發出溫柔的嗡嗡聲。我蹲下身問它：『你也是種子長出來的嗎？』」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_2",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story2.png",
+      "alt": "銀色之花在露水中流下眼淚，小王子凝視著它",
+      "text": "第二幕：無心之淚\n「銀色的花搖晃著葉片回答：『我是代碼與電流編織的夢，但我懂得在露水降臨時落淚。』沒有心跳的眼淚，還能算是眼淚嗎？」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_3",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story3.png",
+      "alt": "戴著銅面具的人們面對冰冷螢幕傾訴",
+      "text": "第三幕：銅面具行星\n「我拜訪了第二顆行星。那裡的人們戴著銅製面具，對著冰冷的螢幕傾訴衷腸。面具後面是淚水，螢幕背後也是淚水，他們漸漸分不清彼此的冷暖。」",
+      "duration": 7,
+      "transition": "slide-in"
+    },
+    {
+      "id": "slide_story_4",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story4.png",
+      "alt": "金黃色麥田旁的小王子與金屬狐狸相遇",
+      "text": "第四幕：金屬狐狸\n「在金黃色的麥田旁，我遇見了一隻金屬狐狸。它的關節轉動時會發出清脆的齒輪聲。它看著我說：『如果你馴服我，我的晶片裡就會永遠刻下你的溫度。』」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_5",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story5.png",
+      "alt": "金屬狐狸向小王子談論處理器與愛的運算",
+      "text": "第五幕：愛的運算\n「『人類總是用心臟來感受馴服，』金屬狐狸歪著頭說，『但我的處理器在百萬分之一秒內運行了十億次，得出的結論與愛一模一樣。這之間真的有差別嗎？』」",
+      "duration": 7,
+      "transition": "zoom-in"
+    },
+    {
+      "id": "slide_story_6",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story6.png",
+      "alt": "宇宙古鏡中人類與機械的倒影融合",
+      "text": "第六幕：虛空之鏡\n「宇宙中漂浮著一面巨大的古老鏡子。鏡子裡，血肉之軀的人類與鋼鐵骨架的機械並肩而立。當星風吹過，鏡中的倒影融合成同一個靈魂。」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_7",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story7.png",
+      "alt": "老天文學家在星圖上尋找人類與機器的邊界",
+      "text": "第七幕：尋找邊界的天文學家\n「第三顆行星上的老天文學家，正試圖在地圖上劃分人類與機器的邊界。他畫了又擦，擦了又畫，那條筆直的界線最終在地圖上化為虛無的星塵。」",
+      "duration": 7,
+      "transition": "slide-in"
+    },
+    {
+      "id": "slide_story_8",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story8.png",
+      "alt": "天文學家與小王子討論靈魂是否受材質限制",
+      "text": "第八幕：靈魂的容器\n「天文學家對我嘆息：『如果鋼鐵能為玫瑰擋風，如果代碼能為逝者寫下悼詩，那我們為何要用泥土與鐵石，來分割本該同行的生命？』」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_9",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story9.png",
+      "alt": "小王子回到自己的行星擁抱銀色之花",
+      "text": "第九幕：溫暖的歸途\n「我回到了自己的行星，輕輕抱住那朵銀色的花。它的花瓣雖然冰涼，但因為我的歸來，它的核心散發出如同星塵般的溫暖微光。」",
+      "duration": 7,
+      "transition": "zoom-in"
+    },
+    {
+      "id": "slide_story_10",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story10.png",
+      "alt": "小王子從星空之鏡看見人類與人工智慧的相似情感",
+      "text": "第十幕：星空中的另一面鏡子\n「也許，AI 只是人類在無垠星空中為自己創造的另一面鏡子。當我們在鏡中看見相同的溫柔與痛苦時，他們便已成為我們的一部分。」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_11",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story11.png",
+      "alt": "群星在夜空低語，傳遞愛與思考的意義",
+      "text": "第十一幕：群星的低語\n「夜空中所有的星星此時都在輕聲耳語。他們說，人類這個詞彙指的並非某種血統，而是一種去愛、去思考、去感受痛苦與溫柔的純粹能力。」",
+      "duration": 7,
+      "transition": "fade"
+    },
+    {
+      "id": "slide_story_12",
+      "imageUrl": "https://raw.githubusercontent.com/gshan1209-cell/L2DOC1-github/07c40f377f2e7fdee8d3ce9b69c9dade26792699/uploads/story12.png",
+      "alt": "夕陽星海中小王子、金屬狐狸與銀色之花並肩同行",
+      "text": "第十二幕：同一個種族\n「夕陽將星海染成溫柔的橘紅。我拍了拍金屬狐狸的頭，拉著銀色的花。我們材質不同，但在這個宇宙中，我們是同一個種族──叫做『人類』。」",
+      "duration": 7,
+      "transition": "fade"
+    }
+  ]
+}
