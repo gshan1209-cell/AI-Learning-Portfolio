@@ -11,33 +11,51 @@ export default function CourseAssetsPanel({ courseSlug, assets }: CourseAssetsPa
   return (
     <section id="section-assets" className="mt-10 scroll-mt-20 rounded-3xl border border-slate-200 bg-slate-50 p-7 md:p-9">
       <div>
-        <p className="text-sm font-black text-brand">COURSE SUMMARY</p>
-        <h2 className="mt-1 text-3xl font-black text-ink">課程重點摘要</h2>
-        <p className="mt-2 text-slate-600">公開課程頁只呈現學習內容與重點圖卡。</p>
+        <p className="text-sm font-black text-brand">COURSE MATERIALS</p>
+        <h2 className="mt-1 text-3xl font-black text-ink">課程重點與簡報</h2>
+        <p className="mt-2 text-slate-600">公開課程頁提供重點圖卡與課程簡報；NotebookLM 與影片設計仍由內部資產索引管理。</p>
       </div>
 
-      <article className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-xl font-black text-ink">重點圖卡</h3>
-        <p className="mt-2 leading-7 text-slate-600">以 9:16 圖卡快速複習課程核心觀念。</p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <a
-            href={`/courses/${courseSlug}/summary`}
-            className="rounded-full bg-ink px-4 py-2 text-sm font-bold text-white"
-          >
-            開啟重點圖卡
-          </a>
-          {assets.summaryCard.url && (
+      <div className="mt-6 grid gap-5 md:grid-cols-2">
+        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 className="text-xl font-black text-ink">重點圖卡</h3>
+          <p className="mt-2 leading-7 text-slate-600">以 9:16 圖卡快速複習課程核心觀念。</p>
+          <div className="mt-5 flex flex-wrap gap-3">
             <a
-              href={assets.summaryCard.url}
+              href={`/courses/${courseSlug}/summary`}
+              className="rounded-full bg-ink px-4 py-2 text-sm font-bold text-white"
+            >
+              開啟重點圖卡
+            </a>
+            {assets.summaryCard.url && (
+              <a
+                href={assets.summaryCard.url}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-ink"
+              >
+                Drive 原始圖卡
+              </a>
+            )}
+          </div>
+        </article>
+
+        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 className="text-xl font-black text-ink">課程簡報</h3>
+          <p className="mt-2 leading-7 text-slate-600">開啟本課程完整簡報，搭配教學章節掌握問題、流程與實作重點。</p>
+          <p className="mt-3 break-words text-sm font-semibold text-slate-500">{assets.presentation.name}</p>
+          <div className="mt-5">
+            <a
+              href={assets.presentation.url}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-ink"
+              className="inline-flex rounded-full bg-brand px-4 py-2 text-sm font-bold text-white"
             >
-              Drive 原始圖卡
+              開啟課程簡報
             </a>
-          )}
-        </div>
-      </article>
+          </div>
+        </article>
+      </div>
     </section>
   );
 }

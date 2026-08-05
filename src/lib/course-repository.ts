@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type {
   Course,
+  CourseAssetLink,
   CourseAssets,
   CourseDemo,
   CourseLevel,
@@ -11,6 +12,8 @@ import type {
 const COURSE_DIRECTORIES = ["course_chunks", "course_chunks_archive"];
 const DEMO_REGISTRY_PATH = "course_demo_registry/demo_registry.json";
 const COURSE_ASSET_REGISTRY_PATH = "course_asset_registry/asset_registry.json";
+const COURSE_PRESENTATION_REGISTRY_PATH =
+  "course_presentation_registry/presentation_registry.json";
 
 function isCourse(value: unknown): value is Course {
   if (!value || typeof value !== "object") return false;
@@ -73,6 +76,33 @@ function readAssetRegistry(): Record<string, CourseAssets> {
   }
 }
 
+function readPresentationRegistry(): Record<string, CourseAssetLink> {
+  const registryPath = path.join(process.cwd(), COURSE_PRESENTATION_REGISTRY_PATH);
+  if (!fs.existsSync(registryPath)) return {};
+
+  try {
+    const parsed = JSON.parse(fs.readFileSync(registryPath, "utf8")) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    return parsed as Record<string, CourseAssetLink>;
+  } catch (error) {
+    console.error(`Unable to read course presentation registry: ${registryPath}`, error);
+    return {};
+  }
+}
+
+function resolveCourseAssets(
+  slug: string,
+  courseAssets: CourseAssets | undefined,
+  assetRegistry: Record<string, CourseAssets>,
+  presentationRegistry: Record<string, CourseAssetLink>,
+): CourseAssets | undefined {
+  const assets = assetRegistry[slug] ?? courseAssets;
+  if (!assets) return undefined;
+
+  const presentation = presentationRegistry[slug];
+  return presentation ? { ...assets, presentation } : assets;
+}
+
 export interface CourseFilters {
   query?: string;
   category?: string;
@@ -84,13 +114,19 @@ export function getAllCourses(filters: CourseFilters = {}): Course[] {
   const courseMap = new Map<string, Course>();
   const demoRegistry = readDemoRegistry();
   const assetRegistry = readAssetRegistry();
+  const presentationRegistry = readPresentationRegistry();
 
   for (const directory of COURSE_DIRECTORIES) {
     for (const course of readDirectory(directory)) {
       courseMap.set(course.slug, {
         ...course,
         demo: demoRegistry[course.slug] ?? course.demo,
-        assets: assetRegistry[course.slug] ?? course.assets,
+        assets: resolveCourseAssets(
+          course.slug,
+          course.assets,
+          assetRegistry,
+          presentationRegistry,
+        ),
       });
     }
   }
