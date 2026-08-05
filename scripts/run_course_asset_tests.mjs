@@ -154,10 +154,14 @@ try {
   }
 
   const panelSource = fs.readFileSync(path.join(root, 'src/components/course-assets-panel.tsx'), 'utf8');
-  for (const label of ['重點圖卡', '課程簡報', 'NotebookLM 提示語', '64 秒影片設計']) {
-    assert(panelSource.includes(label), `asset panel contains ${label}`);
+  assert(panelSource.includes('重點圖卡'), 'asset panel contains the public summary card');
+  for (const hiddenLabel of ['課程簡報', 'NotebookLM 提示語', '64 秒影片設計', '開啟 Drive 課程資料夾']) {
+    assert(!panelSource.includes(hiddenLabel), `asset panel hides ${hiddenLabel}`);
   }
-  assert(panelSource.includes('Drive 課程資料夾'), 'asset panel links to the course Drive folder');
+  assert(
+    panelSource.includes('保留在內部資產管理，不對外顯示'),
+    'asset panel explains that authoring assets remain internal',
+  );
 
   const pageSource = fs.readFileSync(path.join(root, 'src/app/courses/[slug]/page.tsx'), 'utf8');
   assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the asset panel');
