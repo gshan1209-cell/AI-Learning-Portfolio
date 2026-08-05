@@ -159,8 +159,8 @@ try {
     assert(!panelSource.includes(hiddenLabel), `asset panel hides ${hiddenLabel}`);
   }
   assert(
-    panelSource.includes('保留在內部資產管理，不對外顯示'),
-    'asset panel explains that authoring assets remain internal',
+    panelSource.includes('公開課程頁只呈現學習內容與重點圖卡'),
+    'asset panel only describes public learning content and summary card',
   );
 
   const pageSource = fs.readFileSync(path.join(root, 'src/app/courses/[slug]/page.tsx'), 'utf8');
