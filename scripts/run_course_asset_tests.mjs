@@ -96,6 +96,28 @@ try {
   const pageSource = fs.readFileSync(path.join(root, 'src/app/courses/[slug]/page.tsx'), 'utf8');
   assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the asset panel');
   assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the asset panel');
+  assert(
+    pageSource.includes('return getAllCourses().map((course) => ({ slug: course.slug }))'),
+    'course detail static params include every course status',
+  );
+  assert(
+    pageSource.includes('if (!course) notFound();'),
+    'course detail returns 404 only when the course is missing',
+  );
+  assert(
+    pageSource.includes('課程內容仍在轉製中'),
+    'draft course detail shows an honest conversion-status notice',
+  );
+
+  const courseCardSource = fs.readFileSync(path.join(root, 'src/components/course-card.tsx'), 'utf8');
+  assert(
+    courseCardSource.includes('查看課程資產'),
+    'draft course card links to the asset detail page',
+  );
+  assert(
+    !courseCardSource.includes('<span className="font-semibold text-slate-400">即將推出</span>'),
+    'draft course card no longer blocks access to course assets',
+  );
 
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
   assert(packageJson.scripts.test.includes('run_course_asset_tests.mjs'), 'default test command includes asset tests');
