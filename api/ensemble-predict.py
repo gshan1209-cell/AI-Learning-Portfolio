@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from http.server import BaseHTTPRequestHandler
 
-from _ensemble_runtime import ValidationError, predict, runtime_status
+from api._ensemble_runtime import ValidationError, predict, runtime_status
 
 MAX_BODY_BYTES = 64 * 1024
 
