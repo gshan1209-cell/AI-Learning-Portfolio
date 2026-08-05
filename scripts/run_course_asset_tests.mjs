@@ -31,6 +31,38 @@ const slugs = [
   'ai-visual-story',
 ];
 
+function compareCourseChunkNames(left, right) {
+  if (left === 'course_0001.json') return -1;
+  if (right === 'course_0001.json') return 1;
+  return left.localeCompare(right);
+}
+
+function isCourse(value) {
+  return Boolean(
+    value &&
+      typeof value === 'object' &&
+      value.id &&
+      value.slug &&
+      value.title &&
+      value.source,
+  );
+}
+
+function readCourseDirectory(directory) {
+  const directoryPath = path.join(root, directory);
+  if (!fs.existsSync(directoryPath)) return [];
+
+  return fs
+    .readdirSync(directoryPath)
+    .filter((fileName) => fileName.endsWith('.json'))
+    .sort(compareCourseChunkNames)
+    .flatMap((fileName) => {
+      const parsed = JSON.parse(fs.readFileSync(path.join(directoryPath, fileName), 'utf8'));
+      const records = Array.isArray(parsed) ? parsed : [parsed];
+      return records.filter(isCourse);
+    });
+}
+
 try {
   const registryPath = path.join(root, 'course_asset_registry', 'asset_registry.json');
   assert(fs.existsSync(registryPath), 'course asset registry exists');
@@ -86,6 +118,40 @@ try {
   const repositorySource = fs.readFileSync(path.join(root, 'src/lib/course-repository.ts'), 'utf8');
   assert(repositorySource.includes('readAssetRegistry'), 'course repository reads asset registry');
   assert(repositorySource.includes('assets: assetRegistry[course.slug] ?? course.assets'), 'course repository merges assets by slug');
+  assert(
+    repositorySource.includes('compareCourseChunkNames'),
+    'course repository uses deterministic baseline-first chunk precedence',
+  );
+
+  const demoRegistryPath = path.join(root, 'course_demo_registry', 'demo_registry.json');
+  const demoRegistry = JSON.parse(fs.readFileSync(demoRegistryPath, 'utf8'));
+  const courseMap = new Map();
+  for (const directory of ['course_chunks', 'course_chunks_archive']) {
+    for (const course of readCourseDirectory(directory)) {
+      courseMap.set(course.slug, course);
+    }
+  }
+
+  assert(courseMap.size === 14, 'course registry resolves exactly 14 courses');
+  for (const slug of slugs) {
+    const course = courseMap.get(slug);
+    assert(Boolean(course), `${slug} resolves to a course record`);
+    assert(course.status === 'published', `${slug} is published`);
+    assert(course.learningObjectives.length >= 3, `${slug} has at least three learning objectives`);
+    assert(course.sections.length >= 5, `${slug} has at least five teaching sections`);
+    assert(Boolean(course.quiz), `${slug} has a quiz`);
+    assert(course.quiz.options.length >= 4, `${slug} quiz has at least four options`);
+    assert(
+      Number.isInteger(course.quiz.answerIndex) &&
+        course.quiz.answerIndex >= 0 &&
+        course.quiz.answerIndex < course.quiz.options.length,
+      `${slug} quiz answer index is valid`,
+    );
+    assert(
+      Boolean(demoRegistry[slug] || course.source.demoUrl),
+      `${slug} has a registered or source demo`,
+    );
+  }
 
   const panelSource = fs.readFileSync(path.join(root, 'src/components/course-assets-panel.tsx'), 'utf8');
   for (const label of ['重點圖卡', '課程簡報', 'NotebookLM 提示語', '64 秒影片設計']) {
