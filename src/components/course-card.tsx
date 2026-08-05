@@ -106,7 +106,7 @@ export default function CourseCard({ course }: { course: Course }) {
               href={`/courses/${course.slug}`}
               className="inline-flex items-center gap-1 font-bold text-brand hover:underline"
             >
-              {enabled ? "開始學習" : "查看課程資產"} <span>→</span>
+              {enabled ? "開始學習" : "查看課程內容"} <span>→</span>
             </Link>
           </div>
         </div>
