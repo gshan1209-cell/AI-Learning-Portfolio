@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CourseAssetsPanel from "@/components/course-assets-panel";
 import DemoAdapter from "@/components/demo-adapter";
 import WizardStepBanner from "@/components/wizard/wizard-step-banner";
 import { getAllCourses, getCourseBySlug } from "@/lib/course-repository";
@@ -82,6 +83,8 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
           )}
         </div>
       </header>
+
+      <CourseAssetsPanel courseSlug={course.slug} assets={course.assets} />
 
       <section id="section-objectives" className="mt-10 grid gap-5 md:grid-cols-2 scroll-mt-20">
         <div className="rounded-2xl border border-slate-200 bg-white p-6">
