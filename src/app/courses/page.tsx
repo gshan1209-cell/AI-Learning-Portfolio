@@ -5,18 +5,24 @@ import { getAllCourses, getCourseCategories } from "@/lib/course-repository";
 export const metadata = { title: "課程目錄" };
 
 export default function CoursesPage({ searchParams }: { searchParams: { q?: string; category?: string } }) {
+  const allCourses = getAllCourses();
   const courses = getAllCourses({ query: searchParams.q, category: searchParams.category });
   const categories = getCourseCategories();
+  const publishedCount = allCourses.filter((course) => course.status === "published").length;
+  const pendingCount = allCourses.length - publishedCount;
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-14">
       <p className="text-sm font-bold text-brand">Course Registry</p>
       <h1 className="mt-2 text-4xl font-black text-ink">課程作業總目錄</h1>
       <p className="mt-4 max-w-3xl leading-8 text-slate-600">
-        「可學習」代表已完成六段式轉製；「待轉製」仍保留來源 Repository，後續將依序補上教學內容與 Demo Adapter。
+        目前共有 {allCourses.length} 門課程，{publishedCount} 門已完成學習目標、教學章節、Demo、測驗與課程資產串接。
+        {pendingCount > 0
+          ? `另有 ${pendingCount} 門仍在轉製中。`
+          : "所有課程現在都可直接開始學習。"}
       </p>
 
-      <LearnerProgressHub totalCoursesCount={courses.length} />
+      <LearnerProgressHub totalCoursesCount={allCourses.length} />
 
       <form className="mt-8 grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-soft md:grid-cols-[1fr_240px_auto]">
         <input name="q" defaultValue={searchParams.q} placeholder="搜尋課程、技術或 Repository" className="rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-brand" />
