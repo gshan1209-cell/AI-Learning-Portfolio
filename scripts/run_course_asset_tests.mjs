@@ -164,8 +164,8 @@ try {
   );
 
   const pageSource = fs.readFileSync(path.join(root, 'src/app/courses/[slug]/page.tsx'), 'utf8');
-  assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the asset panel');
-  assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the asset panel');
+  assert(pageSource.includes('CourseAssetsPanel'), 'course page imports the summary panel');
+  assert(pageSource.includes('<CourseAssetsPanel'), 'course page renders the summary panel');
   assert(
     pageSource.includes('return getAllCourses().map((course) => ({ slug: course.slug }))'),
     'course detail static params include every course status',
@@ -181,12 +181,16 @@ try {
 
   const courseCardSource = fs.readFileSync(path.join(root, 'src/components/course-card.tsx'), 'utf8');
   assert(
-    courseCardSource.includes('查看課程資產'),
-    'draft course card links to the asset detail page',
+    courseCardSource.includes('查看課程內容'),
+    'draft course card links to the course content page',
+  );
+  assert(
+    !courseCardSource.includes('查看課程資產'),
+    'course card no longer exposes public asset wording',
   );
   assert(
     !courseCardSource.includes('<span className="font-semibold text-slate-400">即將推出</span>'),
-    'draft course card no longer blocks access to course assets',
+    'draft course card no longer blocks access to course content',
   );
 
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
