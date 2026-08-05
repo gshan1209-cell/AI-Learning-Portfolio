@@ -1,3 +1,5 @@
+import report from "@/data/stock-manim-runtime-report.json";
+
 const stockScenes = [
   ["00", "課程開場與學習地圖", "先建立九幕的觀看順序與風險邊界。"],
   ["01", "台股市場基本規則", "理解交易時間、價格與台股紅漲綠跌。"],
@@ -14,21 +16,45 @@ export default function StockManimLab() {
   return (
     <>
       <header className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft md:p-12">
-        <p className="text-sm font-black text-brand">REAL MANIM RUNTIME</p>
-        <h1 className="mt-2 text-4xl font-black text-ink">台股 Manim 九幕場景與渲染驗證</h1>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-black text-brand">REAL MANIM RUNTIME</p>
+            <h1 className="mt-2 text-4xl font-black text-ink">台股 Manim 九幕場景與渲染驗證</h1>
+          </div>
+          <span className="rounded-full bg-emerald-100 px-4 py-2 text-sm font-black text-emerald-800">
+            9／9 MP4 VERIFIED
+          </span>
+        </div>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-          九個 Python／Manim 場景由獨立 GitHub Actions Runtime 安裝 FFmpeg、Cairo、Pango 與繁體中文字體後實際渲染。每支 MP4 必須通過 ffprobe 的影像串流、尺寸與時長檢查，才會被列入 Workflow Artifact。
+          九個 Python／Manim 場景已在 Ubuntu 24.04 安裝 FFmpeg、Cairo、Pango 與繁體中文字體後實際渲染。每支 MP4 均通過 ffprobe 的影像串流、尺寸與時長檢查，並具有獨立 SHA-256。
         </p>
+        <dl className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-2xl bg-slate-50 p-5"><dt className="text-xs font-black text-slate-500">場景</dt><dd className="mt-2 text-3xl font-black text-ink">{report.sceneCount}</dd></div>
+          <div className="rounded-2xl bg-slate-50 p-5"><dt className="text-xs font-black text-slate-500">總時長</dt><dd className="mt-2 text-3xl font-black text-ink">{report.totalDurationSeconds.toFixed(2)} 秒</dd></div>
+          <div className="rounded-2xl bg-slate-50 p-5"><dt className="text-xs font-black text-slate-500">輸出</dt><dd className="mt-2 text-3xl font-black text-ink">854×480</dd></div>
+          <div className="rounded-2xl bg-slate-50 p-5"><dt className="text-xs font-black text-slate-500">Workflow</dt><dd className="mt-2 text-xl font-black text-ink">#{report.workflowRunId}</dd></div>
+        </dl>
       </header>
 
       <section className="mt-8 grid gap-4 md:grid-cols-3">
-        {stockScenes.map(([number, title, description]) => (
-          <article key={number} className="rounded-2xl border border-slate-200 bg-white p-6">
-            <p className="text-sm font-black text-brand">SCENE {number}</p>
-            <h2 className="mt-2 text-xl font-black text-ink">{title}</h2>
-            <p className="mt-3 leading-7 text-slate-600">{description}</p>
-          </article>
-        ))}
+        {stockScenes.map(([number, title, description], index) => {
+          const evidence = report.scenes[index];
+          return (
+            <article key={number} className="rounded-2xl border border-slate-200 bg-white p-6">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-black text-brand">SCENE {number}</p>
+                <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-black text-emerald-700">VERIFIED</span>
+              </div>
+              <h2 className="mt-2 text-xl font-black text-ink">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{description}</p>
+              <dl className="mt-5 border-t border-slate-100 pt-4 text-sm text-slate-600">
+                <div className="flex justify-between gap-3"><dt>時長</dt><dd className="font-bold text-ink">{evidence.duration.toFixed(2)} 秒</dd></div>
+                <div className="mt-2 flex justify-between gap-3"><dt>檔案大小</dt><dd className="font-bold text-ink">{(evidence.bytes / 1024).toFixed(1)} KB</dd></div>
+                <div className="mt-2"><dt>SHA-256</dt><dd className="mt-1 break-all font-mono text-[11px] text-slate-500">{evidence.sha256}</dd></div>
+              </dl>
+            </article>
+          );
+        })}
       </section>
 
       <section className="mt-8 rounded-3xl bg-slate-950 p-7 text-slate-100 md:p-9">
@@ -40,7 +66,7 @@ python render_all.py \\
   --media-dir runtime-media \\
   --manifest runtime-media/render-manifest.json`}</code></pre>
         <p className="mt-5 leading-7 text-slate-300">
-          Renderer 採 strict 模式：缺少場景、Manim 非零退出、找不到 MP4、ffprobe 無影像串流，或尺寸／時長為零，都會使 Workflow 失敗。
+          Renderer 採 strict 模式：缺少場景、Manim 非零退出、找不到 MP4、ffprobe 無影像串流，或尺寸／時長為零，都會使 Workflow 失敗。Artifact ID：{report.artifactId}，ZIP SHA-256：<span className="break-all font-mono text-xs">{report.artifactZipSha256}</span>。
         </p>
       </section>
 
