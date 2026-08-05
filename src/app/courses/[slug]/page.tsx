@@ -116,6 +116,16 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
           {course.summary}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
+          {course.assets?.presentation?.url && (
+            <a
+              href={course.assets.presentation.url}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-brand px-5 py-3 font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              開啟課程簡報
+            </a>
+          )}
           <a
             href={course.source.repositoryUrl}
             target="_blank"
