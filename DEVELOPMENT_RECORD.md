@@ -122,3 +122,12 @@
 3. Wave 004 合併後，確認 Migration Registry 達到 `14 refactoring / 0 planned`。
 4. 集中執行 14 個 `refactoring` 模組的最低必要 Runtime 驗收。
 5. 驗收後建立舊 Repo 搬遷公告與第一批退役候選清單。
+## 課程索引 API 分頁輸入修正（候選）
+
+- 拒絕非數字、非有限數、小數、零／負數、空白與不安全的整數／slice offset，回傳 HTTP 400。
+- 保留未提供參數時 page=1／limit=12，以及有效 limit 上限 50；合法查詢篩選與課程內容不變。
+- 不改 SEO metadata、draft 可見性、archive 優先序、移植狀態或來源退役；不涉及 migration.json。
+- 純函式回歸：`node tests/course-pagination.test.mjs`（Node 24 原生 TypeScript 去型別）。
+- 本機 API 回歸：`python tests/course-pagination-http.py`，需要 Node／Next 已安裝；自動選用本機空閒埠並驗證自建子程序持續存活；僅啟動隔離 dev server，輸出狀態／分頁，不輸出課程內容。
+- 既有版本 `page=abc` 的實際 HTTP 200／null 分頁欄位已重現。候選 21 個分頁斷言與 10 個 HTTP 案例通過，lint、TypeScript 通過。
+- 不以此候選宣稱正式部署、完整產品驗收或其他專案完成。
