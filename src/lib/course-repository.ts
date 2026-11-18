@@ -108,6 +108,7 @@ export interface CourseFilters {
   category?: string;
   level?: CourseLevel;
   status?: CourseStatus;
+  includeDraft?: boolean;
 }
 
 export function getAllCourses(filters: CourseFilters = {}): Course[] {
@@ -135,6 +136,7 @@ export function getAllCourses(filters: CourseFilters = {}): Course[] {
 
   return Array.from(courseMap.values())
     .filter((course) => {
+      if (!filters.includeDraft && course.status === "draft") return false;
       if (filters.category && course.category !== filters.category) return false;
       if (filters.level && course.level !== filters.level) return false;
       if (filters.status && course.status !== filters.status) return false;
